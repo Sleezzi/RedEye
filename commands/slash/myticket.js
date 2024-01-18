@@ -17,7 +17,6 @@ module.exports = {
     },
     async execute(interaction, serverData, client, Discord) {
         try {
-            // console.log(interaction);
             const embed = {
                 color: 0x00FF00,
                 title: `Tickets • ${interaction.user.username}`,

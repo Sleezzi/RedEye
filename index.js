@@ -33,7 +33,7 @@ firebase.initializeApp({
 });
 client.data = {
     cooldown: new Collection(),
-    canvas: "canvas", // require("canvas"),
+    canvas: require("canvas"),
     commands: {
         prefix: new Collection(),
         app: new Collection(),
