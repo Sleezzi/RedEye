@@ -28,7 +28,7 @@
 //         ],
 //         nsfw: false
 //     },
-//     async execute(interaction, client, Discord) {
+//     async execute(interaction, serverData, client, Discord) {
 //         try {
 //             let game = interaction.options.getNumber('game');
 //             let response;

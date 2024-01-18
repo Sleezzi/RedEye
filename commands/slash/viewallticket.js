@@ -30,10 +30,10 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, client, Discord) {
+    async execute(interaction, serverData, client, Discord) {
         try {
             if (!interaction.member.permissions.has("ManageMember")) {
-                require("./myticket").execute(interaction, client, Discord);
+                require("./myticket").execute(interaction, serverData, client, Discord);
                 return;
             }
             const embed = {

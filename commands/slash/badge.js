@@ -28,7 +28,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, client, Discord) {
+    async execute(interaction, serverData, client, Discord) {
         try {
             let id = interaction.options.getNumber('id');
             let response;

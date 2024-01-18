@@ -85,7 +85,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, client, Discord) {
+    async execute(interaction, serverData, client, Discord) {
         try {
             const { v4: uuidv4 } = require("uuid");
             const id = uuidv4();

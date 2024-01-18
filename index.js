@@ -26,13 +26,19 @@ const client = new Client({
 });
 
 const { readdirSync } = require("fs");
+const firebase = require("firebase-admin");
+firebase.initializeApp({
+    credential: firebase.credential.cert(require("./config.json").firebase),
+    databaseURL: "https://blueprint-bot-db-default-rtdb.europe-west1.firebasedatabase.app/"
+});
 client.data = {
     cooldown: new Collection(),
     canvas: "canvas", // require("canvas"),
     commands: {
         prefix: new Collection(),
-        slash: new Collection(),
+        app: new Collection(),
     },
+    db: firebase.database()
 };
 
 client.config = require("./config.json");
@@ -44,25 +50,29 @@ for (const file of readdirSync("./commands/prefix").filter((file) => file.endsWi
     client.data.commands.prefix.set(command.name, command);
     require("./components/log")(`Command "%blue%${command.name}%reset%" loaded`);
 }
+
 require("./components/log")("");
+
 // add all command in a array
 for (const file of readdirSync("./commands/slash").filter((file) => file.endsWith(".js"))) {
     const command = require(`./commands/slash/${file}`);
     if (command.data && command.data.name && command.execute) {
         if (command.data.options) command.data.options.forEach((option) => {
             if (typeof option.type === "number") return;
-            option.type = require("./components/parseApplicationTypes")(option.type);
+            option.type = require("./components/parseAppOptionsTypes")(option.type);
         });
+        if (!command.data.type) command.data.type = 1;
         if (command.data.default_member_permissions && !/^\d+$/.test(command.data.default_member_permissions)) command.data.default_member_permissions = `${require("./components/parsePermissions")(`${command.data.default_member_permissions}`.toLowerCase())}`;
-        client.data.commands.slash.set(command.data.name, command);
+        client.data.commands.app.set(command.data.name, command);
         require("./components/log")(`Command "%blue%/${command.data.name}%reset%" created`);
     } else require("./components/log")(`%yellow%[WARNING] Something missing with ${file}'s command`);
 }
+
 // Add all command in the options of /help
-if (Object.keys(client.data.commands.slash.has("help"))) {
-    Object.keys(client.data.commands.slash).forEach((command) => {
+if (Object.keys(client.data.commands.app.has("help"))) {
+    Object.keys(client.data.commands.app).forEach((command) => {
         if (command.name !== "help") {
-            Object.keys(client.data.commands.slash).find((item) => item.name === "help").options[0].choices.push({
+            Object.keys(client.data.commands.app).find((item) => item.name === "help").options[0].choices.push({
                 name: command.name,
                 name_localizations: command.name_localizations,
                 value: command.name
@@ -70,17 +80,22 @@ if (Object.keys(client.data.commands.slash.has("help"))) {
         }
     });
 };
+
+for (const file of readdirSync("./contextMenu").filter((file) => file.endsWith(".js"))) {
+    const command = require(`./contextMenu/${file}`);
+    if (command.data && command.data.name && command.data.type && command.execute) {
+        if (command.data.options) command.data.options.forEach((option) => {
+            if (typeof option.type === "number") return;
+            option.type = require("./components/parseAppOptionsTypes")(option.type);
+        });
+        if (typeof command.data.type !== "number") command.data.type = require("./components/parseAppType")(command.data.type);
+        if (command.data.default_member_permissions && !/^\d+$/.test(command.data.default_member_permissions)) command.data.default_member_permissions = `${require("./components/parsePermissions")(`${command.data.default_member_permissions}`.toLowerCase())}`;
+        client.data.commands.app.set(command.data.name, command);
+        require("./components/log")(`Context command "%blue%${command.data.name}%reset%" created`);
+    } else require("./components/log")(`%yellow%[WARNING] Something missing with ${file} context command`);
+}
 // update all / commands
-// (async () => {
-//     try {
-//         // The put method is used to fully refresh all commands in the guild with the current set
-//         const data = await new REST().setToken(client.config.token).put(
-//             Routes.applicationGuildCommands(client.config.clientId, client.config.serverId),
-//             { body: client.data.commands.slash.array },
-//         );
-//         require("./components/log")(`Successfully updated ${data.length} slash command${(data.length > 1 ? "s" : "")}.`);
-//     } catch(error) { return "Error"; }
-// })();
+
 require("./components/log")("");
 
 for (const file of readdirSync("./events").filter((file) => file.endsWith(".js"))) {
@@ -92,29 +107,22 @@ for (const file of readdirSync("./events").filter((file) => file.endsWith(".js")
                 prefix: "!",
                 channel: {
                     log: {
-                        enable: false,
                         channelId: undefined,
                         whiteListed: []
                     },
                     welcom: {
-                        enable: false,
                         channelId: undefined,
                         message: "%member% joined us!"
                     },
                     leave: {
-                        enable: false,
                         channelId: undefined,
                         message: "%member% left us!"
                     },
                     boost: {
-                        enable: false,
                         channelId: undefined,
                         message: "%member% boosted this server"
                     },
-                    punishment: {
-                        enable: false,
-                        channelId: undefined,
-                    },
+                    punishment: undefined,
                 },
                 rolesReaction: {},
                 disabledCommands: [],
@@ -131,9 +139,9 @@ client.login(client.config.token).then(() => {
     require("./components/log")("\n", `%green%Logging...%reset%`);
 });
 
-client.on("messageCreate", message => {
-    message.member.permissions.has("Administrator")
-})
+// client.on("interactionCreate", message => {
+//     message
+// });
 
 process.stdin.setRawMode(true);
 process.stdin.resume();
@@ -147,7 +155,7 @@ process.stdin.on("data", (key) => {
             break
         case "c": 
             console.clear();
-            console.log(`\n\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))} \x1b[31m/$$%reset%   \x1b[31m/$$%reset%                 %yellow%/$$%reset%                                                                                    %blue%/$$$$$$$%reset%              %green%/$$%reset%\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m| $$%reset%  \x1b[31m| $$%reset%                %yellow%| $$%reset%                                                                                   %blue%| $$__  $$%reset%            %green%| $$%reset%\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m| $$%reset%  \x1b[31m| $$%reset% %green%/$$$$$$$%reset%   %yellow%/$$$$$$$%reset%  \x1b[34m/$$$$$$%reset%   \x1b[35m/$$$$$$%reset%   %blue%/$$$$$$$%reset%  \x1b[31m/$$$$$$$%reset%  %green%/$$$$$$%reset%   %yellow%/$$$$$$%reset%   \x1b[34m/$$$$$$%reset%              %blue%| $$%reset%  %blue%\\ $$%reset%  \x1b[31m/$$$$$$%reset%  %green%/$$$$$$%reset%\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m| $$%reset%  \x1b[31m| $$%green%| $$__  $$%reset% %yellow%/$$__  $$ \x1b[34m/$$__%reset%  \x1b[34m$$%reset% \x1b[35m/$$__  $$%reset% %blue%/$$_____/%reset% \x1b[31m/$$_____/%reset% %green%/$$__  $$%reset% %yellow%/$$__  $$%reset% \x1b[34m/$$__%reset%  \x1b[34m$$%reset%             %blue%| $$$$$$$%reset%  \x1b[31m/$$__  $$%green%|_  $$_/%reset%\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m| $$%reset%  \x1b[31m| $$%green%| $$%reset%  %green%\\ $$%yellow%| $$%reset%  %yellow%| $$\x1b[34m| $$$$$$$$\x1b[35m| $$%reset%  \x1b[35m\\__/%blue%|  $$$$$$%reset% \x1b[31m| $$%reset%      %green%| $$%reset%  %green%\\ $$%yellow%| $$%reset%  %yellow%\\__/\x1b[34m| $$$$$$$$%reset%             %blue%| $$__  $$\x1b[31m| $$%reset%  \x1b[31m\\ $$%reset%  %green%| $$%reset%\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m| $$%reset%  \x1b[31m| $$%green%| $$%reset%  %green%| $$%yellow%| $$%reset%  %yellow%| $$\x1b[34m| $$_____/\x1b[35m| $$%reset%       %blue%\\____  $$\x1b[31m| $$%reset%      %green%| $$%reset%  %green%| $$%yellow%| $$%reset%      \x1b[34m| $$_____/%reset%             %blue%| $$%reset%  %blue%\\ $$\x1b[31m| $$%reset%  \x1b[31m| $$%reset%  %green%| $$ /$$%reset%\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m|  $$$$$$/%green%| $$%reset%  %green%| $$%yellow%|  $$$$$$$\x1b[34m|  $$$$$$$\x1b[35m| $$%reset%       %blue%/$$$$$$$/\x1b[31m|  $$$$$$$%green%|  $$$$$$/%yellow%| $$%reset%      \x1b[34m|  $$$$$$$%reset% \x1b[35m/$$$$$$%reset%     %blue%| $$$$$$$/\x1b[31m|  $$$$$$/%reset%  %green%|  $$$$/%reset%\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))} \x1b[31m\\______/%reset% %green%|__/%reset%  %green%|__/%reset% %yellow%\\_______/%reset% \x1b[34m\\_______/\x1b[35m|__/%reset%      %blue%|_______/%reset%  \x1b[31m\\_______/%reset% %green%\\______/%reset% %yellow%|__/%reset%       \x1b[34m\\_______/%reset% \x1b[35m|______/%reset%    %blue%|_______/%reset%  \x1b[31m\\______/%reset%    %green%\\____/%reset%\n\n\n  %green%➜%reset%  press h to show help\n  %green%➜%reset%  press c to clear\n  %green%➜%reset%  press r to restart\n  %green%➜%reset%  press e to exit\n\n`);
+            console.log(`\n\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))} \x1b[31m/$$\x1b[0m   \x1b[31m/$$\x1b[0m                 \x1b[33m/$$\x1b[0m                                                                                    \x1b[36m/$$$$$$$\x1b[0m              \x1b[32m/$$\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m| $$\x1b[0m  \x1b[31m| $$\x1b[0m                \x1b[33m| $$\x1b[0m                                                                                   \x1b[36m| $$__  $$\x1b[0m            \x1b[32m| $$\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m| $$\x1b[0m  \x1b[31m| $$\x1b[0m \x1b[32m/$$$$$$$\x1b[0m   \x1b[33m/$$$$$$$\x1b[0m  \x1b[34m/$$$$$$\x1b[0m   \x1b[35m/$$$$$$\x1b[0m   \x1b[36m/$$$$$$$\x1b[0m  \x1b[31m/$$$$$$$\x1b[0m  \x1b[32m/$$$$$$\x1b[0m   \x1b[33m/$$$$$$\x1b[0m   \x1b[34m/$$$$$$\x1b[0m              \x1b[36m| $$\x1b[0m  \x1b[36m\\ $$\x1b[0m  \x1b[31m/$$$$$$\x1b[0m  \x1b[32m/$$$$$$\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m| $$\x1b[0m  \x1b[31m| $$\x1b[32m| $$__  $$\x1b[0m \x1b[33m/$$__  $$\x1b[0m \x1b[34m/$$__  \x1b[34m$$\x1b[0m \x1b[35m/$$__  $$\x1b[0m \x1b[36m/$$_____/\x1b[0m \x1b[31m/$$_____/\x1b[0m \x1b[32m/$$__  $$\x1b[0m \x1b[33m/$$__  $$\x1b[0m \x1b[34m/$$__  \x1b[34m$$\x1b[0m             \x1b[36m| $$$$$$$\x1b[0m  \x1b[31m/$$__  $$\x1b[32m|_  $$_/\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m| $$\x1b[0m  \x1b[31m| $$\x1b[32m| $$\x1b[0m  \x1b[32m\\ $$\x1b[33m| $$\x1b[0m  \x1b[33m| $$\x1b[34m| $$$$$$$$\x1b[35m| $$\x1b[0m  \x1b[35m\\__/\x1b[36m|  $$$$$$\x1b[0m \x1b[31m| $$\x1b[0m      \x1b[32m| $$\x1b[0m  \x1b[32m\\ $$\x1b[33m| $$\x1b[0m  \x1b[33m\\__/\x1b[34m| $$$$$$$$\x1b[0m             \x1b[36m| $$__  $$\x1b[31m| $$\x1b[0m  \x1b[31m\\ $$\x1b[0m  \x1b[32m| $$\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m| $$\x1b[0m  \x1b[31m| $$\x1b[32m| $$\x1b[0m  \x1b[32m| $$\x1b[33m| $$\x1b[0m  \x1b[33m| $$\x1b[34m| $$_____/\x1b[35m| $$\x1b[0m       \x1b[36m\\____  $$\x1b[31m| $$\x1b[0m      \x1b[32m| $$\x1b[0m  \x1b[32m| $$\x1b[33m| $$\x1b[0m      \x1b[34m| $$_____/\x1b[0m             \x1b[36m| $$\x1b[0m  \x1b[36m\\ $$\x1b[31m| $$\x1b[0m  \x1b[31m| $$\x1b[0m  \x1b[32m| $$\x1b[0m \x1b[32m/$$\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m|  $$$$$$/\x1b[32m| $$\x1b[0m  \x1b[32m| $$\x1b[33m|  $$$$$$$\x1b[34m|  $$$$$$$\x1b[35m| $$\x1b[0m       \x1b[36m/$$$$$$$/\x1b[31m|  $$$$$$$\x1b[32m|  $$$$$$/\x1b[33m| $$\x1b[0m      \x1b[34m|  $$$$$$$\x1b[0m \x1b[35m/$$$$$$\x1b[0m     \x1b[36m| $$$$$$$/\x1b[31m|  $$$$$$/\x1b[0m  \x1b[32m|  $$$$/\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))} \x1b[31m\\______/\x1b[0m \x1b[32m|__/\x1b[0m  \x1b[32m|__/\x1b[0m \x1b[33m\\_______/\x1b[0m \x1b[34m\\_______/\x1b[35m|__/\x1b[0m      \x1b[36m|_______/\x1b[0m  \x1b[31m\\_______/\x1b[0m \x1b[32m\\______/\x1b[0m \x1b[33m|__/\x1b[0m       \x1b[34m\\_______/\x1b[0m \x1b[35m|______/\x1b[0m    \x1b[36m|_______/\x1b[0m  \x1b[31m\\______/\x1b[0m    \x1b[32m\\____/\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - "Made by Sleezzi".length) / 2))}Made by Sleezzi\n\n\n  \x1b[32m➜\x1b[0m  press h to show help\n  \x1b[32m➜\x1b[0m  press c to clear\n  \x1b[32m➜\x1b[0m  press r to restart\n  \x1b[32m➜\x1b[0m  press e to exit\n\n`);
             break;
         case "r":
             client.destroy(client.config.token).then(() => {

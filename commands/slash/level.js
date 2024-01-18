@@ -28,7 +28,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, client, Discord) {
+    async execute(interaction, serverData, client, Discord) {
         try {
             let member = interaction.guild.members.cache.find((m) => m.id === (interaction.options.getUser("member") ? interaction.options.getUser("member") : interaction.member).id) ?? interaction.member;
 
@@ -41,7 +41,9 @@ module.exports = {
             ctx.fillStyle = "#FFFFFF";
             ctx.textAlign = "center";
             ctx.fillText(`${(member.user.discriminator === "0" ? member.user.username.toUpperCase() : member.user.tag.toUpperCase())}`, 600, 150);
-            ctx.fillText(`Level: ${(client.data.level.has(member.id) ? `${client.data.level.get(member.id).level} (${client.data.level.get(member.id).xp}/${client.data.level.get(member.id).maxxp}` : "1 (0/100")})`, 600, 250);
+            require("../../components/database").get(`/${message.guild.id}/levels/${member.id}`, client).then((level) => {
+                ctx.fillText(`Level: ${(level.level ? level.level : 1)} (${(level.xp ? level.xp : 0)}/${(level.level ? level.level * 150 : 150)}`, 600, 250);
+            });
             const pdpbot = await client.data.canvas.loadImage(`https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png?size=1024`)
             ctx.drawImage(pdpbot, 967, 345, 50, 50);
             const pdp = await client.data.canvas.loadImage(`https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=1024`);

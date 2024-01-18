@@ -29,7 +29,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, client, Discord) {
+    async execute(interaction, serverData, client, Discord) {
         try {
             
             let member = interaction.guild.members.cache.find((member) => member.id === interaction.options.getUser("member").id);

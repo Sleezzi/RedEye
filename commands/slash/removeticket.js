@@ -30,7 +30,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, client, Discord) {
+    async execute(interaction, serverData, client, Discord) {
         try {
             for (const userId in client.data.tickets) {
                 if (client.data.tickets.get(userId)[interaction.options.getString("id")]) {

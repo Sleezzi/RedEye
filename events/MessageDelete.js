@@ -3,7 +3,12 @@ module.exports = {
     event: "MessageDelete",
     type: "on",
     execute([message], serverData, client, Discord) {
-        if (message.channel.type === 1 || message.content.startsWith(client.config.prefix) || Object.values(client.config.channels.log).includes(message.channel.id) || message.author.id === client.user.id) return;
+        if (!message.channel.type === 1 ||
+            message.content.startsWith(serverData.get(message.guild.id).prefix) ||
+            !serverData.get(message.guild.id).channel.log.channelId ||
+            !message.guild.channels.cache.find(channel => channel.id === serverData.get(message.guild.id).channel.log.channelId) ||
+            message.channel.id === serverData.get(message.guild.id).channel.log.channelId ||
+            !message.guild.channels.cache.find(channel => channel.id === serverData.get(message.guild.id).channel.log.channelId).permissionsFor(message.guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages")) return;
         const embed = new Discord.EmbedBuilder()
             .setColor("Red")
             .setTitle("Message deleted")
@@ -17,6 +22,6 @@ module.exports = {
             )
             .setURL(message.url)
             .setFooter({ text: `Id: ${message.id}`, iconURL: client.user.avatarURL() });
-        client.channels.cache.get(client.config.channels.log.messages).send({ embeds: [embed]});
+            message.guild.channels.cache.find(c => c.id === serverData.get(message.guild.id).channel.log.channelId).send({ embeds: [embed]});
     }
 }

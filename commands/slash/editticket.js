@@ -99,9 +99,8 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, client, Discord) {
+    async execute(interaction, serverData, client, Discord) {
         try {
-            
             if (!client.data.tickets.has(interaction.member.id)) {
                 interaction.deleteReply().then(() => interaction.followUp({ content: `You don't have any ticket`, ephemeral: true  }));
                 return;

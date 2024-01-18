@@ -15,8 +15,9 @@ module.exports = {
         options: [],
         nsfw: false
     },
-    async execute(interaction, client, Discord) {
+    async execute(interaction, serverData, client, Discord) {
         try {
+            // console.log(interaction);
             const embed = {
                 color: 0x00FF00,
                 title: `Tickets • ${interaction.user.username}`,
@@ -33,9 +34,9 @@ module.exports = {
                     icon_url: client.user.avatarURL(),
                 },
             };
-            if (client.data.tickets.has(interaction.member.id)) {
-                for (const ticket in client.data.tickets.get(interaction.member.id)) embed.fields.unshift({name: `**\`${ticket}\`**:`, value: `> - Content: "\`${client.data.tickets.get(interaction.member.id)[ticket].content}\`",\n> - Category: \`${client.data.tickets.get(interaction.member.id)[ticket].cat}\`,\n> - Made at: <t:${client.data.tickets.get(interaction.member.id)[ticket].madeAt}:R>${(client.data.tickets.get(interaction.member.id)[ticket].updatedAt ? `,\n> - Updated at: <t:${client.data.tickets.get(interaction.member.id)[ticket].updatedAt}:R>` : "")}`});
-            }
+            require("../../components/database").get(`/${interaction.guild.id}/tickets/${interaction.member.id}`, client).then((tickets) => {
+                for (const ticket in tickets) embed.fields.unshift({name: `**\`${ticket}\`**:`, value: `> - Content: "\`${tickets[ticket].content}\`",\n> - Category: \`${tickets[ticket].cat}\`,\n> - Made at: <t:${tickets[ticket].madeAt}:R>${(tickets[ticket].updatedAt ? `,\n> - Updated at: <t:${tickets[ticket].updatedAt}:R>` : "")}`});
+            });
             interaction.deleteReply().then(() => interaction.followUp({ embeds: [embed], ephemeral: true  }));
         } catch(err) { return err; }
     }

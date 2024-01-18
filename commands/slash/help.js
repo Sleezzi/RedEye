@@ -36,11 +36,11 @@ module.exports = {
         try {
             let command = message.options.getString("command");
             if (command) {
-                if (!client.data.commands.slash.array.find((c) => c.name === command)) {
+                if (!client.data.commands.app.array.find((c) => c.name === command)) {
                     message.followUp({ content: `/${command} is not a command.`, ephemeral: true });
                     return;
                 }
-                command = client.data.commands.slash.array.find((c) => c.name === command);
+                command = client.data.commands.app.array.find((c) => c.name === command);
                 let embed = {
                     color: 0x0099ff,
                     title: 'Help',

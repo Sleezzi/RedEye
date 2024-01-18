@@ -12,7 +12,7 @@ module.exports = {
         },
         nsfw: false
     },
-    async execute(interaction, client, Discord) {
+    async execute(interaction, serverData, client, Discord) {
         try {
             if (!interaction.member.roles.cache.get(client.config.roles.newMember)) {
                 interaction.deleteReply().then(() => interaction.followUp({ content: "You already accepted the rule", ephemeral: true }));

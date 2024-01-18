@@ -2,7 +2,7 @@ module.exports = {
     name: "disablecommand",
     description: "Disables a command on this server.",
     permissions: "Administrator",
-    model: `disablecommand **\`Name of command to remove\`**`,
+    model: `disablecommand **\`Name of command to disable\`**`,
     category: "Manage",
     cooldown: 5000,
     async execute(message, serverData, client, Discord) {

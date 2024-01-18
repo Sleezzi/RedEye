@@ -30,7 +30,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, client, Discord) {
+    async execute(interaction, serverData, client, Discord) {
         if (!interaction.member.permissions.has("ManageMessages")) return interaction.deleteReply().then(() => interaction.followUp({ content: "You do not have permission to delete interactions", ephemeral: true }));
         let amount = interaction.options.getNumber("number");
         if (!amount) return interaction.deleteReply().then(() => interaction.followUp({ content: 'You must specify a number of messages to delete', ephemeral: true }));
