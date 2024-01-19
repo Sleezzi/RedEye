@@ -32,16 +32,12 @@ module.exports = {
     },
     async execute(interaction, serverData, client, Discord) {
         try {
-            for (const userId in client.data.tickets) {
-                if (client.data.tickets.get(userId)[interaction.options.getString("id")]) {
-                    if (userId === interaction.member.id || interaction.member.permissions.has("ManageMember")) {
-                        const tickets = {...client.data.tickets.get(interaction.member.id)};
-                        delete tickets[interaction.options.getString("id")]
-                        client.data.tickets.set(interaction.member.id, tickets);
-                        interaction.deleteReply().then(() => interaction.followUp({ content: `This ticket has been removed`, ephemeral: true  }));
-                    } else interaction.deleteReply().then(() => interaction.followUp({ content: `You can't remove this ticket`, ephemeral: true  }));
+            require("../../components/database").get(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`, client).then((ticket) => {
+                if (ticket.content) {
+                    require("../../components/database").delete(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`, client)
+                    interaction.deleteReply().then(() => interaction.followUp({ content: `This ticket has been removed`, ephemeral: true  }));
                 } else interaction.deleteReply().then(() => interaction.followUp({ content: `You can't remove this ticket`, ephemeral: true  }));
-            }
+            });
         } catch(err) { return err; }
     }
 }

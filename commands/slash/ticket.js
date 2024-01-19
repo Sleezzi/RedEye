@@ -89,12 +89,13 @@ module.exports = {
         try {
             const { v4: uuidv4 } = require("uuid");
             const id = uuidv4();
-            require("../../components/database").set(`/${interaction.guild.id}/tickets/${interaction.member.id}/${id}`, JSON.stringify({
+            require("../../components/database").set(`/${interaction.guild.id}/tickets/${interaction.member.id}/${id}`, {
                 cat: interaction.options.getString("category"),
                 content: interaction.options.getString("content"),
                 username: interaction.member.user.username,
+                status: "Not done",
                 madeAt: Math.floor(Date.now() / 1000)
-            }), client);
+            }, client);
             interaction.deleteReply().then(() => interaction.followUp({ content: `The ticket has been created, (id of ticket: \`${id}\`)`, ephemeral: true  }));
         } catch(err) { return err; }
     }

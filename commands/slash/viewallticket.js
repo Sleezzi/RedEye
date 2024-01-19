@@ -53,21 +53,22 @@ module.exports = {
                 },
             };
 
-
             if (interaction.options.getUser("member")) {
-                let member = interaction.guild.members.cache.find((member) => member.id === interaction.options.getUser("member").id);
+                const member = interaction.guild.members.cache.find((member) => member.id === interaction.options.getUser("member").id);
                 embed.title = `Tickets • ${member.user.username}`;
-                if (client.data.tickets.has(member.id)) {
-                    for (const ticket in client.data.tickets.get(member.id)) embed.fields.unshift({name: `**\`${ticket}\`**:`, value: `> - Content: "\`${client.data.tickets.get(member.id)[ticket].content}\`",\n> - Category: \`${client.data.tickets.get(member.id)[ticket].cat}\`,\n> - Made at: <t:${client.data.tickets.get(member.id)[ticket].madeAt}:R>${(client.data.tickets.get(member.id)[ticket].updatedAt ? `,\n> - Updated at: <t:${client.data.tickets.get(member.id)[ticket].updatedAt}:R>` : "")}`});
-                }
+                require("../../components/database").get(`/${interaction.guild.id}/tickets/${member.id}`, client).then((tickets) => {
+                    for (const ticket in tickets) embed.fields.unshift({name: `**\`${ticket}\`**:`, value: `> - Content: "\`${tickets[ticket].content}\`",\n> - Category: \`${tickets[ticket].cat}\`,\n> - Status: ${(tickets[ticket].status === "Not done" ? ":x:" : (tickets[ticket].status === "In progress" ? ":hourglass:" : (tickets[ticket].status === "Done" ? ":white_check_mark:" : tickets[ticket].status)))},\n> - Made at: <t:${tickets[ticket].madeAt}:R>${(tickets[ticket].updatedAt ? `,\n> - Updated at: <t:${tickets[ticket].updatedAt}:R>` : "")}`});
+                });
             } else {
-                for (const [userId, user] of client.data.tickets) {
-                    for (const ticket in user) embed.fields.unshift({name: `**\`${ticket}\`**:`, value: `> - Content: "\`${user[ticket].content}\`",\n> - Category: \`${user[ticket].cat}\`,\n> - Status: ${user[ticket].status === "true" ? "Done" : (user[ticket].status === "inProgress" ? "In progress" : "Not done")},\n> - Made at: <t:${user[ticket].madeAt}:R>${(user[ticket].updatedAt ? `,\n> - Updated at: <t:${user[ticket].updatedAt}:R>` : "")}`});
-                    embed.fields.unshift({ name: `Tickets of ${user[Object.keys(user)[0]].username}:`, value: "" });
-                }
+                require("../../components/database").get(`/${interaction.guild.id}/tickets`, client).then((users) => {
+                    for (const user in users) {
+                        for (const ticket in users[user]) embed.fields.unshift({name: `**\`${ticket}\`**:`, value: `> - Content: "\`${users[user][ticket].content}\`",\n> - Category: \`${users[user][ticket].cat}\`,\n> - Status: ${(users[user][ticket].status === "Not done" ? ":x:" : (users[user][ticket].status === "In progress" ? ":hourglass:" : (users[user][ticket].status === "Done" ? ":white_check_mark:" : users[user][ticket].status)))},\n> - Made at: <t:${users[user][ticket].madeAt}:R>${(users[user][ticket].updatedAt ? `,\n> - Updated at: <t:${users[user][ticket].updatedAt}:R>` : "")}`});
+                        embed.fields.unshift({ name: `Tickets of ${users[user][Object.keys(users[user])[0]].username}:`, value: "" });
+                    }
+                });
             }
 
-            interaction.deleteReply().then(() => interaction.followUp({ embeds: [embed], ephemeral: true  }));
+            interaction.deleteReply().then(() => interaction.followUp({ embeds: [embed], ephemeral: true }));
         } catch(err) { return err; }
     }
 }

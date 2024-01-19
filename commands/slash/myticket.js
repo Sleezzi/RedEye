@@ -34,7 +34,7 @@ module.exports = {
                 },
             };
             require("../../components/database").get(`/${interaction.guild.id}/tickets/${interaction.member.id}`, client).then((tickets) => {
-                for (const ticket in tickets) embed.fields.unshift({name: `**\`${ticket}\`**:`, value: `> - Content: "\`${tickets[ticket].content}\`",\n> - Category: \`${tickets[ticket].cat}\`,\n> - Made at: <t:${tickets[ticket].madeAt}:R>${(tickets[ticket].updatedAt ? `,\n> - Updated at: <t:${tickets[ticket].updatedAt}:R>` : "")}`});
+                for (const ticket in tickets) embed.fields.unshift({name: `**\`${ticket}\`**:`, value: `> - Content: "\`${tickets[ticket].content}\`",\n> - Category: \`${tickets[ticket].cat}\`,\n> - Status: ${(tickets[ticket].status === "Not done" ? ":x:" : (tickets[ticket].status === "In progress" ? ":hourglass:" : (tickets[ticket].status === "Done" ? ":white_check_mark:" : tickets[ticket].status)))},\n> - Made at: <t:${tickets[ticket].madeAt}:R>${(tickets[ticket].updatedAt ? `,\n> - Updated at: <t:${tickets[ticket].updatedAt}:R>` : "")}`});
             });
             interaction.deleteReply().then(() => interaction.followUp({ embeds: [embed], ephemeral: true  }));
         } catch(err) { return err; }

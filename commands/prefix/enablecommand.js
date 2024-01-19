@@ -20,15 +20,15 @@ module.exports = {
             message.reply('The specified command does not exist').then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000));
             return;
         }
-        if (!serverData.get(message.guild.id).disabledCommands.find(c => c === command)) {
-            message.reply('The specified command is already enabled').then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000));
-            return;
-        }
-        try {
-            const newserverData = {...serverData.get(message.guild.id)};            
-            newserverData.disabledCommands.shift(newserverData.disabledCommands.indexOf(newserverData.disabledCommands.find(c => c === command)));
-            serverData.set(message.guild.id, newserverData);
+        require("../../components/database").get(`/${message.guild.id}/disabled`, client).then((commands) => {
+            if (!commands[0]) commands = [];
+            if (!commands.find(cmd => cmd === command)) {
+                message.reply('The specified command is not disabled').then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000));
+                return;
+            }
+            commands.shift(commands.indexOf(commands.find(cmd => cmd === command)));
+            require("../../components/database").set(`/${message.guild.id}/disabled`, commands, client);
             message.reply('The command has been enabled').then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000));
-        } catch(err) { return err; }
+        });
     }
 }
