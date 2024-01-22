@@ -105,6 +105,7 @@ module.exports = {
                 if (ticket.content) {
                     require("../../components/database").set(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`, {
                         cat: interaction.options.getString("category"),
+                        username: interaction.member.user.username,
                         content: interaction.options.getString("content"),
                         status: "Not done",
                         madeAt: ticket.madeAt,

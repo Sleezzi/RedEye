@@ -3,7 +3,7 @@ module.exports = {
     description: "",
     category: "Information",
     cooldown: 10000,
-    async execute(message, serverData, client, Discord) {
+    async execute(message, _, client, Discord) {
         try {
             message.channel.sendTyping();
             let command = message.content.split(' ').slice(1)[0];
@@ -14,17 +14,18 @@ module.exports = {
                 }
                 command = client.data.commands.prefix.find((n) => n.name === command);
 
+                const serverData = await require("../../components/database").get(`/${message.guild}`, client)
 
                 const embed = new Discord.EmbedBuilder()
                     .setColor("Aqua")
                     .setTitle("Help:")
-                    .setDescription(`*${client.config.prefix}${command.name}*`)
+                    .setDescription(`*${serverData.prefix ?? "!"}${command.name}*`)
                     .setAuthor({ name: message.member.user.tag, iconURL: message.member.user.avatarURL(), url: message.url })
                     .addFields(
                         { name: "__**Name:**__", value: `**\`${command.name}\`**`},
                         { name: "__**Description:**__", value: `**\`${command.description}\`**`},
                         { name: "__**Can be used:**__", value: `${(command.permissions !== undefined ? (command.permissions === "Owner" && message.member.id === "542703093981380628" ? ":white_check_mark:" : (message.member.permissions.has(command.permissions) ? ":white_check_mark:" : ":x:")) : ":white_check_mark:")}`},
-                        { name: "__**How to use:**__", value: `${client.config.prefix}${command.model}`},
+                        { name: "__**How to use:**__", value: `${serverData.prefix ?? "!"}${command.model}`},
                         { name: "__**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`},
                     )
                     .setURL(message.url)
@@ -40,8 +41,8 @@ module.exports = {
                         url: message.url,
                     },
                     fields: [
-                        { name: `__Prefix:__`, value: `> \`${client.config.prefix}\``, inline: false },
-                        { name: `__Bot made by:__`, value: `> ${message.guild.members.cache.get(client.config.ownerId).user.username}`, inline: false },
+                        { name: `__Prefix:__`, value: `> \`${(serverData.prefix || "!")}\``, inline: false },
+                        { name: `__Bot made by:__`, value: `> [Sleezzi](https://tv-sleezzi.web.app/)`, inline: false },
                         { name: `__Date of creation:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true },
                         { name: `__End in:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000 + 120)}:d> (<t:${Math.floor(message.createdTimestamp / 1000 + 120)}:R>)`, inline: true },
                     ],
@@ -104,8 +105,10 @@ module.exports = {
                         icon_url: client.user.avatarURL(),
                     },
                 };
+                if (!serverData.disabled) serverData.disabled = [];
                 
                 for (const command of client.data.commands.prefix) {
+                    if (serverData.disabled.find(cmd => cmd === command)) continue;
                     if (!command.permissions) {
                         if (command[1].category === "Core") {
                             coreEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
@@ -206,7 +209,7 @@ module.exports = {
                     collector = reply.createMessageComponentCollector({ componentType: Discord.ComponentType.Button, filter: (i) => i.user.id === message.member.id, time: 120_000 });
                     interaction.followUp({ content: "Please wait...", ephemeral: true }).then((msg) => { if (msg && msg.deletable) msg.delete(); });
                 });
-                setTimeout(function() { if (reply) reply.delete() }, 120_000);
+                setTimeout(function() { try { if (reply) reply.delete(); } catch (err) { return; }  }, 120_000);
             }        
             if (message && message.deletable) message.delete();
         } catch(err) {

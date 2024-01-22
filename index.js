@@ -33,7 +33,7 @@ firebase.initializeApp({
 });
 client.data = {
     cooldown: new Collection(),
-    canvas: require("canvas"),
+    canvas: "",//require("canvas"),
     commands: {
         prefix: new Collection(),
         app: new Collection(),
@@ -103,31 +103,6 @@ for (const file of readdirSync("./events").filter((file) => file.endsWith(".js")
     require("./components/log")(`Event "%yellow%${event.name} (${event.event})%reset%" loaded`);
     if (Object.hasOwnProperty.call(Events, event.event) && event.name && event.type && event.execute) {
         client[event.type](Events[`${event.event}`], (...args) => {
-            if (args[0] && args[0].guild && !serverData.has(args[0].guild.id)) serverData.set(args[0].guild.id, {
-                prefix: "!",
-                channel: {
-                    log: {
-                        channelId: undefined,
-                        whiteListed: []
-                    },
-                    welcom: {
-                        channelId: undefined,
-                        message: "%member% joined us!"
-                    },
-                    leave: {
-                        channelId: undefined,
-                        message: "%member% left us!"
-                    },
-                    boost: {
-                        channelId: undefined,
-                        message: "%member% boosted this server"
-                    },
-                    punishment: undefined,
-                },
-                rolesReaction: {},
-                disabledCommands: [],
-                disabeledEvents: []
-            });
             try {
                 return event.execute(args, serverData, client, Discord);
             } catch(err) { return; }
@@ -139,8 +114,18 @@ client.login(client.config.token).then(() => {
     require("./components/log")("\n", `%green%Logging...%reset%`);
 });
 
-// client.on("interactionCreate", message => {
-//     message
+// client.on("messageCreate", message => {
+//     if (message.content !== "!testc") return;
+//     message.guild.channels.create({
+//         name: "le nom de la catégorie",
+//         type: Discord.ChannelType.GuildCategory
+//     }).then(cat => {
+//         message.guild.channels.create({
+//             name: "Le nom du salon",
+//             type: Discord.ChannelType.GuildText, // Tu peux aussi mettre 1 pour le salon de text et je crois que c'est 4 pour les voc
+//             parent: cat.id,
+//         });
+//     });    
 // });
 
 process.stdin.setRawMode(true);

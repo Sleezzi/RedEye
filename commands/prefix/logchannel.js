@@ -5,7 +5,7 @@ module.exports = {
     model: `logchannel **\`mention of channel\`**`,
     category: "Manage",
     cooldown: 5000,
-    async execute(message, serverData, client, Discord) {
+    async execute(message, _, client, Discord) {
         if (!message.member.permissions.has("Administrator")) {
             message.reply("You do not have permission to do this").then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000));
             return;
@@ -13,14 +13,14 @@ module.exports = {
         message.channel.sendTyping();
         const channel = message.mentions.channels.first();
         if (!channel) {
-            if (serverData.get(message.guild.id).channel.log.channelId) {
-                const newserverData = {...serverData.get(message.guild.id)};            
-                newserverData.channel.log.channeldId = undefined;
-                serverData.set(message.guild.id, newserverData);
-                message.reply('You have disabled the log channel').then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000));
-            } else {
-                message.reply('You must mention the channel to which you want the bot to send log messages').then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000));
-            }
+            require("../../components/database").get(`/${message.guild.id}/channels/log/channelId`, client).then((id) => {
+                if (typeof id === "object") {
+                    message.reply('You must mention the channel to which you want the bot to send log messages').then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000));
+                } else {
+                    message.reply('The log channel has been disabled.').then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000));
+                    require("../../components/database").delete(`/${message.guild.id}/channels/log/channelId`, client);
+                }
+            });
             return;
         }
         if (!message.guild.channels.cache.find(c => c.id === channel.id)) {
@@ -32,9 +32,7 @@ module.exports = {
             return;
         }
         try {
-            const newserverData = {...serverData.get(message.guild.id)};            
-            newserverData.channel.log.channeldId = channel.id;
-            serverData.set(message.guild.id, newserverData);
+            require("../../components/database").set(`/${message.guild.id}/channels/log/channelId`, channel.id, client);
             message.reply('The log channel has been successfully registered').then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000));
         } catch(err) { return err; }
     }
