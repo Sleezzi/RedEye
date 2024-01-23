@@ -8,10 +8,10 @@ module.exports = {
             guild.leave();
             return;
         }
-        require("../components/database").set(`/${guild.id}`, {
-            name: guild.name,
-            icon: (guild.iconURL() ? guild.iconURL().replace("https://cdn.discordapp.com/icons/", "").replace(guild.id, "").replace("/", "").replace(".webp", "") : undefined)
-        }, client);
+        const data = {};
+        data.name = guild.name;
+        if (guild.iconURL()) data.icon = guild.iconURL().replace("https://cdn.discordapp.com/icons/", "").replace(guild.id, "").replace("/", "").replace(".webp", "");
+        require("../components/database").set(`/${guild.id}`, data, client);
         require("../components/log")(`${client.user.username} has been added in "${guild.name}" (${guild.id})`)
         try {
             // The put method is used to fully refresh all commands in the guild with the current set
