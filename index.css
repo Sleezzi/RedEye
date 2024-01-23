@@ -2,9 +2,30 @@ body {
     padding: 0;
     background: #333;
     color: white;
-    overflow-x: hidden;
-    width: 100%;
+    width: 100vh;
+    min-width: 100%;
     margin: 0;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 7px;
+    background: #333;
+}
+  
+/* Track */
+::-webkit-scrollbar-track {
+    background: #00000000;
+}
+  
+/* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #222;
+    border-radius: 5vh;
+  }
+  
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #111;
 }
 section {
     width: 100%;
@@ -50,6 +71,7 @@ a#add {
     background: #00000050;
     height: 10%;
     width: 10%;
+    min-width: calc(fit-content);
     transition: all 0.5s ease;
 }
 a#add::before {
@@ -59,12 +81,14 @@ a#add::before {
     background: url(./img/discord.svg) center/70% no-repeat;
     padding: 0 2px 0 0;
     transform: translateY(0) rotateY(0);
-    transition: transform 0.5s ease;
+    transition: all 0.5s ease;
 }
 a#add::after {
     content: "Add bot";
+    text-align: center;
+    width: 45%;
     transform: translateY(0);
-    transition: transform 0.5s ease;
+    transition: all 0.5s ease;
 }
 a#add:hover {
     background: #00000075;
@@ -78,6 +102,7 @@ a#add:hover::before {
     transform: translateY(-5px) rotateY(360deg);
 }
 a#add:hover::after {
+    height: calc(auto + 5px);
     transform: translateY(-5px);
 }
 section.space img {
