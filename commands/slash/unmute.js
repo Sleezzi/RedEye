@@ -47,11 +47,11 @@ module.exports = {
                 interaction.deleteReply().then(() => interaction.followUp({ content: "I can't unmute this member", ephemeral: true }));
                 return;
             }
-            if (!member.roles.cache.has(client.config.roles.mute)) {
+            if (!member.roles.cache.find(role => role.name === "mute")) {
                 interaction.deleteReply().then(() => interaction.followUp({ content: "I can't unmute this member cause he is not mute", ephemeral: true }));
                 return;
             }
-            member.roles.remove(client.config.roles.mute);
+            member.roles.remove(member.roles.cache.find(role => role.name === "mute").id);
             interaction.deleteReply().then(() => interaction.followUp({ content: "This member has been unmuted", ephemeral: true }));
         } catch(err) { return err; }
     }

@@ -7,20 +7,18 @@ module.exports = {
         client.user.setStatus(Discord.PresenceUpdateStatus.Online);
         const fun = () => {
             try {
-                let members = 0;
-                let onlineMembers = 0;
+                let members = [];
+                let onlineMembers = [];
                 client.guilds.cache.forEach((guild) => {
-                    members += guild.members.cache.filter((member) => !member.user.bot).size;
-                    onlineMembers += guild.members.cache.filter((member) => member.presence && member.presence.status !== "offline" && !member.user.bot).size;
+                    guild.members.cache.forEach(member => {
+                        if (!member.user.bot && !members.find(m => m.id === member.id)) members.push(member.id);
+                        if (member.presence && member.presence.status !== "offline" && !member.user.bot && !onlineMembers.find(m => m.id === member.id)) onlineMembers.push(member.id);
+                    });
                 });
-                if (i === 1) {
-                    client.user.setActivity(`!help`, { type: Discord.ActivityType.Playing, url: "https://discord.gg/xKxSt7Ke8x", state: "Bot made by Sleezzi" });
-                }
-                if (i === 2) {
-                    client.user.setActivity(`👤 • ${members}`, { type: Discord.ActivityType.Watching, url: "https://discord.gg/xKxSt7Ke8x", state: "Bot made by Sleezzi" });
-                }
+                if (i === 1) client.user.setActivity(`!help`, { type: Discord.ActivityType.Playing, url: "https://discord.gg/xKxSt7Ke8x", state: "Bot made by Sleezzi" });
+                if (i === 2) client.user.setActivity(`👤 • ${members.length} member${(members.length > 1 ? "s" : "")}`, { type: Discord.ActivityType.Watching, url: "https://discord.gg/xKxSt7Ke8x", state: "Bot made by Sleezzi" });
                 if (i === 3) {
-                    client.user.setActivity(`🟢 • ${onlineMembers}`, { type: Discord.ActivityType.Watching, url: "https://discord.gg/xKxSt7Ke8x", state: "Bot made by Sleezzi" });
+                    client.user.setActivity(`🟢 • ${onlineMembers.length} online member${(onlineMembers.length > 1 ? "s" : "")}`, { type: Discord.ActivityType.Watching, url: "https://discord.gg/xKxSt7Ke8x", state: "Bot made by Sleezzi" });
                     i = 0;
                 }
                 i++

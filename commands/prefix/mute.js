@@ -45,7 +45,7 @@ module.exports = {
                 });
                 return;
             }
-            if (member.roles.cache.has(client.config.roles.mute)) {
+            if (member.roles.cache.find(role => role.name === "mute")) {
                 message.channel.send("I can't mute this member cause he is already mute").then((msg) => {
                     if (msg.deletable) {
                         setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
@@ -53,6 +53,7 @@ module.exports = {
                 });
                 return;
             }
+            
             member.roles.add(client.config.roles.mute);
             message.channel.send("This member has been muted").then((msg) => {
                 if (msg.deletable) {

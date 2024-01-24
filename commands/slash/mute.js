@@ -31,7 +31,6 @@ module.exports = {
     },
     async execute(interaction, serverData, client, Discord) {
         try {
-            
             let member = interaction.guild.members.cache.find((member) => member.id === interaction.options.getUser("member").id);
             if (!interaction.member.permissions.has("ModerateMembers")) {
                 interaction.deleteReply().then(() => interaction.followUp({ content: "You can't mute this member", ephemeral: true }));
@@ -47,11 +46,18 @@ module.exports = {
                 interaction.deleteReply().then(() => interaction.followUp({ content: "I can't mute this member", ephemeral: true }));
                 return;
             }
-            if (member.roles.cache.has(client.config.roles.mute)) {
+            if (member.roles.cache.find(role => role.name === "mute" && role.color === 0xFF0000 && role.permissions.length === 0)) {
                 interaction.deleteReply().then(() => interaction.followUp({ content: "I can't mute this member cause he is already mute", ephemeral: true }));
                 return;
             }
-            member.roles.add(client.config.roles.mute);
+            // if (interaction.guild)
+            const role = await interaction.guild.roles.create({
+                name: "mute",
+                color: 0xFF0000,
+                permissions: [],
+                position: interaction.guild.roles.cache.find(role => role.name === client.user.username && interaction.guild.members.cache.get(client.user.id).roles.cache.has(role.id)).position-1 || 1
+            });
+            member.roles.add(role.id);
             interaction.deleteReply().then(() => interaction.followUp({ content: "This member has been muted", ephemeral: true }));
         } catch(err) { return err; }
     }

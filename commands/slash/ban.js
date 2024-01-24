@@ -61,12 +61,11 @@ module.exports = {
     },
     async execute(interaction, serverData, client, Discord) {
         try {
-            
             let member = interaction.guild.members.cache.find((member) => member.id === interaction.options.getUser("member").id);
 
             if (!interaction.member.permissions.has("BanMembers")) return interaction.deleteReply().then(() => interaction.followUp({ content: 'You cannot ban a member from the server', ephemeral: true }));
             if (!member) return interaction.deleteReply().then(() => interaction.followUp({ content: "Please mention a valid member.", ephemeral: true }));
-            if (interaction.author.id === member.id) return interaction.deleteReply().then(() => interaction.followUp({ content: "You cannot ban yourself from the server", ephemeral: true }));
+            if (interaction.member.id === member.id) return interaction.deleteReply().then(() => interaction.followUp({ content: "You cannot ban yourself from the server", ephemeral: true }));
             if (!member.bannable) return interaction.deleteReply().then(() => interaction.followUp({ content: "I can't ban this member", ephemeral: true }));
 
             let duration = interaction.options.getString("duration");

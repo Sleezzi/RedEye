@@ -48,7 +48,7 @@ console.clear();
 for (const file of readdirSync("./commands/prefix").filter((file) => file.endsWith(".js"))) {
     const command = require(`./commands/prefix/${file}`);
     client.data.commands.prefix.set(command.name, command);
-    require("./components/log")(`Command "%blue%${command.name}%reset%" loaded`);
+    require("./components/log")(`Command "%aqua%${command.name}%reset%" loaded`);
 }
 
 require("./components/log")("");
@@ -91,7 +91,7 @@ for (const file of readdirSync("./contextMenu").filter((file) => file.endsWith("
         if (typeof command.data.type !== "number") command.data.type = require("./components/parseAppType")(command.data.type);
         if (command.data.default_member_permissions && !/^\d+$/.test(command.data.default_member_permissions)) command.data.default_member_permissions = `${require("./components/parsePermissions")(`${command.data.default_member_permissions}`.toLowerCase())}`;
         client.data.commands.app.set(command.data.name, command);
-        require("./components/log")(`Context command "%blue%${command.data.name}%reset%" created`);
+        require("./components/log")(`Context command "%aqua%${command.data.name}%reset%" created`);
     } else require("./components/log")(`%yellow%[WARNING] Something missing with ${file} context command`);
 }
 // update all / commands
@@ -116,16 +116,12 @@ client.login(client.config.token).then(() => {
 
 // client.on("messageCreate", message => {
 //     if (message.content !== "!testc") return;
-//     message.guild.channels.create({
-//         name: "le nom de la catégorie",
-//         type: Discord.ChannelType.GuildCategory
-//     }).then(cat => {
-//         message.guild.channels.create({
-//             name: "Le nom du salon",
-//             type: Discord.ChannelType.GuildText, // Tu peux aussi mettre 1 pour le salon de text et je crois que c'est 4 pour les voc
-//             parent: cat.id,
-//         });
-//     });    
+//     message.guild.roles.create({
+//         name: "mute",
+//         color: 0xFF0000,
+//         permissions: [],
+//         position: message.guild.roles.cache.find(role => role.name === client.user.username && message.guild.members.cache.get(client.user.id).roles.cache.has(role.id)).position-1 || 1
+//     }).then((role) => message.member.roles.add(role.id));
 // });
 
 process.stdin.setRawMode(true);
