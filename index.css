@@ -19,13 +19,13 @@ body {
   
 /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #222;
+    background: #111;
     border-radius: 5vh;
   }
   
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #111;
+    background: black;
 }
 section {
     width: 100%;
