@@ -87,6 +87,7 @@ a#add::after {
     content: "Add bot";
     text-align: center;
     width: 45%;
+    min-width: 60px;
     transform: translateY(0);
     transition: all 0.5s ease;
 }
@@ -110,9 +111,10 @@ section.space img {
     height: auto;
     max-height: 85%;
 }
-section.space p {
+section.space h3 {
     height: auto;
-    max-height: 85%;
+    width: auto;
+    max-height: 35%;
     max-width: 45%;
 }
 .column {
