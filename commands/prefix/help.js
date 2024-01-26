@@ -161,7 +161,7 @@ module.exports = {
                 const row = new Discord.ActionRowBuilder().addComponents(select);
                 
                 let reply = await message.channel.send({ embeds: [ mainEmbed ], components: [ row ], ephemeral: true });
-                let collector = reply.createMessageComponentCollector({ componentType: Discord.ComponentType.StringSelect, filter: (i) => i.user.id === message.author.id, time: 120_000 });
+                let collector = reply.createMessageComponentCollector({ componentType: Discord.ComponentType.StringSelect, filter: (i) => i.user.id === message.author.id && i.customId === "Commands type" });
                 
                 collector.on("collect", async (interaction) => {
                     await interaction.deferReply();

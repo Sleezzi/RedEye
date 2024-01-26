@@ -25,7 +25,7 @@ module.exports = {
                     fr: "Tu as besoin d'aide sur quelle commande ?",
                     "en-US": "Which command do you need help with?"
                 },
-                required: true,
+                required: false,
                 type: 3,
                 choices: []
             }
