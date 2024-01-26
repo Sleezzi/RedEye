@@ -11,55 +11,55 @@ module.exports = {
             let member = message.mentions.members.first();
 
             if (!message.member.permissions.has("ModerateMembers")) {
-                message.channel.send('You can\'t mute this member.').then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                    }
-                });
+                const msg = await message.channel.send('You can\'t mute this member.');
+                if (msg.deletable) {
+                    setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
+                }
                 return;
             }
             
             if (!member) {
-                message.channel.send("You can\'t mute this member.").then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                    }
-                });
+                const msg = await message.channel.send("You can\'t mute this member.");
+                if (msg.deletable) {
+                    setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
+                }
                 return;
             }
 
             if (message.author.id === member.id) {
-                message.channel.send("You can't mute yourself.").then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                    }
-                });
+                const msg = await message.channel.send("You can't mute yourself.");
+                if (msg.deletable) {
+                    setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
+                }
                 return;
             }
             
             if (!member.manageable) {
-                message.channel.send("I can't mute this member").then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                    }
-                });
+                const msg = await message.channel.send("I can't mute this member");
+                if (msg.deletable) {
+                    setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
+                }
                 return;
             }
             if (member.roles.cache.find(role => role.name === "mute")) {
-                message.channel.send("I can't mute this member cause he is already mute").then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                    }
-                });
+                const msg = await message.channel.send("I can't mute this member cause he is already mute");
+                if (msg.deletable) {
+                    setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
+                }
                 return;
             }
-            
-            member.roles.add(client.config.roles.mute);
-            message.channel.send("This member has been muted").then((msg) => {
-                if (msg.deletable) {
-                    setTimeout(() => { try { msg.delete(); } catch(err) { return err; }}, 5000);
-                }
+            const role = await message.guild.roles.create({
+                name: "mute",
+                color: 0xFF0000,
+                permissions: [],
+                position: message.guild.roles.cache.find(role => role.name === client.user.username && message.guild.members.cache.get(client.user.id).roles.cache.has(role.id)).position-1 || 1
             });
+            message.member.roles.add(role.id);
+            member.roles.add(client.config.roles.mute);
+            const msg = await message.channel.send("This member has been muted")
+            if (msg.deletable) {
+                setTimeout(() => { try { msg.delete(); } catch(err) { return err; }}, 5000);
+            }
             if (message) message.delete();
         } catch(err) {
             console.error(err);

@@ -108,7 +108,7 @@ module.exports = {
                 if (!serverData.disabled) serverData.disabled = [];
                 
                 for (const command of client.data.commands.prefix) {
-                    if (serverData.disabled.find(cmd => cmd === command)) continue;
+                    if (serverData.disabled.find(cmd => cmd === command[0])) continue;
                     if (!command.permissions) {
                         if (command[1].category === "Core") {
                             coreEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
@@ -135,78 +135,58 @@ module.exports = {
                         }
                     }
                 }
+                const select = new Discord.StringSelectMenuBuilder()
+                .setCustomId('Commands type')
+                .setPlaceholder('Select the type of the command')
+                .addOptions([
+                    {
+                        label: 'Main',
+                        value: 'main',
+                        default: true
+                    },
+                    {
+                        label: 'Core',
+                        value: 'core',
+                    },
+                    {
+                        label: 'Info',
+                        value: 'info',
+                    },
+                    {
+                        label: 'Fun',
+                        value: 'fun',
+                    }
+                ]);
 
-                const Main = new Discord.ButtonBuilder()
-                .setLabel("Main")
-                .setStyle(Discord.ButtonStyle.Success)
-                .setCustomId("Main")
-                .setDisabled(true);
-
-                const Core = new Discord.ButtonBuilder()
-                .setLabel("Core")
-                .setStyle(Discord.ButtonStyle.Primary)
-                .setCustomId("Core");
-
-                const Fun = new Discord.ButtonBuilder()
-                .setLabel("Fun")
-                .setStyle(Discord.ButtonStyle.Primary)
-                .setCustomId("Fun");
-
-                const Info = new Discord.ButtonBuilder()
-                .setLabel("Info")
-                .setStyle(Discord.ButtonStyle.Primary)
-                .setCustomId("Info");
-
-                const row = new Discord.ActionRowBuilder().addComponents(Main, Core, Fun, Info);
+                const row = new Discord.ActionRowBuilder().addComponents(select);
                 
                 let reply = await message.channel.send({ embeds: [ mainEmbed ], components: [ row ], ephemeral: true });
-                let collector = reply.createMessageComponentCollector({ componentType: Discord.ComponentType.Button, filter: (i) => i.user.id === message.author.id, time: 120_000 });
+                let collector = reply.createMessageComponentCollector({ componentType: Discord.ComponentType.StringSelect, filter: (i) => i.user.id === message.author.id, time: 120_000 });
                 
                 collector.on("collect", async (interaction) => {
                     await interaction.deferReply();
-                    Main.setStyle(Discord.ButtonStyle.Primary);
-                    Core.setStyle(Discord.ButtonStyle.Primary);
-                    Fun.setStyle(Discord.ButtonStyle.Primary);
-                    Info.setStyle(Discord.ButtonStyle.Primary);
-
-                    Main.setDisabled(false);
-                    Core.setDisabled(false);
-                    Fun.setDisabled(false);
-                    Info.setDisabled(false);
-                    if (interaction.customId === "Main") {
-                        Main.setStyle(Discord.ButtonStyle.Success);
-
-                        Main.setDisabled(true);
+                    if (interaction.values[0] === "main") {
                         try {
                             reply.edit({ embeds: [ mainEmbed ], omponents: [ row ], ephemeral: true });
                         } catch(err) { return err; }
                     }
-                    if (interaction.customId === "Core") {
-                        Core.setStyle(Discord.ButtonStyle.Success);
-                        
-                        Core.setDisabled(true);
+                    if (interaction.values[0] === "core") {
                         try {
                             reply.edit({ embeds: [ coreEmbed ], components: [ row ], ephemeral: true });
                         } catch(err) { return err; }
                     }
-                    if (interaction.customId === "Fun") {
-                        Fun.setStyle(Discord.ButtonStyle.Success);
-
-                        Fun.setDisabled(true);
+                    if (interaction.values[0] === "fun") {
                         try {
                             reply.edit({ embeds: [ funEmbed ], components: [ row ], ephemeral: true });
                         } catch(err) { return err; }
                     }
 
-                    if (interaction.customId === "Info") {
-                        Info.setStyle(Discord.ButtonStyle.Success);
-
-                        Info.setDisabled(true);
+                    if (interaction.values[0] === "info") {
                         try {
                             reply.edit({ embeds: [ infoEmbed ], components: [ row ], ephemeral: true });
                         } catch(err) { return err; }
                     }
-                    collector = reply.createMessageComponentCollector({ componentType: Discord.ComponentType.Button, filter: (i) => i.user.id === message.member.id, time: 120_000 });
+                    collector = reply.createMessageComponentCollector({ componentType: Discord.ComponentType.StringSelect, filter: (i) => i.user.id === message.member.id, time: 120_000 });
                     interaction.followUp({ content: "Please wait...", ephemeral: true }).then((msg) => { if (msg && msg.deletable) msg.delete(); });
                 });
                 setTimeout(function() { try { if (reply) reply.delete(); } catch (err) { return; }  }, 120_000);

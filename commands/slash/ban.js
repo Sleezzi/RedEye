@@ -22,7 +22,7 @@ module.exports = {
                 },
                 description: 'Member to ban',
                 description_localizations: {
-                    fr: "Membre a bannir",
+                    fr: "Membre à bannir",
                     "en-US": "Member to ban"
                 },
                 required: true,

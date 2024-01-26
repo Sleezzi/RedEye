@@ -64,8 +64,8 @@ for (const file of readdirSync("./commands/slash").filter((file) => file.endsWit
         if (!command.data.type) command.data.type = 1;
         if (command.data.default_member_permissions && !/^\d+$/.test(command.data.default_member_permissions)) command.data.default_member_permissions = `${require("./components/parsePermissions")(`${command.data.default_member_permissions}`.toLowerCase())}`;
         client.data.commands.app.set(command.data.name, command);
-        require("./components/log")(`Command "%blue%/${command.data.name}%reset%" created`);
-    } else require("./components/log")(`%yellow%[WARNING] Something missing with ${file}'s command`);
+        require("./components/log")(`Command "%aqua%/${command.data.name}%reset%" created`);
+    } else require("./components/log")(`%red%[WARNING] Something missing with ${file}'s command`);
 }
 
 // Add all command in the options of /help
@@ -116,12 +116,6 @@ client.login(client.config.token).then(() => {
 
 // client.on("messageCreate", message => {
 //     if (message.content !== "!testc") return;
-//     message.guild.roles.create({
-//         name: "mute",
-//         color: 0xFF0000,
-//         permissions: [],
-//         position: message.guild.roles.cache.find(role => role.name === client.user.username && message.guild.members.cache.get(client.user.id).roles.cache.has(role.id)).position-1 || 1
-//     }).then((role) => message.member.roles.add(role.id));
 // });
 
 process.stdin.setRawMode(true);
