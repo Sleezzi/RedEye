@@ -19,7 +19,7 @@ module.exports = {
             ctx.textAlign = "center";
             ctx.fillText(`${(member.user.discriminator === "0" ? member.user.username.toUpperCase() : member.user.tag.toUpperCase())}`, 600, 150);
             require("../../components/database").get(`/${message.guild.id}/levels/${member.id}`, client).then((level) => {
-                ctx.fillText(`Level: ${(level.level ? level.level : 1)} (${(level.xp ? level.xp : 0)}/${(level.level ? level.level * 150 : 150)}`, 600, 250);
+                ctx.fillText(`Level: ${(level.level ? level.level : 1)} (${(level.xp ? level.xp : 0)}/${(level.level ? level.level * 150 : 150)})`, 600, 250);
             });
             const pdpbot = await client.data.canvas.loadImage(`https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png?size=1024`)
             ctx.drawImage(pdpbot, 967, 345, 50, 50);
