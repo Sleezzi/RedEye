@@ -33,7 +33,7 @@ module.exports = {
             interaction.deleteReply().then(() => interaction.followUp({ content: "You do not have permission to do this", ephemeral: true }));
             return;
         }
-        const prefix = interaction.getString("prefix").replaceAll(" ", "");
+        const prefix = interaction.options.getString("prefix").replaceAll(" ", "");
         try {
             if (prefix === "!") {
                 require("../../components/database").delete(`/${interaction.guild.id}/prefix`, client);
