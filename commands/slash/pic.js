@@ -32,7 +32,7 @@ module.exports = {
         try {
             let member = interaction.guild.members.cache.find((m) => m.id === (interaction.options.getUser("member") ? interaction.options.getUser("member") : interaction.member).id) ?? interaction.member;
             await interaction.deleteReply();
-            interaction.followUp({ content: `[Picture of ${member.user.username}](${member.user.avatarURL()})`, ephemeral: true });
+            interaction.followUp({ content: `[Picture of ${member.user.username}](${(member.user.avatarURL() ? member.user.avatarURL() : "https://discord.com/assets/c722e74f644b4a758b11.png")})`, ephemeral: true });
         } catch(err) { return err; }
     }
 }

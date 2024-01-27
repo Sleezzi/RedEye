@@ -58,8 +58,7 @@ for (const file of readdirSync("./commands/slash").filter((file) => file.endsWit
     const command = require(`./commands/slash/${file}`);
     if (command.data && command.data.name && command.execute) {
         if (command.data.options) command.data.options.forEach((option) => {
-            if (typeof option.type === "number") return;
-            option.type = require("./components/parseAppOptionsTypes")(option.type);
+            if (typeof option.type !== "number") option.type = require("./components/parseAppOptionsTypes")(option.type);
         });
         if (!command.data.type) command.data.type = 1;
         if (command.data.default_member_permissions && !/^\d+$/.test(command.data.default_member_permissions)) command.data.default_member_permissions = `${require("./components/parsePermissions")(`${command.data.default_member_permissions}`.toLowerCase())}`;

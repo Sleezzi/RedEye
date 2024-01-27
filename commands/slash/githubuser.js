@@ -32,7 +32,10 @@ module.exports = {
         try {
             let user = interaction.options.getString('user');
             let response = await fetch(`https://api.github.com/users/${user}`)
-            if (response.status !== 200) return interaction.deleteReply().then(() => interaction.followUp({ content: `Unable to find "${user}"`, ephemeral: true }));
+            if (response.status !== 200) {
+                interaction.deleteReply().then(() => interaction.followUp({ content: `Unable to find "${user}"`, ephemeral: true }));
+                return response.statusText;
+            }
             response = await response.json();
             const embed = {
                 color: 0x0099ff,
