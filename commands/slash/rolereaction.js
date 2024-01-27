@@ -70,12 +70,12 @@ module.exports = {
                 return;
             }
 
-            if (!interaction.options.getString("emoji").startsWith(":") || !interaction.options.getString("emoji").endsWith(":")) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: `The emoji \`${interaction.options.getString("emoji")}\` is not a valid emoji.`, ephemeral: true  }));
+            if (!interaction.options.getString("reaction").startsWith(":") || !interaction.options.getString("reaction").endsWith(":")) {
+                interaction.deleteReply().then(() => interaction.followUp({ content: `The emoji \`${interaction.options.getString("reaction")}\` is not a valid emoji.`, ephemeral: true  }));
                 return;
             }
 
-            interaction.channel.messages.cache.has(interaction.options.getString("message")).react(interaction.options.getString("emoji"))
+            interaction.channel.messages.cache.get(interaction.options.getString("message")).react(interaction.options.getString("reaction"));
 
             const embed = {
                 color: 0x0099ff,
