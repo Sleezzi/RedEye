@@ -61,7 +61,8 @@ module.exports = {
     async execute(interaction, serverData, client, Discord) {
         try {
             if (!interaction.member.permissions.has("ManageMember")) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: `You don't have the permission to do this.`, ephemeral: true  }));
+                await interaction.deleteReply();
+                interaction.followUp({ content: `You don't have the permission to do this.`, ephemeral: true });
                 return;
             }
 
@@ -75,7 +76,7 @@ module.exports = {
                 return;
             }
 // interaction.options.getString("message")
-            interaction.channel.messages.cache.get("1200811838162599956").react(interaction.options.getString("reaction"));
+            interaction.channel.messages.cache.fetch("1200811838162599956").react(interaction.options.getString("reaction"));
 
             const embed = {
                 color: 0x0099ff,

@@ -28,7 +28,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, serverData, client, Discord) {
+    async execute(interaction, _, client, Discord) {
         try {
     
             let member = interaction.guild.members.cache.find((m) => m.id === (interaction.options.getUser("member") ? interaction.options.getUser("member") : interaction.member).id) ?? interaction.member;
@@ -40,8 +40,12 @@ module.exports = {
                     roles = `<@&${member._roles.map((i) => i).join('>, <@&')}>`;
                 }
             }
-
-            const embed = new Discord.EmbedBuilder()
+            require("../../components/database").get(`/${interaction.guild.id}/levels/${member.id}`, client).then(level => {
+                if (!level.level) level = {
+                    level: 1,
+                    xp: 0
+                };
+                const embed = new Discord.EmbedBuilder()
                 .setColor("Aqua")
                 .setTitle("Information about:")
                 .setDescription(`<@${member.id}>`)
@@ -59,7 +63,9 @@ module.exports = {
                 )
                 .setURL(interaction.url)
                 .setFooter({ text: `Id: ${interaction.id}`, iconURL: client.user.avatarURL() });
-            interaction.deleteReply().then(() => interaction.followUp({ embeds: [embed], ephemeral: true }));
+                interaction.deleteReply().then(() => interaction.followUp({ embeds: [embed], ephemeral: true }));
+            });
+            
         } catch(err) { return err; }
     }
 }
