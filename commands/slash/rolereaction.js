@@ -39,7 +39,7 @@ module.exports = {
                     "en-US": "The id of the message under which the bot must add the reaction"
                 },
                 required: true,
-                type: "number"
+                type: "string"
             },
             {
                 name: 'role',
@@ -65,13 +65,13 @@ module.exports = {
                 return;
             }
 
-            if (!interaction.channel.messages.has(interaction.options.getNumber("id"))) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: `The message \`${interaction.options.getNumber("id")}\` doesn't existe.`, ephemeral: true  }));
+            if (!interaction.channel.messages.has(interaction.options.getString("id"))) {
+                interaction.deleteReply().then(() => interaction.followUp({ content: `The message \`${interaction.options.getString("id")}\` doesn't existe.`, ephemeral: true  }));
                 return;
             }
 
             if (!interaction.options.getString("emoji").startsWith(":") || !interaction.options.getString("emoji").endsWith(":")) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: `The emoji \`${interaction.options.getNumber("emoji")}\` is not a valid emoji.`, ephemeral: true  }));
+                interaction.deleteReply().then(() => interaction.followUp({ content: `The emoji \`${interaction.options.getString("emoji")}\` is not a valid emoji.`, ephemeral: true  }));
                 return;
             }
 
@@ -84,7 +84,7 @@ module.exports = {
                     url: "",
                 },
                 fields: [
-                    { name: `__Message:__`, value: `> \`${interaction.options.getNumber("id")}\``, inline: true},
+                    { name: `__Message:__`, value: `> \`${interaction.options.getString("id")}\``, inline: true},
                     { name: `__Reaction:__`, value: `> ${interaction.options.getString("emoji")}`, inline: true},
                     { name: `__Role:__`, value: `> ${interaction.options.getRole("role")}`, inline: true},
                     { name: `__Date of creation:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: false},
