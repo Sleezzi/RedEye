@@ -65,8 +65,8 @@ module.exports = {
                 return;
             }
 
-            if (!interaction.channel.messages.cache.has(interaction.options.getString("id"))) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: `The message \`${interaction.options.getString("id")}\` doesn't existe.`, ephemeral: true  }));
+            if (!interaction.channel.messages.cache.has(interaction.options.getString("message"))) {
+                interaction.deleteReply().then(() => interaction.followUp({ content: `The message \`${interaction.options.getString("message")}\` doesn't existe.`, ephemeral: true  }));
                 return;
             }
 
@@ -74,6 +74,8 @@ module.exports = {
                 interaction.deleteReply().then(() => interaction.followUp({ content: `The emoji \`${interaction.options.getString("emoji")}\` is not a valid emoji.`, ephemeral: true  }));
                 return;
             }
+
+            interaction.channel.messages.cache.has(interaction.options.getString("message")).react(interaction.options.getString("emoji"))
 
             const embed = {
                 color: 0x0099ff,
@@ -84,7 +86,7 @@ module.exports = {
                     url: "",
                 },
                 fields: [
-                    { name: `__Message:__`, value: `> \`${interaction.options.getString("id")}\``, inline: true},
+                    { name: `__Message:__`, value: `> \`${interaction.options.getString("message")}\``, inline: true},
                     { name: `__Reaction:__`, value: `> ${interaction.options.getString("emoji")}`, inline: true},
                     { name: `__Role:__`, value: `> ${interaction.options.getRole("role")}`, inline: true},
                     { name: `__Date of creation:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: false},
