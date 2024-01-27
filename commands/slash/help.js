@@ -68,7 +68,7 @@ module.exports = {
                         inline: true
                     });
                 });
-                embed.fields.push({ name: "__**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`});     
+                embed.fields.push({ name: ":hourglass: __**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`});     
                 message.deleteReply().then(() => message.followUp({ embeds: [embed], ephemeral: false }));
             } else {
                 const mainEmbed = {

@@ -26,7 +26,7 @@ module.exports = {
 
             let bannedMember;
             await message.guild.bans.fetch().then((bans) => bannedMember = bans.filter((user) => user.user));
-            for (const user of bannedMember.filter((u) => u.user)) embed.fields.push({ name: `> \`${user[1].user.tag}\` (${user[1].user.id})`, value: `Reason: \`${user[1].reason}\``, inline: true});
+            for (const user of bannedMember.filter((u) => u.user)) embed.fields.push({ name: `> <:nametag:1200757678104915978> \`${user[1].user.tag}\` (${user[1].user.id})`, value: `:book: Reason: \`${user[1].reason}\``, inline: true});
             embed.description = `Total banned member: \`${bannedMember.size}\``;
             message.channel.send({ embeds: [embed], ephemeral: false });
             if (message && message.deletable) message.delete();

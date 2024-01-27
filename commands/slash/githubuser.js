@@ -28,7 +28,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, serverData, client, Discord) {
+    async execute(interaction, _, client, Discord) {
         try {
             let user = interaction.options.getString('user');
             let response = await fetch(`https://api.github.com/users/${user}`)
@@ -49,22 +49,22 @@ module.exports = {
                     url: response.avatar_url,
                 },
                 fields: [
-                    { name: `__Name:__`, value: `> \`${response.login}\``, inline: true },
-                    { name: `__Id:__`, value: `> \`${response.id}\``, inline: true },
-                    { name: `__Avatar:__`, value: `> [Image](${response.avatar_url})`, inline: true },
-                    { name: `__Bio:__`, value: `> \`${(response.bio ? response.bio : "Unset")}\``, inline: true },
-                    { name: `__URL:__`, value: `> [${response.login}](${response.html_url})`, inline: true },
-                    { name: `__Company:__`, value: `> \`${(response.company ? response.company : "Unset")}\``, inline: true },
-                    { name: `__Website:__`, value: `> ${(response.blog ? `[Click](${response.blog})` : "`Unset`")}`, inline: true },
-                    { name: `__Type:__`, value: `> \`${response.type}\``, inline: true },
-                    { name: `__Location:__`, value: `> \`${(response.location ? response.location : "Unset")}\``, inline: true },
-                    { name: `__E-Mail:__`, value: `> \`${(response.email ? response.email : "Unset")}\``, inline: true },
-                    { name: `__Twitter:__`, value: `> \`${(response.twitter_username ? `[${response.twitter_username}](https://twitter.com/${response.twitter_username })` : "Unset")}\``, inline: true },
-                    { name: `__Total Public repository:__`, value: `> [${response.public_repos}](${response.html_url}?tab=repositories)`, inline: true },
-                    { name: `__Follower${response.followers > 1 ? "s" : ""}:__`, value: `> `, inline: true },
-                    { name: `__Account created at:__`, value: `> \`${response.created_at}\``, inline: true },
-                    { name: `__Account edited at:__`, value: `> \`${response.updated_at}\``, inline: true },
-                    { name: `__Date of creation:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: false},
+                    { name: `<:nametag:1200757678104915978> __Name:__`, value: `> \`${response.login}\``, inline: true },
+                    { name: `<:ID:1200784630865985598> __Id:__`, value: `> \`${response.id}\``, inline: true },
+                    { name: `:camera: __Avatar:__`, value: `> [Image](${response.avatar_url})`, inline: true },
+                    { name: `:book: __Bio:__`, value: `> \`${(response.bio ? response.bio : "Unset")}\``, inline: true },
+                    { name: `:link: __URL:__`, value: `> [${response.login}](${response.html_url})`, inline: true },
+                    { name: `:necktie: __Company:__`, value: `> \`${(response.company ? response.company : "Unset")}\``, inline: true },
+                    { name: `:globe_with_meridians: __Website:__`, value: `> ${(response.blog ? `[Click](${response.blog})` : "`Unset`")}`, inline: true },
+                    { name: `:gear: __Type:__`, value: `> \`${response.type}\``, inline: true },
+                    { name: `:map: __Location:__`, value: `> \`${(response.location ? response.location : "Unset")}\``, inline: true },
+                    { name: `:incoming_envelope: __E-Mail:__`, value: `> \`${(response.email ? response.email : "Unset")}\``, inline: true },
+                    { name: `**X** __Twitter:__`, value: `> \`${(response.twitter_username ? `[${response.twitter_username}](https://twitter.com/${response.twitter_username })` : "Unset")}\``, inline: true },
+                    { name: `:open_file_folder: __Total Public repository:__`, value: `> [${response.public_repos}](${response.html_url}?tab=repositories)`, inline: true },
+                    { name: `:busts_in_silhouette: __Follower${response.followers > 1 ? "s" : ""}:__`, value: `> `, inline: true },
+                    { name: `:bust_in_silhouette: __Account created at:__`, value: `> \`${response.created_at}\``, inline: true },
+                    { name: `:bust_in_silhouette: __Account edited at:__`, value: `> \`${response.updated_at}\``, inline: true },
+                    { name: `:hourglass: __Date:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: false},
                 ],
                 footer: {
                     text: `Id: ${interaction.id}`,

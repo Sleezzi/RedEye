@@ -17,7 +17,7 @@ module.exports = {
             //         { name: "<:ID:1200784630865985598> __**ID:**__", value: `\`${message.guild.id}\``},
             //         { name: "__**You have been a member since:**__", value: `<t:${Math.floor(message.member.joinedTimestamp / 1000)}:d> (<t:${Math.floor(message.member.joinedTimestamp / 1000)}:R>)`},
             //         { name: "__**Server created:**__", value: `<t:${Math.floor(message.guild.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.guild.createdTimestamp / 1000)}:R>)`},
-            //         { name: "__**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`},
+            //         { name: ":hourglass: __**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`},
             //     )
             //     .setURL(message.url)
             //     .setFooter({ text: `Id: ${message.id}`, iconURL: client.user.avatarURL() });

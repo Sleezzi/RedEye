@@ -34,7 +34,7 @@ module.exports = {
 
             let bannedMember;
             await interaction.guild.bans.fetch().then((bans) => bannedMember = bans.filter((user) => user.user));
-            for (const user of bannedMember.filter((u) => u.user)) embed.fields.push({ name: `> \`${user[1].user.tag}\` (${user[1].user.id})`, value: `Reason: \`${user[1].reason}\``, inline: true});
+            for (const user of bannedMember.filter((u) => u.user)) embed.fields.push({ name: `> <:nametag:1200757678104915978> \`${user[1].user.tag}\` (${user[1].user.id})`, value: `:book: Reason: \`${user[1].reason}\``, inline: true});
             embed.description = `Total banned member: \`${bannedMember.size}\``;
             interaction.followUp({ embeds: [embed], ephemeral: false });
         } catch(err) { return err; }
