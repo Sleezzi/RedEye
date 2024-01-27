@@ -65,17 +65,17 @@ module.exports = {
                 return;
             }
 
-            if (!interaction.channel.messages.cache.has(interaction.options.getString("message"))) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: `The message \`${interaction.options.getString("message")}\` doesn't existe.`, ephemeral: true  }));
-                return;
-            }
+            // if (!interaction.channel.messages.cache.has("1200811838162599956")) {//interaction.options.getString("message"))) {
+            //     interaction.deleteReply().then(() => interaction.followUp({ content: `The message \`${interaction.options.getString("message")}\` doesn't existe.`, ephemeral: true  }));
+            //     return;
+            // }
 
             if (!interaction.options.getString("reaction").startsWith(":") || !interaction.options.getString("reaction").endsWith(":")) {
                 interaction.deleteReply().then(() => interaction.followUp({ content: `The emoji \`${interaction.options.getString("reaction")}\` is not a valid emoji.`, ephemeral: true  }));
                 return;
             }
-
-            interaction.channel.messages.cache.get(interaction.options.getString("message")).react(interaction.options.getString("reaction"));
+// interaction.options.getString("message")
+            interaction.channel.messages.cache.get("1200811838162599956").react(interaction.options.getString("reaction"));
 
             const embed = {
                 color: 0x0099ff,
