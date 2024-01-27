@@ -11,54 +11,72 @@ module.exports = {
             let member = message.mentions.members.first();
 
             if (!message.member.permissions.has("ModerateMembers")) {
-                message.channel.send('You can\'t unmute this member.').then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                    }
-                });
+                const msg = await message.channel.send('You can\'t unmute this member.');
+                setTimeout(() => {
+                    try {
+                        if (msg.deletable) {
+                            msg.delete();
+                        }
+                    } catch(err) { return err; }
+                }, 15000);
                 return;
             }
             
             if (!member) {
-                message.channel.send("You can\'t unmute this member.").then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                    }
-                });
+                const msg = await message.channel.send("You can\'t unmute this member.");
+                setTimeout(() => {
+                    try {
+                        if (msg.deletable) {
+                            msg.delete();
+                        }
+                    } catch(err) { return err; }
+                }, 15000);
                 return;
             }
 
             if (message.author.id === member.id) {
-                message.channel.send("You can't unmute yourself.").then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                    }
-                });
+                const msg = await message.channel.send("You can't unmute yourself.");
+                setTimeout(() => {
+                    try {
+                        if (msg.deletable) {
+                            msg.delete();
+                        }
+                    } catch(err) { return err; }
+                }, 15000);
                 return;
             }
             
             if (!member.manageable) {
-                message.channel.send("I can't unmute this member").then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                    }
-                });
+                const msg = await message.channel.send("I can't unmute this member");
+                setTimeout(() => {
+                    try {
+                        if (msg.deletable) {
+                            msg.delete();
+                        }
+                    } catch(err) { return err; }
+                }, 15000);
                 return;
             }
             if (!member.roles.cache.find(role => role.name === "mute")) {
-                message.channel.send("I can't unmute this member cause he is not mute").then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                    }
-                });
+                const msg = await message.channel.send("I can't unmute this member cause he is not mute");
+                setTimeout(() => {
+                    try {
+                        if (msg.deletable) {
+                            msg.delete();
+                        }
+                    } catch(err) { return err; }
+                }, 15000);
                 return;
             }
             member.roles.remove(member.roles.cache.find(role => role.name === "mute").id);
-            message.channel.send("This member has been unmuted").then((msg) => {
-                if (msg.deletable) {
-                    setTimeout(() => { try { msg.delete(); } catch(err) { return err; }}, 5000);
-                }
-            });
+            const msg = await message.channel.send("This member has been unmuted");
+            setTimeout(() => {
+                try {
+                    if (msg.deletable) {
+                        msg.delete();
+                    }
+                } catch(err) { return err; }
+            }, 15000);
         } catch(err) {
             console.error(err);
         }

@@ -12,34 +12,49 @@ module.exports = {
 
             if (!message.member.permissions.has("ModerateMembers")) {
                 const msg = await message.channel.send('You cannot kick a member from the server');
-                if (msg.deletable) {
-                    setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                }
+                setTimeout(() => {
+                    try {
+                        if (msg.deletable) {
+                            msg.delete();
+                        }
+                    } catch(err) { return err; }
+                }, 5000);
                 return;
             }
             
             if (!member) {
                 const msg = await message.channel.send("Please mention a valid member.");
-                if (msg.deletable) {
-                    setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                }
+                setTimeout(() => {
+                    try {
+                        if (msg.deletable) {
+                            msg.delete();
+                        }
+                    } catch(err) { return err; }
+                }, 5000);
                 return;
             }
 
             if (message.author.id === member.id) {
                 const msg = await message.channel.send("You cannot ban yourself from the server");
-                if (msg.deletable) {
-                    setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                }
+                setTimeout(() => {
+                    try {
+                        if (msg.deletable) {
+                            msg.delete();
+                        }
+                    } catch(err) { return err; }
+                }, 5000);
                 return;
             }
             
             if (!member.bannable) {
-                message.channel.send("I can't kick this member").then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                    }
-                });;
+                const msg = await message.channel.send("I can't kick this member");
+                setTimeout(() => {
+                    try {
+                        if (msg.deletable) {
+                            msg.delete();
+                        }
+                    } catch(err) { return err; }
+                }, 5000);
                 return;
             }
             let reason = message.content.split(" ").map((string, index) => {if (index === message.content.split(" ").length) return string; if (index > 2) return `${string} `;}).join("");

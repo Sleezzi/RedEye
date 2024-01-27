@@ -21,11 +21,14 @@ module.exports = {
                 )
                 .setURL(message.url)
                 .setFooter({ text: `Id: ${message.id}`, iconURL: client.user.avatarURL() });
-            await message.channel.send({ embeds: [embed], ephemeral: true }).then((msg) => {
-                if (msg.deletable) {
-                    setTimeout(() => { try { msg.delete(); } catch(err) { return err; }}, 15000);
-                }
-            });
+            const msg = await message.channel.send({ embeds: [embed], ephemeral: true });
+            setTimeout(() => {
+                try {
+                    if (msg.deletable) {
+                        msg.delete();
+                    }
+                } catch(err) { return err; }
+            }, 15000);
             if (message && message.deletable) message.delete();
         } catch(err) { console.error(err); }
     }

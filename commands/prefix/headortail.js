@@ -4,7 +4,7 @@ module.exports = {
     model: `headortail`,
     category: "Fun",
     cooldown: 10000,
-    async execute(message, serverData, client, Discord) {
+    async execute(message, _, client, Discord) {
         try {
             message.channel.sendTyping();
             let face = message.content.toLowerCase().split(' ').slice(1)[0];
@@ -13,7 +13,12 @@ module.exports = {
 
             if (face) {
                 if (face !== "head" && face !== "tail") {
-                    message.reply('The face chosen is not good.').then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) {console.error(err);} }, 5000));
+                    const msg = await message.reply('The face chosen is not good.');
+                    setTimeout(async () => {
+                        try {
+                            msg.delete();
+                        } catch(err) { return err; }
+                    }, 5000);
                     return;
                 }
                 if (result === face) {

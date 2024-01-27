@@ -11,38 +11,50 @@ module.exports = {
             let member = message.mentions.members.first();
 
             if (!message.member.permissions.has("BanMembers")) {
-                message.channel.send('You cannot ban a member from the server').then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                    }
-                });
+                const msg = await message.channel.send('You cannot ban a member from the server');
+                setTimeout(() => {
+                    try {
+                        if (msg.deletable) {
+                            msg.delete();
+                        }
+                    } catch(err) { return err; }
+                }, 15000);
                 return;
             }
             
             if (!member) {
-                message.channel.send("Please mention a valid member.").then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                    }
-                });
+                const msg = await message.channel.send("Please mention a valid member.");
+                setTimeout(() => {
+                    try {
+                        if (msg.deletable) {
+                            msg.delete();
+                        }
+                    } catch(err) { return err; }
+                }, 15000);
                 return;
             }
 
             if (message.author.id === member.id) {
-                message.channel.send("You cannot ban yourself from the server").then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                    }
-                });
+                const msg = await message.channel.send("You cannot ban yourself from the server");
+                setTimeout(() => {
+                    try {
+                        if (msg.deletable) {
+                            msg.delete();
+                        }
+                    } catch(err) { return err; }
+                }, 15000);
                 return;
             }
             
             if (!member.bannable) {
-                message.channel.send("I can't ban this member").then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
-                    }
-                });;
+                const msg = await message.channel.send("I can't ban this member");
+                setTimeout(() => {
+                    try {
+                        if (msg.deletable) {
+                            msg.delete();
+                        }
+                    } catch(err) { return err; }
+                }, 15000);
                 return;
             }
 

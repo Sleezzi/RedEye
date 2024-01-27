@@ -189,7 +189,7 @@ module.exports = {
                     collector = reply.createMessageComponentCollector({ componentType: Discord.ComponentType.StringSelect, filter: (i) => i.user.id === message.member.id, time: 120_000 });
                     interaction.followUp({ content: "Please wait...", ephemeral: true }).then((msg) => { if (msg && msg.deletable) msg.delete(); });
                 });
-                setTimeout(function() { try { if (reply) reply.delete(); } catch (err) { return; }  }, 120_000);
+                setTimeout(function() { try { if (reply && reply.id) reply.delete(); } catch (err) { return; }  }, 120_000);
             }        
             if (message && message.deletable) message.delete();
         } catch(err) {
