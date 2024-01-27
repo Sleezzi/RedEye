@@ -65,7 +65,7 @@ module.exports = {
                 return;
             }
 
-            if (!interaction.channel.messages.has(interaction.options.getString("id"))) {
+            if (!interaction.channel.messages.cache.has(interaction.options.getString("id"))) {
                 interaction.deleteReply().then(() => interaction.followUp({ content: `The message \`${interaction.options.getString("id")}\` doesn't existe.`, ephemeral: true  }));
                 return;
             }
