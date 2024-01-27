@@ -27,9 +27,9 @@ module.exports = {
                 .setThumbnail(interaction.member.avatarURL())
                 .setAuthor({ name: interaction.member.user.tag, iconURL: interaction.member.avatarURL(), url: interaction.url })
                 .addFields(
-                    { name: "__**Tag:**__", value: `> **\`${member.user.tag}\`**`},
+                    { name: "<:nametag:1200757678104915978> __**Tag:**__", value: `> **\`${member.user.tag}\`**`},
                     { name: "__**Nickname:**__", value: `> ${(member.nickname === null ? "The member does not have a nickname." : `**\`${member.nickname}\`**`)}`},
-                    { name: "__**ID:**__", value: `> \`${(member.id)}\``},
+                    { name: "<:ID:1200784630865985598> __**ID:**__", value: `> \`${(member.id)}\``},
                     { name: `__**Role${(member._roles.length > 1 ? "s" : "")}:**__`, value: `> ${roles}` },
                     { name: "__**Account created:**__", value: `> <t:${Math.floor(member.user.createdTimestamp / 1000)}:d> (<t:${Math.floor(member.user.createdTimestamp / 1000)}:R>)`},
                     { name: "__**Member since:**__", value: `> <t:${Math.floor(member.joinedTimestamp / 1000)}:d> (<t:${Math.floor(member.joinedTimestamp / 1000)}:R>)`},
