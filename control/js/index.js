@@ -1,4 +1,5 @@
 const data = JSON.parse(localStorage.getItem("token"));
+if (!data) window.location.href = "../thanks.html";
 // const firebase = require("firebase");
 // require('firebase/database');
 
