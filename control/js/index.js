@@ -1,4 +1,3 @@
-const params = new URLSearchParams(window.location.search);
 const data = JSON.parse(localStorage.getItem("token"));
 // const firebase = require("firebase");
 // require('firebase/database');
@@ -19,7 +18,7 @@ const data = JSON.parse(localStorage.getItem("token"));
 async function withServer(id) {
     document.querySelector("#index > #withoutGuild").style.display = "none";
     document.querySelector("#index > #withGuild").style.display = "flex";
-    let response = await fetch(`https://discord.com/api/guilds/${params.get("guild")}/preview`, {
+    let response = await fetch(`https://discord.com/api/guilds/${id}/preview`, {
 		headers: {
 		    authorization: `${data.type} ${data.token}`,
 		},
@@ -59,6 +58,7 @@ async function withoutServer() {
 }
 
 (async () => {
+    const params = new URLSearchParams(window.location.search);
     if (params.get("guild")) {
         withServer(params.get("guild"));
         return;
