@@ -13,7 +13,7 @@
 
 			if (!accessToken) return window.location.href = "https://discord.com/api/oauth2/authorize?client_id=1195058289931726848&permissions=8&response_type=token&redirect_uri=https%3A%2F%2Fsleezzi.github.io%2FBlueprint-Bot%2Fthanks&scope=identify+guilds+applications.commands+bot";
 			await localStorage.setItem("token", JSON.stringify({token: accessToken, type: tokenType}));
-			window.location.href = `./control/index.html?guild=${guild}`;
+			window.location.href = `./control/?guild=${guild}`;
 		})();
 	</script>
 </body>

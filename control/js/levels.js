@@ -40,7 +40,7 @@ async function withoutServer() {
         const server = document.createElement("a");
         server.classList.add("server");
         server.setAttribute("guild", serverData);
-        server.href = `./levels.html?guild=${serverData}`;
+        server.href = `./levels?guild=${serverData}`;
         server.innerHTML = `<div style="height: 118px; width: 118px; display: flex; justify-content: center; align-items: center;"><img src="${(serversData[serverData].icon ? `https://cdn.discordapp.com/icons/${serverData}/${serversData[serverData].icon}.png?size=128` : "")}" style="height: 90%; width: 90%; border-radius: 1vh;" alt="${serversData[serverData].name}"></img></div><div style="display: flex; flex-direction: column; justify-content: center; aligne-items: center; height: 100%; width: 100%;"><span>Id: <b>${serverData}</b></span><span>Name: <b>${serversData[serverData].name}</b></span><span>Members: <b>${(serversData[serverData].levels ? Object.keys(serversData[serverData].levels).length : 0)}</b></span></div>`;
         document.querySelector("main#levels #levelsContainer").appendChild(server);
     }

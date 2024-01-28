@@ -1,5 +1,5 @@
 const data = JSON.parse(localStorage.getItem("token"));
-if (!data) window.location.href = "../thanks.html";
+if (!data) window.location.href = "../thanks";
 // const firebase = require("firebase");
 // require('firebase/database');
 
@@ -41,7 +41,7 @@ async function withoutServer() {
     response.forEach(server => {
         if (!server.owner && server.permissions !== 536211447) return;
         const card = document.createElement("a");
-        card.href = `./index.html?guild=${server.id}`
+        card.href = `./?guild=${server.id}`
         card.classList.add("guild");
         card.setAttribute("guildId", server.id);
         card.innerHTML = `<div class="banner"></div>
