@@ -8,14 +8,13 @@
 <body>
     <div id="info">Hi!</div>
 	<script>
-		// #token_type=Bearer&access_token=TwNHK63vCK4doJK3eDrLb3jPqrfUN7&expires_in=604800&scope=guilds.join+identify+guilds&guild_id=1200750236277157999&permissions=8
 		(async () => {
 			const fragment = new URLSearchParams(window.location.hash.slice(1));
 			const [accessToken, tokenType, guild] = [fragment.get('access_token'), fragment.get('token_type'), fragment.get("guild_id")];
 
 			if (!accessToken) return;
 			await localStorage.setItem("token", JSON.stringify({token: accessToken, type: tokenType}));
-			window.location.href = `/control/index.html?guild=${guild}`;
+			window.location.href = `./control/index.html?guild=${guild}`;
 		})();
 	</script>
 </body>
