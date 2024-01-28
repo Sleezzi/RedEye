@@ -2,7 +2,7 @@ body {
     padding: 0;
     background: #333;
     color: white;
-    width: 100vh;
+    width: auto;
     min-width: 100%;
     margin: 0;
     overflow-x: hidden;
@@ -10,6 +10,7 @@ body {
 ::-webkit-scrollbar {
     width: 7px;
     background: #333;
+    cursor: pointer;
 }
   
 /* Track */
@@ -18,11 +19,11 @@ body {
 }
   
 /* Handle */
-  ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: #111;
     border-radius: 5vh;
-  }
-  
+}
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: black;
@@ -55,6 +56,15 @@ section:nth-child(even) {
     transform: translateY(0);
     opacity: 1;
 }
+.fade-down {
+    transform: translateY(-25%);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+.fade-down.active {
+    transform: translateY(0);
+    opacity: 1;
+}
 a {
     color: white;
     text-decoration: none;
@@ -69,15 +79,19 @@ a#add {
     flex-direction: row;
     border-radius: 2vh;
     background: #00000050;
-    height: 10%;
-    width: 10%;
-    min-width: calc(fit-content);
+    height: auto;
+    width: auto;
+    padding: 1%;
+    margin: 0 0 5px 0;
+    min-width: auto;
     transition: all 0.5s ease;
 }
 a#add::before {
     content: "";
     height: 25%;
     width: 25%;
+    min-width: 25px;
+    min-height: 25px;
     background: url(./img/discord.svg) center/70% no-repeat;
     padding: 0 2px 0 0;
     transform: translateY(0) rotateY(0);
@@ -94,9 +108,10 @@ a#add::after {
 a#add:hover {
     background: #00000075;
     border-radius: 1vh;
-    padding-top: 5px;
-    height: calc(10% - 5px);
-    width: 11%;
+    margin: 0;
+    padding-top: calc(1% + 5px);
+    height: calc(auto - 5px);
+    width: calc(auto + 1%);
 }
 a#add:hover::before {
     height: calc(25% + 5px);
@@ -116,6 +131,7 @@ section.space h3 {
     width: auto;
     max-height: 35%;
     max-width: 45%;
+    text-align: center;
 }
 .column {
     display: flex;
@@ -131,7 +147,6 @@ section.space h3 {
     justify-content: center;
     align-items: center;
 }
-
 footer > h5 {
     display: flex;
     flex-direction: row;

@@ -6,30 +6,16 @@
     <title>Blueprint Bot | Thanks</title>
 </head>
 <body>
-    <div id="info">Hoi!</div>
-	<a id="login" style="display: none;" href="https://discord.com/api/oauth2/authorize?client_id=1195058289931726848&response_type=token&redirect_uri=https%3A%2F%2Fsleezzi.github.io%2FBlueprint-Bot%2Fthanks&scope=identify">Identify Yourself</a>
+    <div id="info">Hi!</div>
 	<script>
-		(() => {
+		// #token_type=Bearer&access_token=TwNHK63vCK4doJK3eDrLb3jPqrfUN7&expires_in=604800&scope=guilds.join+identify+guilds&guild_id=1200750236277157999&permissions=8
+		(async () => {
 			const fragment = new URLSearchParams(window.location.hash.slice(1));
-			const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
+			const [accessToken, tokenType, guild] = [fragment.get('access_token'), fragment.get('token_type'), fragment.get("guild_id")];
 
-			if (!accessToken) {
-				console.log("pidhdtr");
-				return (document.getElementById('login').style.display = 'block');
-			}
-
-			fetch('https://discord.com/api/users/@me', {
-				headers: {
-					authorization: `${tokenType} ${accessToken}`,
-				},
-			})
-			.then(result => result.json())
-			.then(response => {
-				console.log(response);
-				const { username, discriminator } = response;
-				document.getElementById('info').innerText += ` ${username}#${discriminator}`;
-			})
-			.catch(console.error);
+			if (!accessToken) return;
+			await localStorage.setItem("token", JSON.stringify({token: accessToken, type: tokenType}));
+			window.location.href = `/control/index.html?guild=${guild}`;
 		})();
 	</script>
 </body>
