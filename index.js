@@ -1,5 +1,4 @@
-const Discord = require("discord.js");
-const {
+const [Discord, {
     Client,
     version,
     PermissionFlagsBits,
@@ -14,7 +13,7 @@ const {
     SlashCommandBuilder,
     Routes,
     REST,
-} = require("discord.js");
+}] = require("discord.js");
 
 const client = new Client({
     presence: {
