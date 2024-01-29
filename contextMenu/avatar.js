@@ -10,6 +10,8 @@ module.exports = {
         dm_permission: undefined
     },
     async execute(interaction, _, client, Discord) {
+        console.log(interaction);
+        return;
         const member = interaction.guild.members.cache.get(interaction.targetId);
         if (!member) {
             interaction.deleteReply().then(() => interaction.followUp({ content: "Unable to find the avatar of user", ephemeral: true }));
