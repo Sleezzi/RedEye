@@ -2,7 +2,7 @@ module.exports = {
     name: "ErrorHandler",
     event: "ShardError",
     type: "on",
-    execute([], serverData, client, Discord) {
+    execute([], client, Discord) {
         return;
     }
 }

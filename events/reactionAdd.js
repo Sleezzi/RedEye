@@ -2,7 +2,7 @@ module.exports = {
     name: "MessageReactionAdd",
     event: "MessageReactionAdd",
     type: "on",
-    execute([reaction, user], _, client, Discord) {
+    execute([reaction, user], client, Discord) {
         try {
             if (user.bot) return;
             const member = reaction.message.guild.members.cache.get(user.id);

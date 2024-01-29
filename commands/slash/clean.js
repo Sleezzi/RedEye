@@ -16,7 +16,7 @@ module.exports = {
         options: [],
         nsfw: false
     },
-    async execute(interaction, serverData, client, Discord) {
+    async execute(interaction, client, Discord) {
         if (interaction.member.permissions.has("ManageMessages")) {
             try {
                 let fetchedMessages = { size: 1};

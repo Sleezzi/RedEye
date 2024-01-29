@@ -2,7 +2,7 @@ module.exports = {
     name: "LevelHandler",
     event: "MessageCreate",
     type: "on",
-    execute([message], serverData, client, Discord) {
+    execute([message], client, Discord) {
         try {
             if (message.channel.type === 1 || message.member.user.bot) return;
             require("../components/database").get(`/${message.guild.id}/levels/${message.member.id}`, client).then(({...level}) => {

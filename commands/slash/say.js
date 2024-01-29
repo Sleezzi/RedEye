@@ -31,7 +31,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, _, client, Discord) {
+    async execute(interaction, client, Discord) {
         if (interaction.member.permissions.has("Administrator")) {
             try {
                 interaction.channel.send({ content: interaction.options.getString("text") });

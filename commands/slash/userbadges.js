@@ -28,7 +28,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, serverData, client, Discord) {
+    async execute(interaction, client, Discord) {
         try {
             let user = interaction.options.getNumber('user');
             let response;

@@ -2,7 +2,7 @@ module.exports = {
     name: "ChannelDelete",
     event: "ChannelDelete",
     type: "on",
-    execute([channel], _, client, Discord) {
+    execute([channel], client, Discord) {
         require("../components/database").get(`/${message.guild.id}/channels/log/channelId`, client).then(id => {
             if (typeof id === "object" || !channel.guild.channels.cache.has(id) || !channel.guild.channels.cache.get(id).permissionsFor(message.guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages")) return;
             const embed = new Discord.EmbedBuilder()

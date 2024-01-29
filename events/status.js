@@ -2,7 +2,7 @@ module.exports = {
     name: "statusHandler",
     event: "ClientReady",
     type: "on",
-    execute([], serverData, client, Discord) {
+    execute([], client, Discord) {
         let i = 1;
         client.user.setStatus(Discord.PresenceUpdateStatus.Online);
         const fun = () => {

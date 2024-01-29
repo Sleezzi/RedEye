@@ -44,7 +44,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, _, client, Discord) {
+    async execute(interaction, client, Discord) {
         try {
         //     const embed = {
         //         title: `Weather`,

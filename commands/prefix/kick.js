@@ -5,7 +5,7 @@ module.exports = {
     model: `kick **\`member\`** *\`The reason for the ban\`*`,
     category: "Core",
     cooldown: 1000,
-    async execute(message, _, client, Discord) {
+    async execute(message, client, Discord) {
         try {
             message.channel.sendTyping();
             let member = message.mentions.members.first();

@@ -5,7 +5,7 @@ module.exports = {
     model: `stop`,
     category: "Core",
     cooldown: 15000,
-    execute(message, serverData, client, Discord) {
+    execute(message, client, Discord) {
         if (message.author.id === "542703093981380628") {
             if (message && message.deletable) message.delete();
             setTimeout(function() {client.destroy(client.config.token)}, 4990);

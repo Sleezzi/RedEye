@@ -4,7 +4,7 @@ module.exports = {
     model: `image **\`the theme of the image\`**`,
     category: "Fun",
     cooldown: 15_000,
-    async execute(message, _, client, Discord) {
+    async execute(message, client, Discord) {
         message.channel.sendTyping();
         const theme = message.content.replace(`${client.config.prefix}image `, "");
         try {

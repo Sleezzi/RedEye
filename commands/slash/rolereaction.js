@@ -58,7 +58,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, serverData, client, Discord) {
+    async execute(interaction, client, Discord) {
         try {
             if (!interaction.member.permissions.has("ManageMember")) {
                 await interaction.deleteReply();

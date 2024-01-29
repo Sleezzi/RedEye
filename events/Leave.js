@@ -2,7 +2,7 @@ module.exports = {
     name: "MemberLeave",
     event: "GuildMemberRemove",
     type: "on",
-    async execute([member], serverData, client, Discord) {
+    async execute([member], client, Discord) {
         if (member.user.bot) return; // Check if user is bot
         // Set the background of image
         const background = await client.data.canvas.loadImage("https://media.discordapp.net/attachments/1133400218554081311/1133487166840918178/canvasBackground.png?width=1024&height=400");

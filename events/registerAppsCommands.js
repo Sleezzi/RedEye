@@ -2,7 +2,7 @@ module.exports = {
     name: "registerAppsCommands",
     event: "ClientReady",
     type: "once",
-    async execute([], serverData, client, Discord) {
+    async execute([], client, Discord) {
         try {
             let servers;
             await require("../components/database").get("/", client).then(srv => servers = srv);

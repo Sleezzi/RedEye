@@ -4,7 +4,7 @@ module.exports = {
     model: `ping`,
     category: "Information",
     cooldown: 15000,
-    async execute(message, serverData, client, Discord) {
+    async execute(message, client, Discord) {
         try {
             let date = new Date();
             const APIPing = Date.now() - message.createdAt;

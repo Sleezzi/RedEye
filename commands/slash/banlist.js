@@ -13,7 +13,7 @@ module.exports = {
         default_member_permissions: "ManageMembers",
         nsfw: false
     },
-    async execute(interaction, serverData, client, Discord) {
+    async execute(interaction, client, Discord) {
         try {
             
             const embed = {

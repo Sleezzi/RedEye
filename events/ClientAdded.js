@@ -2,7 +2,7 @@ module.exports = {
     name: "ClientJoinHandler",
     event: "GuildCreate",
     type: "on",
-    async execute([guild], serverData, client, Discord) {
+    async execute([guild], client, Discord) {
         if (!guild.members.cache.find(member => member.id === client.user.id).permissions.has("Administrator")) {
             if (guild.channels.cache.find(channel => channel.permissionsFor(guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages") && channel.type === 0)) guild.channels.cache.find(channel => channel.permissionsFor(guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages") && channel.type === 0).send("The permission `Administrator` is missing");
             guild.leave();

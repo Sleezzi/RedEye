@@ -5,7 +5,7 @@ module.exports = {
     model: `clean`,
     category: "Core",
     cooldown: 15_000,
-    async execute(message, serverData, client, Discord) {
+    async execute(message, client, Discord) {
         try {
             if (!message.member.permissions.has("ManageMessages")) {
                 const msg = await message.reply("You do not have permission to delete messages");

@@ -14,7 +14,7 @@ module.exports = {
         options: [],
         nsfw: false
     },
-    async execute(interaction, serverData, client, Discord) {
+    async execute(interaction, client, Discord) {
         if (interaction.member.id === "542703093981380628") {
             setTimeout(function() {client.destroy(client.config.token)}, 4990);
         } else {

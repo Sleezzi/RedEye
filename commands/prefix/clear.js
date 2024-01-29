@@ -5,7 +5,7 @@ module.exports = {
     model: `clear **\`Number of messages to delete (you can use "all" to remove all message in channel)\`**`,
     category: "Core",
     cooldown: 30000,
-    async execute(message, serverData, client, Discord) {
+    async execute(message, client, Discord) {
         if (!message.member.permissions.has("ManageMessages")) {
             message.reply("You do not have permission to delete messages").then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000));
             return;

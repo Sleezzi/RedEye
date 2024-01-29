@@ -3,7 +3,7 @@ module.exports = {
     description: "",
     category: "Information",
     cooldown: 10000,
-    async execute(message, _, client, Discord) {
+    async execute(message, client, Discord) {
         try {
             message.channel.sendTyping();
             let command = message.content.split(' ').slice(1)[0];

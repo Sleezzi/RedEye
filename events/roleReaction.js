@@ -2,7 +2,7 @@ module.exports = {
     name: "RoleReactionAutoReact",
     event: "ClientReady",
     type: "once",
-    async execute([], serverData, client, Discord) {
+    async execute([], client, Discord) {
         try {
             // for (const channelId in client.config.reactions) {
             //     try {

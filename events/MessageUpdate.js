@@ -2,7 +2,7 @@ module.exports = {
     name: "MessageUpdate",
     event: "MessageUpdate",
     type: "on",
-    execute([message, newMessage], serverData, client, Discord) {
+    execute([message, newMessage], client, Discord) {
         if (!message.channel.type === 1 || message.author.bot) return;
         // for (const word of client.config.bannedWord) {
         //     if (newMessage.content.includes(word) && newMessage.deletable && newMessage.member.id !== client.user.id) {
@@ -16,15 +16,22 @@ module.exports = {
         //         newMessage.channel.send(`Links are prohibited on this server`).then((msg) => setTimeout(function() {msg.delete()}, 5000))
         //     }
         // }
-        if (newMessage.content.startsWith(serverData.get(message.guild.id).prefix)) {
-            require("./commandHandler").execute([newMessage], serverData, client, Discord);
-        } else {
-            if (!message.channel.type === 1 ||
-                !serverData.get(message.guild.id).channel.log.channelId ||
-                !message.guild.channels.cache.find(channel => channel.id === serverData.get(message.guild.id).channel.log.channelId) ||
-                !message.guild.channels.cache.find(channel => channel.id === serverData.get(message.guild.id).channel.log.channelId).permissionsFor(message.guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages")
-            ) return;
-            const embed = new Discord.EmbedBuilder()
+        require("../components/database").get(`/${message.guild.id}`, client).then(async (serverData) => {
+            if (message.channel.type !== 1) return;
+            if (serverData.prefix) serverData.prefix = "!";
+            if (newMessage.content.startsWith(serverData.prefix)) {
+                require("./commandHandler").execute([newMessage], serverData, client, Discord);
+                return;
+            };
+            if ((serverData.prefix && message.content.startsWith(serverData.prefix)) ||
+                !serverData.channels ||
+                !serverData.channels.log ||
+                !serverData.channels.log.channelId ||
+                !message.guild.channels.cache.get(serverData.channels.log.channelId) ||
+                message.channel.id === serverData.channels.log.channelId ||
+                !message.guild.channels.cache.find(channel => channel.id === serverData.channels.log.channelId).permissionsFor(message.guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages")
+                ) return;
+                const embed = new Discord.EmbedBuilder()
                 .setColor("Orange")
                 .setTitle("Message edited")
                 .addFields(
@@ -37,7 +44,7 @@ module.exports = {
                 )
                 .setURL(message.url)
                 .setFooter({ text: `Id: ${message.id}`, iconURL: client.user.avatarURL() });
-                message.guild.channels.cache.find(c => c.id === serverData.get(message.guild.id).channel.log.channelId).send({ embeds: [embed]});
-        }
+                message.guild.channels.cache.get(serverData.channels.log.channelId).send({ embeds: [embed]});
+        });
     }
 }

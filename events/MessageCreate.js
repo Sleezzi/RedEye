@@ -2,7 +2,7 @@ module.exports = {
     name: "NewMessage",
     event: "MessageCreate",
     type: "on",
-    execute([message], _, client, Discord) {
+    execute([message], client, Discord) {
         if (message.channel.type === 1 || message.author.bot) return;
         // for (const word of client.config.bannedWord) {
         //     if (message.content.toLocaleLowerCase().includes(word) && message.deletable && message.member.id !== client.user.id) {

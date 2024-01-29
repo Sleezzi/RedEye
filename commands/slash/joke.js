@@ -214,7 +214,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, serverData, client, Discord) {
+    async execute(interaction, client, Discord) {
         try {
     
             let category = interaction.options.getString('category');

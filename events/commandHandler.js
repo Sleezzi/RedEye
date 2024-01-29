@@ -2,7 +2,7 @@ module.exports = {
     name: "CommandsHandler",
     event: "MessageCreate",
     type: "on",
-    async execute([message], _, client, Discord) {
+    async execute([message], client, Discord) {
         if (message.channel.type === 1
         || message.author.bot) return;
         const serverData = await require("../components/database").get(`/${message.guild.id}`, client); // Get serverData from db
@@ -40,7 +40,7 @@ module.exports = {
                         }] }).then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000)); // send message to warn the user about the disabled command
                         return; // End here
                     }
-                    const err = await require(`../commands/prefix/${command}`).execute(message, serverData, client, Discord); // Execute the command
+                    const err = await require(`../commands/prefix/${command}`).execute(message, client, Discord); // Execute the command
                     if (err) console.error(err); // Check if some error happned
                     if (serverData.channels && serverData.channels.log && message.channelId !== serverData.channels.log.channelId && message.guild.channels.cache.find((channel) => channel.id === serverData.channels.log.channelId) && (!serverData.channels.log.whitelisted || !serverData.channels.log.whitelisted.find((channel) => channel === message.channel.id))) { // Check if a log channel is defined and if the message has don't been send in a whitelisted channel
                         const embed = new Discord.EmbedBuilder()

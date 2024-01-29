@@ -4,7 +4,7 @@ module.exports = {
     model: `level *\`member\`*`,
     category: "Information",
     cooldown: 10000,
-    async execute(message, serverData, client, Discord) {
+    async execute(message, client, Discord) {
         try {
             message.channel.sendTyping();
             let user = message.content.split(' ').slice(1)[0];

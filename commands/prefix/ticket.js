@@ -4,7 +4,7 @@ module.exports = {
     model: `about`,
     category: "Information",
     cooldown: 15000,
-    async execute(message, serverData, client, Discord) {
+    async execute(message, client, Discord) {
         try {
             // const embed = new Discord.EmbedBuilder()
             //     .setColor("Aqua")

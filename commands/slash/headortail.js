@@ -54,7 +54,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, serverData, client, Discord) {
+    async execute(interaction, client, Discord) {
         try {
     
             let face = interaction.options.getString("chosen");

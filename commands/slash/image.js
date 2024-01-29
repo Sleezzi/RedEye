@@ -29,7 +29,7 @@ module.exports = {
             }
         ]
     },
-    async execute(interaction, serverData, client, Discord) {
+    async execute(interaction, client, Discord) {
         const theme = interaction.options.getString("theme");
         try {
             const response = await fetch(`https://source.unsplash.com/1920x1080/?${theme}`);

@@ -15,7 +15,7 @@ module.exports = {
         options: [],
         nsfw: false
     },
-    async execute(interaction, serverData, client, Discord) {
+    async execute(interaction, client, Discord) {
         try {
             const embed = {
                 color: 0x00FF00,

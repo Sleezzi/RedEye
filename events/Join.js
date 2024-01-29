@@ -2,7 +2,7 @@ module.exports = {
     name: "MemberJoin",
     event: "GuildMemberAdd",
     type: "on",
-    async execute([member], serverData, client, Discord) {
+    async execute([member], client, Discord) {
         console.log(member.username);
         // Check if the user doesn't have a banned name
         // for (const word of client.config.bannedWord) if (member.user.username.toLowerCase().includes(word)) member.setNickname(member.user.username.toLowerCase().replace(word, "-".repeat(word.length)));

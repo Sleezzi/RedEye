@@ -4,7 +4,7 @@ module.exports = {
     model: `headortail`,
     category: "Fun",
     cooldown: 10000,
-    async execute(message, _, client, Discord) {
+    async execute(message, client, Discord) {
         try {
             message.channel.sendTyping();
             let face = message.content.toLowerCase().split(' ').slice(1)[0];

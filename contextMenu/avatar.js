@@ -9,7 +9,7 @@ module.exports = {
         default_member_permissions: undefined,
         dm_permission: undefined
     },
-    async execute(interaction, _, client, Discord) {
+    async execute(interaction, client, Discord) {
         console.log(interaction);
         return;
         const member = interaction.guild.members.cache.get(interaction.targetId);

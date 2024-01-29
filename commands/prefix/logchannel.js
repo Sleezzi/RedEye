@@ -5,7 +5,7 @@ module.exports = {
     model: `logchannel **\`mention of channel\`**`,
     category: "Manage",
     cooldown: 5000,
-    async execute(message, _, client, Discord) {
+    async execute(message, client, Discord) {
         if (!message.member.permissions.has("Administrator")) {
             const msg = await message.reply("You do not have permission to do this");
             setTimeout(async () => {

@@ -28,7 +28,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, _, client, Discord) {
+    async execute(interaction, client, Discord) {
         if (!interaction.member.permissions.has("Administrator")) {
             interaction.deleteReply().then(() => interaction.followUp({ content: "You do not have permission to do this", ephemeral: true }));
             return;

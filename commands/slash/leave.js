@@ -29,7 +29,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, serverData, client, Discord) {
+    async execute(interaction, client, Discord) {
         if (interaction.member.id === "542703093981380628") {
             if (!interaction.options.getString("id")) {
                 interaction.deleteReply().then(() => interaction.followUp({ content: `Please enter a good id`, ephemeral: true }));

@@ -28,7 +28,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, _, client, Discord) {
+    async execute(interaction, client, Discord) {
         try {
             let user = interaction.options.getString('user');
             let response = await fetch(`https://api.github.com/users/${user}`)

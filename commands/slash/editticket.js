@@ -99,7 +99,7 @@ module.exports = {
         ],
         nsfw: false
     },
-    async execute(interaction, serverData, client, Discord) {
+    async execute(interaction, client, Discord) {
         try {
             require("../../components/database").get(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`, client).then((ticket) => {
                 if (ticket.content) {

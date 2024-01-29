@@ -5,7 +5,7 @@ module.exports = {
     model: `enablecommand **\`Name of command to enable\`**`,
     category: "Manage",
     cooldown: 5000,
-    async execute(message, serverData, client, Discord) {
+    async execute(message, client, Discord) {
         message.channel.sendTyping();
         if (!message.member.permissions.has("Administrator")) {
             const msg = await message.reply("You do not have permission to enable command").then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000));
