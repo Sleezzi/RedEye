@@ -31,9 +31,17 @@ module.exports = {
         nsfw: false
     },
     async execute(interaction, client, Discord) {
-        if (!interaction.member.permissions.has("ManageMessages")) return interaction.deleteReply().then(() => interaction.followUp({ content: "You do not have permission to delete interactions", ephemeral: true }));
+        if (!interaction.member.permissions.has("ManageMessages")) {
+            await interaction.deleteReply();
+            interaction.followUp({ content: "You do not have permission to delete interactions", ephemeral: true });
+            return;
+        }
         let amount = interaction.options.getNumber("number");
-        if (!amount) return interaction.deleteReply().then(() => interaction.followUp({ content: 'You must specify a number of messages to delete', ephemeral: true }));
+        if (!amount) {
+            await interaction.deleteReply();
+            interaction.followUp({ content: 'You must specify a number of messages to delete', ephemeral: true });
+            return;
+        }
         amount++
         if (amount > 100) amount = 100;
             
@@ -41,7 +49,8 @@ module.exports = {
             interaction.channel.messages.fetch({ limit: amount }).then(async (messages) => {
                 try {
                     await interaction.channel.bulkDelete(messages.filter((msg) => 1_209_600 > Math.floor((Date.now() - msg.createdTimestamp) / 1000)))
-                    interaction.deleteReply().then(() => interaction.followUp({ content: `Multiple Messages Deleted (${messages.filter((msg) => 1_209_600 > Math.floor((Date.now() - msg.createdTimestamp) / 1000)).size - 1} message${((messages.filter((msg) => 14 < msg.createdTimestamp - Date.now()).size - 1) > 1 ? "s" : "")})`, ephemeral: true }));
+                    await interaction.deleteReply();
+                    interaction.followUp({ content: `Multiple Messages Deleted (${messages.filter((msg) => 1_209_600 > Math.floor((Date.now() - msg.createdTimestamp) / 1000)).size} message${((messages.filter((msg) => 14 < msg.createdTimestamp - Date.now()).size) > 1 ? "s" : "")})`, ephemeral: true });
                 } catch(err) { return err; }
             });
         } catch(err) { return err; }
