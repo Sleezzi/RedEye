@@ -78,11 +78,10 @@ a#add {
     justify-content: center;
     flex-direction: row;
     border-radius: 2vh;
-    background: #00000050;
+    background: #00000075;
     height: auto;
     width: auto;
     padding: 1%;
-    margin: 0 0 5px 0;
     min-width: auto;
     transition: all 0.5s ease;
 }
@@ -93,8 +92,7 @@ a#add::before {
     min-width: 25px;
     min-height: 25px;
     background: url(./img/discord.svg) center/70% no-repeat;
-    padding: 0 2px 0 0;
-    transform: translateY(0) rotateY(0);
+    transform: rotateY(0);
     transition: all 0.5s ease;
 }
 a#add::after {
@@ -102,24 +100,21 @@ a#add::after {
     text-align: center;
     width: 45%;
     min-width: 60px;
-    transform: translateY(0);
     transition: all 0.5s ease;
 }
 a#add:hover {
-    background: #00000075;
+    background: #000000;
     border-radius: 1vh;
     margin: 0;
-    padding-top: calc(1% + 5px);
     height: calc(auto - 5px);
     width: calc(auto + 1%);
 }
 a#add:hover::before {
     height: calc(25% + 5px);
-    transform: translateY(-5px) rotateY(360deg);
+    transform: rotateY(360deg);
 }
 a#add:hover::after {
     height: calc(auto + 5px);
-    transform: translateY(-5px);
 }
 section.space img {
     width: 45%;
