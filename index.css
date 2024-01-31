@@ -8,22 +8,19 @@ body {
     overflow-x: hidden;
 }
 ::-webkit-scrollbar {
-    width: 7px;
+    width: 1vh;
     background: #333;
     cursor: pointer;
-}
-  
+}  
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #00000000;
+    background: transparent;
 }
-  
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #111;
     border-radius: 5vh;
 }
-
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: black;
@@ -91,7 +88,7 @@ a#add::before {
     width: 25%;
     min-width: 25px;
     min-height: 25px;
-    background: url(./img/discord.svg) center/70% no-repeat;
+    background: url(/img/discord.svg) center/70% no-repeat;
     transform: rotateY(0);
     transition: all 0.5s ease;
 }

@@ -1,4 +1,4 @@
-import { getData, listener, removeData, setData } from "./firebase.js";
+import { getData, listener, removeData, setData } from "/firebase.js";
 
 const parseDate = (timestamp) => {
     return `${(new Date(timestamp).getDate() < 10 ? `0${new Date(timestamp).getDate()}` : new Date(timestamp).getDate())}/${(new Date(timestamp).getMonth()+1 < 10 ? `0${new Date(timestamp).getMonth()+1}` : new Date(timestamp).getMonth()+1)}/${(new Date(timestamp).getFullYear() < 10 ? `0${new Date(timestamp).getFullYear()}` : new Date(timestamp).getFullYear())} ${(new Date(timestamp).getHours() < 10 ? `0${new Date(timestamp).getHours()}` : new Date(timestamp).getHours())}:${(new Date(timestamp).getMinutes() < 10 ? `0${new Date(timestamp).getMinutes()}` : new Date(timestamp).getMinutes())}`;
