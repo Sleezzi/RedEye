@@ -11,7 +11,7 @@
 			const fragment = new URLSearchParams(window.location.hash.slice(1));
 			const [accessToken, tokenType, guild, permissions] = [fragment.get('access_token'), fragment.get('token_type'), fragment.get("guild_id"), fragment.get("permissions")];
 
-			if (!accessToken || permissions !== 8) return window.location.href = "https://discord.com/api/oauth2/authorize?client_id=1195058289931726848&permissions=8&response_type=token&redirect_uri=https%3A%2F%2Fblueprint.sleezzi.fr%2Fthanks&scope=identify+guilds+bot+applications.commands.permissions.update+applications.commands";
+			if (!accessToken || permissions !== "8") return window.location.href = "https://discord.com/api/oauth2/authorize?client_id=1195058289931726848&permissions=8&response_type=token&redirect_uri=https%3A%2F%2Fblueprint.sleezzi.fr%2Fthanks&scope=identify+guilds+bot+applications.commands.permissions.update+applications.commands";
 			await localStorage.setItem("token", JSON.stringify({token: accessToken, type: tokenType}));
 			window.location.href = `/control/?guild=${guild}`;
 		})();
