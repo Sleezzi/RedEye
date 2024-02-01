@@ -1,0 +1,8 @@
+{
+    "clear": {
+        "description": "",
+        "type": "Core",
+        "deactivatable": true,
+        "options": []
+    }
+}

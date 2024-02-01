@@ -1,0 +1,67 @@
+#index {
+    height: 90%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+h1, h2, h3, h4, h5 {
+    margin: 0;
+}
+#withGuild {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+#login {
+    background: #00000075;
+    height: 50%;
+    max-width: 50%;
+    min-width: 25%;
+    border-radius: 2vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+#login > div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    height: 90%;
+    width: 90%;
+}
+#login > div > div {
+    width: 100%;
+}
+#login input {
+    width: 95%;
+    height: 35%;
+    background: #00000075;
+    border: 2px solid #00000075;
+    border-radius: 1vh;
+    color: white;
+    outline: unset;
+}
+#login button {
+    color: white;
+    border-radius: 1vh;
+    position: relative;
+    z-index: 2;
+    background: #007F00;
+    transition: .5s cubic-bezier(0.3, 0.5, 0.6, 1);
+}
+#login button:hover {
+    background: #009F00;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}

@@ -47,7 +47,6 @@ pre {
     font-family: 'Source Code Pro', monospace;
     margin: 0;
 }
-
 main {
     display: flex;
 }
@@ -56,18 +55,15 @@ main {
     background: #333;
     cursor: pointer;
 }
-  
 /* Track */
 ::-webkit-scrollbar-track {
     background: #00000000;
 }
-  
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #111;
     border-radius: 5vh;
 }
-
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: black;

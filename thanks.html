@@ -13,7 +13,7 @@
 
 			if (!accessToken || permissions !== "8") return window.location.href = "/invite";
 			await localStorage.setItem("token", JSON.stringify({token: accessToken, type: tokenType}));
-			window.location.href = `/control/?guild=${guild}`;
+			window.location.href = `/control/guild?id=${guild}`;
 		})();
 	</script>
 </body>
