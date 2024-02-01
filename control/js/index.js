@@ -53,7 +53,7 @@ async function withoutServer() {
     document.querySelector("#index > #withoutGuild > h2").innerText = `You are on ${response.length} server${(response.length > 1 ? "s" : "")}, but you can only moderate ${response.filter(server => server.owner || server.permissions === 536211447).length} of them`;
 }
 (async () => {
-    if (!data || !data.token || !data.type) return window.location.href = "/thanks";
+    if (!data || !data.token || !data.type) return window.location.href = "/invite";
     const params = new URLSearchParams(window.location.search);
     if (params.get("guild")) {
         withServer(params.get("guild"));
