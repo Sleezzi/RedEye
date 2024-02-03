@@ -45,6 +45,9 @@ body.dark #toggleTheme .knobs, #toggleTheme .layer {
 }
 .knobs {
     z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .layer {
     width: 100%;

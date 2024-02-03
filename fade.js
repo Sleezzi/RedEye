@@ -1,4 +1,4 @@
-function handkeScroll() {
+function handleScroll() {
     document.querySelectorAll(".fade-up").forEach(element => {
         if (element.getBoundingClientRect().top < window.innerHeight) {
             element.classList.add('active');
@@ -14,5 +14,5 @@ function handkeScroll() {
         }
     });
 }
-handkeScroll();
-window.addEventListener('scroll', handkeScroll);
+handleScroll();
+window.addEventListener('scroll', handleScroll);

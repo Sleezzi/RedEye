@@ -1,8 +1,304 @@
 {
+    "setprefix": {
+        "description": "Change the prefix on this server.",
+        "model": "setprefix **`prefix`**",
+        "category": "Core",
+        "permissions": "Administrator",
+        "desactivable": false,
+        "options": [
+            {
+                "name": "prefix",
+                "description": "The new prefix",
+                "type": "string",
+                "required": true
+            }
+        ]
+    },
+    "mute": {
+        "description": "Mute a members",
+        "model": "mute **`member`**",
+        "category": "Moderation",
+        "permissions": "Manage Members",
+        "desactivable": true,
+        "options": [
+            {
+                "name": "member",
+                "description": "The member you want to mute",
+                "type": "user",
+                "required": true
+            }
+        ]
+    },
+    "unmute": {
+        "description": "Unmute a members",
+        "model": "unmute **`member`**",
+        "category": "Moderation",
+        "permissions": "Manage Members",
+        "desactivable": true,
+        "options": [
+            {
+                "name": "member",
+                "description": "The member you want to unmute",
+                "type": "user",
+                "required": true
+            }
+        ]
+    },
+    "kick": {
+        "description": "Kick a members",
+        "model": "kick **`member`** *`The reason for the ban`*",
+        "category": "Moderation",
+        "permissions": "Kick Members",
+        "desactivable": true,
+        "options": [
+            {
+                "name": "member",
+                "description": "The mention of the member to be expelled",
+                "type": "user",
+                "required": true
+            },
+            {
+                "name": "reason",
+                "description": "The reason for the member's expulsion",
+                "type": "string",
+                "required": false
+            }
+        ]
+    },
+    "ban": {
+        "description": "Ban a members",
+        "model": "ban **`member`** *`Banishment time in seconds`* *`The reason for the ban`*",
+        "category": "Moderation",
+        "permissions": "Ban Members",
+        "desactivable": true,
+        "options": [
+            {
+                "name": "member",
+                "description": "The mention of the member to be banned",
+                "type": "user",
+                "required": true
+            },
+            {
+                "name": "duration",
+                "description": "The duration of the member's ban",
+                "type": "string",
+                "required": false
+            },
+            {
+                "name": "reason",
+                "description": "The reason for banning the member",
+                "type": "string",
+                "required": false
+            }
+        ]
+    },
+    "banlist": {
+        "description": "Returns the list of all banned members from the server",
+        "category": "Moderation",
+        "model": "banlist",
+        "permissions": "Manage Members",
+        "desactivable": true,
+        "options": []
+    },
+    "clean": {
+        "description": "Deletes all messages sent by the bot in the room",
+        "model": "clean",
+        "category": "Core",
+        "permissions": "Manage Messages",
+        "desactivable": true,
+        "options": []
+    },
     "clear": {
-        "description": "",
-        "type": "Core",
-        "deactivatable": true,
+        "description": "Delete messages in the channel in which the command is used",
+        "model": "clear **`Number of messages to delete`**",
+        "category": "Core",
+        "permissions": "Manage Messages",
+        "desactivable": true,
+        "options": [
+            {
+                "name": "count",
+                "description": "Number of messages to delete",
+                "type": "number",
+                "required": true
+            }
+        ]
+    },
+    "disablecommand": {
+        "description": "Disables a command on this server.",
+        "model": "disablecommand **`Name of command to disable`**",
+        "category": "Core",
+        "permissions": "Administrator",
+        "desactivable": false,
+        "options": [
+            {
+                "name": "command",
+                "description": "Name of command to disable",
+                "type": "string",
+                "required": true
+            }
+        ]
+    },
+    "enablecommand": {
+        "description": "Enables a command on this server.",
+        "model": "enablecommand **`Name of command to enable`**",
+        "category": "Core",
+        "permissions": "Administrator",
+        "desactivable": false,
+        "options": [
+            {
+                "name": "command",
+                "description": "Name of command to enable",
+                "type": "string",
+                "required": true
+            }
+        ]
+    },
+    "logchannel": {
+        "description": "Change/select the living room intended for the log",
+        "model": "logchannel **`mention of channel`**",
+        "category": "Core",
+        "permissions": "Administrator",
+        "desactivable": true,
+        "options": [
+            {
+                "name": "channel",
+                "description": "The mention of the channel is for logs",
+                "type": "channel",
+                "required": true
+            }
+        ]
+    },
+    "help": {
+        "description": "Shows you the help menu",
+        "category": "Core",
+        "permissions": "-",
+        "desactivable": false,
+        "options": [
+            {
+                "name": "command",
+                "description": "Which command do you need help with?",
+                "type": "string",
+                "required": false
+            }
+        ]
+    },
+    "badge": {
+        "description": "Gives information on a Roblox badge",
+        "model": "badge **`bagde Id`**",
+        "category": "Misc",
+        "permissions": "-",
+        "desactivable": true,
+        "options": [
+            {
+                "name": "id",
+                "description": "The badge id",
+                "type": "string",
+                "required": true
+            }
+        ]
+    },
+    "githubuser": {
+        "description": "Gives information about a GitHub user",
+        "model": "githubuser *`user Id`*",
+        "category": "Misc",
+        "permissions": "-",
+        "options": [
+            {
+                "name": "id",
+                "description": "The github user id",
+                "type": "string",
+                "required": true
+            }
+        ]
+    },
+    "headortail": {
+        "description": "Toss head or tail",
+        "model": "headortail",
+        "category": "Misc",
+        "permissions": "-",
+        "options": [
+            {
+                "name": "face",
+                "description": "The side you chose",
+                "type": "string",
+                "required": false
+            }
+        ]
+    },
+    "image": {
+        "description": "Send a photo on a specific theme (may not work properly)",
+        "model": "image **`the theme of the image`**",
+        "category": "Misc",
+        "permissions": "-",
+        "desactivable": true,
+        "options": [
+            {
+                "name": "theme",
+                "description": "A very short description of the image",
+                "type": "string",
+                "required": true
+            }
+        ]
+    },
+    "level": {
+        "description": "Give your level or that of a member",
+        "model": "level *`member`*",
+        "category": "Misc",
+        "permissions": "-",
+        "desactivable": true,
+        "options": [
+            {
+                "name": "member",
+                "description": "The member you want to see the level on",
+                "type": "user",
+                "required": false
+            }
+        ]
+    },
+    "pic": {
+        "description": "Gives the avatar of a user",
+        "model": "pic *`member`*",
+        "category": "Misc",
+        "permissions": "-",
+        "desactivable": true,
+        "options": [
+            {
+                "name": "member",
+                "description": "The member's mention",
+                "type": "user",
+                "required": false
+            }
+        ]
+    },
+    "about": {
+        "description": "Gives information about the server",
+        "model": "about",
+        "category": "Misc",
+        "permissions": "-",
+        "desactivable": true,
+        "options": []
+    },
+    "userinfo": {
+        "description": "Gives you information about a member or about you",
+        "model": "userinfo *`member`*",
+        "category": "Misc",
+        "permissions": "-",
+        "desactivable": true,
+        "options": [
+            {
+                "name": "member",
+                "description": "The member",
+                "type": "user",
+                "required": false
+            }
+        ]
+    },
+    "ping": {
+        "description": "Ping the bot",
+        "model": "ping",
+        "category": "Core",
+        "permissions": "-",
+        "desactivable": true,
         "options": []
     }
 }

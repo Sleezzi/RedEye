@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/control/css/theme.css">
     <link rel="shortcut icon" href="https://cdn.discordapp.com/avatars/1195058289931726848/8bfdcab3822a834daa8e3f2b7a6f0cec.png?size=32" type="image/x-icon">
     <script src="/control/js/chart.js"></script>
+    <!-- Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
@@ -31,7 +32,7 @@
         </span>
         </button>
         <a href="/" class="title">
-        <img src="https://cdn.discordapp.com/avatars/1131654875239940200/95101567cea3ab3c11b9ca4c0984d93f.png?size=48" alt="">
+        <img src="https://cdn.discordapp.com/avatars/1195058289931726848/8bfdcab3822a834daa8e3f2b7a6f0cec.png?size=48" alt="">
         <h2>Blueprint Bot</h2>
         </a>
         <div>
@@ -56,11 +57,11 @@
         </a>
         </div>
         <div>
-        <div class="button r" id="toggleTheme">
-            <input type="checkbox" class="checkbox"/>
-            <div class="knobs"></div>
-            <div class="layer"></div>
-        </div>
+            <div class="button r" id="toggleTheme">
+                <input type="checkbox" class="checkbox"/>
+                <div class="knobs"></div>
+                <div class="layer"></div>
+            </div>
         </div>
     </div>
     <header>
@@ -80,7 +81,50 @@
     </div>
     </header>
     <main id="index">
-        
+        <section class="fade-up" id="core">
+            <div>
+                <p>Prefix</p>
+                <input type="text" value="!">
+                <div style="display: flex; justify-content: space-evenly; width: 50%;">
+                    <p name="clear" style="background: #00000085; padding: 2%;border-radius: 0.5rem;">!clear 5</p>
+                    <p name="help" style="background: #00000085; padding: 2%;border-radius: 0.5rem;">!help</p>
+                    <p name="about" style="background: #00000085; padding: 2%;border-radius: 0.5rem;">!about</p>
+                    <p name="ban" style="background: #00000085; padding: 2%;border-radius: 0.5rem;">!ban @user</p>
+                    <p name="image" style="background: #00000085; padding: 2%;border-radius: 0.5rem;">!image dog</p>
+                </div>
+            </div>
+            <div></div>
+        </section>
+        <section class="fade-up" id="commands">
+            <div>
+                <div class="name">
+                    <div style="display: flex;">
+                        <span class="material-symbols-outlined">keyboard</span>: Command
+                    </div>
+                </div>
+                <div class="category">
+                    <div style="display: flex;">
+                        <span class="material-symbols-outlined">category</span>: Category
+                    </div>
+                </div>
+                <div class="permissions">
+                    <div style="display: flex;">
+                        <span class="material-symbols-outlined">shield</span>: Permissions
+                    </div>
+                </div>
+                <div class="model">
+                    <span class="material-symbols-outlined">mode</span>: Model
+                    <p><b>bold</b><aria-label>Required</aria-label></p><p><i>italic</i><aria-label>Not required</aria-label></p>
+                </div>
+                <div style="width: 5%;">Enable</div>
+            </div>
+        </section>
+        <section class="fade-up" id="log">
+            log
+        </section>
+        <section class="fade-up" id="other">
+            other
+        </section>
     </main>
     <footer>
         <span>Copyright ® Blueprint Bot - 2023 - All Right Reserved</span>
@@ -88,5 +132,6 @@
     <script src="/control/js/theme.js"></script>
     <script src="/control/js/sidenav.js"></script>
     <script type="module" src="/control/js/guild.js"></script>
+    <script src="/fade.js"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@ body {
     overflow-x: hidden;
 }
 ::-webkit-scrollbar {
+    height: 1vh;
     width: 1vh;
     background: #333;
     cursor: pointer;

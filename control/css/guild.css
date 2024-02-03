@@ -1,0 +1,83 @@
+body {
+    overflow: hidden;
+}
+#index {
+    flex-direction: column;
+    height: 90%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+section {
+    width: 100%;
+    height: auto;
+}
+section:nth-child(even) {
+    background: #00000085;
+}
+section#core > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+section#core > div > p {
+    width: 80%;
+    margin: 1% 0 0 0;
+}
+section#core > div > input {
+    background: #00000085;
+    border: 2px solid #00000085;
+    border-radius: .25rem;
+    width: 80%;
+    margin: 0;
+    color: white;
+    font-size: 100%;
+}
+section#commands {
+    color: white;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}
+section#commands > div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+section#commands > div:nth-child(even) {
+    background: #FFFFFF1F;
+}
+section#commands > div > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(25% - 2px);
+    border: 1px solid gray;
+    height: 3rem;
+}
+section#commands > div > .model > * {
+    margin: 0 0 0 5px;
+    position: relative;
+    display: flex;
+    width: auto;
+}
+section#commands > div > div.toggle .knobs {
+    background: red;
+    transition: background .3s ease;
+}
+section#commands > div > div.toggle .knobs:before {
+    content: "X";
+    font-size: 80%;
+    right: 20px;
+}
+section#commands > div > div.toggle > div.button > .checkbox:checked + .knobs {
+    background: green;
+}
+section#commands > div > div.toggle > div.button > .checkbox:checked + .knobs:before {
+    content: "✓";
+    left: 20px;
+}
+span.material-symbols-outlined {
+    font-size: 100%;
+}
