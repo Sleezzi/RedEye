@@ -11,7 +11,7 @@ async function withoutServer() {
     response.forEach(server => {
         if (!server.owner && server.permissions !== 536211447) return;
         const card = document.createElement("a");
-        card.href = `/Control/guild?id=${server.id}`
+        card.href = `/control/guild?id=${server.id}`
         card.classList.add("guild");
         card.setAttribute("guildId", server.id);
         card.innerHTML = `

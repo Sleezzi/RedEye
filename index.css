@@ -212,3 +212,6 @@ a#firebase::before {
     height: 2vh;
     background: url(https://firebase.google.com/_static/firebase/images/icon.svg) center/cover no-repeat;
 }
+footer {
+    overflow: scroll;
+}
