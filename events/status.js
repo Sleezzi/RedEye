@@ -15,10 +15,10 @@ module.exports = {
                         if (member.presence && member.presence.status !== "offline" && !member.user.bot && !onlineMembers.find(m => m.id === member.id)) onlineMembers.push(member.id);
                     });
                 });
-                if (i === 1) client.user.setActivity(`!help`, { type: Discord.ActivityType.Playing, url: "https://discord.gg/xKxSt7Ke8x", state: "Bot made by Sleezzi" });
-                if (i === 2) client.user.setActivity(`👤 • ${members.length} member${(members.length > 1 ? "s" : "")}`, { type: Discord.ActivityType.Watching, url: "https://discord.gg/xKxSt7Ke8x", state: "Bot made by Sleezzi" });
+                if (i === 1) client.user.setActivity(`!help`, { type: Discord.ActivityType.Playing, url: "https://blueprint.sleezzi.fr", state: "Bot made by Sleezzi" });
+                if (i === 2) client.user.setActivity(`👤 • ${members.length} member${(members.length > 1 ? "s" : "")}`, { type: Discord.ActivityType.Watching, url: "https://blueprint.sleezzi.fr", state: "Bot made by Sleezzi" });
                 if (i === 3) {
-                    client.user.setActivity(`🟢 • ${onlineMembers.length} online member${(onlineMembers.length > 1 ? "s" : "")}`, { type: Discord.ActivityType.Watching, url: "https://discord.gg/xKxSt7Ke8x", state: "Bot made by Sleezzi" });
+                    client.user.setActivity(`🟢 • ${onlineMembers.length} online member${(onlineMembers.length > 1 ? "s" : "")}`, { type: Discord.ActivityType.Watching, url: "https://blueprint.sleezzi.fr", state: "Bot made by Sleezzi" });
                     i = 0;
                 }
                 i++

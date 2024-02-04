@@ -5,9 +5,9 @@ module.exports = {
             "en-US": "help",
             fr: "aide"
         },
-        description: "This command doesn't have a description",
+        description: "Shows you the help menu",
         description_localizations: {
-            "en-US": "This command doesn't have a description",
+            "en-US": "Shows you the help menu",
             fr: "Ouvre le menu d'aide"
         },
         default_permission: undefined,
@@ -267,7 +267,7 @@ module.exports = {
                     },
                     fields: [
                         { name: `__Prefix:__`, value: `> \`${(serverData.prefix || "!")}\``, inline: false },
-                        { name: `__Bot made by:__`, value: `> [Sleezzi](https://tv-sleezzi.web.app/)`, inline: false },
+                        { name: `__Bot made by:__`, value: `> [Sleezzi](https://sleezzi.fr/)`, inline: false },
                         { name: `__Date of creation:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true },
                         { name: `__End in:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000 + 120)}:d> (<t:${Math.floor(message.createdTimestamp / 1000 + 120)}:R>)`, inline: true },
                     ],

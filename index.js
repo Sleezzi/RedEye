@@ -16,7 +16,6 @@ const {
     Routes,
     REST,
 } = Discord;
-
 const client = new Client({
     presence: {
         status: "idle",
