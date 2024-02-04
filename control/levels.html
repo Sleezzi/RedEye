@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="title">Controls Panels</title>
-  <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/sidenav.css">
-  <link rel="stylesheet" href="/css/theme.css">
-  <link rel="stylesheet" href="/css/levels.css">
+  <link rel="stylesheet" href="/cdn/css/main.css">
+  <link rel="stylesheet" href="/cdn/css/sidenav.css">
+  <link rel="stylesheet" href="/cdn/css/theme.css">
+  <link rel="stylesheet" href="/cdn/css/control/levels.css">
   <link rel="shortcut icon" href="https://cdn.discordapp.com/avatars/1195058289931726848/8bfdcab3822a834daa8e3f2b7a6f0cec.png?size=48" type="image/x-icon">
-  <script src="/js/chart.js"></script>
+  <script src="/cdn/js/control/levels.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <!-- Firebase -->
-  <script type="module" src="/js/firebase.js"></script>
+  <script type="module" src="/cdn/js/firebase.js"></script>
 </head>
 <body class="dark">
   <div id="sideNav" class="sidenav">
@@ -34,21 +34,21 @@
       <h2>Blueprint Bot</h2>
     </a>
     <div>
-      <a href="/stats" id="stats">
+      <a href="/control/stats" id="stats">
         <span class="material-symbols-outlined">trending_up</span>
         <div></div>
         <p>Stats</p>
       </a>
     </div>
     <div>
-    <a href="/levels" id="levels">
+    <a href="/control/levels" id="levels">
         <span class="material-symbols-outlined">track_changes</span>
         <div></div>
         <p>Level</p>
     </a>
   </div>
   <div>
-    <a href="/tickets" id="tickets">
+    <a href="/control/tickets" id="tickets">
       <span class="material-symbols-outlined">confirmation_number</span>
       <div></div>
       <p>Tickets</p>
@@ -82,7 +82,7 @@
     <section>
       <span class="material-symbols-outlined">track_changes</span>
       <div style="margin: 0 1% 0 1%;width: 1px;height: 40px;background: linear-gradient(transparent 0%, gray 35%, gray 65%, transparent 100%) center/cover no-repeat;"></div>
-      <h1>Level</h1></a>
+      <h1>Levels</h1></a>
     </section>
     <section>
       <h2>Nothing to see here.</h2>
@@ -94,8 +94,8 @@
   <footer>
     <span>Copyright ® Blueprint Bot - 2023 - All Right Reserved</span>
   </footer>
-  <script src="/js/theme.js"></script>
-  <script src="/js/sidenav.js"></script>
-  <script type="module" src="/js/levels.js"></script>
+  <script src="/cdn/js/theme.js"></script>
+  <script src="/cdn/js/sidenav.js"></script>
+  <script type="module" src="/cdn/js/control/levels.js"></script>
 </body>
 </html>

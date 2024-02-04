@@ -133,7 +133,10 @@ footer > h5 > a {
     flex-direction: row;
     margin: 0 0 0 5px;
 }
-a#nodejs::before {
+a.icon {
+    position: relative;
+}
+a.icon::before {
     content: "";
     position: relative;
     top: calc(1vh / 2);
@@ -141,28 +144,26 @@ a#nodejs::before {
     display: inline-flex;
     width: 2vh;
     height: 2vh;
+}
+a#nodejs::before {
     background: url(https://nodejs.org/static/images/favicons/favicon.png) center/cover no-repeat;
 }
 a#discordjs::before {
-    content: "";
-    position: relative;
-    top: calc(1vh / 2);
-    right: 2px;
-    display: inline-flex;
-    width: 2vh;
-    height: 2vh;
     background: url(https://discord.js.org/favicon-32x32.png) center/cover no-repeat;
 }
 a#firebase::before {
-    content: "";
-    position: relative;
-    top: calc(1vh / 2);
-    right: 2px;
-    display: inline-flex;
-    width: 2vh;
-    height: 2vh;
     background: url(https://firebase.google.com/_static/firebase/images/icon.svg) center/cover no-repeat;
 }
+a#bot-hosting::before {
+    background: url(https://bot-hosting.net/assets/img/bothosting2.png) center/cover no-repeat;
+}
+a#github::before {
+    background: url(https://github.githubassets.com/favicons/favicon-dark.png) center/cover no-repeat;
+}
+/* A mettre dans un truc qui ne prend en compte que les petits écran pour ne 
+pas bloquer le aria-label
 footer {
     overflow: scroll;
 }
+
+*/
