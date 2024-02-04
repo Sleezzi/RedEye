@@ -1,0 +1,86 @@
+body {
+    transition: background 0.5s;
+}
+body.dark {
+    background: #333;
+    color: white;
+}
+body.light {
+    background: #FFF;
+    color: black;
+}
+.knobs, .layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+body.dark #toggleTheme .knobs, #toggleTheme .layer {
+    background: #333;
+}
+.button {
+    position: relative;
+    width: 45px;
+    height: 26px;
+    margin: -20px auto 0 auto;
+    overflow: hidden;
+    text-align: center;
+    color: white;
+    margin: 15px 0 15px 0;
+    display: flex;
+}
+.button.r, .button.r .layer {
+    border-radius: 100vh;
+}
+.checkbox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+.knobs {
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.layer {
+    width: 100%;
+    background: #ebf7fc;
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+.button .knobs::before {
+    position: absolute;
+    top: 14%;
+    left: 10%;
+    width: 40%;
+    height: 50%;
+    font-size: 50%;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1;
+    padding: 3px 2px;
+    border-radius: 50%;
+    transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) left right;
+    background: #FFF;
+    color: black;
+    text-align: center;
+    font-family: unset;
+}
+.button .knobs, .button .knobs:before, .button .layer {
+    transition: 0.3s ease all;
+}
+#toggleTheme .knobs:before {
+    content: "☾";
+    right: 20px;
+}
+#toggleTheme .checkbox:checked + .knobs:before {
+    content: "⚡︎";
+    left: 20px;
+}
