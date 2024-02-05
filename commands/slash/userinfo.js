@@ -30,11 +30,8 @@ module.exports = {
     },
     async execute(interaction, client, Discord) {
         try {
-    
             let member = interaction.guild.members.cache.find((m) => m.id === (interaction.options.getUser("member") ? interaction.options.getUser("member") : interaction.member).id) ?? interaction.member;
-
             let roles = "The member has no role.";
-
             if (member._roles.length > 0) {
                 for (let i = 0; i < member._roles.length; i++) {
                     roles = `<@&${member._roles.map((i) => i).join('>, <@&')}>`;

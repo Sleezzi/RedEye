@@ -58,9 +58,11 @@ module.exports = {
         
         if (amount > 100) amount = 100;
         try {
-            interaction.channel.messages.fetch({ limit: amount }).then(async (messages) => {
+            interaction.channel.messages.fetch({ limit: amount, filter: (msg) => {console.log(msg); return true} }).then(async (messages) => {
                 try {
-                    await interaction.channel.bulkDelete(messages.filter((msg) => 1_209_600 > Math.floor((Date.now() - msg.createdTimestamp) / 1000) && (!interaction.options.getUser("member") || msg.member.id === interaction.options.getUser("member").id)))
+                    await interaction.channel.bulkDelete(messages.filter((msg) => 
+                    1_209_600 > Math.floor((Date.now() - msg.createdTimestamp) / 1000) &&
+                    (!interaction.options.getUser("member") || msg.member.id === interaction.options.getUser("member").id)))
                     await interaction.deleteReply();
                     interaction.followUp({ content: `Multiple Messages Deleted (${messages.filter((msg) => 1_209_600 > Math.floor((Date.now() - msg.createdTimestamp) / 1000)).size} message${((messages.filter((msg) => 14 < msg.createdTimestamp - Date.now()).size) > 1 ? "s" : "")})`, ephemeral: true });
                 } catch(err) { return err; }
