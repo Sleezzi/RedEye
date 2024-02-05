@@ -50,14 +50,8 @@ module.exports = {
                 interaction.deleteReply().then(() => interaction.followUp({ content: "I can't mute this member cause he is already mute", ephemeral: true }));
                 return;
             }
-            // if (interaction.guild)
-            const role = await interaction.guild.roles.create({
-                name: "mute",
-                color: 0xFF0000,
-                permissions: [],
-                position: interaction.guild.roles.cache.find(role => role.name === client.user.username && interaction.guild.members.cache.get(client.user.id).roles.cache.has(role.id)).position-1 || 1
-            });
-            member.roles.add(role.id);
+            
+            member.timeout()
             interaction.deleteReply().then(() => interaction.followUp({ content: "This member has been muted", ephemeral: true }));
         } catch(err) { return err; }
     }

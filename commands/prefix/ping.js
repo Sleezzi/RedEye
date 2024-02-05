@@ -10,7 +10,7 @@ module.exports = {
             const APIPing = Date.now() - message.createdAt;
             let embed = {
                 color: 0x00FFFF,
-                title: ".o0 | Latency:",
+                title: ".oO | Latency:",
                 author: {
                     name: message.author.tag,
                     icon_url: message.member.user.avatarURL(),
@@ -24,7 +24,7 @@ module.exports = {
             }
             const msg = await message.channel.send({ embeds: [embed], ephemeral: false });
             embed.fields.push(
-                { name: "__**The ping of Bot:**__", value: `**\`${(msg.createdAt - message.createdAt) - APIPing}ms\`**`, inline: true }
+                { name: "__**The ping of Bot:**__", value: `**\`${client.ws.ping}ms\`**`, inline: true }
             )
             msg.edit({ embeds: [embed], ephemeral: false });
             if (message && message.deletable) message.delete();
