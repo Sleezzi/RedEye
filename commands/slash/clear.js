@@ -42,7 +42,7 @@ module.exports = {
             interaction.followUp({ content: 'You must specify a number of messages to delete', ephemeral: true });
             return;
         }
-        amount++
+        
         if (amount > 100) amount = 100;
             
         try {
