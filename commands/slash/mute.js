@@ -25,6 +25,20 @@ module.exports = {
                 },
                 required: true,
                 type: 6,
+            },
+            {
+                name: 'duration',
+                name_localizations: {
+                    fr: "durer",
+                    "en-US": "duration"
+                },
+                description: 'The duration of the mute',
+                description_localizations: {
+                    fr: "Le temps que le membre doit être mute",
+                    "en-US": "The duration of the mute"
+                },
+                required: true,
+                type: "Number",
             }
         ],
         nsfw: false
@@ -51,7 +65,7 @@ module.exports = {
                 return;
             }
             
-            member.timeout()
+            member.timeout(interaction.options.getNumber("duration") * 1_000);
             interaction.deleteReply().then(() => interaction.followUp({ content: "This member has been muted", ephemeral: true }));
         } catch(err) { return err; }
     }
