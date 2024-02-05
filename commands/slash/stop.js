@@ -16,9 +16,12 @@ module.exports = {
     },
     async execute(interaction, client, Discord) {
         if (interaction.member.id === "542703093981380628") {
-            setTimeout(function() {client.destroy(client.config.token)}, 4990);
+            setTimeout(function() {
+                client.destroy(client.config.token);
+            }, 4990);
         } else {
-            interaction.deleteReply().then(() => interaction.followUp({ content: `<@${interaction.member.id}>, you do not have the necessary permissions to use this command`, ephemeral: true }));
+            await interaction.deleteReply()
+            interaction.followUp({ content: `:x: - <@${interaction.member.id}>, you do not have the necessary permissions to use this command`, ephemeral: true });
         }
     }
 }

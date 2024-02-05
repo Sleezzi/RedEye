@@ -7,7 +7,7 @@ module.exports = {
     cooldown: 5000,
     async execute(message, client, Discord) {
         if (!message.member.permissions.has("Administrator")) {
-            message.reply("You do not have permission to do this").then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000));
+            message.reply(":x: - You do not have permission to do this").then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000));
             return;
         }
         message.channel.sendTyping();

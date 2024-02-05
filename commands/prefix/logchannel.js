@@ -7,7 +7,7 @@ module.exports = {
     cooldown: 5000,
     async execute(message, client, Discord) {
         if (!message.member.permissions.has("Administrator")) {
-            const msg = await message.reply("You do not have permission to do this");
+            const msg = await message.reply(":x: - You do not have permission to do this");
             setTimeout(async () => {
                 try {
                     msg.delete();

@@ -68,7 +68,7 @@ module.exports = {
                         inline: true
                     });
                 });
-                embed.fields.push({ name: ":hourglass: __**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`});     
+                embed.fields.push({ name: ":hourglass: - ____**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`});     
                 message.deleteReply().then(() => message.followUp({ embeds: [embed], ephemeral: false }));
             } else {
                 const mainEmbed = {
@@ -248,10 +248,10 @@ module.exports = {
                     .setAuthor({ name: message.member.user.tag, iconURL: message.member.user.avatarURL(), url: message.url })
                     .addFields(
                         { name: "<:nametag:1200757678104915978> __**Name:**__", value: `**\`${command.name}\`**`},
-                        { name: ":book: __**Description:**__", value: `**\`${command.description}\`**`},
-                        { name: ":unlock: __**Can be used:**__", value: `${(command.permissions !== undefined ? (command.permissions === "Owner" && message.member.id === "542703093981380628" ? ":white_check_mark:" : (message.member.permissions.has(command.permissions) ? ":white_check_mark:" : ":x:")) : ":white_check_mark:")}`},
-                        { name: ":question: __**How to use:**__", value: `${serverData.prefix ?? "!"}${command.model}`},
-                        { name: ":hourglass: __**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`},
+                        { name: ":book: - __**Description:**__", value: `**\`${command.description}\`**`},
+                        { name: ":unlock: - __**Can be used:**__", value: `${(command.permissions !== undefined ? (command.permissions === "Owner" && message.member.id === "542703093981380628" ? ":white_check_mark:" : (message.member.permissions.has(command.permissions) ? ":white_check_mark:" : ":x:")) : ":white_check_mark:")}`},
+                        { name: ":question: - __**How to use:**__", value: `${serverData.prefix ?? "!"}${command.model}`},
+                        { name: ":hourglass: - __**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`},
                     )
                     .setURL(message.url)
                     .setFooter({ text: `Id: ${message.id}`, iconURL: client.user.avatarURL() });        

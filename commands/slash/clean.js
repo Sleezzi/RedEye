@@ -28,10 +28,37 @@ module.exports = {
                     } catch(err) { return err; }
                     messagesDeleted += fetchedMessages.size;
                 } while (fetchedMessages.size >= 2);
-                interaction.followUp({ content: `Channel content delete (${messagesDeleted} message${(messagesDeleted > 1 ? "s" : "")})`, ephemeral: true });
+                interaction.followUp({ embeds: [{
+                    title: `:put_litter_in_its_place: - **Channel content delete** (${messagesDeleted} message${(messagesDeleted > 1 ? "s" : "")})`,
+                    color: 0x00FF00,
+                    author: {
+                        name: interaction.member.tag,
+                        icon_url: interaction.member.user.avatarURL(),
+                        url: interaction.url,
+                    },
+                    footer: {
+                        text: `Id: ${interaction.id}`,
+                        icon_url: client.user.avatarURL(),
+                    },
+                }], ephemeral: true });
             } catch(err) { return err; }
         } else {
-            interaction.followUp({ content: "You do not have permission to delete messages", ephemeral: true });
+            await interaction.deleteReply();
+            interaction.followUp({ embeds: [
+                {
+                    title: ":x: - You do not have permission to delete messages",
+                    color: 0xFF0000,
+                    author: {
+                        name: interaction.member.tag,
+                        icon_url: interaction.member.user.avatarURL(),
+                        url: interaction.url,
+                    },
+                    footer: {
+                        text: `Id: ${interaction.id}`,
+                        icon_url: client.user.avatarURL(),
+                    },
+                }
+            ], ephemeral: true });
         }
     }
 }

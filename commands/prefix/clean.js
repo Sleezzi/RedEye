@@ -8,7 +8,7 @@ module.exports = {
     async execute(message, client, Discord) {
         try {
             if (!message.member.permissions.has("ManageMessages")) {
-                const msg = await message.reply("You do not have permission to delete messages");
+                const msg = await message.reply(":x: - You do not have permission to delete messages");
                 setTimeout(() => {
                     try {
                         if (msg.deletable) {
@@ -29,7 +29,7 @@ module.exports = {
                 messagesDeleted += fetchedMessages.size;
             } while (fetchedMessages.size >= 2);
             try { if (message && message.id) message.delete();} catch(err) { return err; }
-            const msg = await message.channel.send(`Channel content delete (${messagesDeleted} message${(messagesDeleted > 1 ? "s" : "")})`);
+            const msg = await message.channel.send(`:put_litter_in_its_place: - Channel content delete (${messagesDeleted} message${(messagesDeleted > 1 ? "s" : "")})`);
             setTimeout(() => {
                 try {
                     if (msg.deletable) {

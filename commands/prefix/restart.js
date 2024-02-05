@@ -14,7 +14,7 @@ module.exports = {
                 });
             }, 490);
         } else {
-            message.channel.send(`<@${message.member.id}>, you do not have the necessary permissions to use this command`).then((msg) => setTimeout(function() { msg.delete() }, 5000));
+            message.channel.send(`:x: - <@${message.member.id}>, you do not have the necessary permissions to use this command`).then((msg) => setTimeout(function() { msg.delete() }, 5000));
             if (message && message.deletable) message.delete();
         }
     }

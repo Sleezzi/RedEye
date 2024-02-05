@@ -13,12 +13,12 @@ module.exports = {
                 .setThumbnail(message.guild.iconURL())
                 .addFields(
                     { name: "<:nametag:1200757678104915978> __**Server name:**__", value: `**\`${message.guild.name}\`**`},
-                    { name: ":book: __**Server description:**__", value: `**\`${message.guild.description}\`**`},
-                    { name: "<:ID:1200784630865985598> __**ID:**__", value: `\`${message.guild.id}\``},
-                    { name: "<:owner:1200816888364683396> __**Owner:**__", value: `${message.guild.members.cache.find(member => member.id === message.guild.ownerId).user.username} (id: ${message.guild.ownerId})`},
-                    { name: ":inbox_tray: __**You have been a member since:**__", value: `<t:${Math.floor(message.member.joinedTimestamp / 1000)}:d> (<t:${Math.floor(message.member.joinedTimestamp / 1000)}:R>)`},
-                    { name: ":computer: __**Server created:**__", value: `<t:${Math.floor(message.guild.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.guild.createdTimestamp / 1000)}:R>)`},
-                    { name: ":hourglass: __**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`},
+                    { name: ":book: - __**Server description:**__", value: `**\`${message.guild.description}\`**`},
+                    { name: "<:ID:1200784630865985598> - __**ID:**__", value: `\`${message.guild.id}\``},
+                    { name: "<:owner:1200816888364683396> - __**Owner:**__", value: `${message.guild.members.cache.find(member => member.id === message.guild.ownerId).user.username} (id: ${message.guild.ownerId})`},
+                    { name: ":inbox_tray: - __**You have been a member since:**__", value: `<t:${Math.floor(message.member.joinedTimestamp / 1000)}:d> (<t:${Math.floor(message.member.joinedTimestamp / 1000)}:R>)`},
+                    { name: ":computer: - __**Server created:**__", value: `<t:${Math.floor(message.guild.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.guild.createdTimestamp / 1000)}:R>)`},
+                    { name: ":hourglass: - __**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`},
                 )
                 .setURL(message.url)
                 .setFooter({ text: `Id: ${message.id}`, iconURL: client.user.avatarURL() });

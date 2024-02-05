@@ -39,9 +39,11 @@ module.exports = {
                 embed.fields[0].value = `> - Total server${(client.guilds.cache.map(server => server.id).length > 1 ? "s" : "")}: \`${client.guilds.cache.map(server => server.id).length}\`\n> - Total member${(members > 1 ? "s" : "")}: \`${members}\``;
                 embed.fields.push({name: `${guild.name} (\`${guild.id}\`)`, value: `> - Member${(guild.members.cache.filter((member) => !member.user.bot).size > 1 ? "s" : "")}: **${guild.members.cache.filter((member) => !member.user.bot).size}**\n> - Online member${(guild.members.cache.filter((member) => member.presence && member.presence.status !== "offline" && !member.user.bot).size > 1 ? "s" : "")}: **${guild.members.cache.filter((member) => member.presence && member.presence.status !== "offline" && !member.user.bot).size}**\n> - Owner: **${guild.members.cache.find(member => member.id === guild.ownerId).user.username.toUpperCase()}**`})
             });
-            interaction.deleteReply().then(() => interaction.followUp({ embeds: [embed], ephemeral: true }));
+            await interaction.deleteReply()
+            interaction.followUp({ embeds: [embed], ephemeral: true });
         } else {
-            interaction.deleteReply().then(() => interaction.followUp({ content: `<@${interaction.member.id}>, you do not have the necessary permissions to use this command`, ephemeral: true }));
+            await interaction.deleteReply()
+            interaction.followUp({ content: `:x: - <@${interaction.member.id}>, you do not have the necessary permissions to use this command`, ephemeral: true });
         }
     }
 }

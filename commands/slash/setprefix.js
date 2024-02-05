@@ -30,7 +30,8 @@ module.exports = {
     },
     async execute(interaction, client, Discord) {
         if (!interaction.member.permissions.has("Administrator")) {
-            interaction.deleteReply().then(() => interaction.followUp({ content: "You do not have permission to do this", ephemeral: true }));
+            await interaction.deleteReply()
+            interaction.followUp({ content: ":x: - You do not have permission to do this", ephemeral: true });
             return;
         }
         const prefix = interaction.options.getString("prefix").replaceAll(" ", "");
@@ -40,7 +41,8 @@ module.exports = {
             } else {
                 require("../../components/database").set(`/${interaction.guild.id}/prefix`, prefix, client);
             }
-            interaction.deleteReply().then(() => interaction.followUp({ content: `The prefix has been successfully updated, now it's \`${prefix}\``, ephemeral: true }));
+            await interaction.deleteReply()
+            interaction.followUp({ content: `The prefix has been successfully updated, now it's \`${prefix}\``, ephemeral: true });
         } catch(err) { return err; }
     }
 }

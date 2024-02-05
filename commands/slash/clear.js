@@ -37,7 +37,7 @@ module.exports = {
                     fr: "Supprimer tous les messages du membre",
                     "en-US": "Delete all messages from the member"
                 },
-                required: true,
+                required: false,
                 type: 6,
             }
         ],
@@ -46,27 +46,22 @@ module.exports = {
     async execute(interaction, client, Discord) {
         if (!interaction.member.permissions.has("ManageMessages")) {
             await interaction.deleteReply();
-            interaction.followUp({ content: "You do not have permission to delete interactions", ephemeral: true });
+            interaction.followUp({ content: ":x: - You do not have permission to delete interactions", ephemeral: true });
             return;
         }
         let amount = interaction.options.getNumber("number");
         if (!amount) {
             await interaction.deleteReply();
-            interaction.followUp({ content: 'You must specify a number of messages to delete', ephemeral: true });
+            interaction.followUp({ content: ':x: - You must specify a number of messages to delete', ephemeral: true });
             return;
         }
         
         if (amount > 100) amount = 100;
         try {
-            interaction.channel.messages.fetch({ limit: amount, filter: (msg) => 14 < msg.createdTimestamp - Date.now() && (!interaction.options.getUser("member") || msg.member.id === interaction.options.getUser("member").id)}).then(async (messages) => {
-                try {
-                    await interaction.channel.bulkDelete(messages.filter((msg) => 
-                    1_209_600 > Math.floor((Date.now() - msg.createdTimestamp) / 1000) &&
-                    (!interaction.options.getUser("member") || msg.member.id === interaction.options.getUser("member").id)))
-                    await interaction.deleteReply();
-                    interaction.followUp({ content: `${(messages.size) > 1 ? "Multiple " : ""}Messages Deleted (${messages.size} message${messages.size > 1 ? "s" : ""})`, ephemeral: true });
-                } catch(err) { return err; }
-            });
-        } catch(err) { return err; }
+            const messages = await interaction.channel.messages.fetch({ limit: amount, filter: (msg) => 14 < msg.createdTimestamp - Date.now() && (!interaction.options.getUser("member") || msg.member.id === interaction.options.getUser("member").id)});
+            await interaction.channel.bulkDelete(messages);
+            await interaction.deleteReply();
+            interaction.followUp({ content: `:put_litter_in_its_place: - ${(messages.size) > 1 ? "Multiple " : ""}Messages Deleted (${messages.size} message${messages.size > 1 ? "s" : ""})`, ephemeral: true });
+        } catch(err) { return {err, line: 68, file: "/commands/slash/clear.js"}; }
     }
 }

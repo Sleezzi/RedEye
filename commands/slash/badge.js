@@ -44,16 +44,16 @@ module.exports = {
                     url: interaction.url,
                 },
                 fields: [
-                    { name: `<:nametag:1200757678104915978> __Name:__`, value: `> \`${response.name}\``, inline: true },
-                    { name: `<:ID:1200784630865985598> __Id:__`, value: `> \`${id}\``, inline: true },
-                    { name: `:book: __Description:__`, value: `> \`${(response.description ? response.description : "Unset")}\``, inline: true },
+                    { name: `<:nametag:1200757678104915978> - __Name:__`, value: `> \`${response.name}\``, inline: true },
+                    { name: `<:ID:1200784630865985598> - __Id:__`, value: `> \`${id}\``, inline: true },
+                    { name: `:book: - __Description:__`, value: `> \`${(response.description ? response.description : "Unset")}\``, inline: true },
                     { name: `:link __URL:__`, value: `> [${response.name}](https://www.roblox.com/badges/${id}/)`, inline: true },
-                    { name: `:chart_with_upwards_trend: __Stats:__`, value: `> ${response.statistics.winRatePercentage * 100}% (owned ${response.statistics.awardedCount} times)`, inline: true },
+                    { name: `:chart_with_upwards_trend: - __Stats:__`, value: `> ${response.statistics.winRatePercentage * 100}% (owned ${response.statistics.awardedCount} times)`, inline: true },
                     { name: `__Enable:__`, value: `> ${(response.enabled ? `:white_check_mark:` : `:x:`)}`, inline: true },
-                    { name: `:video_game: __Game:__`, value: `> \`${response.awardingUniverse.name}\` (id: \`${response.awardingUniverse.id}\`)`, inline: false },
+                    { name: `:video_game: - __Game:__`, value: `> \`${response.awardingUniverse.name}\` (id: \`${response.awardingUniverse.id}\`)`, inline: false },
                     { name: `__Created at:__`, value: `> \`${response.created}\``, inline: true },
                     { name: `__Last update:__`, value: `> \`${response.updated}\``, inline: true },
-                    { name: `:hourglass: __Date:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: false}
+                    { name: `:hourglass: - __Date:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: false}
                 ],
                 footer: {
                     text: `Id: ${interaction.id}`,

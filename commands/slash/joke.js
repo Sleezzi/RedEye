@@ -216,7 +216,6 @@ module.exports = {
     },
     async execute(interaction, client, Discord) {
         try {
-    
             let category = interaction.options.getString('category');
             let lang = interaction.options.getString('lang');
             let type = interaction.options.getString('type');
@@ -226,10 +225,20 @@ module.exports = {
                 response = await response.json();
                 if (response.error === false) {
                     if (type === "single") {
-                        interaction.deleteReply().then(() => interaction.followUp({ content: `${response.joke}`, ephemeral: true }));
-                    } else interaction.deleteReply().then(() => interaction.followUp({ content: `${response.setup}\n||${response.delivery}||`, ephemeral: true }));
-                } else interaction.deleteReply().then(() => interaction.followUp({ content: `There was an error while executing this command : ${response.causedBy[0]}`, ephemeral: true }));
-            } else interaction.deleteReply().then(() => interaction.followUp({ content: `There was an error while executing this command`, ephemeral: true }));
+                        await interaction.deleteReply();
+                        interaction.followUp({ content: `${response.joke}`, ephemeral: true });
+                    } else {
+                        await interaction.deleteReply()
+                        interaction.followUp({ content: `${response.setup}\n||${response.delivery}||`, ephemeral: true });
+                    }
+                } else {
+                    await interaction.deleteReply();
+                    interaction.followUp({ content: `There was an error while executing this command : ${response.causedBy[0]}`, ephemeral: true });
+                }
+            } else {
+                await interaction.deleteReply()
+                interaction.followUp({ content: `There was an error while executing this command`, ephemeral: true });
+            }
         } catch(err) { return err; }
     }
 }
