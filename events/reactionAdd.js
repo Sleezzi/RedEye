@@ -11,9 +11,7 @@ module.exports = {
                 if (!reaction.message.guild.roles.cache.has(roleId)) return;
                 try {
                     member.roles.add(roleId);
-                } catch (err) {
-                    return err;
-                }
+                } catch (err) { return err; }
             });
             // if (!client.config.reactions[reaction.message.channel.id] || !client.config.reactions[reaction.message.channel.id][reaction.message.id] || !client.config.reactions[reaction.message.channel.id][reaction.message.id][reaction.emoji.name]) return;
             // try {

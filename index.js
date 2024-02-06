@@ -42,7 +42,6 @@ client.data = {
 };
 
 client.config = require("./config.json");
-serverData = new Collection();
 console.clear();
 
 for (const file of readdirSync("./commands/prefix").filter((file) => file.endsWith(".js"))) {
@@ -64,21 +63,8 @@ for (const file of readdirSync("./commands/slash").filter((file) => file.endsWit
         if (command.data.default_member_permissions && !/^\d+$/.test(command.data.default_member_permissions)) command.data.default_member_permissions = `${require("./components/parsePermissions")(`${command.data.default_member_permissions}`.toLowerCase())}`;
         client.data.commands.app.set(command.data.name, command);
         require("./components/log")(`Command "%aqua%/${command.data.name}%reset%" created`);
-    } else require("./components/log")(`%red%[WARNING] Something missing with ${file}'s command`);
+    } else require("./components/log")(`%red%[WARNING] Something missing with ${file}'s command %gray%(${!command.data ? "Command information is missign" : (!command.data.name ? "Command name is missing" : (!command.execute ? "The command execution function is missing" : ""))})%reset%`);
 }
-
-// Add all command in the options of /help
-if (Object.keys(client.data.commands.app.has("help"))) {
-    Object.keys(client.data.commands.app).forEach((command) => {
-        if (command.name !== "help") {
-            Object.keys(client.data.commands.app).find((item) => item.name === "help").options[0].choices.push({
-                name: command.name,
-                name_localizations: command.name_localizations,
-                value: command.name
-            });
-        }
-    });
-};
 
 for (const file of readdirSync("./contextMenu").filter((file) => file.endsWith(".js"))) {
     const command = require(`./contextMenu/${file}`);
@@ -114,7 +100,7 @@ client.login(client.config.token).then(() => {
 });
 
 // client.on("messageCreate", message => {
-//     if (message.content !== "!testc") return;
+//     if (message.content !== "!test") return;
 // });
 
 process.stdin.setRawMode(true);
@@ -139,7 +125,7 @@ process.stdin.on("data", (key) => {
             });
             break;
         case "h":
-            console.log(`\n\n  %green%➜%reset%  press h to show help\n  %green%➜%reset%  press c to clear\n  %green%➜%reset%  press r to restart\n  %green%➜%reset%  press e to exit\n\n`);
+            console.log(`\n\n  \x1b[32m➜\x1b[0m  press h to show help\n  \x1b[32m➜\x1b[0m  press c to clear\n  \x1b[32m➜\x1b[0m  press r to restart\n  \x1b[32m➜\x1b[0m  press e to exit\n\n`);
             break;
     }
 });

@@ -14,30 +14,32 @@ module.exports = {
                 try {
                     if (client.data.cooldown.has(message.author.id)) { // Checks if the user is in cooldown
                         try {
-                            message.reply(`Please wait **${client.data.cooldown.get(message.author.id).cooldown / 1000 - (Math.floor(Date.now() / 1000) - client.data.cooldown.get(message.author.id).usedAt)}s** before using command.`).then((msg) => setTimeout(async function() {
+                            const msg = await message.reply(`Please wait **${client.data.cooldown.get(message.author.id).cooldown / 1000 - (Math.floor(Date.now() / 1000) - client.data.cooldown.get(message.author.id).usedAt)}s** before using command.`);
+                            setTimeout(function() {
                                 try {
                                     if (msg.id) msg.delete();
                                     if (message && message.deletable) message.delete();
                                 } catch(err) {console.error(err);}
-                            }, (client.data.cooldown.get(message.author.id).cooldown - (Math.floor(Date.now() / 1000) - client.data.cooldown.get(message.author.id).usedAt)))); // Delete message when the cooldown is end
+                            }, (client.data.cooldown.get(message.author.id).cooldown - (Math.floor(Date.now() / 1000) - client.data.cooldown.get(message.author.id).usedAt))); // Delete message when the cooldown is end
                             return;
                         } catch(err) {console.error(err);}
                     }
                     client.data.cooldown.set(message.author.id, { usedAt: Math.floor(Date.now() / 1000), cooldown: require(`../commands/prefix/${command}`).cooldown}); // Put the user in cooldown
-                    require("../components/log")(`%aqua%${(message.member.nickname ? `${message.member.nickname} (${(message.author.tag.endsWith("#0") ? `${`${message.author.username}`.replace(`${message.author.username}`.slice(1), "").toUpperCase()}${`${message.author.username}`.slice(1)}` : `${`${message.author.tag}`.replace(`${message.author.tag}`.slice(1), "").toUpperCase()}${`${message.author.tag}`.slice(1)}`)})` : `${(message.author.tag.endsWith("#0") ? `${`${message.author.username}`.replace(`${message.author.username}`.slice(1), "").toUpperCase()}${`${message.author.username}`.slice(1)}` : `${`${message.author.tag}`.replace(`${message.author.tag}`.slice(1), "").toUpperCase()}${`${message.author.tag}`.slice(1)}`)}`)}%reset% a utilisé la commande %yellow%${serverData.prefix}${command}%reset%${(message.content.toLowerCase().split(`${command} `).slice(1).length > 0 ? ` (%grey%${message.content.toLowerCase().split(`${command} `).slice(1)}%reset%)` : '%reset%')}`); // Log message in console
+                    require("../components/log")(`%aqua%${(message.member.nickname ? `${message.member.nickname} (${(message.author.tag.endsWith("#0") ? `${`${message.author.username}`.replace(`${message.author.username}`.slice(1), "").toUpperCase()}${`${message.author.username}`.slice(1)}` : `${`${message.author.tag}`.replace(`${message.author.tag}`.slice(1), "").toUpperCase()}${`${message.author.tag}`.slice(1)}`)})` : `${(message.author.tag.endsWith("#0") ? `${`${message.author.username}`.replace(`${message.author.username}`.slice(1), "").toUpperCase()}${`${message.author.username}`.slice(1)}` : `${`${message.author.tag}`.replace(`${message.author.tag}`.slice(1), "").toUpperCase()}${`${message.author.tag}`.slice(1)}`)}`)}%reset% used the %yellow%${serverData.prefix}${command}%reset% command ${(message.content.toLowerCase().split(`${command} `).slice(1).length > 0 ? `(%gray%${message.content.toLowerCase().split(`${command} `).slice(1)}%reset%) ` : '')}on server %aqua%${message.guild.name}%reset% (%gray%${message.guild.id}%reset%)`); // Log message in console
                     if (serverData.disabled.find(c => c === command)) { // Check if the server has disabled the command
-                        message.reply({ embeds: [{
+                        const msg = await message.reply({ embeds: [{
                             color: 0xff0000,
                             title: `Error`,
                             fields: [
-                                { name: 'The administrators of this server have disabled this command.', value: '\u200B', inline: false },
-                                { name: `__Date of creation:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},
+                                { name: ':x: - The administrators of this server have disabled this command.', value: '\u200B', inline: false },
+                                { name: `:hourglass: - __Date:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},
                             ],
                             footer: {
                                 text: `Id: ${message.id}`,
                                 icon_url: client.user.avatarURL(),
                             }
-                        }] }).then((msg) => setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000)); // send message to warn the user about the disabled command
+                        }] });
+                        setTimeout(function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000); // send message to warn the user about the disabled command
                         return; // End here
                     }
                     const err = await require(`../commands/prefix/${command}`).execute(message, client, Discord); // Execute the command
@@ -48,35 +50,41 @@ module.exports = {
                             .setTitle("New command")
                             .setAuthor({ name: message.author.tag, iconURL: message.author.avatarURL(), url: message.url })
                             .addFields(
-                                { name: "__Command:__", value: `**\`${command}\`**` },
-                                { name: "__Options(s):__", value: `**\`${message.content.split(`${serverData.prefix}${command} `).slice(1)}\`**` },
-                                { name: "__Channel:__", value: `<#${message.channelId}> \`(${message.channelId})\``},
-                                { name: "__Author:__", value: `**\`${message.author.tag}\`** \`(${message.author.id})\``},
-                                { name: "__Date:__", value: `<t:${Math.floor(message.created / 1000)}:d> (<t:${Math.floor(message.created / 1000)}:R>)` },
+                                { name: ":keyboard: - __Command:__", value: `**\`${command}\`**` },
+                                { name: ":gear: - __Options(s):__", value: `**\`${message.content.split(`${serverData.prefix}${command} `).slice(1)}\`**` },
+                                { name: "<:tag:1200813621970739251> - __Channel:__", value: `<#${message.channelId}> \`(${message.channelId})\``},
+                                { name: "<:nametag:1200757678104915978> - __Author:__", value: `**\`${message.author.tag}\`** \`(${message.author.id})\``},
+                                { name: ":hourglass: - __Date:__", value: `<t:${Math.floor(message.createdAt / 1000)}:d> (<t:${Math.floor(message.createdAt / 1000)}:R>)` },
                             )
                             .setURL(message.url)
                             .setFooter({ text: `Id: ${message.id}`, iconURL: client.user.avatarURL() });
                         message.guild.channels.cache.get(serverData.channels.log.channelId).send({ embeds: [embed]}); // Send the log in the channel selected by the admin of the server
                     }
                 } catch(err) { console.error(err); }
-               
+                
                 setTimeout(function() { // Await
                     try {
                         client.data.cooldown.delete(message.author.id); // Remove the user in cooldown
                     } catch(err) { console.error(err); }
                 }, require(`../commands/prefix/${command}`).cooldown);
             } else { // If command don't existe
-                if (!serverData.channels || !serverData.channels.log || message.channelId === serverData.channels.log.channelId || message.guild.channels.cache.find((channel) => channel.id === serverData.channels.log.channelId) || (serverData.channels.log.whitelisted && serverData.channels.log.whitelisted.find((channel) => channel === message.channel.id))) return; // Check if a log channel is defined and if the message has don't been send in a whitelisted channel
+                if (
+                    !serverData.channels ||
+                    !serverData.channels.log ||
+                    message.channelId === serverData.channels.log.channelId ||
+                    message.guild.channels.cache.find((channel) => channel.id === serverData.channels.log.channelId) ||
+                    (serverData.channels.log.whitelisted && serverData.channels.log.whitelisted.find((channel) => channel === message.channel.id))
+                ) return; // Check if a log channel is defined and if the message has don't been send in a whitelisted channel
                 const embed = new Discord.EmbedBuilder()
                     .setColor("Red")
                     .setTitle("New command")
                     .setAuthor({ name: message.author.tag, iconURL: message.author.avatarURL(), url: message.url })
                     .addFields(
-                        { name: "__Command:__", value: `**\`${command}\`**` },
-                        { name: "__Options(s):__", value: `**\`${message.content.replace(`${serverData.prefix}${command}`, "").split(" ")[0]}\`**` },
-                        { name: "__Channel:__", value: `<#${message.channelId}> \`(${message.channelId})\``},
-                        { name: "__Author:__", value: `**\`${message.author.tag}\`** \`(${message.author.id})\``},
-                        { name: "__Date:__", value: `<t:${Math.floor(message.createdMath.floor(Date.now() / 1000) / 1000)}:d> (<t:${Math.floor(message.createdMath.floor(Date.now() / 1000) / 1000)}:R>)` },
+                        { name: ":keyboard: - __Command:__", value: `**\`${command}\`**` },
+                        { name: ":gear: - __Options(s):__", value: `**\`${message.content.replace(`${serverData.prefix}${command}`, "").split(" ")[0]}\`**` },
+                        { name: "<:tag:1200813621970739251> - __Channel:__", value: `<#${message.channelId}> \`(${message.channelId})\``},
+                        { name: "<:nametag:1200757678104915978> - __Author:__", value: `**\`${message.author.tag}\`** \`(${message.author.id})\``},
+                        { name: ":hourglass: -__Date:__", value: `<t:${Math.floor(message.createdMath.floor(Date.now() / 1000) / 1000)}:d> (<t:${Math.floor(message.createdMath.floor(Date.now() / 1000) / 1000)}:R>)` },
                     )
                     .setURL(message.url)
                     .setFooter({ text: `Id: ${message.id}`, iconURL: client.user.avatarURL() });

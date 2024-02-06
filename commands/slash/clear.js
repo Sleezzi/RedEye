@@ -46,13 +46,37 @@ module.exports = {
     async execute(interaction, client, Discord) {
         if (!interaction.member.permissions.has("ManageMessages")) {
             await interaction.deleteReply();
-            interaction.followUp({ content: ":x: - You do not have permission to delete interactions", ephemeral: true });
+            interaction.followUp({ embeds: [{
+                title: ":x: - You do not have permission to delete interactions",
+                color: 0xFF0000,
+                author: {
+                    name: interaction.member.tag,
+                    icon_url: interaction.member.user.avatarURL(),
+                    url: interaction.url,
+                },
+                footer: {
+                    text: `Id: ${interaction.id}`,
+                    icon_url: client.user.avatarURL(),
+                },
+            }], ephemeral: true });
             return;
         }
         let amount = interaction.options.getNumber("number");
         if (!amount) {
             await interaction.deleteReply();
-            interaction.followUp({ content: ':x: - You must specify a number of messages to delete', ephemeral: true });
+            interaction.followUp({ embeds: [{
+                title: ':x: - You must specify a number of messages to delete',
+                color: 0xFF0000,
+                author: {
+                    name: interaction.member.tag,
+                    icon_url: interaction.member.user.avatarURL(),
+                    url: interaction.url,
+                },
+                footer: {
+                    text: `Id: ${interaction.id}`,
+                    icon_url: client.user.avatarURL(),
+                },
+            }], ephemeral: true });
             return;
         }
         
@@ -61,7 +85,19 @@ module.exports = {
             const messages = await interaction.channel.messages.fetch({ limit: amount, filter: (msg) => 14 < msg.createdTimestamp - Date.now() && (!interaction.options.getUser("member") || msg.member.id === interaction.options.getUser("member").id)});
             await interaction.channel.bulkDelete(messages);
             await interaction.deleteReply();
-            interaction.followUp({ content: `:put_litter_in_its_place: - ${(messages.size) > 1 ? "Multiple " : ""}Messages Deleted (${messages.size} message${messages.size > 1 ? "s" : ""})`, ephemeral: true });
+            interaction.followUp({ embeds: [{
+                title: `:put_litter_in_its_place: - ${(messages.size) > 1 ? "Multiple " : ""}Messages Deleted (${messages.size} message${messages.size > 1 ? "s" : ""})`,
+                color: 0x00FF00,
+                author: {
+                    name: interaction.member.tag,
+                    icon_url: interaction.member.user.avatarURL(),
+                    url: interaction.url,
+                },
+                footer: {
+                    text: `Id: ${interaction.id}`,
+                    icon_url: client.user.avatarURL(),
+                },
+            }], ephemeral: true });
         } catch(err) { return {err, line: 68, file: "/commands/slash/clear.js"}; }
     }
 }

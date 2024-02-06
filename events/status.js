@@ -16,15 +16,14 @@ module.exports = {
                     });
                 });
                 if (i === 1) client.user.setActivity(`!help`, { type: Discord.ActivityType.Playing, url: "https://blueprint.sleezzi.fr", state: "Bot made by Sleezzi" });
-                if (i === 2) client.user.setActivity(`👤 • ${members.length} member${(members.length > 1 ? "s" : "")}`, { type: Discord.ActivityType.Watching, url: "https://blueprint.sleezzi.fr", state: "Bot made by Sleezzi" });
+                if (i === 2) client.user.setActivity(`${members.length} member${(members.length > 1 ? "s" : "")} • 👤`, { type: Discord.ActivityType.Watching, url: "https://blueprint.sleezzi.fr", state: "Bot made by Sleezzi" });
                 if (i === 3) {
-                    client.user.setActivity(`🟢 • ${onlineMembers.length} online member${(onlineMembers.length > 1 ? "s" : "")}`, { type: Discord.ActivityType.Watching, url: "https://blueprint.sleezzi.fr", state: "Bot made by Sleezzi" });
+                    client.user.setActivity(`${onlineMembers.length} online member${(onlineMembers.length > 1 ? "s" : "")} • 🟢`, { type: Discord.ActivityType.Watching, url: "https://blueprint.sleezzi.fr", state: "Bot made by Sleezzi" });
                     i = 0;
                 }
                 i++
             } catch(err) { return console.error(err); }
         }
-
         setInterval(fun, 15_000);
         fun();
     }

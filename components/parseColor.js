@@ -9,5 +9,5 @@ module.exports = (log) => {
     .replace(/\%aqua\%/g, "\x1b[36m")
     // .replace(/\%\%/g, "\x1b[3m")
     // .replace(/\%\%/g, "\x1b[3m")
-    .replace(/\%grey\%/g, "\x1b[90m");
+    .replace(/\%gray\%/g, "\x1b[90m");
 }

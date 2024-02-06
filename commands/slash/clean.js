@@ -22,9 +22,10 @@ module.exports = {
                 let fetchedMessages = { size: 1};
                 let messagesDeleted = 0;
                 do {
-                    await interaction.channel.messages.fetch({ limit: 100 }).then((messages) => fetchedMessages = messages.filter((msg) => msg && 1_209_600 > Math.floor((Date.now() - msg.createdTimestamp) / 1_000) && msg.bulkDeletable && msg.member.id === client.user.id));
+                    fetchedMessages = await interaction.channel.messages.fetch({ limit: 100, filter: (msg) => msg && 1_209_600 > Math.floor((Date.now() - msg.createdTimestamp) / 1_000) && msg.bulkDeletable && msg.member.id === client.user.id});
+                    
                     try {
-                        await interaction.channel.bulkDelete(fetchedMessages.filter((msg) => msg.id));
+                        await interaction.channel.bulkDelete(fetchedMessages);
                     } catch(err) { return err; }
                     messagesDeleted += fetchedMessages.size;
                 } while (fetchedMessages.size >= 2);
