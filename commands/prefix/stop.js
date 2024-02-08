@@ -6,7 +6,7 @@ module.exports = {
     category: "Core",
     cooldown: 15000,
     execute(message, client, Discord) {
-        if (message.author.id === "542703093981380628") {
+        if (message.author.id === client.ownerId) {
             if (message && message.deletable) message.delete();
             setTimeout(function() {client.destroy(client.config.token)}, 4990);
         } else {

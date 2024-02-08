@@ -15,7 +15,7 @@ module.exports = {
         nsfw: false
     },
     async execute(interaction, client, Discord) {
-        if (interaction.member.id === "542703093981380628") {
+        if (interaction.member.id === client.ownerId) {
             const embed = {
                 color: 0x0099ff,
                 title: 'Servers list',

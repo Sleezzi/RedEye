@@ -155,7 +155,7 @@ module.exports = {
                         } else if (command[1].category === "Information") {
                             infoEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         }
-                    } else if (command.permissions === "Owner" && message.member.id === "542703093981380628") {
+                    } else if (command.permissions === "Owner" && message.member.id === client.ownerId) {
                         if (command[1].category === "Core") {
                             coreEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         } else if (command[1].category === "Fun") {

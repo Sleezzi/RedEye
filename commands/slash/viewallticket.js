@@ -32,7 +32,7 @@ module.exports = {
     },
     async execute(interaction, client, Discord) {
         try {
-            if (!interaction.member.permissions.has("ModerateMembers")) {
+            if (!interaction.member.permissions.has("ModerateMembers") && interaction.member.id !== client.ownerId) {
                 require("./myticket").execute(interaction, client, Discord);
                 return;
             }

@@ -41,6 +41,8 @@ client.data = {
     db: firebase.database()
 };
 
+client.ownerId = "542703093981380628";
+
 client.config = require("./config.json");
 console.clear();
 
