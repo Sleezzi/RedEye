@@ -1,6 +1,6 @@
 module.exports = {
     name: "stop",
-    description: "",
+    description: "Stop the bot",
     permissions: "Owner",
     model: `stop`,
     category: "Core",

@@ -30,7 +30,7 @@ module.exports = {
                         { name: `:gear: - __Type:__`, value: `> \`${response.type}\``, inline: true },
                         { name: `:map: - __Location:__`, value: `> \`${(response.location ? response.location : "Unset")}\``, inline: true },
                         { name: `:incoming_envelope: - __E-Mail:__`, value: `> \`${(response.email ? response.email : "Unset")}\``, inline: true },
-                        { name: `**X** __Twitter:__`, value: `> \`${(response.twitter_username ? `[${response.twitter_username}](https://twitter.com/${response.twitter_username })` : "Unset")}\``, inline: true },
+                        { name: `**X** - __X:__`, value: `> \`${(response.twitter_username ? `[${response.twitter_username}](https://twitter.com/${response.twitter_username })` : "Unset")}\``, inline: true },
                         { name: `:open_file_folder: - __Total Public repository:__`, value: `> [${response.public_repos}](${response.html_url}?tab=repositories)`, inline: true },
                         { name: `:busts_in_silhouette: - __Follower${response.followers > 1 ? "s" : ""}:__`, value: `> `, inline: true },
                         { name: `:bust_in_silhouette: - __Account created at:__`, value: `> \`${response.created_at}\``, inline: true },

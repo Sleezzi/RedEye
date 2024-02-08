@@ -1,6 +1,6 @@
 module.exports = {
     data: {
-        name: "clear",
+        // name: "clear",
         name_localizations: {
             "en-US": "clear",
             fr: "clear"
@@ -82,7 +82,7 @@ module.exports = {
         
         if (amount > 100) amount = 100;
         try {
-            const messages = await interaction.channel.messages.fetch({ limit: amount, filter: (msg) => 14 < msg.createdTimestamp - Date.now() && (!interaction.options.getUser("member") || msg.member.id === interaction.options.getUser("member").id)});
+            const messages = await interaction.channel.messages.fetch({ limit: amount }).then(messages => messages.filter((msg) => 14 < msg.createdAt - Date.now() && (!interaction.options.getUser("member") || msg.member.id === interaction.options.getUser("member").id)));
             await interaction.channel.bulkDelete(messages);
             await interaction.deleteReply();
             interaction.followUp({ embeds: [{

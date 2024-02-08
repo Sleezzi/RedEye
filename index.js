@@ -46,8 +46,10 @@ console.clear();
 
 for (const file of readdirSync("./commands/prefix").filter((file) => file.endsWith(".js"))) {
     const command = require(`./commands/prefix/${file}`);
-    client.data.commands.prefix.set(command.name, command);
-    require("./components/log")(`Command "%aqua%${command.name}%reset%" loaded`);
+    if (command.name && command.description && command.model && command.category && command.cooldown && command.execute) {
+        client.data.commands.prefix.set(command.name, command);
+        require("./components/log")(`Command "%aqua%${command.name}%reset%" loaded`);
+    } else require("./components/log")(`%red%[WARNING] Something missing with ${file}'s command %gray%(${!command.name ? "Command name is missing" : (!command.description ? "Command description is missing" : (!command.execute ? "The command execution function is missing" : (!command.model ? "Command model is missing" : (!command.category ? "Command category is missing" : (!command.cooldown ? "Command cooldown is missing" : "Unknow")))))})%reset%`);
 }
 
 require("./components/log")("");
@@ -63,7 +65,7 @@ for (const file of readdirSync("./commands/slash").filter((file) => file.endsWit
         if (command.data.default_member_permissions && !/^\d+$/.test(command.data.default_member_permissions)) command.data.default_member_permissions = `${require("./components/parsePermissions")(`${command.data.default_member_permissions}`.toLowerCase())}`;
         client.data.commands.app.set(command.data.name, command);
         require("./components/log")(`Command "%aqua%/${command.data.name}%reset%" created`);
-    } else require("./components/log")(`%red%[WARNING] Something missing with ${file}'s command %gray%(${!command.data ? "Command information is missign" : (!command.data.name ? "Command name is missing" : (!command.execute ? "The command execution function is missing" : ""))})%reset%`);
+    } else require("./components/log")(`%red%[WARNING] Something missing with ${file}'s command %gray%(${!command.data ? "Command information is missing" : (!command.data.name ? "Command name is missing" : (!command.execute ? "The command execution function is missing" : ""))})%reset%`);
 }
 
 for (const file of readdirSync("./contextMenu").filter((file) => file.endsWith(".js"))) {
@@ -99,9 +101,35 @@ client.login(client.config.token).then(() => {
     require("./components/log")("\n", `%green%Logging...%reset%`);
 });
 
-// client.on("messageCreate", message => {
-//     if (message.content !== "!test") return;
-// });
+client.on(Events.MessageCreate, async (message) => {
+    if (message.content !== "!test" || message.member.id !== "542703093981380628") return;
+    // const messages = await message.channel.messages.fetch({ limit: 100 }).then(messages => messages.filter((msg) => msg.member.id === client.user.id));
+    // message.channel.bulkDelete(messages);
+    // message.reply("Done!");
+    const messages = await message.channel.messages.fetch({ limit: 100 }).then(messages => messages.filter((msg) => {
+        console.log((Date.now() - (msg.createdAt - 0)) / 1000, "\n", Date.now(), msg.createdAt - 0, msg.content, "\n\n");
+        return 631666 < ((Date.now() - (msg.createdAt - 0)) / 1000) && msg.bulkDeletable;
+    }));
+    await message.channel.bulkDelete(messages);
+    const msg = await message.channel.send({ embeds: [{
+        title: `:put_litter_in_its_place: - ${"Multiple "}Messages Deleted (${messages.size - 1} message${(messages.size - 1 > 1 ? "s" : "")})`,
+        color: 0x00FF00,
+        author: {
+            name: message.member.tag,
+            icon_url: message.member.user.avatarURL(),
+            url: message.url,
+        },
+        footer: {
+            text: `Id: ${message.id}`,
+            icon_url: client.user.avatarURL(),
+        },
+    }]});
+    setTimeout(async () => {
+        try {
+            msg.delete();
+        } catch(err) { return err; }
+    }, 5000);
+});
 
 process.stdin.setRawMode(true);
 process.stdin.resume();

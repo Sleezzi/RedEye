@@ -1,6 +1,6 @@
 module.exports = {
     name: "restart",
-    description: "",
+    description: "Restart the bot",
     permissions: "Owner",
     model: `restart`,
     category: "Core",
