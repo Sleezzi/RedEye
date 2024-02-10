@@ -47,7 +47,7 @@ module.exports = {
         if (!interaction.member.permissions.has("ManageMessages")) {
             await interaction.deleteReply();
             interaction.followUp({ embeds: [{
-                title: ":x: - You do not have permission to delete messages",
+                title: "<a:no:1205984659524296744> - You do not have permission to delete messages",
                 color: 0xFF0000,
                 author: {
                     name: interaction.member.tag,
@@ -65,7 +65,7 @@ module.exports = {
         if (!amount) {
             await interaction.deleteReply();
             interaction.followUp({ embeds: [{
-                title: ':x: - You must specify a number of messages to delete',
+                title: '<a:no:1205984659524296744> - You must specify a number of messages to delete',
                 color: 0xFF0000,
                 author: {
                     name: interaction.member.tag,
@@ -87,7 +87,7 @@ module.exports = {
             await interaction.channel.bulkDelete(messages);
             await interaction.deleteReply();
             interaction.followUp({ embeds: [{
-                title: `:put_litter_in_its_place: - ${(messages.size) > 1 ? "Multiple " : ""}Messages Deleted (${messages.size} message${messages.size > 1 ? "s" : ""})`,
+                title: `<:trash:1205985915160371221> - ${(messages.size) > 1 ? "Multiple " : ""}Messages Deleted (${messages.size} message${messages.size > 1 ? "s" : ""})`,
                 color: 0x00FF00,
                 author: {
                     name: interaction.member.tag,

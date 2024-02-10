@@ -22,7 +22,7 @@ module.exports = {
 
             const embed = new Discord.EmbedBuilder()
                 .setColor("Aqua")
-                .setTitle("Information about:")
+                .setTitle(":information: - Information about:")
                 .setDescription(`<@${member.id}>`)
                 .setThumbnail(interaction.member.avatarURL())
                 .setAuthor({ name: interaction.member.user.tag, iconURL: interaction.member.avatarURL(), url: interaction.url })
@@ -33,7 +33,7 @@ module.exports = {
                     { name: `<:member:1200816753421328484> - __**Role${(member._roles.length > 1 ? "s" : "")}:**__`, value: `> ${roles}` },
                     { name: ":inbox_tray: - __**Account created:**__", value: `> <t:${Math.floor(member.user.createdTimestamp / 1000)}:d> (<t:${Math.floor(member.user.createdTimestamp / 1000)}:R>)`},
                     { name: ":inbox_tray: - __**Member since:**__", value: `> <t:${Math.floor(member.joinedTimestamp / 1000)}:d> (<t:${Math.floor(member.joinedTimestamp / 1000)}:R>)`},
-                    { name: ":hourglass: - __**Date:**__", value: `<t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`},
+                    { name: "<:time:1205987554260684870> - __**Date:**__", value: `<t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`},
                 )
                 .setURL(interaction.url)
                 .setFooter({ text: `Id: ${interaction.id}`, iconURL: client.user.avatarURL() });

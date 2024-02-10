@@ -29,8 +29,8 @@ module.exports = {
                 { name: ":keyboard: - __New message:__", value: `\`${newMessage.content}\``, inline: true},
                 { name: "<:tag:1200813621970739251> - __Channel:__", value: `<#${message.channelId}> \`(${message.channelId})\``},
                 { name: "<:nametag:1200757678104915978> - __Author:__", value: `\`${message.author}\``},
-                { name: ":hourglass: - __Date the message was sent:__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},
-                { name: ":hourglass: - __Message modification date:__", value: `<t:${Math.floor(Date.now() / 1000)}:d> (<t:${Math.floor(Date.now() / 1000)}:R>)`, inline: true},
+                { name: "<:time:1205987554260684870> - __Date the message was sent:__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},
+                { name: "<:time:1205987554260684870> - __Message modification date:__", value: `<t:${Math.floor(Date.now() / 1000)}:d> (<t:${Math.floor(Date.now() / 1000)}:R>)`, inline: true},
             )
             .setURL(message.url)
             .setFooter({ text: `Id: ${message.id}`, iconURL: client.user.avatarURL() });

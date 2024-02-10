@@ -16,7 +16,7 @@ module.exports = {
         try {
             const embed = new Discord.EmbedBuilder()
                 .setColor("Aqua")
-                .setTitle("Server Information:")
+                .setTitle(":information: - Server Information:")
                 .setDescription(interaction.guild.description)
                 .setThumbnail(interaction.guild.iconURL())
                 .addFields(
@@ -26,7 +26,7 @@ module.exports = {
                     { name: "<:owner:1200816888364683396> - __**Owner:**__", value: `${interaction.guild.members.cache.find(member => member.id === interaction.guild.ownerId).user.username} (id: ${interaction.guild.ownerId})`},
                     { name: ":inbox_tray: - __**You have been a member since:**__", value: `<t:${Math.floor(interaction.member.joinedTimestamp / 1000)}:d> (<t:${Math.floor(interaction.member.joinedTimestamp / 1000)}:R>)`},
                     { name: ":computer: - __**Server created:**__", value: `<t:${Math.floor(interaction.guild.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.guild.createdTimestamp / 1000)}:R>)`},
-                    { name: ":hourglass: - __**Date:**__", value: `<t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`},
+                    { name: "<:time:1205987554260684870> - __**Date:**__", value: `<t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`},
                 )
                 .setURL(interaction.url)
                 .setFooter({ text: `Id: ${interaction.id}`, iconURL: client.user.avatarURL() });

@@ -18,7 +18,7 @@ module.exports = {
                     { name: "<:owner:1200816888364683396> - __**Owner:**__", value: `${message.guild.members.cache.find(member => member.id === message.guild.ownerId).user.username} (id: ${message.guild.ownerId})`},
                     { name: ":inbox_tray: - __**You have been a member since:**__", value: `<t:${Math.floor(message.member.joinedTimestamp / 1000)}:d> (<t:${Math.floor(message.member.joinedTimestamp / 1000)}:R>)`},
                     { name: ":computer: - __**Server created:**__", value: `<t:${Math.floor(message.guild.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.guild.createdTimestamp / 1000)}:R>)`},
-                    { name: ":hourglass: - __**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`},
+                    { name: "<:time:1205987554260684870> - __**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`},
                 )
                 .setURL(message.url)
                 .setFooter({ text: `Id: ${message.id}`, iconURL: client.user.avatarURL() });

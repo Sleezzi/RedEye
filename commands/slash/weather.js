@@ -47,7 +47,7 @@ module.exports = {
     async execute(interaction, client, Discord) {
         try {
         //     const embed = {
-        //         title: `Weather`,
+        //         title: `:thermometer: -Weather`,
         //         color: 0x00FF00,
         //         author: {
         //             name: interaction.member.tag,
@@ -55,7 +55,7 @@ module.exports = {
         //             url: interaction.url,
         //         },
         //         fields: [
-        //             { name: `__Date of message creation:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: false}
+        //             { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: false}
         //         ],
         //         footer: {
         //             text: `Id: ${interaction.id}`,

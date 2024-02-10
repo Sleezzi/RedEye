@@ -89,10 +89,10 @@ module.exports = {
                     url: "",
                 },
                 fields: [
-                    { name: `__Message:__`, value: `> \`${interaction.options.getString("message")}\``, inline: true},
-                    { name: `__Reaction:__`, value: `> ${interaction.options.getString("emoji")}`, inline: true},
-                    { name: `__Role:__`, value: `> ${interaction.options.getRole("role")}`, inline: true},
-                    { name: `__Date of creation:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: false},
+                    { name: `:book: - __Message:__`, value: `> \`${interaction.options.getString("message")}\``, inline: true},
+                    { name: `:upside_down: - __Reaction:__`, value: `> ${interaction.options.getString("emoji")}`, inline: true},
+                    { name: `:bust_in_silhouette: - __Role:__`, value: `> ${interaction.options.getRole("role")}`, inline: true},
+                    { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: false},
                 ],
                 footer: {
                     text: `Id: ${interaction.id}`,

@@ -35,7 +35,7 @@ module.exports = {
                         { name: `:busts_in_silhouette: - __Follower${response.followers > 1 ? "s" : ""}:__`, value: `> `, inline: true },
                         { name: `:bust_in_silhouette: - __Account created at:__`, value: `> \`${response.created_at}\``, inline: true },
                         { name: `:bust_in_silhouette: - __Account edited at:__`, value: `> \`${response.updated_at}\``, inline: true },
-                        { name: `:hourglass: - __Date of creation:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},
+                        { name: `<:time:1205987554260684870> - __Date of creation:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},
                     ],
                     footer: {
                         text: `Id: ${message.id}`,

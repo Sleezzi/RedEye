@@ -18,7 +18,7 @@ module.exports = {
             
             const embed = {
                 color: 0x0099ff,
-                title: 'Ban list',
+                title: '<a:ban:1205986766687965276> - Ban list',
                 description: "",
                 author: {
                     name: interaction.member.tag,

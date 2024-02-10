@@ -8,7 +8,7 @@ module.exports = {
     async execute(message, client, Discord) {
         if (!message.member.permissions.has("ManageMessages")) {
             const msg = await message.reply({embeds: [{
-                title: ":x: - You do not have permission to delete messages",
+                title: "<a:no:1205984659524296744> - You do not have permission to delete messages",
                 color: 0xFF0000,
                 author: {
                     name: message.member.tag,
@@ -27,7 +27,7 @@ module.exports = {
         let amount = message.content.split(' ').slice(1)[0];
         if (!amount) {
             const msg = await message.reply({embeds: [{
-                title: 'You must specify a number of messages to delete',
+                title: '<a:no:1205984659524296744> - You must specify a number of messages to delete',
                 color: 0xFF0000,
                 author: {
                     name: message.member.tag,
@@ -74,7 +74,7 @@ module.exports = {
             .then(messages => messages.filter((msg) => 1_209_600_000 > Date.now() - msg.createdAt && msg.bulkDeletable));
             await message.channel.bulkDelete(messages);
             const msg = await message.channel.send({ embeds: [{
-                title: `:put_litter_in_its_place: - ${"Multiple "}Messages Deleted (${messages.size - 1} message${(messages.size - 1 > 1 ? "s" : "")})`,
+                title: `<:trash:1205985915160371221> - ${"Multiple "}Messages Deleted (${messages.size - 1} message${(messages.size - 1 > 1 ? "s" : "")})`,
                 color: 0x00FF00,
                 author: {
                     name: message.member.tag,

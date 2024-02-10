@@ -14,13 +14,27 @@ module.exports = {
             const message = interaction.channel.messages.cache.get(interaction.targetId);
             if (!message) {
                 await interaction.deleteReply();
-                interaction.followUp({ content: "Unable to find the messsage", ephemeral: true });
+                interaction.followUp({ embeds: [
+                    {
+                        title: "<a:no:1205984659524296744> - Unable to find the messsage",
+                        color: 0xFF0000,
+                        author: {
+                            name: message.member.tag,
+                            icon_url: message.member.user.avatarURL(),
+                            url: message.url,
+                        },
+                        footer: {
+                            text: `Id: ${message.id}`,
+                            icon_url: client.user.avatarURL(),
+                        },
+                    }
+                ], ephemeral: true });
                 return;
             }
             if (!interaction.member.permissions.has("ManageMessages")) {
                 await interaction.deleteReply();
                 interaction.followUp({ embeds: [{
-                    title: ":x: - You do not have permission to delete messages",
+                    title: "<a:no:1205984659524296744> - You do not have permission to delete messages",
                     color: 0xFF0000,
                     author: {
                         name: interaction.member.tag,
@@ -38,7 +52,7 @@ module.exports = {
                 await interaction.deleteReply();
                 interaction.followUp({ embeds: [
                     {
-                        title: `:x: - I can't delete this message`,
+                        title: `<a:no:1205984659524296744> - I can't delete this message`,
                         color: 0xFF0000,
                         author: {
                             name: message.member.tag,
@@ -57,7 +71,7 @@ module.exports = {
             await interaction.deleteReply();
             interaction.followUp({ embeds: [
                 {
-                    title: `:put_litter_in_its_place: - Message deleted`,
+                    title: `<:trash:1205985915160371221> - Message deleted`,
                     color: 0x00FF00,
                     author: {
                         name: message.member.tag,

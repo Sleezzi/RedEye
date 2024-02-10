@@ -53,11 +53,11 @@ module.exports = {
                     { name: `:book: - __Description:__`, value: `> \`${(response.description ? response.description : "Unset")}\``, inline: true },
                     { name: `:link __URL:__`, value: `> [${response.name}](https://www.roblox.com/badges/${id}/)`, inline: true },
                     { name: `:chart_with_upwards_trend: - __Stats:__`, value: `> ${response.statistics.winRatePercentage * 100}% (owned ${response.statistics.awardedCount} times)`, inline: true },
-                    { name: `__Enable:__`, value: `> ${(response.enabled ? `:white_check_mark:` : `:x:`)}`, inline: true },
+                    { name: `:play_pause: - __Enable:__`, value: `> ${(response.enabled ? `<a:yes:1205984539852144751>` : `<a:no:1205984659524296744>`)}`, inline: true },
                     { name: `:video_game: - __Game:__`, value: `> \`${response.awardingUniverse.name}\` (id: \`${response.awardingUniverse.id}\`)`, inline: false },
-                    { name: `__Created at:__`, value: `> \`${response.created}\``, inline: true },
-                    { name: `__Last update:__`, value: `> \`${response.updated}\``, inline: true },
-                    { name: `:hourglass: - __Date:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: false}
+                    { name: `<:time:1205987554260684870> - __Created at:__`, value: `> \`${response.created}\``, inline: true },
+                    { name: `<:time:1205987554260684870> - __Last update:__`, value: `> \`${response.updated}\``, inline: true },
+                    { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: false}
                 ],
                 footer: {
                     text: `Id: ${interaction.id}`,

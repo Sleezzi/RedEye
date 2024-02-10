@@ -73,13 +73,13 @@ module.exports = {
                     url: data.avatarURL,
                 },
                 fields: [
-                    { name: `__Name:__`, value: `> \`${data.username}\``, inline: true },
-                    { name: `__Id:__`, value: `> \`${user}\``, inline: true },
-                    { name: `__Avatar:__`, value: `> [Image](${data.avatarURL})`, inline: true },
-                    { name: `__Bio:__`, value: `> \`${(data.desc ? data.desc : "Unset")}\``, inline: true },
-                    { name: `__URL:__`, value: `> [${data.username}](https://www.roblox.com/users/${user}/profile)`, inline: true },
-                    { name: `__Banned:__`, value: `> ${(data.banned ? `:white_check_mark:` : `:x:`)}`, inline: true },
-                    { name: `__Verified:__`, value: `> ${(data.verified ? `:white_check_mark:` : `:x:`)}`, inline: true },
+                    { name: `<:nametag:1200757678104915978> - __Name:__`, value: `> \`${data.username}\``, inline: true },
+                    { name: `<:ID:1200784630865985598> - __Id:__`, value: `> \`${user}\``, inline: true },
+                    { name: `:bust_in_silhouette: - __Avatar:__`, value: `> [Image](${data.avatarURL})`, inline: true },
+                    { name: `:book: - __Bio:__`, value: `> \`${(data.desc ? data.desc : "Unset")}\``, inline: true },
+                    { name: `:link: - __URL:__`, value: `> [${data.username}](https://www.roblox.com/users/${user}/profile)`, inline: true },
+                    { name: `<a:ban:1205986766687965276> - __Banned:__`, value: `> ${(data.banned ? `<a:yes:1205984539852144751>` : `<a:no:1205984659524296744>`)}`, inline: true },
+                    { name: `<a:verified:1205995010567184475> - __Verified:__`, value: `> ${(data.verified ? `<a:yes:1205984539852144751>` : `<a:no:1205984659524296744>`)}`, inline: true },
                 ],
                 footer: {
                     text: `Id: ${interaction.id}`,
@@ -93,14 +93,14 @@ module.exports = {
                 return;
             }
             response = await response.json();
-            embed.fields.push({ name: `__Badge${response.data.length > 1 ? "s" : ""}:__`, value: `\u200B`, inline: false});
+            embed.fields.push({ name: `:trophy: - __Badge${response.data.length > 1 ? "s" : ""}:__`, value: `\u200B`, inline: false});
             response.data.forEach((badge) => {
-                embed.fields.push({ name: `${badge.displayName}:`, value: `Description: \`${badge.description}\`, Difficulty to own: ${badge.statistics.winRatePercentage * 100}%, Id: \`${badge.id}\``, inline: true});
+                embed.fields.push({ name: `${badge.displayName}:`, value: `> :book: - Description: \`${badge.description}\`,\n> :warn: - Difficulty to own: ${badge.statistics.winRatePercentage * 100}%,\n> <:ID:1200784630865985598> - Id: \`${badge.id}\``, inline: true});
             });
             
             embed.fields.push({ name: `\u200B`, value: `\u200B`, inline: false });
-            embed.fields.push({ name: `__Account created at:__`, value: `> \`${data.created_at}\``, inline: true });
-            embed.fields.push({ name: `__Date of creation:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: true});
+            embed.fields.push({ name: `<:time:1205987554260684870> - __Account created at:__`, value: `> \`${data.created_at}\``, inline: true });
+            embed.fields.push({ name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: true});
             await interaction.deleteReply();
             interaction.followUp({ embeds: [ embed ], ephemeral: true });
         } catch(err) { return err; }

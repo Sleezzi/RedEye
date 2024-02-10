@@ -48,8 +48,8 @@ module.exports = {
                         url: message.url
                     },
                     fields: [
-                        { name: "__**Name:**__", value: `**\`${command.name}\`**`},
-                        { name: "__**Description:**__", value: `**\`${command.description}\`**`},
+                        { name: "<:nametag:1200757678104915978> - __**Name:**__", value: `**\`${command.name}\`**`},
+                        { name: ":book: - __**Description:**__", value: `**\`${command.description}\`**`},
                         { name: ":gear: - __**Options:**__", value: `\u200B`},
                     ],
                     url: message.url,
@@ -65,7 +65,7 @@ module.exports = {
                         inline: true
                     });
                 });
-                embed.fields.push({ name: ":hourglass: - ____**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`});     
+                embed.fields.push({ name: "<:time:1205987554260684870> - ____**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`});     
                 await message.deleteReply()
                 message.followUp({ embeds: [embed], ephemeral: true });
             } else {
@@ -79,10 +79,10 @@ module.exports = {
                         url: message.url,
                     },
                     fields: [
-                        { name: `__Prefix:__`, value: `> \`${(serverData.prefix || "!")}\``, inline: false },
-                        { name: `__Bot made by:__`, value: `> [Sleezzi](https://sleezzi.fr/)`, inline: false },
-                        { name: `__Date of creation:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true },
-                        { name: `__End in:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000 + 120)}:d> (<t:${Math.floor(message.createdTimestamp / 1000 + 120)}:R>)`, inline: true },
+                        { name: `:keyboard: - __Prefix:__`, value: `> \`${(serverData.prefix || "!")}\``, inline: false },
+                        { name: `:robot: - __Bot made by:__`, value: `> [Sleezzi](https://sleezzi.fr/)`, inline: false },
+                        { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true },
+                        { name: `<:time:1205987554260684870> - __End in:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000 + 120)}:d> (<t:${Math.floor(message.createdTimestamp / 1000 + 120)}:R>)`, inline: true },
                     ],
                     footer: {
                         text: `Id: ${message.id}`,
@@ -99,8 +99,8 @@ module.exports = {
                         url: message.url,
                     },
                     fields: [
-                        { name: `__Date of creation:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},
-                        { name: `__End in:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000 + 40)}:d> (<t:${Math.floor(message.createdTimestamp / 1000 + 40)}:R>)`, inline: true},
+                        { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},
+                        { name: `<:time:1205987554260684870> - __End in:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000 + 40)}:d> (<t:${Math.floor(message.createdTimestamp / 1000 + 40)}:R>)`, inline: true},
                     ],
                     footer: {
                         text: `Id: ${message.id}`,
@@ -117,8 +117,8 @@ module.exports = {
                         url: message.url,
                     },
                     fields: [
-                        { name: `__Date of creation:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},
-                        { name: `__End in:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000 + 40)}:d> (<t:${Math.floor(message.createdTimestamp / 1000 + 40)}:R>)`, inline: true},
+                        { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},
+                        { name: `<:time:1205987554260684870> - __End in:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000 + 40)}:d> (<t:${Math.floor(message.createdTimestamp / 1000 + 40)}:R>)`, inline: true},
                     ],
                     footer: {
                         text: `Id: ${message.id}`,
@@ -135,8 +135,8 @@ module.exports = {
                         url: message.url,
                     },
                     fields: [
-                        { name: `__Date of creation:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},
-                        { name: `__End in:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000 + 40)}:d> (<t:${Math.floor(message.createdTimestamp / 1000 + 40)}:R>)`, inline: true},
+                        { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},
+                        { name: `<:time:1205987554260684870> - __End in:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000 + 40)}:d> (<t:${Math.floor(message.createdTimestamp / 1000 + 40)}:R>)`, inline: true},
                     ],
                     footer: {
                         text: `Id: ${message.id}`,
@@ -225,7 +225,7 @@ module.exports = {
                         } catch(err) { return err; }
                     }
                     collector = reply.createMessageComponentCollector({ componentType: Discord.ComponentType.StringSelect, filter: (i) => i.user.id === message.member.id, time: 120_000 });
-                    const msg = await interaction.followUp({ content: "Please wait...", ephemeral: true })
+                    const msg = await interaction.followUp({ content: "<a:loading:1204754788055646218> - Please wait...", ephemeral: true })
                     if (msg && msg.deletable) msg.delete();
                 });
             }

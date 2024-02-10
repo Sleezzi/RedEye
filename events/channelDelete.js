@@ -10,10 +10,10 @@ module.exports = {
             .setColor("Red")
             .setTitle(`${(channel.type === 0 ? "Text" : (channel.type === 2 ? "Voice" : (channel.type === 15 ? "Forum" : (channel.type === 5 ? "Announcement" : (channel.type === 13 ? "Stage" : "Unknown")))))} channel deleted`)
             .addFields(
-                { name: "__Nom:__", value: `\`${channel.name}\`` },
-                { name: "__NSFW:__", value: (channel.nsfw === true ? ":white_check_mark:" : ":x:") },
-                { name: "__Date de création:__", value: `<t:${Math.floor(channel.createdTimestamp / 1000)}:d> (<t:${Math.floor(channel.createdTimestamp / 1000)}:R>)`, inline: true },
-                { name: "__Date de supression", value: `<t:${Math.floor(Date.now() / 1000)}:d> (<t:${Math.floor(Date.now() / 1000)}:R>)`, inline: true }
+                { name: "<:nametag:1200757678104915978> - __Name:__", value: `\`${channel.name}\`` },
+                { name: ":underage: - __NSFW:__", value: (channel.nsfw === true ? "<a:yes:1205984539852144751>" : "<a:no:1205984659524296744>") },
+                { name: "<:time:1205987554260684870> - __Date of creation:__", value: `<t:${Math.floor(channel.createdTimestamp / 1000)}:d> (<t:${Math.floor(channel.createdTimestamp / 1000)}:R>)`, inline: true },
+                { name: "<:time:1205987554260684870> - __Date of delete", value: `<t:${Math.floor(Date.now() / 1000)}:d> (<t:${Math.floor(Date.now() / 1000)}:R>)`, inline: true }
             )
             .setFooter({ text: `Id: ${channel.id}`, iconURL: client.user.avatarURL() });
             channel.guild.channels.cache.get(id).send({ embeds: [embed] });

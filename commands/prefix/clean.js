@@ -11,7 +11,7 @@ module.exports = {
             if (!message.member.permissions.has("ManageMessages")) {
                 const msg = await message.reply({embeds: [
                     {
-                        title: ":x: - You do not have permission to delete messages",
+                        title: "<a:no:1205984659524296744> - You do not have permission to delete messages",
                         color: 0xFF0000,
                         author: {
                             name: message.member.tag,
@@ -46,7 +46,7 @@ module.exports = {
             try { if (message && message.id) message.delete();} catch(err) { return err; }
             const msg = await message.channel.send({embeds: [
                 {
-                    title: `:put_litter_in_its_place: - Channel content delete (${messagesDeleted} message${(messagesDeleted > 1 ? "s" : "")})`,
+                    title: `<:trash:1205985915160371221> - Channel content delete (${messagesDeleted} message${(messagesDeleted > 1 ? "s" : "")})`,
                     color: 0x00FF00,
                     author: {
                         name: message.member.tag,

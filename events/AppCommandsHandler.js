@@ -10,8 +10,8 @@ module.exports = {
                 color: 0xff0000,
                 title: `Error`,
                 fields: [
-                    { name: 'There was an error while executing this command!', value: '\u200B', inline: false },
-                    { name: `__Date:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: true},
+                    { name: '<:error:1205982398429532280> - There was an error while executing this command!', value: '\u200B', inline: false },
+                    { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: true},
                 ],
                 footer: {
                     text: `Id: ${interaction.id}`,
@@ -59,8 +59,8 @@ module.exports = {
                         color: 0xff0000,
                         title: `Error`,
                         fields: [
-                            { name: 'The administrators of this server have disabled this command.', value: '\u200B', inline: false },
-                            { name: `__Date of creation:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: true},
+                            { name: '<a:no:1205984659524296744> - The administrators of this server have disabled this command.', value: '\u200B', inline: false },
+                            { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: true},
                         ],
                         footer: {
                             text: `Id: ${interaction.id}`,
@@ -74,16 +74,14 @@ module.exports = {
                     const replyMessage = [
                         "The bot feels tired today, doesn't blame him.",
                         "Mistakes happen to everyone",
-                        "resolves the P ≟ NP issue",
-                        "tracks down the criminals"
                     ];
                     await interaction.deleteReply();
                     interaction.followUp({ embeds: [{
                         color: 0xff0000,
                         title: `Error`,
                         fields: [
-                            { name: 'There was an error while executing this command!', value: replyMessage[Math.floor(Math.random() * replyMessage.length)], inline: false },
-                            { name: `__Date:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: true},
+                            { name: '<:error:1205982398429532280> - There was an error while executing this command!', value: replyMessage[Math.floor(Math.random() * replyMessage.length)], inline: false },
+                            { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: true},
                         ],
                         footer: {
                             text: `Id: ${interaction.id}`,

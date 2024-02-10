@@ -31,8 +31,8 @@ module.exports = {
                             color: 0xff0000,
                             title: `Error`,
                             fields: [
-                                { name: ':x: - The administrators of this server have disabled this command.', value: '\u200B', inline: false },
-                                { name: `:hourglass: - __Date:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},
+                                { name: '<a:no:1205984659524296744> - The administrators of this server have disabled this command.', value: '\u200B', inline: false },
+                                { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},
                             ],
                             footer: {
                                 text: `Id: ${message.id}`,
@@ -59,7 +59,7 @@ module.exports = {
                                 { name: ":gear: - __Options(s):__", value: `**\`${message.content.split(`${serverData.prefix}${command} `).slice(1)}\`**` },
                                 { name: "<:tag:1200813621970739251> - __Channel:__", value: `<#${message.channelId}> \`(${message.channelId})\``},
                                 { name: "<:nametag:1200757678104915978> - __Author:__", value: `**\`${message.author.tag}\`** \`(${message.author.id})\``},
-                                { name: ":hourglass: - __Date:__", value: `<t:${Math.floor(message.createdAt / 1000)}:d> (<t:${Math.floor(message.createdAt / 1000)}:R>)` },
+                                { name: "<:time:1205987554260684870> - __Date:__", value: `<t:${Math.floor(message.createdAt / 1000)}:d> (<t:${Math.floor(message.createdAt / 1000)}:R>)` },
                             )
                             .setURL(message.url)
                             .setFooter({ text: `Id: ${message.id}`, iconURL: client.user.avatarURL() });
@@ -89,7 +89,7 @@ module.exports = {
                         { name: ":gear: - __Options(s):__", value: `**\`${message.content.replace(`${serverData.prefix}${command}`, "").split(" ")[0]}\`**` },
                         { name: "<:tag:1200813621970739251> - __Channel:__", value: `<#${message.channelId}> \`(${message.channelId})\``},
                         { name: "<:nametag:1200757678104915978> - __Author:__", value: `**\`${message.author.tag}\`** \`(${message.author.id})\``},
-                        { name: ":hourglass: -__Date:__", value: `<t:${Math.floor(message.createdMath.floor(Date.now() / 1000) / 1000)}:d> (<t:${Math.floor(message.createdMath.floor(Date.now() / 1000) / 1000)}:R>)` },
+                        { name: "<:time:1205987554260684870> -__Date:__", value: `<t:${Math.floor(message.createdMath.floor(Date.now() / 1000) / 1000)}:d> (<t:${Math.floor(message.createdMath.floor(Date.now() / 1000) / 1000)}:R>)` },
                     )
                     .setURL(message.url)
                     .setFooter({ text: `Id: ${message.id}`, iconURL: client.user.avatarURL() });

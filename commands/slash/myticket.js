@@ -26,7 +26,7 @@ module.exports = {
                     url: interaction.url,
                 },
                 fields: [
-                    { name: `__Date of message creation:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: false}
+                    { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: false}
                 ],
                 footer: {
                     text: `Id: ${interaction.id}`,
@@ -34,7 +34,7 @@ module.exports = {
                 },
             };
             const tickets = await require("../../components/database").get(`/${interaction.guild.id}/tickets/${interaction.member.id}`, client);
-            for (const ticket in tickets) embed.fields.unshift({name: `**\`${ticket}\`**:`, value: `> - Content: "\`${tickets[ticket].content}\`",\n> - Category: \`${tickets[ticket].cat}\`,\n> - Status: ${(tickets[ticket].status === "Not done" ? ":x:" : (tickets[ticket].status === "In progress" ? ":hourglass:" : (tickets[ticket].status === "Done" ? ":white_check_mark:" : tickets[ticket].status)))},\n> - Made at: <t:${tickets[ticket].madeAt}:R>${(tickets[ticket].updatedAt ? `,\n> - Updated at: <t:${tickets[ticket].updatedAt}:R>` : "")}`});
+            for (const ticket in tickets) embed.fields.unshift({name: `<:nametag:1200757678104915978> - **\`${ticket}\`**:`, value: `> - Content: "\`${tickets[ticket].content}\`",\n> - Category: \`${tickets[ticket].cat === "Bot" ? ":robot:" : tickets[ticket].cat}\`,\n> - Status: ${(tickets[ticket].status === "Not done" ? "<a:no:1205984659524296744>" : (tickets[ticket].status === "In progress" ? "<:time:1205987554260684870>" : (tickets[ticket].status === "Done" ? "<a:yes:1205984539852144751>" : tickets[ticket].status)))},\n> - Made at: <t:${tickets[ticket].madeAt}:R>${(tickets[ticket].updatedAt ? `,\n> - Updated at: <t:${tickets[ticket].updatedAt}:R>` : "")}`});
             await interaction.deleteReply();
             interaction.followUp({ embeds: [embed], ephemeral: true  });
         } catch(err) { return err; }
