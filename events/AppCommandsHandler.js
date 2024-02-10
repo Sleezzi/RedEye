@@ -43,7 +43,7 @@ module.exports = {
                     try {
                         await interaction.deleteReply();
                         interaction.followUp(`Please wait **${client.data.cooldown.get(interaction.member.id).cooldown / 1000 - (Math.floor(Date.now() / 1000) - client.data.cooldown.get(interaction.member.id).usedAt)}s** before using command.`);
-                        setTimeout(function() {
+                        setTimeout(() => {
                             try {
                                 interaction.deleteReply();
                             } catch(err) {console.error(err);}
@@ -71,12 +71,18 @@ module.exports = {
                 }
                 const err = await command.execute(interaction, client, Discord);
                 if (err) {
+                    const replyMessage = [
+                        "The bot feels tired today, doesn't blame him.",
+                        "Mistakes happen to everyone",
+                        "resolves the P ≟ NP issue",
+                        "tracks down the criminals"
+                    ];
                     await interaction.deleteReply();
                     interaction.followUp({ embeds: [{
                         color: 0xff0000,
                         title: `Error`,
                         fields: [
-                            { name: 'There was an error while executing this command!', value: '\u200B', inline: false },
+                            { name: 'There was an error while executing this command!', value: replyMessage[Math.floor(Math.random() * replyMessage.length)], inline: false },
                             { name: `__Date:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: true},
                         ],
                         footer: {

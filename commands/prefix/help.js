@@ -199,7 +199,7 @@ module.exports = {
                     const msg = await interaction.followUp({ content: "Please wait...", ephemeral: true })
                     if (msg && msg.deletable) msg.delete();
                 });
-                setTimeout(function() { try { if (reply && reply.id) reply.delete(); } catch (err) { return; }  }, 120_000);
+                setTimeout(() => { try { if (reply && reply.id) reply.delete(); } catch (err) { return; }  }, 120_000);
             }        
             if (message && message.deletable) message.delete();
         } catch(err) {

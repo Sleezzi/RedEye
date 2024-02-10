@@ -15,9 +15,9 @@ module.exports = {
                     if (client.data.cooldown.has(message.author.id)) { // Checks if the user is in cooldown
                         try {
                             const msg = await message.reply(`Please wait **${client.data.cooldown.get(message.author.id).cooldown / 1000 - (Math.floor(Date.now() / 1000) - client.data.cooldown.get(message.author.id).usedAt)}s** before using command.`);
-                            setTimeout(function() {
+                            setTimeout(() => {
                                 try {
-                                    if (msg.id) msg.delete();
+                                    msg.delete();
                                     if (message && message.deletable) message.delete();
                                 } catch(err) {console.error(err);}
                             }, (client.data.cooldown.get(message.author.id).cooldown - (Math.floor(Date.now() / 1000) - client.data.cooldown.get(message.author.id).usedAt))); // Delete message when the cooldown is end
@@ -39,7 +39,12 @@ module.exports = {
                                 icon_url: client.user.avatarURL(),
                             }
                         }] });
-                        setTimeout(function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000); // send message to warn the user about the disabled command
+                        setTimeout(() => {
+                            try {
+                                msg.delete();
+                                if (message) message.delete();
+                            } catch(err) { return err; }
+                        }, 5000); // send message to warn the user about the disabled command
                         return; // End here
                     }
                     const err = await require(`../commands/prefix/${command}`).execute(message, client, Discord); // Execute the command
@@ -62,7 +67,7 @@ module.exports = {
                     }
                 } catch(err) { console.error(err); }
                 
-                setTimeout(function() { // Await
+                setTimeout(() => { // Await
                     try {
                         client.data.cooldown.delete(message.author.id); // Remove the user in cooldown
                     } catch(err) { console.error(err); }

@@ -16,7 +16,7 @@ module.exports = {
     },
     async execute(interaction, client, Discord) {
         if (interaction.member.id === client.ownerId) {
-            setTimeout(function() {
+            setTimeout(() => {
                 client.destroy(client.config.token);
             }, 4990);
         } else {

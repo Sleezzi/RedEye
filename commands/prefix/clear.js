@@ -20,7 +20,7 @@ module.exports = {
                     icon_url: client.user.avatarURL(),
                 },
             }]})
-            setTimeout(async function() { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000);
+            setTimeout(async () => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000);
             return;
         }
         message.channel.sendTyping();
