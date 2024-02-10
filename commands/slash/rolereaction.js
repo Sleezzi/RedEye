@@ -67,12 +67,14 @@ module.exports = {
             }
 
             // if (!interaction.channel.messages.cache.has("1200811838162599956")) {//interaction.options.getString("message"))) {
-            //     interaction.deleteReply().then(() => interaction.followUp({ content: `The message \`${interaction.options.getString("message")}\` doesn't existe.`, ephemeral: true  }));
+            //     await interaction.deleteReply();
+            //     interaction.followUp({ content: `The message \`${interaction.options.getString("message")}\` doesn't existe.`, ephemeral: true  });
             //     return;
             // }
 
             if (!interaction.options.getString("reaction").startsWith(":") || !interaction.options.getString("reaction").endsWith(":")) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: `The emoji \`${interaction.options.getString("reaction")}\` is not a valid emoji.`, ephemeral: true  }));
+                await interaction.deleteReply();
+                interaction.followUp({ content: `The emoji \`${interaction.options.getString("reaction")}\` is not a valid emoji.`, ephemeral: true  });
                 return;
             }
 // interaction.options.getString("message")
@@ -97,7 +99,8 @@ module.exports = {
                     icon_url: client.user.avatarURL(),
                 },
             };
-            interaction.deleteReply().then(() => interaction.followUp({ embeds: [embed], ephemeral: true  }));
+            await interaction.deleteReply();
+            interaction.followUp({ embeds: [embed], ephemeral: true  });
         } catch(err) { return err; }
     }
 }

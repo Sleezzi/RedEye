@@ -2,21 +2,10 @@ module.exports = {
     name: "MessageUpdate",
     event: "MessageUpdate",
     type: "on",
-    execute([message, newMessage], client, Discord) {
-        if (!message.channel.type === 1 || message.author.bot) return;
-        // for (const word of client.config.bannedWord) {
-        //     if (newMessage.content.includes(word) && newMessage.deletable && newMessage.member.id !== client.user.id) {
-        //         newMessage.delete();
-        //         newMessage.channel.send(`The word ||${word}|| is forbidden on this server`).then((msg) => setTimeout(function() {msg.delete()}, 5000))
-        //     }
-        // }
-        // for (const word of client.config.link) {
-        //     if (newMessage.content.includes(word) && newMessage.deletable && !newMessage.member.roles.cache.has(client.config.roles.link)) {
-        //         newMessage.delete();
-        //         newMessage.channel.send(`Links are prohibited on this server`).then((msg) => setTimeout(function() {msg.delete()}, 5000))
-        //     }
-        // }
-        require("../components/database").get(`/${message.guild.id}`, client).then(async (serverData) => {
+    async execute([message, newMessage], client, Discord) {
+        try {
+            if (!message.channel.type === 1 || message.author.bot) return;
+            let serverData = await require("../components/database").get(`/${message.guild.id}`, client);
             if (message.channel.type !== 1) return;
             if (serverData.prefix) serverData.prefix = "!";
             if (newMessage.content.startsWith(serverData.prefix)) {
@@ -46,6 +35,6 @@ module.exports = {
             .setURL(message.url)
             .setFooter({ text: `Id: ${message.id}`, iconURL: client.user.avatarURL() });
             message.guild.channels.cache.get(serverData.channels.log.channelId).send({ embeds: [embed]});
-        });
+        } catch (err) { return err; }
     }
 }

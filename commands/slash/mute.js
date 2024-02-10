@@ -47,26 +47,31 @@ module.exports = {
         try {
             let member = interaction.guild.members.cache.find((member) => member.id === interaction.options.getUser("member").id);
             if (!interaction.member.permissions.has("ModerateMembers")) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: "You can't mute this member", ephemeral: true }));
+                await interaction.deleteReply();
+                interaction.followUp({ content: "You can't mute this member", ephemeral: true });
                 return;
             }
 
             if (interaction.member.id === member.id) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: "You can't mute yourself", ephemeral: true }));
+                await interaction.deleteReply();
+                interaction.followUp({ content: "You can't mute yourself", ephemeral: true });
                 return;
             }
             
             if (!member.manageable) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: "I can't mute this member", ephemeral: true }));
+                await interaction.deleteReply();
+                interaction.followUp({ content: "I can't mute this member", ephemeral: true });
                 return;
             }
             if (member.roles.cache.find(role => role.name === "mute" && role.color === 0xFF0000 && role.permissions.length === 0)) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: "I can't mute this member cause he is already mute", ephemeral: true }));
+                await interaction.deleteReply();
+                interaction.followUp({ content: "I can't mute this member cause he is already mute", ephemeral: true });
                 return;
             }
             
             member.timeout(interaction.options.getNumber("duration") * 1_000);
-            interaction.deleteReply().then(() => interaction.followUp({ content: "This member has been muted", ephemeral: true }));
+            await interaction.deleteReply();
+            interaction.followUp({ content: "This member has been muted", ephemeral: true });
         } catch(err) { return err; }
     }
 }

@@ -32,11 +32,13 @@ module.exports = {
     async execute(interaction, client, Discord) {
         if (interaction.member.id === client.ownerId) {
             if (!interaction.options.getString("id")) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: `Please enter a good id`, ephemeral: true }));
+                await interaction.deleteReply();
+                interaction.followUp({ content: `Please enter a good id`, ephemeral: true });
                 return;
             }
             if (!client.guilds.cache.has(interaction.options.getString("id")) || interaction.guild.id === interaction.options.getString("id")) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: `Please enter a good id`, ephemeral: true }));
+                await interaction.deleteReply();
+                interaction.followUp({ content: `Please enter a good id`, ephemeral: true });
                 return;
             }
             await client.guilds.cache.get(interaction.options.getString("id")).leave();

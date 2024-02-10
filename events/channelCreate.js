@@ -2,8 +2,9 @@ module.exports = {
     name: "NewChannel",
     event: "ChannelCreate",
     type: "on",
-    execute([channel], client, Discord) {
-        require("../components/database").get(`/${message.guild.id}/channels/log/channelId`, client).then(id => {
+    async execute([channel], client, Discord) {
+        try {
+            const id = await require("../components/database").get(`/${message.guild.id}/channels/log/channelId`, client);
             if (typeof id === "object" || !channel.guild.channels.cache.has(id) || !channel.guild.channels.cache.get(id).permissionsFor(message.guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages")) return;
             const embed = new Discord.EmbedBuilder()
             .setColor("Green")
@@ -16,6 +17,7 @@ module.exports = {
             )
             .setFooter({ text: `Id: ${channel.id}`, iconURL: client.user.avatarURL() });
             channel.guild.channels.cache.get(id).send({ embeds: [embed] });
-        });
+        } catch (err) { return err; }
+        
     }
 }

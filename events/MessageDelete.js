@@ -2,8 +2,9 @@ module.exports = {
     name: "MessageDelete",
     event: "MessageDelete",
     type: "on",
-    execute([message], client, Discord) {
-        require("../components/database").get(`/${message.guild.id}`, client).then(async (serverData) => {
+    async execute([message], client, Discord) {
+        try {
+            let serverData = await require("../components/database").get(`/${message.guild.id}`, client);
             if (message.channel.type !== 1 ||
                 (serverData.prefix && message.content.startsWith(serverData.prefix)) &&
                 serverData.channels &&
@@ -29,6 +30,6 @@ module.exports = {
             .setURL(message.url)
             .setFooter({ text: `Id: ${message.id}`, iconURL: client.user.avatarURL() });
             message.guild.channels.cache.get(serverData.channels.log.channelId).send({ embeds: [embed]});
-        });
+        } catch (err) { return err; }
     }
 }

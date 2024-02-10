@@ -35,16 +35,19 @@ module.exports = {
             const response = await fetch(`https://source.unsplash.com/1920x1080/?${theme}`);
             
             if (response.ok) {                
-                interaction.channel.send({ content: `We found that with “UNSPLASH”, is that what you wanted? ${response.url}`, ephemeral: true }).then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(function() { msg.delete(); }, 60_000);
-                    }
-                });
+                const msg = await interaction.followUp({ content: `We found that with “UNSPLASH”, is that what you wanted? ${response.url}`, ephemeral: true });
+                if (msg.deletable) {
+                    setTimeout(() => {
+                        msg.delete();
+                    }, 60_000);
+                }
             } else {
-                interaction.deleteReply().then(() => interaction.followUp({ content: 'Unable to find an image on this topic', ephemeral: true }));
+                await interaction.deleteReply();
+                interaction.followUp({ content: 'Unable to find an image on this topic', ephemeral: true });
             }
         } catch(err) {
-            interaction.deleteReply().then(() => interaction.followUp({ content: 'An error occurred while retrieving the image', ephemeral: true }));
+            await interaction.deleteReply();
+            interaction.followUp({ content: 'An error occurred while retrieving the image', ephemeral: true });
             return err;
         }
     }

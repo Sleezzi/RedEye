@@ -33,7 +33,11 @@ module.exports = {
             let id = interaction.options.getNumber('id');
             let response;
             response = await fetch(`https://badges.roblox.com/v1/badges/${id}`);
-            if (response.status !== 200) return interaction.deleteReply().then(() => interaction.followUp({ content: `Unable to find "${id}"`, ephemeral: true }));
+            if (response.status !== 200) {
+                await interaction.deleteReply();
+                interaction.followUp({ content: `Unable to find "${id}"`, ephemeral: true });
+                return;
+            }
             response = await response.json();
             const embed = {
                 color: 0x00FF00,
@@ -64,10 +68,15 @@ module.exports = {
                 }
             };
             response = await fetch(`https://thumbnails.roblox.com/v1/badges/icons?badgeIds=${id}&size=150x150&format=Png&isCircular=false`);
-            if (response.status !== 200) return interaction.deleteReply().then(() => interaction.followUp({ content: `An error has occurred`, ephemeral: true }));
+            if (response.status !== 200) {
+                await interaction.deleteReply();
+                interaction.followUp({ content: `An error has occurred`, ephemeral: true });
+                return;
+            }
             response = await response.json();
             embed.thumbnail.url = response.data[0].imageUrl;
-            interaction.deleteReply().then(() => interaction.followUp({ embeds: [ embed ], ephemeral: true }));
+            await interaction.deleteReply();
+            interaction.followUp({ embeds: [ embed ], ephemeral: true });
         } catch(err) { return err; }
     }
 }

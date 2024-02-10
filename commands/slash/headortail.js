@@ -61,26 +61,42 @@ module.exports = {
             
             const result = Math.random() < 0.5 ? 'tail' : 'head';
             if (face && face !== "none") {
-                if (face !== "head" && face !== "tail") return interaction.deleteReply().then(() => interaction.followUp({ content: 'The face chosen is not good.', ephemeral: true }));
+                if (face !== "head" && face !== "tail") {
+                    await interaction.deleteReply();
+                    interaction.followUp({ content: 'The face chosen is not good.', ephemeral: true });
+                    return;
+                }
                 if (result === face) {
-                    await interaction.deleteReply().then(() => interaction.followUp({ content: "You won", ephemeral: false })).then((msg) => {
-                        if (msg.deletable) {
-                            setTimeout(function() { msg.delete(); }, 5000);
+                    await interaction.deleteReply()
+                    const msg = await interaction.followUp({ content: "You won", ephemeral: false });
+                    setTimeout(() => {
+                        try {
+                            msg.delete();
+                        } catch (err) {
+                            return err;
                         }
-                    });
+                    }, 5000);
                 } else {
-                    await interaction.deleteReply().then(() => interaction.followUp({ content: "You lost", ephemeral: false })).then((msg) => {
-                        if (msg.deletable) {
-                            setTimeout(function() { msg.delete(); }, 5000);
+                    await interaction.deleteReply();
+                    const msg = await interaction.followUp({ content: "You lost", ephemeral: false });
+                    setTimeout(() => {
+                        try {
+                            msg.delete();
+                        } catch (err) {
+                            return err;
                         }
-                    });
+                    }, 5000);
                 }
             } else {
-                await interaction.deleteReply().then(() => interaction.followUp({ content: `It's falling on \`${result}\``, ephemeral: false })).then((msg) => {
-                    if (msg.deletable) {
-                        setTimeout(function() { msg.delete(); }, 5000);
+                await interaction.deleteReply();
+                const msg = await interaction.followUp({ content: `It's falling on \`${result}\``, ephemeral: false });
+                setTimeout(() => {
+                    try {
+                        msg.delete();
+                    } catch (err) {
+                        return err;
                     }
-                });
+                }, 5000);
             }
         } catch(err) { return err; }
     }

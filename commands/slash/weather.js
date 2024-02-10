@@ -65,7 +65,8 @@ module.exports = {
         //     let resp = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${interaction.options.getNumber("latitude")}&longitude=${interaction.options.getNumber("longitude")}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,cloud_cover,wind_speed_10m&tim`);
         //     if ()
 
-        //     interaction.deleteReply().then(() => interaction.followUp({ embeds: [embed], ephemeral: true }));
+        //     await interaction.deleteReply();
+        //     interaction.followUp({ embeds: [embed], ephemeral: true }));
         } catch(err) { return err; }
     }
 }

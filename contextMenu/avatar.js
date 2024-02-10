@@ -13,11 +13,13 @@ module.exports = {
         try {
             const member = interaction.guild.members.cache.get(interaction.targetId);
             if (!member) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: "Unable to find the avatar of user", ephemeral: true }));
+                await interaction.deleteReply();
+                interaction.followUp({ content: "Unable to find the avatar of user", ephemeral: true });
                 return;
             }
             
-            interaction.deleteReply().then(() => interaction.followUp({ content: `[This](${member.user.avatarURL()}) is the profile picture of ${member.user.username}`, ephemeral: true }));
+            await interaction.deleteReply();
+            interaction.followUp({ content: `[This](${member.user.avatarURL()}) is the profile picture of ${member.user.username}`, ephemeral: true });
         } catch (err) { console.error(err); }
     }
 }

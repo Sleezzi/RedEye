@@ -33,8 +33,9 @@ module.exports = {
             let user = interaction.options.getString('user');
             let response = await fetch(`https://api.github.com/users/${user}`)
             if (response.status !== 200) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: `Unable to find "${user}"`, ephemeral: true }));
-                return response.statusText;
+                await interaction.deleteReply();
+                interaction.followUp({ content: `Unable to find "${user}"`, ephemeral: true });
+                return;
             }
             response = await response.json();
             const embed = {
@@ -83,7 +84,8 @@ module.exports = {
                     });
                 }
             }
-            interaction.deleteReply().then(() => interaction.followUp({ embeds: [ embed ], ephemeral: true }));
+            await interaction.deleteReply();
+            interaction.followUp({ embeds: [ embed ], ephemeral: true });
         } catch(err) { return err; }
     }
 }

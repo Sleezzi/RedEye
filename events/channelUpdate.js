@@ -2,8 +2,9 @@ module.exports = {
     name: "ChannelUpdate",
     event: "ChannelUpdate",
     type: "on",
-    execute([oldChannel, channel], client, Discord) {
-        require("../components/database").get(`/${message.guild.id}/channels/log/channelId`, client).then(id => {
+    async execute([oldChannel, channel], client, Discord) {
+        try {
+            const id = await require("../components/database").get(`/${message.guild.id}/channels/log/channelId`, client);
             if (typeof id === "object" || !channel.guild.channels.cache.has(id) || !channel.guild.channels.cache.get(id).permissionsFor(message.guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages")) return;
             const embed = {
                 color: 0xffa500,
@@ -18,7 +19,7 @@ module.exports = {
                     icon_url: client.user.avatarURL(),
                 },
             }
-    
+            
             if (oldChannel.nsfw !== channel.nsfw) {
                 embed.fields.push(
                     { name: `__NSFW before:__`, value: `> ${(oldChannel.nsfw === true ? `:white_check_mark:` : `:x:`)}`, inline: true},
@@ -34,7 +35,7 @@ module.exports = {
                     { name: '\u200B', value: '\u200B', inline: true },
                 );
             }
-    
+            
             if (oldChannel.name !== channel.name) {
                 embed.fields.push(
                     { name: `__Old name:__`, value: `> \`${oldChannel.name}\``, inline: true },
@@ -47,6 +48,6 @@ module.exports = {
                 );
             }
             channel.guild.channels.cache.get(id).send({ embeds: [embed] });
-        });
+        } catch (err) { return err; }
     }
 }

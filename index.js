@@ -103,56 +103,27 @@ client.login(client.config.token).then(() => {
     require("./components/log")("\n", `%green%Logging...%reset%`);
 });
 
-client.on(Events.MessageCreate, async (message) => {
-    if (message.content !== "!test" || message.member.id !== "542703093981380628") return;
-    // const messages = await message.channel.messages.fetch({ limit: 100 }).then(messages => messages.filter((msg) => msg.member.id === client.user.id));
-    // message.channel.bulkDelete(messages);
-    // message.reply("Done!");
-    const messages = await message.channel.messages.fetch({ limit: 100 }).then(messages => messages.filter((msg) => {
-        console.log((Date.now() - (msg.createdAt - 0)) / 1000, "\n", Date.now(), msg.createdAt - 0, msg.content, "\n\n");
-        return 631666 < ((Date.now() - (msg.createdAt - 0)) / 1000) && msg.bulkDeletable;
-    }));
-    await message.channel.bulkDelete(messages);
-    const msg = await message.channel.send({ embeds: [{
-        title: `:put_litter_in_its_place: - ${"Multiple "}Messages Deleted (${messages.size - 1} message${(messages.size - 1 > 1 ? "s" : "")})`,
-        color: 0x00FF00,
-        author: {
-            name: message.member.tag,
-            icon_url: message.member.user.avatarURL(),
-            url: message.url,
-        },
-        footer: {
-            text: `Id: ${message.id}`,
-            icon_url: client.user.avatarURL(),
-        },
-    }]});
-    setTimeout(async () => {
-        try {
-            msg.delete();
-        } catch(err) { return err; }
-    }, 5000);
-});
+// client.on(Events.MessageCreate, async (message) => {});
 
 process.stdin.setRawMode(true);
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 if (process.stdout.columns < 143) process.stdout.columns = 143;
 
-process.stdin.on("data", (key) => {
+process.stdin.on("data", async (key) => {
     switch (key) {
         case "e": 
-            client.destroy(client.config.token).then(() => process.exit(0));
+            await client.destroy(client.config.token);
+            process.exit(0);
             break
         case "c": 
             console.clear();
             console.log(`\n\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))} \x1b[31m/$$\x1b[0m   \x1b[31m/$$\x1b[0m                 \x1b[33m/$$\x1b[0m                                                                                    \x1b[36m/$$$$$$$\x1b[0m              \x1b[32m/$$\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m| $$\x1b[0m  \x1b[31m| $$\x1b[0m                \x1b[33m| $$\x1b[0m                                                                                   \x1b[36m| $$__  $$\x1b[0m            \x1b[32m| $$\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m| $$\x1b[0m  \x1b[31m| $$\x1b[0m \x1b[32m/$$$$$$$\x1b[0m   \x1b[33m/$$$$$$$\x1b[0m  \x1b[34m/$$$$$$\x1b[0m   \x1b[35m/$$$$$$\x1b[0m   \x1b[36m/$$$$$$$\x1b[0m  \x1b[31m/$$$$$$$\x1b[0m  \x1b[32m/$$$$$$\x1b[0m   \x1b[33m/$$$$$$\x1b[0m   \x1b[34m/$$$$$$\x1b[0m              \x1b[36m| $$\x1b[0m  \x1b[36m\\ $$\x1b[0m  \x1b[31m/$$$$$$\x1b[0m  \x1b[32m/$$$$$$\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m| $$\x1b[0m  \x1b[31m| $$\x1b[32m| $$__  $$\x1b[0m \x1b[33m/$$__  $$\x1b[0m \x1b[34m/$$__  \x1b[34m$$\x1b[0m \x1b[35m/$$__  $$\x1b[0m \x1b[36m/$$_____/\x1b[0m \x1b[31m/$$_____/\x1b[0m \x1b[32m/$$__  $$\x1b[0m \x1b[33m/$$__  $$\x1b[0m \x1b[34m/$$__  \x1b[34m$$\x1b[0m             \x1b[36m| $$$$$$$\x1b[0m  \x1b[31m/$$__  $$\x1b[32m|_  $$_/\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m| $$\x1b[0m  \x1b[31m| $$\x1b[32m| $$\x1b[0m  \x1b[32m\\ $$\x1b[33m| $$\x1b[0m  \x1b[33m| $$\x1b[34m| $$$$$$$$\x1b[35m| $$\x1b[0m  \x1b[35m\\__/\x1b[36m|  $$$$$$\x1b[0m \x1b[31m| $$\x1b[0m      \x1b[32m| $$\x1b[0m  \x1b[32m\\ $$\x1b[33m| $$\x1b[0m  \x1b[33m\\__/\x1b[34m| $$$$$$$$\x1b[0m             \x1b[36m| $$__  $$\x1b[31m| $$\x1b[0m  \x1b[31m\\ $$\x1b[0m  \x1b[32m| $$\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m| $$\x1b[0m  \x1b[31m| $$\x1b[32m| $$\x1b[0m  \x1b[32m| $$\x1b[33m| $$\x1b[0m  \x1b[33m| $$\x1b[34m| $$_____/\x1b[35m| $$\x1b[0m       \x1b[36m\\____  $$\x1b[31m| $$\x1b[0m      \x1b[32m| $$\x1b[0m  \x1b[32m| $$\x1b[33m| $$\x1b[0m      \x1b[34m| $$_____/\x1b[0m             \x1b[36m| $$\x1b[0m  \x1b[36m\\ $$\x1b[31m| $$\x1b[0m  \x1b[31m| $$\x1b[0m  \x1b[32m| $$\x1b[0m \x1b[32m/$$\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))}\x1b[31m|  $$$$$$/\x1b[32m| $$\x1b[0m  \x1b[32m| $$\x1b[33m|  $$$$$$$\x1b[34m|  $$$$$$$\x1b[35m| $$\x1b[0m       \x1b[36m/$$$$$$$/\x1b[31m|  $$$$$$$\x1b[32m|  $$$$$$/\x1b[33m| $$\x1b[0m      \x1b[34m|  $$$$$$$\x1b[0m \x1b[35m/$$$$$$\x1b[0m     \x1b[36m| $$$$$$$/\x1b[31m|  $$$$$$/\x1b[0m  \x1b[32m|  $$$$/\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - 143) / 2))} \x1b[31m\\______/\x1b[0m \x1b[32m|__/\x1b[0m  \x1b[32m|__/\x1b[0m \x1b[33m\\_______/\x1b[0m \x1b[34m\\_______/\x1b[35m|__/\x1b[0m      \x1b[36m|_______/\x1b[0m  \x1b[31m\\_______/\x1b[0m \x1b[32m\\______/\x1b[0m \x1b[33m|__/\x1b[0m       \x1b[34m\\_______/\x1b[0m \x1b[35m|______/\x1b[0m    \x1b[36m|_______/\x1b[0m  \x1b[31m\\______/\x1b[0m    \x1b[32m\\____/\x1b[0m\n${" ".repeat(Math.floor((process.stdout.columns - "Made by Sleezzi".length) / 2))}Made by Sleezzi\n\n\n  \x1b[32m➜\x1b[0m  press h to show help\n  \x1b[32m➜\x1b[0m  press c to clear\n  \x1b[32m➜\x1b[0m  press r to restart\n  \x1b[32m➜\x1b[0m  press e to exit\n\n`);
             break;
         case "r":
-            client.destroy(client.config.token).then(() => {
-                client.login(client.config.token).then(() => {
-                    require("./components/log")(`  %green%➜ Restarted%reset%\n\n`);
-                });
-            });
+            await client.destroy(client.config.token);
+            await client.login(client.config.token);
+            require("./components/log")(`  %green%➜ Restarted%reset%\n\n`);
             break;
         case "h":
             console.log(`\n\n  \x1b[32m➜\x1b[0m  press h to show help\n  \x1b[32m➜\x1b[0m  press c to clear\n  \x1b[32m➜\x1b[0m  press r to restart\n  \x1b[32m➜\x1b[0m  press e to exit\n\n`);

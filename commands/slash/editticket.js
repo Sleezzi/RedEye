@@ -101,19 +101,22 @@ module.exports = {
     },
     async execute(interaction, client, Discord) {
         try {
-            require("../../components/database").get(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`, client).then((ticket) => {
-                if (ticket.content) {
-                    require("../../components/database").set(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`, {
-                        cat: interaction.options.getString("category"),
-                        username: interaction.member.user.username,
-                        content: interaction.options.getString("content"),
-                        status: "Not done",
-                        madeAt: ticket.madeAt,
-                        updatedAt: Math.floor(Date.now() / 1000)
-                    }, client);
-                    interaction.deleteReply().then(() => interaction.followUp({ content: `Ticket edited!`, ephemeral: true  }));
-                } else interaction.deleteReply().then(() => interaction.followUp({ content: `Error: Bad id, are you sure ${interaction.options.getString("id")} exists?`, ephemeral: true  }));
-            });            
+            const ticket = await require("../../components/database").get(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`, client);
+            if (ticket.content) {
+                require("../../components/database").set(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`, {
+                    cat: interaction.options.getString("category"),
+                    username: interaction.member.user.username,
+                    content: interaction.options.getString("content"),
+                    status: "Not done",
+                    madeAt: ticket.madeAt,
+                    updatedAt: Math.floor(Date.now() / 1000)
+                }, client);
+                await interaction.deleteReply();
+                interaction.followUp({ content: `Ticket edited!`, ephemeral: true  });
+            } else {
+                await interaction.deleteReply();
+                interaction.followUp({ content: `Error: Bad id, are you sure ${interaction.options.getString("id")} exists?`, ephemeral: true  });
+            }          
         } catch(err) { return err; }
     }
 }

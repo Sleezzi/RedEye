@@ -41,7 +41,11 @@ module.exports = {
                 avatarURL: "",
             };
             response = await fetch(`https://users.roblox.com/v1/users/${user}`);
-            if (response.status !== 200) return interaction.deleteReply().then(() => interaction.followUp({ content: `Unable to find "${user}"`, ephemeral: true }));
+            if (response.status !== 200) {
+                await interaction.deleteReply();
+                interaction.followUp({ content: `Unable to find "${user}"`, ephemeral: true });
+                return;
+            }
             response = await response.json();
             data.username = response.name;
             data.desc = response.description;
@@ -49,7 +53,11 @@ module.exports = {
             data.verified = response.hasVerifiedBadge;
             data.created_at = response.created;
             response = await fetch(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${user}&size=48x48&format=Png&isCircular=false`);
-            if (response.status !== 200) return interaction.deleteReply().then(() => interaction.followUp({ content: `An error has occurred`, ephemeral: true }));
+            if (response.status !== 200) {
+                await interaction.deleteReply();
+                interaction.followUp({ content: `An error has occurred`, ephemeral: true });
+                return;
+            }
             response = await response.json();
             data.avatarURL = response.data[0].imageUrl;
             
@@ -79,7 +87,11 @@ module.exports = {
                 },
             };
             response = await fetch(`https://badges.roblox.com/v1/users/${user}/badges?cursor=&limit=10&sortOrder=Asc`);
-            if (response.status !== 200) return interaction.deleteReply().then(() => interaction.followUp({ content: `An error has occurred`, ephemeral: true }));
+            if (response.status !== 200) {
+                await interaction.deleteReply();
+                interaction.followUp({ content: `An error has occurred`, ephemeral: true });
+                return;
+            }
             response = await response.json();
             embed.fields.push({ name: `__Badge${response.data.length > 1 ? "s" : ""}:__`, value: `\u200B`, inline: false});
             response.data.forEach((badge) => {
@@ -89,7 +101,8 @@ module.exports = {
             embed.fields.push({ name: `\u200B`, value: `\u200B`, inline: false });
             embed.fields.push({ name: `__Account created at:__`, value: `> \`${data.created_at}\``, inline: true });
             embed.fields.push({ name: `__Date of creation:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: true});
-            interaction.deleteReply().then(() => interaction.followUp({ embeds: [ embed ], ephemeral: true }));
+            await interaction.deleteReply();
+            interaction.followUp({ embeds: [ embed ], ephemeral: true });
         } catch(err) { return err; }
     }
 }

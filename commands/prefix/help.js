@@ -10,7 +10,15 @@ module.exports = {
             let command = message.content.split(' ').slice(1)[0];
             if (command && command !== "help") {
                 if (!client.data.commands.prefix.has(command)) {
-                    message.channel.send({ content: `${command} is not a command.` }).then((msg) => {if (message && message.deletable) message.delete(); setTimeout(function() {msg.delete()}, 5000)});
+                    const msg = await message.channel.send({ content: `${command} is not a command.` });
+                    if (message.deletable) message.delete();
+                    setTimeout(() => {
+                        try {
+                            msg.delete();
+                        } catch (err) {
+                            return err;
+                        }
+                    }, 5000);
                     return;
                 }
                 command = client.data.commands.prefix.find((n) => n.name === command);

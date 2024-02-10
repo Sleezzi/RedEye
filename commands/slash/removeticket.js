@@ -32,12 +32,15 @@ module.exports = {
     },
     async execute(interaction, client, Discord) {
         try {
-            require("../../components/database").get(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`, client).then((ticket) => {
-                if (ticket.content) {
-                    require("../../components/database").delete(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`, client)
-                    interaction.deleteReply().then(() => interaction.followUp({ content: `This ticket has been removed`, ephemeral: true  }));
-                } else interaction.deleteReply().then(() => interaction.followUp({ content: `You can't remove this ticket`, ephemeral: true  }));
-            });
+            const ticket = await require("../../components/database").get(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`, client);
+            if (ticket.content) {
+                await require("../../components/database").delete(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`, client);
+                await interaction.deleteReply();
+                interaction.followUp({ content: `This ticket has been removed`, ephemeral: true  });
+            } else {
+                await interaction.deleteReply();
+                interaction.followUp({ content: `You can't remove this ticket`, ephemeral: true  });
+            }
         } catch(err) { return err; }
     }
 }

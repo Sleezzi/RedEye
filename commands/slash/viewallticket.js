@@ -56,19 +56,17 @@ module.exports = {
             if (interaction.options.getUser("member")) {
                 const member = interaction.guild.members.cache.find((member) => member.id === interaction.options.getUser("member").id);
                 embed.title = `Tickets • ${member.user.username}`;
-                require("../../components/database").get(`/${interaction.guild.id}/tickets/${member.id}`, client).then((tickets) => {
-                    for (const ticket in tickets) embed.fields.unshift({name: `**\`${ticket}\`**:`, value: `> - Content: **\`${tickets[ticket].content}\`**,\n> - Category: ${tickets[ticket].cat === "bot" ? "" : (tickets[ticket].cat === "server" ? "" : "")},\n> - Status: ${(tickets[ticket].status === "Not done" ? ":x:" : (tickets[ticket].status === "In progress" ? ":hourglass:" : (tickets[ticket].status === "Done" ? ":white_check_mark:" : tickets[ticket].status)))},\n> - Made at: <t:${tickets[ticket].madeAt}:R>${(tickets[ticket].updatedAt ? `,\n> - Updated at: <t:${tickets[ticket].updatedAt}:R>` : "")}`});
-                });
+                const tickets = await require("../../components/database").get(`/${interaction.guild.id}/tickets/${member.id}`, client);
+                for (const ticket in tickets) embed.fields.unshift({name: `**\`${ticket}\`**:`, value: `> - Content: **\`${tickets[ticket].content}\`**,\n> - Category: ${tickets[ticket].cat === "bot" ? "" : (tickets[ticket].cat === "server" ? "" : "")},\n> - Status: ${(tickets[ticket].status === "Not done" ? ":x:" : (tickets[ticket].status === "In progress" ? ":hourglass:" : (tickets[ticket].status === "Done" ? ":white_check_mark:" : tickets[ticket].status)))},\n> - Made at: <t:${tickets[ticket].madeAt}:R>${(tickets[ticket].updatedAt ? `,\n> - Updated at: <t:${tickets[ticket].updatedAt}:R>` : "")}`});
             } else {
-                require("../../components/database").get(`/${interaction.guild.id}/tickets`, client).then((users) => {
-                    for (const user in users) {
-                        for (const ticket in users[user]) embed.fields.unshift({name: `**\`${ticket}\`**:`, value: `> - Content: **\`${tickets[ticket].content}\`**,\n> - Category: ${tickets[ticket].cat === "bot" ? "" : (tickets[ticket].cat === "server" ? "" : "")},\n> - Status: ${(users[user][ticket].status === "Not done" ? ":x:" : (users[user][ticket].status === "In progress" ? ":hourglass:" : (users[user][ticket].status === "Done" ? ":white_check_mark:" : users[user][ticket].status)))},\n> - Made at: <t:${users[user][ticket].madeAt}:R>${(users[user][ticket].updatedAt ? `,\n> - Updated at: <t:${users[user][ticket].updatedAt}:R>` : "")}`});
-                        embed.fields.unshift({ name: `Tickets of ${users[user][Object.keys(users[user])[0]].username}:`, value: "" });
-                    }
-                });
+                const users = await require("../../components/database").get(`/${interaction.guild.id}/tickets`, client);
+                for (const user in users) {
+                    for (const ticket in users[user]) embed.fields.unshift({name: `**\`${ticket}\`**:`, value: `> - Content: **\`${tickets[ticket].content}\`**,\n> - Category: ${tickets[ticket].cat === "bot" ? "" : (tickets[ticket].cat === "server" ? "" : "")},\n> - Status: ${(users[user][ticket].status === "Not done" ? ":x:" : (users[user][ticket].status === "In progress" ? ":hourglass:" : (users[user][ticket].status === "Done" ? ":white_check_mark:" : users[user][ticket].status)))},\n> - Made at: <t:${users[user][ticket].madeAt}:R>${(users[user][ticket].updatedAt ? `,\n> - Updated at: <t:${users[user][ticket].updatedAt}:R>` : "")}`});
+                    embed.fields.unshift({ name: `Tickets of ${users[user][Object.keys(users[user])[0]].username}:`, value: "" });
+                }
             }
-
-            interaction.deleteReply().then(() => interaction.followUp({ embeds: [embed], ephemeral: true }));
+            await interaction.deleteReply();
+            interaction.followUp({ embeds: [embed], ephemeral: true });
         } catch(err) { return err; }
     }
 }

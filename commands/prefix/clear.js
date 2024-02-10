@@ -1,5 +1,5 @@
 module.exports = {
-    // name: "clear",
+    name: "clear",
     description: "Delete messages in the channel in which the command is used",
     permissions: "ManageMessages",
     model: `clear **\`Number of messages to delete\`** *\`member\`*`,
@@ -52,7 +52,7 @@ module.exports = {
         //         let messagesDeleted = 0;
         //         let err;
         //         do {
-        //             await message.channel.messages.fetch({ limit: 100 }).then((messages) => fetchedMessages = messages.filter((msg) => msg && 1_209_600 > ((Date.now() - msg.createdTimestamp) / 1000) && msg.id && msg.bulkDeletable));
+        //             await message.channel.messages.fetch({ limit: 100 }).then((messages) => fetchedMessages = messages.filter((msg) => msg && 1_209_600_000> ((Date.now() - msg.createdTimestamp) / 1000) && msg.id && msg.bulkDeletable));
         //             try {
         //                 await message.channel.bulkDelete(fetchedMessages);
         //                 messagesDeleted += fetchedMessages.size;
@@ -70,7 +70,8 @@ module.exports = {
         amount++;
         if (amount > 100) amount = 100;
         try {
-            const messages = await message.channel.messages.fetch({ limit: amount }).then(messages => messages.filter((msg) => 14 < msg.createdAt - Date.now() && msg.bulkDeletable));
+            const messages = await message.channel.messages.fetch({ limit: amount })
+            .then(messages => messages.filter((msg) => 1_209_600_000 > Date.now() - msg.createdAt && msg.bulkDeletable));
             await message.channel.bulkDelete(messages);
             const msg = await message.channel.send({ embeds: [{
                 title: `:put_litter_in_its_place: - ${"Multiple "}Messages Deleted (${messages.size - 1} message${(messages.size - 1 > 1 ? "s" : "")})`,

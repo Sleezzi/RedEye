@@ -1,5 +1,5 @@
 module.exports = {
-    // name: "clean",
+    name: "clean",
     description: "Delete messages in the channel in which the command is used",
     permissions: "ManageMessages",
     model: `clean`,
@@ -36,7 +36,8 @@ module.exports = {
             setTimeout(() => kill = true, 5_000);
             let messagesDeleted = 0;
             do {
-                messages = await message.channel.messages.fetch({ limit: 100 }).then(messages => messages.filter((msg) => msg.member.id === client.user.id && 14 < message.createdAt - Date.now() / 1000));
+                messages = await message.channel.messages.fetch({ limit: 100 })
+                .then(messages => messages.filter((msg) => msg.member.id === client.user.id && 1_209_600_000 > Date.now() - msg.createdAt && msg.bulkDeletable));
                 try {
                     await message.channel.bulkDelete(messages);
                 } catch(err) { return err; }

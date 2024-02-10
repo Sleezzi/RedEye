@@ -34,25 +34,30 @@ module.exports = {
             
             let member = interaction.guild.members.cache.find((member) => member.id === interaction.options.getUser("member").id);
             if (!interaction.member.permissions.has("ModerateMembers")) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: "You can't unmute this member", ephemeral: true }));
+                await interaction.deleteReply();
+                interaction.followUp({ content: "You can't unmute this member", ephemeral: true });
                 return;
             }
 
             if (interaction.member.id === member.id) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: "You can't unmute yourself", ephemeral: true }));
+                await interaction.deleteReply();
+                interaction.followUp({ content: "You can't unmute yourself", ephemeral: true });
                 return;
             }
             
             if (!member.manageable) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: "I can't unmute this member", ephemeral: true }));
+                await interaction.deleteReply();
+                interaction.followUp({ content: "I can't unmute this member", ephemeral: true });
                 return;
             }
             if (!member.roles.cache.find(role => role.name === "mute")) {
-                interaction.deleteReply().then(() => interaction.followUp({ content: "I can't unmute this member cause he is not mute", ephemeral: true }));
+                await interaction.deleteReply();
+                interaction.followUp({ content: "I can't unmute this member cause he is not mute", ephemeral: true });
                 return;
             }
             member.roles.remove(member.roles.cache.find(role => role.name === "mute").id);
-            interaction.deleteReply().then(() => interaction.followUp({ content: "This member has been unmuted", ephemeral: true }));
+            await interaction.deleteReply();
+            interaction.followUp({ content: "This member has been unmuted", ephemeral: true });
         } catch(err) { return err; }
     }
 }

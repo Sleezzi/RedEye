@@ -96,7 +96,8 @@ module.exports = {
                 status: "Not done",
                 madeAt: Math.floor(Date.now() / 1000)
             }, client);
-            interaction.deleteReply().then(() => interaction.followUp({ content: `The ticket has been created, (id of ticket: \`${id}\`)`, ephemeral: true  }));
+            await interaction.deleteReply();
+            interaction.followUp({ content: `The ticket has been created, (id of ticket: \`${id}\`)`, ephemeral: true  });
         } catch(err) { return err; }
     }
 }

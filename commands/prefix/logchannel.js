@@ -18,24 +18,23 @@ module.exports = {
         message.channel.sendTyping();
         const channel = message.mentions.channels.first();
         if (!channel) {
-            require("../../components/database").get(`/${message.guild.id}/channels/log/channelId`, client).then(async (id) => {
-                if (typeof id === "object") {
-                    const msg = await message.reply('You must mention the channel to which you want the bot to send log messages');
-                    setTimeout(async () => {
-                        try {
-                            msg.delete();
-                        } catch(err) { return err; }
-                    }, 5000);
-                } else {
-                    const msg = await message.reply('The log channel has been disabled.');
-                    setTimeout(async () => {
-                        try {
-                            msg.delete();
-                        } catch(err) { return err; }
-                    }, 5000);
-                    require("../../components/database").delete(`/${message.guild.id}/channels/log/channelId`, client);
-                }
-            });
+            const id = await require("../../components/database").get(`/${message.guild.id}/channels/log/channelId`, client);
+            if (typeof id === "object") {
+                const msg = await message.reply('You must mention the channel to which you want the bot to send log messages');
+                setTimeout(async () => {
+                    try {
+                        msg.delete();
+                    } catch(err) { return err; }
+                }, 5000);
+            } else {
+                const msg = await message.reply('The log channel has been disabled.');
+                setTimeout(async () => {
+                    try {
+                        msg.delete();
+                    } catch(err) { return err; }
+                }, 5000);
+                require("../../components/database").delete(`/${message.guild.id}/channels/log/channelId`, client);
+            }
             return;
         }
         if (!message.guild.channels.cache.find(c => c.id === channel.id)) {

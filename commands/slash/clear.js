@@ -1,6 +1,6 @@
 module.exports = {
     data: {
-        // name: "clear",
+        name: "clear",
         name_localizations: {
             "en-US": "clear",
             fr: "clear"
@@ -47,7 +47,7 @@ module.exports = {
         if (!interaction.member.permissions.has("ManageMessages")) {
             await interaction.deleteReply();
             interaction.followUp({ embeds: [{
-                title: ":x: - You do not have permission to delete interactions",
+                title: ":x: - You do not have permission to delete messages",
                 color: 0xFF0000,
                 author: {
                     name: interaction.member.tag,
@@ -82,7 +82,8 @@ module.exports = {
         
         if (amount > 100) amount = 100;
         try {
-            const messages = await interaction.channel.messages.fetch({ limit: amount }).then(messages => messages.filter((msg) => 14 < msg.createdAt - Date.now() && (!interaction.options.getUser("member") || msg.member.id === interaction.options.getUser("member").id)));
+            const messages = await interaction.channel.messages.fetch({ limit: amount })
+            .then(messages => messages.filter((msg) => 1_209_600_000 > Date.now() - msg.createdAt && msg.bulkDeletable && (!interaction.options.getUser("member") || msg.member.id === interaction.options.getUser("member").id)));
             await interaction.channel.bulkDelete(messages);
             await interaction.deleteReply();
             interaction.followUp({ embeds: [{

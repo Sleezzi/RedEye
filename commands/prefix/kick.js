@@ -57,10 +57,29 @@ module.exports = {
                 }, 5000);
                 return;
             }
-            let reason = message.content.split(" ").map((string, index) => {if (index === message.content.split(" ").length) return string; if (index > 2) return `${string} `;}).join("");
+            let reason = message.content.split(" ").map((string, index) => {if (index === message.content.split(" ").length) return string; if (index > 2) return `${string} `;}).join("") || "No reason specified";
 
-            await member.kick({ reason: `Reason: "${reason}", kick by: ${message.member.user.tag}` });
-            const msg = await message.channel.send(`**${member.user.tag}** was successfully kicked for the following reason: \`${(reason ? reason : "Aucune raison spécifiée")}\``)
+            await member.kick({ reason: `Reason: "${reason}", kick by: ${message.member.user.username}` });
+            const msg = await message.channel.send({ embeds: [{
+                title: `<a:exit:1205202384326885498> - Kick`,
+                color: 0xFF0000,
+                author: {
+                    name: message.member.username,
+                    icon_url: message.member.user.avatarURL(),
+                    url: message.url,
+                },
+                fields: [
+                    { name: `<:nametag:1200757678104915978> - __Name:__`, value:`${member.user.username} (*${member.id}*)` },
+                    { name: `<:nametag:1200757678104915978> - __Reason:__`, value:`${reason}` },
+                    { name: `<:nametag:1200757678104915978> - __By:__`, value:`${message.member.user.username}` },
+                    { name: `<:nametag:1200757678104915978> - __Date:__`, value:`${member.user.username}` },
+                    { name: `<:nametag:1200757678104915978> - __Name:__`, value:`${member.user.username}` },
+                ],
+                footer: {
+                    text: `Id: ${message.id}`,
+                    icon_url: client.user.avatarURL(),
+                },
+            }] }`**${member.user.tag}** was successfully kicked for the following reason: \`${reason}\``)
             setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
         } catch(err) {
             console.error(err);

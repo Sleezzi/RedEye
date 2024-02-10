@@ -63,10 +63,26 @@ module.exports = {
         try {
             let member = interaction.guild.members.cache.find((member) => member.id === interaction.options.getUser("member").id);
 
-            if (!interaction.member.permissions.has("BanMembers")) return interaction.deleteReply().then(() => interaction.followUp({ content: 'You cannot ban a member from the server', ephemeral: true }));
-            if (!member) return interaction.deleteReply().then(() => interaction.followUp({ content: "Please mention a valid member.", ephemeral: true }));
-            if (interaction.member.id === member.id) return interaction.deleteReply().then(() => interaction.followUp({ content: "You cannot ban yourself from the server", ephemeral: true }));
-            if (!member.bannable) return interaction.deleteReply().then(() => interaction.followUp({ content: "I can't ban this member", ephemeral: true }));
+            if (!interaction.member.permissions.has("BanMembers")) {
+                await interaction.deleteReply();
+                interaction.followUp({ content: 'You cannot ban a member from the server', ephemeral: true });
+                return;
+            }
+            if (!member) {
+                await interaction.deleteReply();
+                interaction.followUp({ content: "Please mention a valid member.", ephemeral: true });
+                return;
+            }
+            if (interaction.member.id === member.id) {
+                await interaction.deleteReply();
+                interaction.followUp({ content: "You cannot ban yourself from the server", ephemeral: true });
+                return;
+            }
+            if (!member.bannable) {
+                await interaction.deleteReply();
+                interaction.followUp({ content: "I can't ban this member", ephemeral: true });
+                return;
+            }
 
             let duration = interaction.options.getString("duration");
             let reason = interaction.options.getString("reason");
@@ -76,10 +92,13 @@ module.exports = {
             } else duration = duration;
 
             if (duration == "Perm") {
-                member.ban({ reason: `Reason: "${reason}", ban by: ${interaction.member.user.tag}` }).then(() => interaction.deleteReply().then(() => interaction.followUp({ content: `${member.user.tag} was successfully banned for the following reason: \`${(reason ? reason: "No reason specified")}\``, ephemeral: true })));
+                await member.ban({ reason: `Reason: "${reason}", ban by: ${interaction.member.user.tag}` });
+                await interaction.deleteReply();
+                interaction.followUp({ content: `${member.user.tag} was successfully banned for the following reason: \`${(reason ? reason: "No reason specified")}\``, ephemeral: true });
             } else {
-                member.ban({ reason: `Reason: "${reason}", ban by: ${interaction.member.user.tag}`, expiresIn: duration })
-                .then(() => interaction.deleteReply().then(() => interaction.followUp({ content: `${member.user.tag} was successfully banned for the following reason: \`${(reason ? reason : "No reason specified")}\` and for a period of \`${duration}s\``, ephemeral: true })));
+                await member.ban({ reason: `Reason: "${reason}", ban by: ${interaction.member.user.tag}`, expiresIn: duration });
+                await interaction.deleteReply();
+                interaction.followUp({ content: `${member.user.tag} was successfully banned for the following reason: \`${(reason ? reason : "No reason specified")}\` and for a period of \`${duration}s\``, ephemeral: true });
             }
         } catch(err) { return err; }
     }

@@ -41,7 +41,11 @@ module.exports = {
                 avatarURL: "",
             };
             response = await fetch(`https://users.roblox.com/v1/users/${user}`);
-            if (response.status !== 200) return interaction.deleteReply().then(() => interaction.followUp({ content: `Unable to find "${user}"`, ephemeral: true }));
+            if (response.status !== 200) {
+                await interaction.deleteReply();
+                interaction.followUp({ content: `Unable to find "${user}"`, ephemeral: true });
+                return;
+            }
             response = await response.json();
             data.username = response.name;
             data.desc = response.description;
@@ -49,7 +53,11 @@ module.exports = {
             data.verified = response.hasVerifiedBadge;
             data.created_at = response.created;
             response = await fetch(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${user}&size=48x48&format=Png&isCircular=false`);
-            if (response.status !== 200) return interaction.deleteReply().then(() => interaction.followUp({ content: `An error has occurred`, ephemeral: true }));
+            if (response.status !== 200) {
+                await interaction.deleteReply();
+                interaction.followUp({ content: `An error has occurred`, ephemeral: true });
+                return;
+            }
             response = await response.json();
             data.avatarURL = response.data[0].imageUrl;
             const embed = {
@@ -79,7 +87,8 @@ module.exports = {
                     icon_url: client.user.avatarURL(),
                 },
             };
-            interaction.deleteReply().then(() => interaction.followUp({ embeds: [ embed ], ephemeral: true }));
+            await interaction.deleteReply();
+            interaction.followUp({ embeds: [ embed ], ephemeral: true });
         } catch(err) { return err; }
     }
 }

@@ -30,7 +30,8 @@ module.exports = {
                 )
                 .setURL(interaction.url)
                 .setFooter({ text: `Id: ${interaction.id}`, iconURL: client.user.avatarURL() });
-            await interaction.deleteReply().then(() => interaction.followUp({ embeds: [embed], ephemeral: true }));
+            await interaction.deleteReply();
+            interaction.followUp({ embeds: [embed], ephemeral: true });
         } catch(err) { return err; }
     }
 }

@@ -228,7 +228,7 @@ module.exports = {
                         await interaction.deleteReply();
                         interaction.followUp({ content: `${response.joke}`, ephemeral: true });
                     } else {
-                        await interaction.deleteReply()
+                        await interaction.deleteReply();
                         interaction.followUp({ content: `${response.setup}\n||${response.delivery}||`, ephemeral: true });
                     }
                 } else {
@@ -236,7 +236,7 @@ module.exports = {
                     interaction.followUp({ content: `There was an error while executing this command : ${response.causedBy[0]}`, ephemeral: true });
                 }
             } else {
-                await interaction.deleteReply()
+                await interaction.deleteReply();
                 interaction.followUp({ content: `There was an error while executing this command`, ephemeral: true });
             }
         } catch(err) { return err; }

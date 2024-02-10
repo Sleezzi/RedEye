@@ -69,9 +69,14 @@ module.exports = {
             }
 
             if (duration == "Perm") {
-                member.ban({ reason: `Reason: "${reason}", ban by: ${message.member.user.tag}` }).then(() => message.channel.send(`${member.user.tag} was successfully banned for the following reason: \`${(reason ? reason : "Aucune raison spécifiée")}\``).then((msg) => { setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000); }));
+                await member.ban({ reason: `Reason: "${reason}", ban by: ${message.member.user.tag}` });
+                const msg = await message.channel.send(`${member.user.tag} was successfully banned for the following reason: \`${(reason ? reason : "Aucune raison spécifiée")}\``);
+                setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
+                
             } else {
-                member.ban({ reason: `Reason: "${reason}", ban by: ${message.member.user.tag}`, expiresIn: duration }).then(() => message.channel.send(`${member.user.tag} was successfully banned for the following reason: \`${(reason ? reason : "No reason specified")}\`and for a period of \`${duration}s\``).then((msg) => { setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000); }));
+                await member.ban({ reason: `Reason: "${reason}", ban by: ${message.member.user.tag}`, expiresIn: duration });
+                const msg = await message.channel.send(`${member.user.tag} was successfully banned for the following reason: \`${(reason ? reason : "No reason specified")}\`and for a period of \`${duration}s\``);
+                setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
             }
         } catch(err) {
             console.error(err);

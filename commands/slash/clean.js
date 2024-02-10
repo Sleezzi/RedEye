@@ -1,6 +1,6 @@
 module.exports = {
     data: {
-        // name: "clean",
+        name: "clean",
         name_localizations: {
             fr: "nettoyer",
             "en-US": "clean"
@@ -40,7 +40,8 @@ module.exports = {
             let messages = { size: 1};
             let messagesDeleted = 0;
             do {
-                messages = await interaction.channel.messages.fetch({ limit: 100 }).then(messages => messages.filter((msg) => msg.member.id === client.user.id));
+                messages = await interaction.channel.messages.fetch({ limit: 100 })
+                .then(messages => messages.filter((msg) => msg.member.id === client.user.id && 1_209_600_000 > Date.now() - msg.createdAt && msg.bulkDeletable));
                 try {
                     await interaction.channel.bulkDelete(messages);
                 } catch(err) { return err; }
