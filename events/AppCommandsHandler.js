@@ -47,7 +47,7 @@ module.exports = {
                             try {
                                 interaction.deleteReply();
                             } catch(err) {console.error(err);}
-                        }, (client.data.cooldown.get(interaction.member.id).cooldown - (Math.floor(Date.now() / 1000) - client.data.cooldown.get(interaction.member.id).usedAt))); // Delete message when the cooldown is end
+                        }, (client.data.cooldown.get(interaction.member.id).cooldown - Date.now() - client.data.cooldown.get(interaction.member.id).usedAt * 1000)); // Delete message when the cooldown is end
                         return;
                     } catch(err) {console.error(err);}
                 }
