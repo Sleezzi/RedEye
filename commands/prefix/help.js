@@ -7,6 +7,8 @@ module.exports = {
     async execute(message, client, Discord) {
         try {
             message.channel.sendTyping();
+            const serverData = await require("../../components/database").get(`/${message.guild}`, client);
+
             let command = message.content.split(' ').slice(1)[0];
             if (command && command !== "help") {
                 if (!client.data.commands.prefix.has(command)) {
@@ -22,9 +24,6 @@ module.exports = {
                     return;
                 }
                 command = client.data.commands.prefix.find((n) => n.name === command);
-
-                const serverData = await require("../../components/database").get(`/${message.guild}`, client)
-
                 const embed = new Discord.EmbedBuilder()
                     .setColor("Aqua")
                     .setTitle("Help:")

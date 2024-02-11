@@ -197,7 +197,7 @@ module.exports = {
                 ]);
 
                 const row = new Discord.ActionRowBuilder().addComponents(select);
-                await interaction.deleteReply();
+                await message.deleteReply();
                 let reply = await message.reply({ embeds: [ mainEmbed ], components: [ row ], ephemeral: true });
                 let collector = reply.createMessageComponentCollector({ componentType: Discord.ComponentType.StringSelect, filter: (i) => i.user.id === message.author.id && i.customId === "Commands type" });
                 
