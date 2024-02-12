@@ -17,16 +17,16 @@ module.exports = {
         }
         message.channel.sendTyping();
         const channel = message.mentions.channels.first();
-        if (!channel) {
+        if (!channel) { // Check if the user put a channel
             const id = await require("../../components/database").get(`/${message.guild.id}/channels/log/channelId`, client);
-            if (typeof id === "object") {
+            if (typeof id === "object") { // Check if the db already has a channelId
                 const msg = await message.reply('You must mention the channel to which you want the bot to send log messages');
                 setTimeout(async () => {
                     try {
                         msg.delete();
                     } catch(err) { return err; }
                 }, 5000);
-            } else {
+            } else { // If the db has a log's channelId
                 const msg = await message.reply('The log channel has been disabled.');
                 setTimeout(async () => {
                     try {
@@ -37,7 +37,7 @@ module.exports = {
             }
             return;
         }
-        if (!message.guild.channels.cache.find(c => c.id === channel.id)) {
+        if (!message.guild.channels.cache.find(c => c.id === channel.id)) { // Check if the bot can access to the channel
             const msg = await message.reply('The mentioned channel does not exist or the bot does not have access to it');
             setTimeout(async () => {
                 try {
@@ -46,7 +46,7 @@ module.exports = {
             }, 5000);
             return;
         }
-        if (!message.guild.channels.cache.find(c => c.id === channel.id).permissionsFor(message.guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages")) {
+        if (!message.guild.channels.cache.find(c => c.id === channel.id).permissionsFor(message.guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages")) { // Check if the bot can send message in clog channel
             const msg = await message.reply('The bot cannot send messages to the mentioned channel');
             setTimeout(async () => {
                 try {
@@ -55,8 +55,9 @@ module.exports = {
             }, 5000);
             return;
         }
+        
         try {
-            require("../../components/database").set(`/${message.guild.id}/channels/log/channelId`, channel.id, client);
+            require("../../components/database").set(`/${message.guild.id}/channels/log/channelId`, channel.id, client); // Register the channel id in db
             const msg = await message.reply('The log channel has been successfully registered');
             setTimeout(async () => {
                 try {

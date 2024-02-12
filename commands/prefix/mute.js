@@ -10,7 +10,7 @@ module.exports = {
             message.channel.sendTyping();
             let member = message.mentions.members.first();
 
-            if (!message.member.permissions.has("ModerateMembers")) {
+            if (!message.member.permissions.has("ModerateMembers")) { // Check if the user have "ModerateMembers"'s permission
                 const msg = await message.channel.send('You can\'t mute this member.');
                 if (msg.deletable) {
                     setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
@@ -18,7 +18,7 @@ module.exports = {
                 return;
             }
             
-            if (!member) {
+            if (!member) { // Check if the user put a member to mute
                 const msg = await message.channel.send("You can\'t mute this member.");
                 if (msg.deletable) {
                     setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
@@ -26,7 +26,7 @@ module.exports = {
                 return;
             }
 
-            if (message.author.id === member.id) {
+            if (message.author.id === member.id) { // Check if the user has not mentioned himself
                 const msg = await message.channel.send("You can't mute yourself.");
                 if (msg.deletable) {
                     setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
@@ -34,7 +34,7 @@ module.exports = {
                 return;
             }
             
-            if (!member.manageable) {
+            if (!member.manageable) { // Check if the bot can mutate the member
                 const msg = await message.channel.send("I can't mute this member");
                 if (msg.deletable) {
                     setTimeout(() => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; }}, 5000);
