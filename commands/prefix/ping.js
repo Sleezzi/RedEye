@@ -2,7 +2,7 @@ module.exports = {
     name: "ping",
     description: "Gives information about the server",
     model: `ping`,
-    category: "Information",
+    category: "Misc",
     cooldown: 15000,
     async execute(message, client, Discord) {
         try {

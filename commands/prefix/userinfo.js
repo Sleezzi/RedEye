@@ -2,7 +2,7 @@ module.exports = {
     name: "userinfo",
     description: "Gives you information about a member or about you",
     model: `userinfo *\`member\`*`,
-    category: "Information",
+    category: "Misc",
     cooldown: 10000,
     async execute(message, client, Discord) {
         try {

@@ -126,9 +126,9 @@ module.exports = {
                     },
                 };
 
-                const infoEmbed = {
+                const miscEmbed = {
                     color: 0x0099ff,
-                    title: 'Help • Information',
+                    title: 'Help • Misc',
                     author: {
                         name: message.member.tag,
                         icon_url: message.member.user.avatarURL(),
@@ -152,24 +152,24 @@ module.exports = {
                             coreEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         } else if (command[1].category === "Fun") {
                             funEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
-                        } else if (command[1].category === "Information") {
-                            infoEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
+                        } else if (command[1].category === "Misc") {
+                            miscEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         }
                     } else if (command.permissions === "Owner" && message.member.id === client.ownerId) {
                         if (command[1].category === "Core") {
                             coreEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         } else if (command[1].category === "Fun") {
                             funEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
-                        } else if (command[1].category === "Information") {
-                            infoEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
+                        } else if (command[1].category === "Misc") {
+                            miscEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         }
                     } else if (message.member.permissions.has(command.permissions)) {
                         if (command[1].category === "Core") {
                             coreEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         } else if (command[1].category === "Fun") {
                             funEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
-                        } else if (command[1].category === "Information") {
-                            infoEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
+                        } else if (command[1].category === "Misc") {
+                            miscEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         }
                     }
                 }
@@ -187,8 +187,8 @@ module.exports = {
                         value: 'core',
                     },
                     {
-                        label: 'Info',
-                        value: 'info',
+                        label: 'Misc',
+                        value: 'misc',
                     },
                     {
                         label: 'Fun',
@@ -220,9 +220,9 @@ module.exports = {
                         } catch(err) { return err; }
                     }
                     
-                    if (interaction.values[0] === "info") {
+                    if (interaction.values[0] === "misc") {
                         try {
-                            reply.edit({ embeds: [ infoEmbed ], components: [ row ], ephemeral: true });
+                            reply.edit({ embeds: [ miscEmbed ], components: [ row ], ephemeral: true });
                         } catch(err) { return err; }
                     }
                     collector = reply.createMessageComponentCollector({ componentType: Discord.ComponentType.StringSelect, filter: (i) => i.user.id === message.member.id, time: 120_000 });

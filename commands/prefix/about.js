@@ -2,7 +2,7 @@ module.exports = {
     name: "about",
     description: "Gives information about the server",
     model: `about`,
-    category: "Information",
+    category: "Misc",
     cooldown: 15000,
     async execute(message, client, Discord) {
         try {

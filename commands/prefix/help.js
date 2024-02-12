@@ -2,7 +2,7 @@ module.exports = {
     name: "help",
     description: "Show you the help menu",
     model: "help *\`command\`*",
-    category: "Information",
+    category: "Misc",
     cooldown: 10000,
     async execute(message, client, Discord) {
         try {

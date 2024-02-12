@@ -2,7 +2,7 @@ module.exports = {
     name: "pic",
     description: "Gives the pdp of a user",
     model: `pic *\`member\`*`,
-    category: "Information",
+    category: "Misc",
     cooldown: 15000,
     async execute(message, client, Discord) {
         try {

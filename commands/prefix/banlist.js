@@ -3,7 +3,7 @@ module.exports = {
     description: "Returns the list of all banned members from the server",
     permissions: "BanMembers",
     model: `banlist`,
-    category: "Information",
+    category: "Misc",
     cooldown: 15000,
     async execute(message, client, Discord) {
         try {
