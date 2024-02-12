@@ -202,6 +202,7 @@ module.exports = {
                 let collector = reply.createMessageComponentCollector({ componentType: Discord.ComponentType.StringSelect, filter: (i) => i.user.id === message.author.id && i.customId === "Commands type" });
                 
                 collector.on("collect", async (interaction) => {
+                    const msg = await interaction.followUp({ content: "<a:loading:1204754788055646218> - Please wait...", ephemeral: true })
                     await interaction.deferReply();
                     if (interaction.values[0] === "main") {
                         try {
@@ -218,14 +219,13 @@ module.exports = {
                             reply.edit({ embeds: [ funEmbed ], components: [ row ], ephemeral: true });
                         } catch(err) { return err; }
                     }
-
+                    
                     if (interaction.values[0] === "info") {
                         try {
                             reply.edit({ embeds: [ infoEmbed ], components: [ row ], ephemeral: true });
                         } catch(err) { return err; }
                     }
                     collector = reply.createMessageComponentCollector({ componentType: Discord.ComponentType.StringSelect, filter: (i) => i.user.id === message.member.id, time: 120_000 });
-                    const msg = await interaction.followUp({ content: "<a:loading:1204754788055646218> - Please wait...", ephemeral: true })
                     if (msg && msg.deletable) msg.delete();
                 });
             }
