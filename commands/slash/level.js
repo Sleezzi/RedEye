@@ -1,3 +1,4 @@
+const canvas = require("canvas");
 module.exports = {
     data: {
         name: "level",
@@ -32,8 +33,8 @@ module.exports = {
         try {
             let member = interaction.guild.members.cache.find((m) => m.id === (interaction.options.getUser("member") ? interaction.options.getUser("member") : interaction.member).id) ?? interaction.member;
 
-            const background = await client.data.canvas.loadImage("https://media.discordapp.net/attachments/1133400218554081311/1133487166840918178/canvasBackground.png?width=1024&height=400");
-            const image = client.data.canvas.createCanvas(1024, 400);
+            const background = await canvas.loadImage("https://media.discordapp.net/attachments/1133400218554081311/1133487166840918178/canvasBackground.png?width=1024&height=400");
+            const image = canvas.createCanvas(1024, 400);
 
             const ctx = image.getContext("2d");
             ctx.drawImage(background, 0, 0, 1024, 400);
@@ -45,9 +46,9 @@ module.exports = {
             const level = await require("../../components/database").get(`/${interaction.guild.id}/levels/${member.id}`, client)
             ctx.fillText(`Level: ${(level.level ? level.level : 1)} (${(level.xp ? level.xp : 0)}/${(level.level ? level.level * 150 : 150)})`, 600, 250);
             
-            const pdpbot = await client.data.canvas.loadImage(`https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png?size=1024`)
+            const pdpbot = await canvas.loadImage(`https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png?size=1024`)
             ctx.drawImage(pdpbot, 967, 345, 50, 50);
-            const pdp = await client.data.canvas.loadImage(`https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=1024`);
+            const pdp = await canvas.loadImage(`https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=1024`);
             ctx.beginPath();
             ctx.arc(300, 166, 123, 0, Math.PI * 2);
             ctx.closePath();

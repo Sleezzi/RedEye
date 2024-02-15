@@ -1,6 +1,5 @@
 console.clear();
-const Discord = require("discord.js");
-const {
+const [Discord, {
     Client,
     version,
     PermissionFlagsBits,
@@ -14,8 +13,10 @@ const {
     PresenceUpdateStatus,
     SlashCommandBuilder,
     Routes,
-    REST,
-} = Discord;
+    REST
+}] = [require("discord.js"), require("discord.js")];
+    
+
 const client = new Client({
     presence: {
         status: "idle",
@@ -33,7 +34,6 @@ firebase.initializeApp({
 });
 client.data = {
     cooldown: new Collection(),
-    canvas: require("canvas"),
     commands: {
         prefix: new Collection(),
         app: new Collection(),
