@@ -1,4 +1,6 @@
-const canvas = require("canvas");
+const { registerFont, createCanvas, loadImage } = require("canvas");
+registerFont("./cdn/fonts/ProtestStrike.ttf", { family: "Protest Strike" }); // Load font
+
 module.exports = {
     name: "level",
     description: "Gives you information about a member or about you",
@@ -9,7 +11,7 @@ module.exports = {
         try {
             message.channel.sendTyping();
             let member = message.mentions.members.first() || message.guild.members.cache.get(message.member.id);
-
+            
             const image = createCanvas(1024, 400); // Create an image
             
             const ctx = image.getContext("2d"); // Initialize canvas
@@ -18,8 +20,8 @@ module.exports = {
             ctx.font = `42px "Protest Strike"`; // Change the text font
             ctx.fillStyle = "#FFFFFF"; // Make the text white
             ctx.textAlign = "center"; // Position the text in the center
-            ctx.fillText("Sleezzi".toUpperCase(), 625, 194); // Write the member's name
-
+            ctx.fillText(member.user.username.toUpperCase(), 625, 194); // Write the member's name
+            
             ctx.font = `35px "Protest Strike"`; // Change the text font
             const level = await require("../../components/database").get(`/${message.guild.id}/levels/${member.id}`, client);
             ctx.fillText(`Level: ${(level.level ? level.level : 1)} (${(level.xp ? level.xp : 0)}/${(level.level ? level.level * 150 : 150)})`, 625, 249); // Writes the member level
@@ -42,8 +44,8 @@ module.exports = {
             ctx.arc(227, 200, 119, 0, Math.PI * 2); // Draw a circle
             ctx.clip(); // Cut the sheet so that you can only write in this circle
             ctx.drawImage(pdp, 109, 80, 238, 238); // Draw the member's profile picture
-
-            const attachment = new Discord.AttachmentBuilder(image.toBuffer(), {name: `${member.user.tag.toLowerCase()} welcom image.png`});
+            
+            const attachment = new Discord.AttachmentBuilder(image.toBuffer(), {name: `${member.user.tag.toLowerCase()}'s level image.png`});
             await message.channel.send({ files: [attachment] });
             
             if (message && message.deletable) message.delete();
