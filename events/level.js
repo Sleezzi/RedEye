@@ -10,7 +10,7 @@ module.exports = {
                 level.xp++;
                 if (level.xp >= (level.level * 150)) {
                     level.level++;
-                    level.xp = level.level * 150 - level.xp;
+                    level.xp = 0;
                     const channel = await message.author.createDM()
                     channel.send({ content: `GG <@${message.member.id}>, you passed **level ${level.level}**`, ephemeral: false });
                 }
