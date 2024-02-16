@@ -5,7 +5,7 @@ const properties = {
     image: {
         width: 1024,
         height: 400,
-        background: "https://blueprint.sleezzi.fr/cdn/img/canvas-background.png"
+        background: "https://blueprint.sleezzi.fr/cdn/img/canvas-background-level.png"
     },
     pdp: {
         background: {
@@ -132,7 +132,11 @@ module.exports = {
             ctx.fillText(member.user.username.toUpperCase(), properties.username.x || 0, properties.username.y || 0); // Write the member's name
             ctx.strokeText(member.user.username.toUpperCase(), properties.username.x || 0, properties.username.y || 0); // Write the member's name
             
-            const level = await require("../../components/database").get(`/${interaction.guild.id}/levels/${member.id}`, client);
+            let level = await require("../../components/database").get(`/${interaction.guild.id}/levels/${member.id}`, client);
+            if (level.level === undefined) level = {
+                level: 1,
+                xp: 0
+            }
             // LEVEL Text
             ctx.font = `${properties.level.size || 42}px "${properties.level.font || "Protest Strike"}"`; // Change the text font
             ctx.fillStyle = properties.level.color || "#FFF"; // Make the text white
