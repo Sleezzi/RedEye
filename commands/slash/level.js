@@ -7,6 +7,22 @@ const properties = {
         height: 400,
         background: "https://blueprint.sleezzi.fr/cdn/img/canvas-background-level.png"
     },
+    overlay: {
+        get x() {
+            return properties.overlay.margin;
+        },
+        get y() {
+            return properties.overlay.margin;
+        },
+        get width() {
+            return properties.image.width - properties.overlay.margin * 2;
+        },       
+        get height() {
+            return properties.image.height - properties.overlay.margin * 2;
+        },
+        color: "#00000050",
+        margin: 15
+    },
     pdp: {
         background: {
             x: 227,
@@ -123,6 +139,10 @@ module.exports = {
             const ctx = image.getContext("2d"); // Initialize canvas
             const background = await loadImage(properties.image.background);
             ctx.drawImage(background, 0, 0, properties.image.width, properties.image.height); // Draw the background image
+            
+            // Drawn overlay
+            ctx.fillStyle = properties.overlay.color || "#FFF"; // Make the text white
+            ctx.fillRect(properties.overlay.x || 0, properties.overlay.y || 0, properties.overlay.width || 0, properties.overlay.height || 0); // Fill the circle blank
             
             // Username
             ctx.font = `${properties.username.size || 42}px "${properties.username.font || "Protest Strike"}"`; // Change the text font

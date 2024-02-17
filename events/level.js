@@ -17,7 +17,7 @@ module.exports = {
             } else level = {
                 level: 1,
                 xp: 1,
-            }                
+            }
             require("../components/database").set(`/${message.guild.id}/levels/${message.member.id}`, level, client);
         } catch (err) { console.error(err); }
     }

@@ -6,6 +6,7 @@ module.exports = {
     category: "Manage",
     cooldown: 5000,
     async execute(message, client, Discord) {
+        message.channel.sendTyping();
         if (!message.member.permissions.has("Administrator")) {
             const msg = await message.reply("<a:no:1205984659524296744> - You do not have permission to do this");
             setTimeout(async () => {
@@ -15,7 +16,6 @@ module.exports = {
             }, 5000);
             return;
         }
-        message.channel.sendTyping();
         const channel = message.mentions.channels.first();
         if (!channel) { // Check if the user put a channel
             const id = await require("../../components/database").get(`/${message.guild.id}/channels/log/channelId`, client);

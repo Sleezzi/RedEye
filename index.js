@@ -101,7 +101,11 @@ client.login(client.config.token).then(() => {
     require("./components/log")("\n", `%green%Logging...%reset%`);
 });
 
-// client.on(Events.MessageCreate, async (message) => {});
+
+
+// client.on(Events.MessageCreate, async (message) => {
+//     message.reactions.cache.get(reaction.emoji.id).users.cache.find(member => member.id === message.member.id)
+// });
 
 process.stdin.setRawMode(true);
 process.stdin.resume();

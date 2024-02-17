@@ -7,23 +7,39 @@ const properties = {
         height: 400,
         background: "https://blueprint.sleezzi.fr/cdn/img/canvas-background-level.png"
     },
+    overlay: {
+        get x() {
+            return properties.overlay.margin;
+        },
+        get y() {
+            return properties.overlay.margin;
+        },
+        get width() {
+            return properties.image.width - properties.overlay.margin * 2;
+        },       
+        get height() {
+            return properties.image.height - properties.overlay.margin * 2;
+        },
+        color: "#00000050",
+        margin: 15
+    },
     pdp: {
         background: {
             x: 227,
             get y() {
-                return properties.image.height / 2
+                return properties.image.height / 2;
             },
             size: 123
         },
         image: {
             get x() {
-                return properties.pdp.background.x - properties.pdp.image.size
+                return properties.pdp.background.x - properties.pdp.image.size;
             },
             get y() {
-                return properties.image.height / 2 - properties.pdp.image.size
+                return properties.image.height / 2 - properties.pdp.image.size;
             },
             get size() {
-                return properties.pdp.background.size - 4
+                return properties.pdp.background.size - 4;
             }
         }
         
@@ -35,40 +51,40 @@ const properties = {
         },
         size: 64,
         get lineWidth() {
-            return Math.floor(properties.username.size / 20)
+            return Math.floor(properties.username.size / 20);
         },
     },
     level: {
         get x() {
-            return 625 - properties.progressBar.with / 2 // => 354
+            return 625 - properties.progressBar.with / 2;
         },
         get y() {
-            return properties.image.height / 3 + 55 + properties.xp.size / 2
+            return properties.image.height / 3 + 55 + properties.xp.size / 2;
         },
         size: 35,
         get lineWidth() {
-            return Math.floor(properties.level.size / 20)
+            return Math.floor(properties.level.size / 20);
         },
         textAlign: "start"
     },
     xp: {
         get x() {
-            return properties.progressBar.x + properties.progressBar.with - 4
+            return properties.progressBar.x + properties.progressBar.with - 4;
         },
         get y() {
-            return properties.progressBar.y + properties.xp.size + 2
+            return properties.progressBar.y + properties.xp.size + 2;
         },
         size: 35,
         get lineWidth() {
-            return Math.floor(properties.xp.size / 20)
+            return Math.floor(properties.xp.size / 20);
         },
     },
     progressBar: {
         get x() {
-            return 625 - properties.progressBar.with / 2
+            return 625 - properties.progressBar.with / 2;
         },
         get y() {
-            return properties.image.height / 3 + 55 * 2 - properties.progressBar.height / 2
+            return properties.image.height / 3 + 55 * 2 - properties.progressBar.height / 2;
         },
         height: 50,
         with: 350,
@@ -76,10 +92,10 @@ const properties = {
     },
     pdpBot: {
         get x() {
-            return properties.image.width - properties.pdpBot.size / 2 - 7
+            return properties.image.width - properties.pdpBot.size / 2 - 7;
         },
         get y() {
-            return properties.image.height - properties.pdpBot.size / 2 - 7
+            return properties.image.height - properties.pdpBot.size / 2 - 7;
         },
         size: 50
     }
@@ -100,6 +116,10 @@ module.exports = {
             const ctx = image.getContext("2d"); // Initialize canvas
             const background = await loadImage(properties.image.background);
             ctx.drawImage(background, 0, 0, properties.image.width, properties.image.height); // Draw the background image
+            
+            // Drawn overlay
+            ctx.fillStyle = properties.overlay.color || "#FFF"; // Make the text white
+            ctx.fillRect(properties.overlay.x || 0, properties.overlay.y || 0, properties.overlay.width || 0, properties.overlay.height || 0); // Fill the circle blank
             
             // Username
             ctx.font = `${properties.username.size || 42}px "${properties.username.font || "Protest Strike"}"`; // Change the text font
