@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="/cdn/css/index.css">
     <link rel="stylesheet" href="/cdn/css/main.css">
     <link rel="stylesheet" href="/cdn/css/fade.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap" rel="stylesheet">
 </head>
 <body>
     <section class="pres column" id="0">
@@ -23,7 +26,8 @@
     </section>
     <section class="fade-up space" id="1">
         <h3>An advanced ticketing and leveling system</h3>
-        <img src="/cdn/img/blueprints_level_image.png" alt="">
+        <canvas height="400" width="1024" id="level" hidden>Your browser does not support canvas, please use another browser</canvas>
+        <img src="/cdn/img/blueprints_level_image.png" alt="" id="level">
     </section>
     <section class="fade-up space" id="2">
         <img src="https://koya.gg/_next/image?url=%2Fassets%2Fimg%2Ffeatures%2Fgreetings.png&w=1920&q=100" alt="">
@@ -34,7 +38,8 @@
         <img src="https://koya.gg/_next/image?url=%2Fassets%2Fimg%2Ffeatures%2Fgreetings.png&w=1920&q=100" alt="">
     </section>
     <section class="fade-up space" id="4">
-        <img src="/cdn/img/blueprints_welcom_image.png" alt="">
+        <img src="/cdn/img/blueprints_welcom_image.png" id="welcome" alt="">
+        <canvas height="400" width="712" id="welcome" hidden>Your browser does not support canvas, please use another browser</canvas>
         <h3>Welcome a new member with welcome images sent to the room you want</h3>
     </section>
     <section class="fade-up space" id="5">

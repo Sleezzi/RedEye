@@ -96,7 +96,7 @@ a#manage::after {
     transition: all 0.5s ease;
 }
 
-section.space img {
+section.space img, section.space canvas {
     width: 45%;
     height: auto;
     max-height: 85%;
@@ -139,7 +139,7 @@ a.icon {
 a.icon::before {
     content: "";
     position: relative;
-    top: calc(1vh / 2);
+    top: 0;
     right: 2px;
     display: inline-flex;
     width: 2vh;
