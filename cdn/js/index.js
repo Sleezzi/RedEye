@@ -113,7 +113,7 @@ async function buildLevel(username, avatar, color) {
         ctx.fillRect(properties.overlay.x || 0, properties.overlay.y || 0, properties.overlay.width || 0, properties.overlay.height || 0); // Fill the circle blank
         
         // // Username
-        ctx.font = `${properties.username.size || 42}px "${properties.username.font || "sherif"}"`; // Change the text font
+        ctx.font = `${properties.username.size || 42}px "${properties.username.font || "Protest Strike"}"`; // Change the text font
         ctx.fillStyle = properties.username.color || "#FFF"; // Make the text white
         ctx.textAlign = properties.username.textAlign || "center"; // Position the text in the center
         ctx.lineWidth = properties.username.lineWidth || 4;  //define the width of the stroke line
@@ -121,7 +121,7 @@ async function buildLevel(username, avatar, color) {
         ctx.strokeText((username || "blueprint").toUpperCase(), properties.username.x || 0, properties.username.y || 0); // Write the member's nam
         
         // LEVEL Text
-        ctx.font = `${properties.level.size || 42}px "${properties.level.font || "sherif"}"`; // Change the text font
+        ctx.font = `${properties.level.size || 42}px "${properties.level.font || "Protest Strike"}"`; // Change the text font
         ctx.fillStyle = properties.level.color || "#FFF"; // Make the text white
         ctx.textAlign = properties.level.textAlign || "center"; // Position the text in the center
         ctx.lineWidth = properties.level.lineWidth || 4;  //define the width of the stroke line
@@ -176,7 +176,8 @@ async function buildLevel(username, avatar, color) {
             ctx.closePath(); // Close last path
         }
     }
-    document.querySelector("canvas#level").removeAttribute("hidden");
+    document.querySelector("a#level").removeAttribute("hidden");
+    document.querySelector("a#level").href = `/overview/level?member=${username}&avatar=${avatar}&color=rgb(${parseInt(color.replace(/^#/, "").substring(0, 2), 16)},${parseInt(color.replace(/^#/, "").substring(2, 4), 16)},${parseInt(color.replace(/^#/, "").substring(2, 6), 16)})&level=1&xp=55`;
     document.querySelector("img#level").style.display = "none";
 }
 
@@ -323,7 +324,8 @@ async function buildwelcome(username, avatar) {
             ctx.closePath(); // Close last path
         }
     }
-    document.querySelector("canvas#welcome").removeAttribute("hidden");
+    document.querySelector("a#welcome").removeAttribute("hidden");
+    document.querySelector("a#welcome").href = `/overview/welcome?member=${username}&avatar=${avatar}`;
     document.querySelector("img#welcome").style.display = "none";
 }
 

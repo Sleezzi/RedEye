@@ -96,10 +96,15 @@ a#manage::after {
     transition: all 0.5s ease;
 }
 
-section.space img, section.space canvas {
+section.space img, section.space canvas, section.space a {
     width: 45%;
     height: auto;
     max-height: 85%;
+}
+section.space a > canvas {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
 }
 section.space h3 {
     height: auto;
