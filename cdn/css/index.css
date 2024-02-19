@@ -38,7 +38,7 @@ a#add, a#manage {
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    border-radius: 2vh;
+    border-radius: 20px;
     background: #00000075;
     height: auto;
     width: auto;
@@ -65,7 +65,7 @@ a#add::after {
 }
 a#add:hover, a#manage:hover {
     background: #000000;
-    border-radius: 1vh;
+    border-radius: 10px;
     margin: 0;
     height: calc(auto - 5px);
     width: calc(auto + 1%);
