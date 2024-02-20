@@ -88,7 +88,7 @@ const properties = {
         },
         height: 50,
         with: 350,
-        color: `#${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}`
+        color: `#${Math.floor(Math.random()*16777215).toString(16)}`
     },
     pdpBot: {
         get x() {

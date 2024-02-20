@@ -11,7 +11,7 @@ module.exports = {
             if (!message.member.permissions.has("ManageMessages")) {
                 const msg = await message.reply({embeds: [
                     {
-                        title: "<a:no:1205984659524296744> - You do not have permission to delete messages",
+                        title: "<a:no:1209518375169167391> - You do not have permission to delete messages",
                         color: 0xFF0000,
                         author: {
                             name: message.member.tag,

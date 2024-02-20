@@ -103,8 +103,8 @@ module.exports = {
             ctx.fillStyle = properties.username.color || "#FFF"; // Make the text white
             ctx.textAlign = properties.username.textAlign || "center"; // Position the text in the center
             ctx.lineWidth = properties.username.lineWidth || 4;  //define the width of the stroke line
-            ctx.fillText(member.user.username.toUpperCase().toUpperCase(), properties.username.x || 0, properties.username.y || 0); // Write the member's name
-            ctx.strokeText(member.user.username.toUpperCase().toUpperCase(), properties.username.x || 0, properties.username.y || 0);
+            ctx.fillText(member.user.username.toUpperCase(), properties.username.x || 0, properties.username.y || 0); // Write the member's name
+            ctx.strokeText(member.user.username.toUpperCase(), properties.username.x || 0, properties.username.y || 0);
             
             // welcom Text
             ctx.fillStyle = properties.welcom.color || "#FFF"; // Make the text white

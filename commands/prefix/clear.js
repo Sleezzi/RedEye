@@ -8,7 +8,7 @@ module.exports = {
     async execute(message, client, Discord) {
         if (!message.member.permissions.has("ManageMessages")) {
             const msg = await message.reply({embeds: [{
-                title: "<a:no:1205984659524296744> - You do not have permission to delete messages",
+                title: "<a:no:1209518375169167391> - You do not have permission to delete messages",
                 color: 0xFF0000,
                 author: {
                     name: message.member.tag,
@@ -27,7 +27,7 @@ module.exports = {
         let amount = message.content.split(' ').slice(1)[0];
         if (!amount) {
             const msg = await message.reply({embeds: [{
-                title: '<a:no:1205984659524296744> - You must specify a number of messages to delete',
+                title: '<a:no:1209518375169167391> - You must specify a number of messages to delete',
                 color: 0xFF0000,
                 author: {
                     name: message.member.tag,

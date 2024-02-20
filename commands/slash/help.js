@@ -34,6 +34,7 @@ module.exports = {
             let command = message.options.getString("command");
             if (command) {
                 if (!client.data.commands.app.get(command)) {
+                    await message.deleteReply();
                     message.followUp({ content: `/${command} is not a command.`, ephemeral: true });
                     return;
                 }
@@ -150,25 +151,31 @@ module.exports = {
                     if (!command.permissions) {
                         if (command[1].category === "Core") {
                             coreEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
-                        } else if (command[1].category === "Fun") {
+                        }
+                        if (command[1].category === "Fun") {
                             funEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
-                        } else if (command[1].category === "Misc") {
+                        }
+                        if (command[1].category === "Misc") {
                             miscEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         }
                     } else if (command.permissions === "Owner" && message.member.id === client.ownerId) {
                         if (command[1].category === "Core") {
                             coreEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
-                        } else if (command[1].category === "Fun") {
+                        }
+                        if (command[1].category === "Fun") {
                             funEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
-                        } else if (command[1].category === "Misc") {
+                        }
+                        if (command[1].category === "Misc") {
                             miscEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         }
                     } else if (message.member.permissions.has(command.permissions)) {
                         if (command[1].category === "Core") {
                             coreEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
-                        } else if (command[1].category === "Fun") {
+                        }
+                        if (command[1].category === "Fun") {
                             funEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
-                        } else if (command[1].category === "Misc") {
+                        }
+                        if (command[1].category === "Misc") {
                             miscEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         }
                     }
@@ -203,7 +210,6 @@ module.exports = {
                 
                 collector.on("collect", async (interaction) => {
                     const msg = await interaction.followUp({ content: "<a:loading:1204754788055646218> - Please wait...", ephemeral: true })
-                    await interaction.deferReply();
                     if (interaction.values[0] === "main") {
                         try {
                             reply.edit({ embeds: [ mainEmbed ], omponents: [ row ], ephemeral: true });

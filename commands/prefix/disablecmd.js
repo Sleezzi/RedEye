@@ -8,7 +8,7 @@ module.exports = {
     async execute(message, client, Discord) {
         message.channel.sendTyping();
         if (!message.member.permissions.has("Administrator")) {
-            const msg = await message.reply("<a:no:1205984659524296744> - You do not have permission to disable command");
+            const msg = await message.reply("<a:no:1209518375169167391> - You do not have permission to disable command");
             setTimeout(async () => {
                 try {
                     msg.delete();

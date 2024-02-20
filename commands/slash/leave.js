@@ -46,7 +46,7 @@ module.exports = {
             interaction.followUp({ content: `The bot left server **${interaction.options.getString("id")}**`, ephemeral: true });
         } else {
             await interaction.deleteReply();
-            interaction.followUp({ content: `<a:no:1205984659524296744> - <@${interaction.member.id}>, you do not have the necessary permissions to use this command`, ephemeral: true });
+            interaction.followUp({ content: `<a:no:1209518375169167391> - <@${interaction.member.id}>, you do not have the necessary permissions to use this command`, ephemeral: true });
         }
     }
 }

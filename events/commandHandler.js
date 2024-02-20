@@ -31,7 +31,7 @@ module.exports = {
                             color: 0xff0000,
                             title: `Error`,
                             fields: [
-                                { name: '<a:no:1205984659524296744> - The administrators of this server have disabled this command.', value: '\u200B', inline: false },
+                                { name: '<a:no:1209518375169167391> - The administrators of this server have disabled this command.', value: '\u200B', inline: false },
                                 { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},
                             ],
                             footer: {

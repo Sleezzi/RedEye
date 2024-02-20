@@ -31,7 +31,7 @@ module.exports = {
     async execute(interaction, client, Discord) {
         if (!interaction.member.permissions.has("Administrator")) {
             await interaction.deleteReply()
-            interaction.followUp({ content: "<a:no:1205984659524296744> - You do not have permission to do this", ephemeral: true });
+            interaction.followUp({ content: "<a:no:1209518375169167391> - You do not have permission to do this", ephemeral: true });
             return;
         }
         const prefix = interaction.options.getString("prefix").replaceAll(" ", "");
