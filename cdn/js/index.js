@@ -112,7 +112,7 @@ async function buildLevel(username, avatar, color) {
         ctx.fillStyle = properties.overlay.color || "#FFF"; // Make the text white
         ctx.fillRect(properties.overlay.x || 0, properties.overlay.y || 0, properties.overlay.width || 0, properties.overlay.height || 0); // Fill the circle blank
         
-        // // Username
+        // Username
         ctx.font = `${properties.username.size || 42}px "${properties.username.font || "Protest Strike"}"`; // Change the text font
         ctx.fillStyle = properties.username.color || "#FFF"; // Make the text white
         ctx.textAlign = properties.username.textAlign || "center"; // Position the text in the center
@@ -128,12 +128,12 @@ async function buildLevel(username, avatar, color) {
         ctx.fillText(`Level: 1`, properties.level.x || 0, properties.level.y || 0); // Writes the member level
         ctx.strokeText(`Level: 1`, properties.level.x || 0, properties.level.y || 0);
         
-        // // Progress bar
+        // Progress bar
         ctx.fillRect(properties.progressBar.x || 0, properties.progressBar.y || 0, properties.progressBar.with || 0, properties.progressBar.height || 0); // Fill the circle blank
         ctx.fillStyle = color || properties.progressBar.color; // Make the text white
         ctx.fillRect(properties.progressBar.x || 0, properties.progressBar.y || 0, (55 / (1 * 150) * properties.progressBar.with) || 0, properties.progressBar.height || 0); // Fill the circle blank
         
-        // // XP Text
+        // XP Text
         ctx.fillStyle = "#FFF"; // Make the text white
         ctx.font = `${properties.xp.font || 35}px "${properties.xp.font || "Protest Strike"}"`; // Change the text font
         ctx.textAlign = properties.xp.textAlign || "end"; // Position the text in the center
@@ -141,9 +141,16 @@ async function buildLevel(username, avatar, color) {
         ctx.fillText(`55/150`, properties.xp.x || 0, properties.xp.y || 0); // Writes the member level
         ctx.strokeText(`55/150`, properties.xp.x || 0, properties.xp.y || 0);
         
-        // // Drawn bot logo
+        ctx.beginPath();
+        ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2 + properties.overlay.margin / 1.15, 0, Math.PI * 2);
+        ctx.save(); // Save the image
+        ctx.clip();
+        ctx.drawImage(background, 0, 0, properties.image.width, properties.image.height)
+        ctx.restore();
+        
+        // Drawn bot logo
         const pdpbot = new Image();
-        pdpbot.src = "https://cdn.discordapp.com/avatars/1195058289931726848/8bfdcab3822a834daa8e3f2b7a6f0cec.png?size=64";
+        pdpbot.src = "/cdn/img/Logo/BP.png";
         pdpbot.onload = () => {
             ctx.beginPath(); // Create a new path
             ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2, 0, Math.PI * 2); // Draw a circle
@@ -154,7 +161,7 @@ async function buildLevel(username, avatar, color) {
             ctx.closePath(); // Close last path
         }
         
-        // // Drawn the user profile picture
+        // Drawn the user profile picture
         ctx.beginPath(); // Create a new path
         ctx.arc(properties.pdp.background.x || 0, properties.pdp.background.y || 0, properties.pdp.background.size || 0, 0, Math.PI * 2); // Draw a circle
         ctx.save(); // Save the image
@@ -163,9 +170,8 @@ async function buildLevel(username, avatar, color) {
         ctx.restore(); // Restore the sheet
         ctx.closePath(); // Close last path
         
-        
         const pdp = new Image();
-        pdp.src = avatar || "https://cdn.discordapp.com/avatars/1195058289931726848/8bfdcab3822a834daa8e3f2b7a6f0cec.png?size=1024";
+        pdp.src = avatar || "/cdn/img/Logo/BP.png";
         pdp.onload = () => {
             ctx.beginPath(); // Create a new path
             ctx.arc(properties.pdp.background.x || 0, properties.pdp.background.y || 0, properties.pdp.image.size || 0, 0, Math.PI * 2); // Draw a circle
@@ -177,7 +183,7 @@ async function buildLevel(username, avatar, color) {
         }
     }
     document.querySelector("a#level").removeAttribute("hidden");
-    document.querySelector("a#level").href = `/overview/level?member=${username}&avatar=${avatar}&color=rgb(${parseInt(color.replace(/^#/, "").substring(0, 2), 16)},${parseInt(color.replace(/^#/, "").substring(2, 4), 16)},${parseInt(color.replace(/^#/, "").substring(2, 6), 16)})&level=1&xp=55`;
+    document.querySelector("a#level").href = `/overview/level?member=${username}&avatar=${avatar}&color=${color.replace(/^#/, "%23")}&level=1&xp=55`;
     document.querySelector("img#level").style.display = "none";
 }
 
@@ -289,9 +295,16 @@ async function buildwelcome(username, avatar) {
         ctx.fillText(`Welcom!`, properties.welcom.x || 0, properties.welcom.y || 0); // Writes the member level
         ctx.strokeText(`Welcom!`, properties.welcom.x || 0, properties.welcom.y || 0);
         
-        // // Drawn bot logo
+        ctx.beginPath();
+        ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2 + properties.overlay.margin / 1.15, 0, Math.PI * 2);
+        ctx.save(); // Save the image
+        ctx.clip();
+        ctx.drawImage(background, 0, 0, properties.image.width, properties.image.height)
+        ctx.restore();
+        
+        // Drawn bot logo
         const pdpbot = new Image();
-        pdpbot.src = "https://cdn.discordapp.com/avatars/1195058289931726848/8bfdcab3822a834daa8e3f2b7a6f0cec.png?size=64";
+        pdpbot.src = "/cdn/img/Logo/BP.png";
         pdpbot.onload = () => {
             ctx.beginPath(); // Create a new path
             ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2, 0, Math.PI * 2); // Draw a circle
@@ -313,7 +326,7 @@ async function buildwelcome(username, avatar) {
         
         
         const pdp = new Image();
-        pdp.src = avatar || "https://cdn.discordapp.com/avatars/1195058289931726848/8bfdcab3822a834daa8e3f2b7a6f0cec.png?size=1024";
+        pdp.src = avatar || "/cdn/img/Logo/BP.png";
         pdp.onload = () => {
             ctx.beginPath(); // Create a new path
             ctx.arc(properties.pdp.background.x || 0, properties.pdp.background.y || 0, properties.pdp.image.size || 0, 0, Math.PI * 2); // Draw a circle

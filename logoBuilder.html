@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blueprint</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&family=Protest+Guerrilla&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas height="1024" width="1024"></canvas>
+    <script>
+        const canvas = document.querySelector("canvas");
+        const ctx = canvas.getContext("2d");
+        ctx.arc(1024/2, 1024/2, 1024/2, 0, Math.PI *2);
+        ctx.clip();
+        ctx.fillStyle = "#FFF";
+        ctx.fillRect(0, 0, 1024, 1024);
+        ctx.fillStyle = "#000";
+        ctx.font = "750px \"Protest Guerrilla\"";
+        ctx.fillText("BP", 1024/2-750/2-20, 1024/2+750/3, 1024);
+    </script>
+</body>
+</html>

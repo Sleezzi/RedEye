@@ -114,7 +114,7 @@
         ctx.fillRect(properties.overlay.x || 0, properties.overlay.y || 0, properties.overlay.width || 0, properties.overlay.height || 0); // Fill the circle blank
         
         // // Username
-        ctx.font = `${properties.username.size || 42}px "${properties.username.font || "sherif"}"`; // Change the text font
+        ctx.font = `${properties.username.size || 42}px "${properties.username.font || "Protest Strike"}"`; // Change the text font
         ctx.fillStyle = properties.username.color || "#FFF"; // Make the text white
         ctx.textAlign = properties.username.textAlign || "center"; // Position the text in the center
         ctx.lineWidth = properties.username.lineWidth || 4;  //define the width of the stroke line
@@ -126,7 +126,7 @@
             xp: 0
         }
         // LEVEL Text
-        ctx.font = `${properties.level.size || 42}px "${properties.level.font || "sherif"}"`; // Change the text font
+        ctx.font = `${properties.level.size || 42}px "${properties.level.font || "Protest Strike"}"`; // Change the text font
         ctx.fillStyle = properties.level.color || "#FFF"; // Make the text white
         ctx.textAlign = properties.level.textAlign || "center"; // Position the text in the center
         ctx.lineWidth = properties.level.lineWidth || 4;  //define the width of the stroke line
@@ -146,13 +146,20 @@
         ctx.fillText(`${params.get("xp") || "0"}/${params.get("level") * 150 || 150}`, properties.xp.x || 0, properties.xp.y || 0); // Writes the member level
         ctx.strokeText(`${params.get("xp") || "0"}/${params.get("level") * 150 || 150}`, properties.xp.x || 0, properties.xp.y || 0);
         
-        // // Drawn bot logo
+        ctx.beginPath();
+        ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2 + properties.overlay.margin / 1.15, 0, Math.PI * 2);
+        ctx.save(); // Save the image
+        ctx.clip();
+        ctx.drawImage(background, 0, 0, properties.image.width, properties.image.height)
+        ctx.restore();
+        
+        // Drawn bot logo
         const pdpbot = new Image();
-        pdpbot.src = "https://cdn.discordapp.com/avatars/1195058289931726848/8bfdcab3822a834daa8e3f2b7a6f0cec.png?size=64";
+        pdpbot.src = "/cdn/img/Logo/BP_Rounded.png";
         pdpbot.onload = () => {
             ctx.beginPath(); // Create a new path
-            ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2, 0, Math.PI * 2); // Draw a circle
             ctx.save(); // Save the image
+            ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2, 0, Math.PI * 2); // Draw a circle
             ctx.clip(); // Cut the sheet so that you can only write in this circle
             ctx.drawImage(pdpbot, properties.pdpBot.x - properties.pdpBot.size / 2, properties.pdpBot.y - properties.pdpBot.size / 2 || 0, properties.pdpBot.size || 0, properties.pdpBot.size || 0); // Draw the bot's profile picture
             ctx.restore(); // Restore the sheet
@@ -170,7 +177,7 @@
         
         
         const pdp = new Image();
-        pdp.src = params.get("avatar") || "https://cdn.discordapp.com/avatars/1195058289931726848/8bfdcab3822a834daa8e3f2b7a6f0cec.png?size=1024";
+        pdp.src = params.get("avatar") || "/cdn/img/Logo/BP_Rounded.png";
         pdp.onload = () => {
             ctx.beginPath(); // Create a new path
             ctx.arc(properties.pdp.background.x || 0, properties.pdp.background.y || 0, properties.pdp.image.size || 0, 0, Math.PI * 2); // Draw a circle

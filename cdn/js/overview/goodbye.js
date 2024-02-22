@@ -107,9 +107,16 @@
         ctx.fillText(`Goodbye!`, properties.welcom.x || 0, properties.welcom.y || 0); // Writes the member level
         ctx.strokeText(`Goodbye!`, properties.welcom.x || 0, properties.welcom.y || 0);
         
-        // // Drawn bot logo
+        ctx.beginPath();
+        ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2 + properties.overlay.margin / 1.15, 0, Math.PI * 2);
+        ctx.save(); // Save the image
+        ctx.clip();
+        ctx.drawImage(background, 0, 0, properties.image.width, properties.image.height)
+        ctx.restore();
+        
+        // Drawn bot logo
         const pdpbot = new Image();
-        pdpbot.src = "https://cdn.discordapp.com/avatars/1195058289931726848/8bfdcab3822a834daa8e3f2b7a6f0cec.png?size=64";
+        pdpbot.src = "/cdn/img/Logo/BP.png";
         pdpbot.onload = () => {
             ctx.beginPath(); // Create a new path
             ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2, 0, Math.PI * 2); // Draw a circle
@@ -120,7 +127,7 @@
             ctx.closePath(); // Close last path
         }
         
-        // // Drawn the user profile picture
+        // Drawn the user profile picture
         ctx.beginPath(); // Create a new path
         ctx.arc(properties.pdp.background.x || 0, properties.pdp.background.y || 0, properties.pdp.background.size || 0, 0, Math.PI * 2); // Draw a circle
         ctx.save(); // Save the image
@@ -130,7 +137,7 @@
         ctx.closePath(); // Close last path
         
         const pdp = new Image();
-        pdp.src = params.get("avatar") || "https://cdn.discordapp.com/avatars/1195058289931726848/8bfdcab3822a834daa8e3f2b7a6f0cec.png?size=1024";
+        pdp.src = params.get("avatar") || "/cdn/img/Logo/BP.png?size=1024";
         pdp.onload = () => {
             ctx.beginPath(); // Create a new path
             ctx.arc(properties.pdp.background.x || 0, properties.pdp.background.y || 0, properties.pdp.image.size || 0, 0, Math.PI * 2); // Draw a circle
