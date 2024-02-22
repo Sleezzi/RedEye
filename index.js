@@ -27,23 +27,21 @@ const client = new Client({
 });
 
 const { readdirSync } = require("fs");
-const firebase = require("firebase-admin");
-firebase.initializeApp({
-    credential: firebase.credential.cert(require("./config.json").firebase),
-    databaseURL: "https://blueprint-bot-db-default-rtdb.europe-west1.firebasedatabase.app/"
-});
+
 client.data = {
     cooldown: new Collection(),
     commands: {
         prefix: new Collection(),
         app: new Collection(),
-    },
-    db: firebase.database()
+    }
 };
 client.ownerId = "542703093981380628";
 
 client.config = require("./config.json");
 console.clear();
+
+
+require("./components/database").initialize();
 
 for (const file of readdirSync("./commands/prefix").filter((file) => file.endsWith(".js"))) {
     const command = require(`./commands/prefix/${file}`);
@@ -101,10 +99,8 @@ client.login(client.config.token).then(() => {
     require("./components/log")("\n", `%green%Logging...%reset%`);
 });
 
-
-
-// client.on(Events.MessageCreate, async (message) => {
-//     message.reactions.cache.get(reaction.emoji.id).users.cache.find(member => member.id === message.member.id)
+// client.on(Events.InteractionCreate, async (interaction) => {
+//     interaction.deleteReply
 // });
 
 process.stdin.setRawMode(true);

@@ -20,7 +20,7 @@ module.exports = {
                 url: message.url
             },
             fields: [
-                { name: ":mechanical_arm: - __**Server(s):**__", value: `Total member: 0`, inline: false},
+                { name: ":mechanical_arm:・__**Server(s):**__", value: `Total member: 0`, inline: false},
             ],
             url: message.url,
             footer: {

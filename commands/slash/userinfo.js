@@ -37,7 +37,7 @@ module.exports = {
                     roles = `<@&${member._roles.map((i) => i).join('>, <@&')}>`;
                 }
             }
-            let level = await require("../../components/database").get(`/${interaction.guild.id}/levels/${member.id}`, client);
+            let level = await require("../../components/database").get(`/${interaction.guild.id}/levels/${member.id}`);
             if (!level.level) level = {
                 level: 1,
                 xp: 0
@@ -54,8 +54,8 @@ module.exports = {
                 { name: "<:ID:1200784630865985598> - __**ID:**__", value: `> \`${(member.id)}\``},
                 { name: `<:boost:1200817314740842616> - __**Level:**__`, value: `> ${level.level} (${level.xp}/${level.level * 150})`},
                 { name: `<:member:1200816753421328484> - __**Role${(member._roles.length > 1 ? "s" : "")}:**__`, value: `> ${roles}` },
-                { name: ":inbox_tray: - __**Account created:**__", value: `> <t:${Math.floor(member.user.createdTimestamp / 1000)}:d> (<t:${Math.floor(member.user.createdTimestamp / 1000)}:R>)`},
-                { name: ":inbox_tray: - __**Member since:**__", value: `> <t:${Math.floor(member.joinedTimestamp / 1000)}:d> (<t:${Math.floor(member.joinedTimestamp / 1000)}:R>)`},
+                { name: ":inbox_tray:・__**Account created:**__", value: `> <t:${Math.floor(member.user.createdTimestamp / 1000)}:d> (<t:${Math.floor(member.user.createdTimestamp / 1000)}:R>)`},
+                { name: ":inbox_tray:・__**Member since:**__", value: `> <t:${Math.floor(member.joinedTimestamp / 1000)}:d> (<t:${Math.floor(member.joinedTimestamp / 1000)}:R>)`},
                 { name: "<:time:1205987554260684870> - __**Date:**__", value: `<t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`},
             )
             .setURL(interaction.url)

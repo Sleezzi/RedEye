@@ -5,7 +5,7 @@ module.exports = {
     async execute([message], client, Discord) {
         try {
             if (message.channel.type === 1 || message.member.user.bot) return;
-            const {...level} = await require("../components/database").get(`/${message.guild.id}/levels/${message.member.id}`, client);
+            const {...level} = await require("../components/database").get(`/${message.guild.id}/levels/${message.member.id}`);
             if (level.level) {
                 level.xp++;
                 if (level.xp >= (level.level * 150)) {
@@ -18,7 +18,7 @@ module.exports = {
                 level: 1,
                 xp: 1,
             }
-            require("../components/database").set(`/${message.guild.id}/levels/${message.member.id}`, level, client);
+            require("../components/database").set(`/${message.guild.id}/levels/${message.member.id}`, level);
         } catch (err) { console.error(err); }
     }
 }

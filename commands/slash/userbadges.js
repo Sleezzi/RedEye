@@ -5,10 +5,10 @@ module.exports = {
             "en-US": "userbadges",
             fr: "userbadges"
         },
-        description: "List of badges obtained by a player",
+        description: "List of badges obtained by a Roblox player",
         description_localizations: {
-            "en-US": "List of badges obtained by a player",
-            fr: "Liste les badges obtenue par un joueur"
+            "en-US": "List of badges obtained by a Roblox player",
+            fr: "Liste les badges obtenue par un joueur Roblox"
         },
         options: [
             {
@@ -75,9 +75,9 @@ module.exports = {
                 fields: [
                     { name: `<:nametag:1200757678104915978> - __Name:__`, value: `> \`${data.username}\``, inline: true },
                     { name: `<:ID:1200784630865985598> - __Id:__`, value: `> \`${user}\``, inline: true },
-                    { name: `:bust_in_silhouette: - __Avatar:__`, value: `> [Image](${data.avatarURL})`, inline: true },
-                    { name: `:book: - __Bio:__`, value: `> \`${(data.desc ? data.desc : "Unset")}\``, inline: true },
-                    { name: `:link: - __URL:__`, value: `> [${data.username}](https://www.roblox.com/users/${user}/profile)`, inline: true },
+                    { name: `:bust_in_silhouette:・__Avatar:__`, value: `> [Image](${data.avatarURL})`, inline: true },
+                    { name: `:book:・__Bio:__`, value: `> \`${(data.desc ? data.desc : "Unset")}\``, inline: true },
+                    { name: `:link:・__URL:__`, value: `> [${data.username}](https://www.roblox.com/users/${user}/profile)`, inline: true },
                     { name: `<a:ban:1205986766687965276> - __Banned:__`, value: `> ${(data.banned ? `<a:yes:1205984539852144751>` : `<a:no:1209518375169167391>`)}`, inline: true },
                     { name: `<a:verified:1205995010567184475> - __Verified:__`, value: `> ${(data.verified ? `<a:yes:1205984539852144751>` : `<a:no:1209518375169167391>`)}`, inline: true },
                 ],
@@ -93,9 +93,9 @@ module.exports = {
                 return;
             }
             response = await response.json();
-            embed.fields.push({ name: `:trophy: - __Badge${response.data.length > 1 ? "s" : ""}:__`, value: `\u200B`, inline: false});
+            embed.fields.push({ name: `:trophy:・__Badge${response.data.length > 1 ? "s" : ""}:__`, value: `\u200B`, inline: false});
             response.data.forEach((badge) => {
-                embed.fields.push({ name: `${badge.displayName}:`, value: `> :book: - Description: \`${badge.description}\`,\n> :warn: - Difficulty to own: ${badge.statistics.winRatePercentage * 100}%,\n> <:ID:1200784630865985598> - Id: \`${badge.id}\``, inline: true});
+                embed.fields.push({ name: `${badge.displayName}:`, value: `> :book:・Description: \`${badge.description}\`,\n> :warn:・Difficulty to own: ${badge.statistics.winRatePercentage * 100}%,\n> <:ID:1200784630865985598> - Id: \`${badge.id}\``, inline: true});
             });
             
             embed.fields.push({ name: `\u200B`, value: `\u200B`, inline: false });

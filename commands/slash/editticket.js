@@ -110,7 +110,7 @@ module.exports = {
                     status: "Not done",
                     madeAt: ticket.madeAt,
                     updatedAt: Math.floor(Date.now() / 1000)
-                }, client);
+                });
                 await interaction.deleteReply();
                 interaction.followUp({ content: `Ticket edited!`, ephemeral: true  });
             } else {

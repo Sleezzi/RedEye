@@ -5,7 +5,7 @@ module.exports = {
     async execute([message, newMessage], client, Discord) {
         try {
             if (!message.channel.type === 1 || message.author.bot) return;
-            let serverData = await require("../components/database").get(`/${message.guild.id}`, client);
+            let serverData = await require("../components/database").get(`/${message.guild.id}`);
             if (message.channel.type !== 1) return;
             if (serverData.prefix) serverData.prefix = "!";
             if (newMessage.content.startsWith(serverData.prefix)) {
@@ -25,8 +25,8 @@ module.exports = {
             .setColor("Orange")
             .setTitle("Message edited")
             .addFields(
-                { name: ":keyboard: - __Old message:__", value: `\`${message.content}\``, inline: true},
-                { name: ":keyboard: - __New message:__", value: `\`${newMessage.content}\``, inline: true},
+                { name: ":keyboard:・__Old message:__", value: `\`${message.content}\``, inline: true},
+                { name: ":keyboard:・__New message:__", value: `\`${newMessage.content}\``, inline: true},
                 { name: "<:tag:1200813621970739251> - __Channel:__", value: `<#${message.channelId}> \`(${message.channelId})\``},
                 { name: "<:nametag:1200757678104915978> - __Author:__", value: `\`${message.author}\``},
                 { name: "<:time:1205987554260684870> - __Date the message was sent:__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},

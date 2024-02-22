@@ -5,10 +5,10 @@ module.exports = {
             fr: "dire",
             "en-US": "say"
         },
-        description: "Delete messages in the channel in which the command is used",
+        description: "Make the bot say something",
         description_localizations: {
-            fr: "Supprime tous les messages du bot sur le salon",
-            "en-US": "Delete messages in the channel in which the command is used"
+            fr: "Fait dire quelque chose au bot",
+            "en-US": "Make the bot say something"
         },
         default_permission: undefined,
         default_member_permissions: "8",

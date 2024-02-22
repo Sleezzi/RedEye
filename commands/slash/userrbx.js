@@ -74,9 +74,9 @@ module.exports = {
                 fields: [
                     { name: `<:nametag:1200757678104915978> - __Name:__`, value: `> \`${data.username}\``, inline: true },
                     { name: `<:ID:1200784630865985598> - __Id:__`, value: `> \`${user}\``, inline: true },
-                    { name: `:bust_in_silhouette: - __Avatar:__`, value: `> [Image](${data.avatarURL})`, inline: true },
-                    { name: `:book: - __Bio:__`, value: `> \`${(data.desc ? data.desc : "Unset")}\``, inline: true },
-                    { name: `:link: - __URL:__`, value: `> [${data.username}](https://www.roblox.com/users/${user}/profile)`, inline: true },
+                    { name: `:bust_in_silhouette:・__Avatar:__`, value: `> [Image](${data.avatarURL})`, inline: true },
+                    { name: `:book:・__Bio:__`, value: `> \`${(data.desc ? data.desc : "Unset")}\``, inline: true },
+                    { name: `:link:・__URL:__`, value: `> [${data.username}](https://www.roblox.com/users/${user}/profile)`, inline: true },
                     { name: `<a:ban:1205986766687965276> - __Banned:__`, value: `> ${(data.banned ? `<a:yes:1205984539852144751>` : `<a:no:1209518375169167391>`)}`, inline: true },
                     { name: `<a:verified:1205995010567184475> - __Verified:__`, value: `> ${(data.verified ? `<a:yes:1205984539852144751>` : `<a:no:1209518375169167391>`)}`, inline: true },
                     { name: `<:time:1205987554260684870>__Account created at:__`, value: `> \`${data.created_at}\``, inline: true },

@@ -7,7 +7,7 @@ module.exports = {
     async execute(message, client, Discord) {
         try {
             message.channel.sendTyping();
-            const serverData = await require("../../components/database").get(`/${message.guild}`, client);
+            const serverData = await require("../../components/database").get(`/${message.guild}`);
 
             let command = message.content.split(' ').slice(1)[0];
             if (command && command !== "help") {
@@ -31,9 +31,9 @@ module.exports = {
                     .setAuthor({ name: message.member.user.tag, iconURL: message.member.user.avatarURL(), url: message.url })
                     .addFields(
                         { name: "<:nametag:1200757678104915978> - __**Name:**__", value: `**\`${command.name}\`**`},
-                        { name: ":book: - __**Description:**__", value: `**\`${command.description}\`**`},
-                        { name: ":unlock: - __**Can be used:**__", value: `${(command.permissions !== undefined ? (command.permissions === "Owner" && message.member.id === client.ownerId ? "<a:yes:1205984539852144751>" : (message.member.permissions.has(command.permissions) ? "<a:yes:1205984539852144751>" : "<a:no:1209518375169167391>")) : "<a:yes:1205984539852144751>")}`},
-                        { name: ":question: - __**How to use:**__", value: `${serverData.prefix ?? "!"}${command.model}`},
+                        { name: ":book:・__**Description:**__", value: `**\`${command.description}\`**`},
+                        { name: ":unlock:・__**Can be used:**__", value: `${(command.permissions !== undefined ? (command.permissions === "Owner" && message.member.id === client.ownerId ? "<a:yes:1205984539852144751>" : (message.member.permissions.has(command.permissions) ? "<a:yes:1205984539852144751>" : "<a:no:1209518375169167391>")) : "<a:yes:1205984539852144751>")}`},
+                        { name: ":question:・__**How to use:**__", value: `${serverData.prefix ?? "!"}${command.model}`},
                         { name: "<:time:1205987554260684870> - __**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`},
                     )
                     .setURL(message.url)
@@ -49,8 +49,8 @@ module.exports = {
                         url: message.url,
                     },
                     fields: [
-                        { name: `:keyboard: - __Prefix:__`, value: `> \`${(serverData.prefix || "!")}\``, inline: false },
-                        { name: `:robot: - __Bot made by:__`, value: `> [Sleezzi](https://sleezzi.fr/)`, inline: false },
+                        { name: `:keyboard:・__Prefix:__`, value: `> \`${(serverData.prefix || "!")}\``, inline: false },
+                        { name: `:robot:・__Bot made by:__`, value: `> [Sleezzi](https://sleezzi.fr/)`, inline: false },
                         { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true },
                         { name: `<:time:1205987554260684870> - __End in:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000 + 120)}:d> (<t:${Math.floor(message.createdTimestamp / 1000 + 120)}:R>)`, inline: true },
                     ],

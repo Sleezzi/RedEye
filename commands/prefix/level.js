@@ -129,7 +129,7 @@ module.exports = {
             ctx.fillText(member.user.username.toUpperCase(), properties.username.x || 0, properties.username.y || 0); // Write the member's name
             ctx.strokeText(member.user.username.toUpperCase(), properties.username.x || 0, properties.username.y || 0); // Write the member's name
             
-            let level = await require("../../components/database").get(`/${message.guild.id}/levels/${member.id}`, client);
+            let level = await require("../../components/database").get(`/${message.guild.id}/levels/${member.id}`);
             if (level.level === undefined) level = {
                 level: 1,
                 xp: 0
@@ -154,11 +154,18 @@ module.exports = {
             ctx.fillText(`${level.xp}/${level.level * 150}`, properties.xp.x || 0, properties.xp.y || 0); // Writes the member level
             ctx.strokeText(`${level.xp}/${level.level * 150}`, properties.xp.x || 0, properties.xp.y || 0);
             
+            // Put a margin with the overlay to the pdp bot
+            ctx.beginPath();
+            ctx.save(); // Save the image
+            ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2 + properties.overlay.margin / 1.25, 0, Math.PI * 2);
+            ctx.clip();
+            ctx.drawImage(background, 0, 0, properties.image.width, properties.image.height); // Draw the background image
+            ctx.closePath();
+            
             // Drawn bot logo
             ctx.beginPath(); // Create a new path
             const pdpbot = await loadImage(`https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png?size=64`); // Load the bot's profile image
             ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2, 0, Math.PI * 2); // Draw a circle
-            ctx.save(); // Save the image
             ctx.clip(); // Cut the sheet so that you can only write in this circle
             ctx.drawImage(pdpbot, properties.pdpBot.x - properties.pdpBot.size / 2, properties.pdpBot.y - properties.pdpBot.size / 2 || 0, properties.pdpBot.size || 0, properties.pdpBot.size || 0); // Draw the bot's profile picture
             ctx.restore(); // Restore the sheet

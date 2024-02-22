@@ -35,7 +35,7 @@ module.exports = {
             }, 5000);
             return;
         }
-        let commands = await require("../../components/database").get(`/${message.guild.id}/disabled`, client)
+        let commands = await require("../../components/database").get(`/${message.guild.id}/disabled`)
         if (!commands[0]) commands = [];
         if (commands.find(cmd => cmd === command)) {
             const msg = await message.reply('The specified command is already disabled');
@@ -47,7 +47,7 @@ module.exports = {
             return;
         }
         commands.push(command);
-        require("../../components/database").set(`/${message.guild.id}/disabled`, commands, client);
+        require("../../components/database").set(`/${message.guild.id}/disabled`, commands);
         const msg = await message.reply('The command has been disabled');
         setTimeout(async () => {
             try {

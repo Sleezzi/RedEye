@@ -32,9 +32,9 @@ module.exports = {
     },
     async execute(interaction, client, Discord) {
         try {
-            const ticket = await require("../../components/database").get(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`, client);
+            const ticket = await require("../../components/database").get(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`);
             if (ticket.content) {
-                await require("../../components/database").delete(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`, client);
+                await require("../../components/database").delete(`/${interaction.guild.id}/tickets/${interaction.member.id}/${interaction.options.getString("id")}`);
                 await interaction.deleteReply();
                 interaction.followUp({ content: `This ticket has been removed`, ephemeral: true  });
             } else {

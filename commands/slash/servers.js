@@ -5,10 +5,10 @@ module.exports = {
             "en-US": "guild",
             fr: "servers"
         },
-        description: "Show you the list of guild where the bot is",
+        description: "Shows you the list of servers the bot is on",
         description_localizations: {
-            "en-US": "Show you the list of guild where the bot is",
-            fr: "Vous montre la liste des serveurs sur lequel le bot est"
+            "en-US": "Shows you the list of servers the bot is on",
+            fr: "Vous montre la liste des serveurs sur lesquels le bot est"
         },
         default_member_permissions: "8",
         options: [],
@@ -30,7 +30,7 @@ module.exports = {
                     url: interaction.url
                 },
                 fields: [
-                    { name: ":mechanical_arm: - __**Server(s):**__", value: `Total member: 0`, inline: false},
+                    { name: ":mechanical_arm:・__**Server(s):**__", value: `Total member: 0`, inline: false},
                 ],
                 url: interaction.url,
                 footer: {

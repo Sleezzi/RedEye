@@ -42,16 +42,11 @@ module.exports = {
                 if (client.data.cooldown.has(interaction.member.id)) { // Checks if the user is in cooldown
                     try {
                         await interaction.deleteReply();
-                        interaction.followUp(`Please wait **${client.data.cooldown.get(interaction.member.id).cooldown / 1000 - (Math.floor(Date.now() / 1000) - client.data.cooldown.get(interaction.member.id).usedAt)}s** before using command.`);
-                        setTimeout(() => {
-                            try {
-                                interaction.deleteReply();
-                            } catch(err) {console.error(err);}
-                        }, (client.data.cooldown.get(interaction.member.id).cooldown - Date.now() - client.data.cooldown.get(interaction.member.id).usedAt * 1000)); // Delete message when the cooldown is end
+                        interaction.followUp({ content: `Please wait **${client.data.cooldown.get(interaction.member.id).cooldown / 1000 - (Math.floor(Date.now() / 1000) - client.data.cooldown.get(interaction.member.id).usedAt)}s** before using command.`, ephemeral: true});
                         return;
                     } catch(err) {console.error(err);}
                 }
-                let disabled = await require("../components/database").get(`/${interaction.guild.id}/disabled`, client);
+                let disabled = await require("../components/database").get(`/${interaction.guild.id}/disabled`);
                 if (!disabled[0]) disabled = [];
                 if (disabled.find(c => c === command)) { // Check if the server has disabled the command
                     await interaction.deleteReply();

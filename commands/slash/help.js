@@ -50,8 +50,8 @@ module.exports = {
                     },
                     fields: [
                         { name: "<:nametag:1200757678104915978> - __**Name:**__", value: `**\`${command.name}\`**`},
-                        { name: ":book: - __**Description:**__", value: `**\`${command.description}\`**`},
-                        { name: ":gear: - __**Options:**__", value: `\u200B`},
+                        { name: ":book:・__**Description:**__", value: `**\`${command.description}\`**`},
+                        { name: ":gear:・__**Options:**__", value: `\u200B`},
                     ],
                     url: message.url,
                     footer: {
@@ -70,7 +70,7 @@ module.exports = {
                 await message.deleteReply()
                 message.followUp({ embeds: [embed], ephemeral: true });
             } else {
-                let serverData = await require("../../components/database").get(`/${message.guild.id}`, client);
+                let serverData = await require("../../components/database").get(`/${message.guild.id}`);
                 const mainEmbed = {
                     color: 0x0099ff,
                     title: 'Help • Main',
@@ -80,8 +80,8 @@ module.exports = {
                         url: message.url,
                     },
                     fields: [
-                        { name: `:keyboard: - __Prefix:__`, value: `> \`${(serverData.prefix || "!")}\``, inline: false },
-                        { name: `:robot: - __Bot made by:__`, value: `> [Sleezzi](https://sleezzi.fr/)`, inline: false },
+                        { name: `:keyboard:・__Prefix:__`, value: `> \`${(serverData.prefix || "!")}\``, inline: false },
+                        { name: `:robot:・__Bot made by:__`, value: `> [Sleezzi](https://sleezzi.fr/)`, inline: false },
                         { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true },
                         { name: `<:time:1205987554260684870> - __End in:__`, value: `> <t:${Math.floor(message.createdTimestamp / 1000 + 120)}:d> (<t:${Math.floor(message.createdTimestamp / 1000 + 120)}:R>)`, inline: true },
                     ],

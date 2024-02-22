@@ -95,7 +95,7 @@ module.exports = {
                 username: interaction.member.user.username,
                 status: "Not done",
                 madeAt: Math.floor(Date.now() / 1000)
-            }, client);
+            });
             await interaction.deleteReply();
             interaction.followUp({ content: `The ticket has been created, (id of ticket: \`${id}\`)`, ephemeral: true  });
         } catch(err) { return err; }

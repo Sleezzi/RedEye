@@ -5,7 +5,7 @@ module.exports = {
     async execute([message], client, Discord) {
         try {
             if (message.channel.type === 1 || message.author.bot) return;
-            let serverData = await require("../components/database").get(`/${message.guild.id}`, client);
+            let serverData = await require("../components/database").get(`/${message.guild.id}`);
             if (!serverData.prefix) serverData.prefix = "!";
             if (!message.content.startsWith(serverData.prefix) &&
                 serverData.channels &&
@@ -20,7 +20,7 @@ module.exports = {
                     .setTitle("New message")
                     .setAuthor({ name: message.author.tag, iconURL: message.author.avatarURL(), url: message.url })
                     .addFields(
-                        { name: ":keyboard: - __Message:__", value: `**\`${message.content}\`**` },
+                        { name: ":keyboard:・__Message:__", value: `**\`${message.content}\`**` },
                         { name: "<:tag:1200813621970739251> - __Channel:__", value: `<#${message.channelId}> \`(${message.channelId})\``},
                         { name: "<:nametag:1200757678104915978> - __Author:__", value: `**\`${message.author.tag}\`** \`(${message.author.id})\``},
                         { name: "<:time:1205987554260684870> - __Date:__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)` },

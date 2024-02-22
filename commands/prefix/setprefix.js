@@ -30,9 +30,9 @@ module.exports = {
                 return;
             }
             if (prefix === "!") {
-                require("../../components/database").delete(`/${message.guild.id}/prefix`, client);
+                require("../../components/database").delete(`/${message.guild.id}/prefix`);
             } else {
-                require("../../components/database").set(`/${message.guild.id}/prefix`, prefix, client);
+                require("../../components/database").set(`/${message.guild.id}/prefix`, prefix);
             }
             const msg = await message.reply(`The prefix has been successfully updated, now it's \`${prefix}\``);
             setTimeout(async () => {

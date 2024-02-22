@@ -4,7 +4,7 @@ module.exports = {
     type: "on",
     async execute([message], client, Discord) {
         try {
-            let serverData = await require("../components/database").get(`/${message.guild.id}`, client);
+            let serverData = await require("../components/database").get(`/${message.guild.id}`);
             if (message.channel.type !== 1 ||
                 (serverData.prefix && message.content.startsWith(serverData.prefix)) &&
                 serverData.channels &&
@@ -21,7 +21,7 @@ module.exports = {
             .setTitle("Message deleted")
             .setAuthor({ name: message.author.tag, iconURL: message.author.avatarURL(), url: message.url })
             .addFields(
-                { name: ":keyboard: - __Message:__", value: `**\`${message.content}\`**` },
+                { name: ":keyboard:・__Message:__", value: `**\`${message.content}\`**` },
                 { name: "<:tag:1200813621970739251> - __Channel:__", value: `<#${message.channelId}> \`(${message.channelId})\``},
                 { name: "<:nametag:1200757678104915978> - __Author:__", value: `**\`${message.author.tag}\`** \`(${message.author.id})\``},
                 { name: "<:time:1205987554260684870> - __Date the message was sent:__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`, inline: true},

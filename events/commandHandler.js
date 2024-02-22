@@ -5,7 +5,7 @@ module.exports = {
     async execute([message], client, Discord) {
         if (message.channel.type === 1
         || message.author.bot) return;
-        const serverData = await require("../components/database").get(`/${message.guild.id}`, client); // Get serverData from db
+        const serverData = await require("../components/database").get(`/${message.guild.id}`); // Get serverData from db
         if (!serverData.prefix) serverData.prefix = "!"; // Check if the server have a custom prefix, if he don't have, it's put ! by default
         if (!serverData.disabled) serverData.disabled = []; // Check if the server have a disabled command, if he don't have, it set disabled on a Array to don't make error
         if (message.content.startsWith(serverData.prefix)) { // Check if message is a command
@@ -55,8 +55,8 @@ module.exports = {
                             .setTitle("New command")
                             .setAuthor({ name: message.author.tag, iconURL: message.author.avatarURL(), url: message.url })
                             .addFields(
-                                { name: ":keyboard: - __Command:__", value: `**\`${command}\`**` },
-                                { name: ":gear: - __Options(s):__", value: `**\`${message.content.split(`${serverData.prefix}${command} `).slice(1)}\`**` },
+                                { name: ":keyboard:・__Command:__", value: `**\`${command}\`**` },
+                                { name: ":gear:・__Options(s):__", value: `**\`${message.content.split(`${serverData.prefix}${command} `).slice(1)}\`**` },
                                 { name: "<:tag:1200813621970739251> - __Channel:__", value: `<#${message.channelId}> \`(${message.channelId})\``},
                                 { name: "<:nametag:1200757678104915978> - __Author:__", value: `**\`${message.author.tag}\`** \`(${message.author.id})\``},
                                 { name: "<:time:1205987554260684870> - __Date:__", value: `<t:${Math.floor(message.createdAt / 1000)}:d> (<t:${Math.floor(message.createdAt / 1000)}:R>)` },
@@ -85,8 +85,8 @@ module.exports = {
                     .setTitle("New command")
                     .setAuthor({ name: message.author.tag, iconURL: message.author.avatarURL(), url: message.url })
                     .addFields(
-                        { name: ":keyboard: - __Command:__", value: `**\`${command}\`**` },
-                        { name: ":gear: - __Options(s):__", value: `**\`${message.content.replace(`${serverData.prefix}${command}`, "").split(" ")[0]}\`**` },
+                        { name: ":keyboard:・__Command:__", value: `**\`${command}\`**` },
+                        { name: ":gear:・__Options(s):__", value: `**\`${message.content.replace(`${serverData.prefix}${command}`, "").split(" ")[0]}\`**` },
                         { name: "<:tag:1200813621970739251> - __Channel:__", value: `<#${message.channelId}> \`(${message.channelId})\``},
                         { name: "<:nametag:1200757678104915978> - __Author:__", value: `**\`${message.author.tag}\`** \`(${message.author.id})\``},
                         { name: "<:time:1205987554260684870> -__Date:__", value: `<t:${Math.floor(message.createdMath.floor(Date.now() / 1000) / 1000)}:d> (<t:${Math.floor(message.createdMath.floor(Date.now() / 1000) / 1000)}:R>)` },

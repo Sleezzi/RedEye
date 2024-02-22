@@ -5,10 +5,10 @@ module.exports = {
             "en-US": "setprefix",
             fr: "setprefix"
         },
-        description: "Send you in private message the rules of the server",
+        description: "Change the bot prefix on this server",
         description_localizations: {
-            "en-US": "Send you in private message the rules of the server",
-            fr: "Envoie les règles du serveur"
+            "en-US": "Change the bot prefix on this server",
+            fr: "Change le prefixe du bot sur ce serveur"
         },
         options: [
             {
@@ -37,9 +37,9 @@ module.exports = {
         const prefix = interaction.options.getString("prefix").replaceAll(" ", "");
         try {
             if (prefix === "!") {
-                require("../../components/database").delete(`/${interaction.guild.id}/prefix`, client);
+                require("../../components/database").delete(`/${interaction.guild.id}/prefix`);
             } else {
-                require("../../components/database").set(`/${interaction.guild.id}/prefix`, prefix, client);
+                require("../../components/database").set(`/${interaction.guild.id}/prefix`, prefix);
             }
             await interaction.deleteReply()
             interaction.followUp({ content: `The prefix has been successfully updated, now it's \`${prefix}\``, ephemeral: true });

@@ -10,7 +10,7 @@ module.exports = {
             const APIPing = Date.now() - message.createdAt;
             let embed = {
                 color: 0x00FFFF,
-                title: ":wireless: - Latency:",
+                title: ":wireless:・Latency:",
                 author: {
                     name: message.author.tag,
                     icon_url: message.member.user.avatarURL(),
