@@ -5,16 +5,17 @@ module.exports = {
     async execute([message], client, Discord) {
         try {
             let serverData = await require("../components/database").get(`/${message.guild.id}`);
-            if (message.channel.type !== 1 ||
-                (serverData.prefix && message.content.startsWith(serverData.prefix)) &&
-                serverData.channels &&
-                serverData.channels.log &&
-                serverData.channels.log.channelId &&
-                message.guild.channels.cache.get(serverData.channels.log.channelId) &&
-                message.channel.id !== serverData.channels.log.channelId &&
-                message.guild.channels.cache.get(serverData.channels.log.channelId).permissionsFor(message.guild.members.cache.get(client.user.id)).has("SendMessages") ||
+            if (!serverData.prefix) serverData.prefix = "!";
+            if (
+                message.channel.type === 1 ||
+                message.content.startsWith(serverData.prefix) ||
+                !serverData.channels ||
+                !serverData.channels.log ||
+                !serverData.channels.log.channelId ||
+                !message.guild.channels.cache.get(serverData.channels.log.channelId) ||
+                message.channel.id === serverData.channels.log.channelId ||
+                !message.guild.channels.cache.get(serverData.channels.log.channelId).permissionsFor(message.guild.members.cache.get(client.user.id)).has("SendMessages") ||
                 message.member.id === client.user.id
-
             ) return;
             const embed = new Discord.EmbedBuilder()
             .setColor("Red")

@@ -5,7 +5,6 @@ const modules = {
         model: "#channel",
         async execute(message, response, reaction, client, Discord) {
             try {
-                response.channel.sendTyping();
                 const channel = response.mentions.channels.first();
                 if (!channel) { // Check if the user put a channel
                     const id = await require("../../components/database").get(`/${response.guild.id}/channels/log/channelId`);
@@ -64,7 +63,6 @@ const modules = {
         model: "#channel",
         async execute(message, response, reaction, client, Discord) {
             try {
-                response.channel.sendTyping();
                 const channel = response.mentions.channels.first();
                 if (!channel) { // Check if the user put a channel
                     const id = await require("../../components/database").get(`/${response.guild.id}/channels/welcome/channelId`);
@@ -123,7 +121,6 @@ const modules = {
         model: "#channel",
         async execute(message, response, reaction, client, Discord) {
             try {
-                response.channel.sendTyping();
                 const channel = response.mentions.channels.first();
                 if (!channel) { // Check if the user put a channel
                     const id = await require("../../components/database").get(`/${response.guild.id}/channels/goodbye/channelId`);
@@ -173,6 +170,17 @@ const modules = {
                         } catch(err) { console.error(err); }
                     }, 5000);
                 } catch(err) { console.error(err); }
+                return;
+            } catch (err) { console.error(err); }
+        }
+    },
+    autorole: {
+        emoji: "1200816753421328484",
+        description: "Automatically assigns a role to the new member",
+        model: "@role",
+        async execute(message, response, reaction, client, Discord) {
+            try {
+                console.log(response.mentions.roles.first());
                 return;
             } catch (err) { console.error(err); }
         }
@@ -253,6 +261,7 @@ module.exports = {
                         ) return;
                         
                         used = true;
+                        response.channel.sendTyping();
                         await modules[Object.keys(modules).find(module =>
                             modules[module].emoji === msg.reactions.cache.find(r =>
                                 r.emoji.id === reaction.emoji.id &&

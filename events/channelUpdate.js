@@ -5,7 +5,11 @@ module.exports = {
     async execute([oldChannel, channel], client, Discord) {
         try {
             const id = await require("../components/database").get(`/${message.guild.id}/channels/log/channelId`);
-            if (typeof id === "object" || !channel.guild.channels.cache.has(id) || !channel.guild.channels.cache.get(id).permissionsFor(message.guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages")) return;
+            if (
+                typeof id === "object" ||
+                !channel.guild.channels.cache.has(id) ||
+                !channel.guild.channels.cache.get(id).permissionsFor(message.guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages")
+            ) return;
             const embed = {
                 color: 0xffa500,
                 title: `${(channel.type === 0 ? "Text" : (channel.type === 2 ? "Voice" : (channel.type === 15 ? "Forum" : (channel.type === 5 ? "Announcement" : (channel.type === 13 ? "Stage" : "Unknown")))))} Salon edited`,

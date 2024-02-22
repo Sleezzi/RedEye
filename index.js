@@ -89,7 +89,7 @@ for (const file of readdirSync("./events").filter((file) => file.endsWith(".js")
     if (Object.hasOwnProperty.call(Events, event.event) && event.name && event.type && event.execute) {
         client[event.type](Events[`${event.event}`], (...args) => {
             try {
-                return event.execute(args, client, Discord);
+                return event.execute(args, client, Discord).then((err) => { if (err) console.error(err); });
             } catch(err) { return; }
         });
     }
