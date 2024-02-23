@@ -19,6 +19,17 @@ const properties = {
             width: 150,
             margin: 15
         }
+    },
+    pigeon: {
+        image: {
+            height: 1000,
+            width: 1500
+        },
+        pdp: {
+            size: 250,
+            x: 640,
+            y: 500
+        }
     }
 }
 
@@ -73,6 +84,19 @@ module.exports = {
                         },
                         value: "brazzer"
                     },
+                    {
+                        name: "pigeon",
+                        name_localizations: {
+                            fr: "pigeon",
+                            "en-US": "pigeon"
+                        },
+                        description: 'Makes you part of the "Shut up and take my money" meme',
+                        description_localizations: {
+                            fr: "Vous intègre au meme \"Shut up and take my money\"",
+                            "en-US": "Makes you part of the \"Shut up and take my money\" meme"
+                        },
+                        value: "pigeon"
+                    },
                 ],
                 required: true,
                 type: "String"
@@ -112,6 +136,14 @@ module.exports = {
                 ctx.drawImage(pdp, 0, 0, properties.blur.image.width, properties.blur.image.height);
                 const brazzer = await loadImage("https://images-assets-ht.project1content.com/Brazzers/Tour/Tour/PC/5f1b1271a1e429.16105348.png");
                 ctx.drawImage(brazzer, properties.brazzer.image.width - properties.brazzer.brazzer.width - properties.brazzer.brazzer.margin, properties.brazzer.image.height - properties.brazzer.brazzer.height - properties.brazzer.brazzer.margin, properties.brazzer.brazzer.width, properties.brazzer.brazzer.height)
+            }
+            if (interaction.options.getString("type") === "pigeon") {
+                const background = await loadImage(`https://blueprint.sleezzi.fr/cdn/img/meme/shut-up-and-take-my-money.png`);
+                ctx.drawImage(background, 0, 0, properties.pigeon.image.width, properties.pigeon.image.height);
+                const pdp = await loadImage(`https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=1024`);
+                ctx.arc(properties.pigeon.pdp.x, properties.pigeon.pdp.x, properties.pigeon.pdp.size, 0, Math.PI * 2);
+                ctx.clip();
+                ctx.drawImage(pdp, properties.pigeon.pdp.x, properties.pigeon.pdp.x, properties.pigeon.pdp.size, properties.pigeon.pdp.size);
             }
 
             // Drawn bot logo
