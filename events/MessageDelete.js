@@ -8,7 +8,7 @@ module.exports = {
             if (!serverData.prefix) serverData.prefix = "!";
             if (
                 message.channel.type === 1 ||
-                message.content.startsWith(serverData.prefix) ||
+                // message.content.startsWith(serverData.prefix) ||
                 !serverData.channels ||
                 !serverData.channels.log ||
                 !serverData.channels.log.channelId ||

@@ -180,7 +180,55 @@ const modules = {
         model: "@role",
         async execute(message, response, reaction, client, Discord) {
             try {
-                console.log(response.mentions.roles.first());
+                const role = response.mentions.roles.first();
+                if (!role) { // Check if the user put a channel
+                    const id = await require("../../components/database").get(`/${response.guild.id}/autorole`);
+                    if (typeof id === "object") { // Check if the db already has a channelId
+                        const msg = await response.reply('You must mention the role that the bot must give to the new member');
+                        setTimeout(() => {
+                            try {
+                                msg.delete();
+                            } catch(err) { console.error(err); }
+                        }, 5000);
+                    } else { // If the db has a goodbye's channelId
+                        const msg = await response.reply('The autorole module has been disabled.');
+                        setTimeout(() => {
+                            try {
+                                msg.delete();
+                            } catch(err) { console.error(err); }
+                        }, 5000);
+                        require("../../components/database").delete(`/${response.guild.id}/autorole`);
+                    }
+                    return;
+                }
+                if (!response.guild.roles.cache.find(r => r.id === role.id)) { // Check if the bot can access to the channel
+                    const msg = await response.reply('The bot cannot find this role');
+                    setTimeout(() => {
+                        try {
+                            msg.delete();
+                        } catch(err) { console.error(err); }
+                    }, 5000);
+                    return;
+                }
+                if (!response.guild.roles.cache.find(r => r.id === role.id).editable) { // Check if the bot can send message in clog channel
+                    const msg = await response.reply('The bot cannot give this role to the member');
+                    setTimeout(() => {
+                        try {
+                            msg.delete();
+                        } catch(err) { console.error(err); }
+                    }, 5000);
+                    return;
+                }
+                
+                try {
+                    require("../../components/database").set(`/${response.guild.id}/autorole`, role.id); // Register the channel id in db
+                    const msg = await response.reply('The autorole has been successfully registered');
+                    setTimeout(() => {
+                        try {
+                            msg.delete();
+                        } catch(err) { console.error(err); }
+                    }, 5000);
+                } catch(err) { console.error(err); }
                 return;
             } catch (err) { console.error(err); }
         }
@@ -249,7 +297,9 @@ module.exports = {
                 }
                 msg.reactions.cache.forEach(r => {
                     if (r.emoji.id !== reaction.emoji.id) r.remove();
-                    msg.react(r.emoji);
+                    try {
+                        msg.react(r.emoji);
+                    } catch (err) { return err; }
                 });
                 
                 client.on(Discord.Events.MessageCreate, async (response) => {

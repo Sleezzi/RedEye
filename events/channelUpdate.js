@@ -4,11 +4,11 @@ module.exports = {
     type: "on",
     async execute([oldChannel, channel], client, Discord) {
         try {
-            const id = await require("../components/database").get(`/${message.guild.id}/channels/log/channelId`);
+            const id = await require("../components/database").get(`/${channel.guild.id}/channels/log/channelId`);
             if (
                 typeof id === "object" ||
                 !channel.guild.channels.cache.has(id) ||
-                !channel.guild.channels.cache.get(id).permissionsFor(message.guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages")
+                !channel.guild.channels.cache.get(id).permissionsFor(channel.guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages")
             ) return;
             const embed = {
                 color: 0xffa500,
@@ -25,37 +25,37 @@ module.exports = {
             }
             
             if (oldChannel.nsfw !== channel.nsfw) {
-                embed.fields.push(
+                embed.fields.unshift(
                     { name: `:underage:・__NSFW before:__`, value: `> ${(oldChannel.nsfw === true ? `<a:yes:1205984539852144751>` : `<a:no:1209518375169167391>`)}`, inline: true},
                     { name: `:underage:・__NSFW after:__`, value: `> ${(channel.nsfw === true ? `<a:yes:1205984539852144751>` : `<a:no:1209518375169167391>`)}`, inline: true },
                     { name: '\u200B', value: '\u200B', inline: true },
                 );
             } else {
-                embed.fields.push(
+                embed.fields.unshift(
                     { name: `:underage:・__NSFW:__`, value: `> ${(channel.nsfw === true ? `<a:yes:1205984539852144751>` : `<a:no:1209518375169167391>`)}`, inline: true},
                 );
             }
             
             if (oldChannel.topic !== channel.topic) {
-                embed.fields.push(
+                embed.fields.unshift(
                     { name: `:book:・__Old description:__`, value: `> ${oldChannel.topic}`, inline: true},
                     { name: `:book:・__New description:__`, value: `> ${channel.topic}`, inline: true },
                     { name: '\u200B', value: '\u200B', inline: true },
                 );
             } else {
-                embed.fields.push(
+                embed.fields.unshift(
                     { name: `:book:・__Description:__`, value: `> ${channel.topic}`, inline: true},
                 );
             }
             
             if (oldChannel.name !== channel.name) {
-                embed.fields.push(
+                embed.fields.unshift(
                     { name: `<:nametag:1200757678104915978> - __Old name:__`, value: `> \`${oldChannel.name}\``, inline: true },
                     { name: `<:nametag:1200757678104915978> - __New name:__`, value: `> <#${channel.id}> \`(${channel.name})\``, inline: true },
                     { name: '\u200B', value: '\u200B', inline: true },
                 );
             } else {
-                embed.fields.push(
+                embed.fields.unshift(
                     { name: `<:nametag:1200757678104915978> - __Name:__`, value: `> <#${channel.id}> \`(${channel.name})\``},
                 );
             }

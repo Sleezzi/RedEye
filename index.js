@@ -99,8 +99,8 @@ client.login(client.config.token).then(() => {
     require("./components/log")("\n", `%green%Logging...%reset%`);
 });
 
-// client.on(Events.InteractionCreate, async (interaction) => {
-//     interaction.deleteReply
+// client.on(Events.MessageCreate, async (response) => {
+//     response.guild.roles.cache.find(role => role.id === "").
 // });
 
 process.stdin.setRawMode(true);

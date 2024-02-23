@@ -4,11 +4,11 @@ module.exports = {
     type: "on",
     async execute([channel], client, Discord) {
         try {
-            const id = await require("../components/database").get(`/${message.guild.id}/channels/log/channelId`);
+            const id = await require("../components/database").get(`/${channel.guild.id}/channels/log/channelId`);
             if (
                 typeof id === "object" ||
                 !channel.guild.channels.cache.has(id) ||
-                !channel.guild.channels.cache.get(id).permissionsFor(message.guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages")
+                !channel.guild.channels.cache.get(id).permissionsFor(channel.guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages")
             ) return;
             const embed = new Discord.EmbedBuilder()
             .setColor("Green")
