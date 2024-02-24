@@ -13,7 +13,7 @@ module.exports = {
                     client.destroy(client.config.token);
                 }, 4990);
             } else {
-                const msg = await message.channel.send(`<a:no:1209518375169167391> - <@${message.member.id}>, you do not have the necessary permissions to use this command`);
+                const msg = await message.channel.send(`<a:no:1211019198881472622> - <@${message.member.id}>, you do not have the necessary permissions to use this command`);
                 setTimeout(() => {
                     msg.delete();
                 }, 5000);

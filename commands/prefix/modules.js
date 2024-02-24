@@ -246,7 +246,7 @@ module.exports = {
         try {
             message.channel.sendTyping();
             if (!message.member.permissions.has("Administrator")) {
-                const msg = await message.reply("<a:no:1209518375169167391> - You do not have permission to do this");
+                const msg = await message.reply("<a:no:1211019198881472622> - You do not have permission to do this");
                 setTimeout(async () => {
                     try {
                         msg.delete();

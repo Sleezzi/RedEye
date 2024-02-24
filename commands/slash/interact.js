@@ -141,14 +141,14 @@ module.exports = {
                 const background = await loadImage(`https://blueprint.sleezzi.fr/cdn/img/meme/shut-up-and-take-my-money.png`);
                 ctx.drawImage(background, 0, 0, properties.pigeon.image.width, properties.pigeon.image.height);
                 const pdp = await loadImage(`https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=1024`);
-                ctx.arc(properties.pigeon.pdp.x, properties.pigeon.pdp.x, properties.pigeon.pdp.size, 0, Math.PI * 2);
+                ctx.arc(properties.pigeon.pdp.x, properties.pigeon.pdp.y, properties.pigeon.pdp.size / 2, 0, Math.PI * 2);
                 ctx.clip();
-                ctx.drawImage(pdp, properties.pigeon.pdp.x, properties.pigeon.pdp.x, properties.pigeon.pdp.size, properties.pigeon.pdp.size);
+                ctx.drawImage(pdp, properties.pigeon.pdp.x - properties.pigeon.pdp.size / 2, properties.pigeon.pdp.y - properties.pigeon.pdp.size / 2, properties.pigeon.pdp.size, properties.pigeon.pdp.size);
             }
 
             // Drawn bot logo
             // ctx.beginPath(); // Create a new path
-            // const pdpbot = await loadImage(`https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png?size=64`); // Load the bot's profile image
+            // const pdpbot = await loadImage(`https://blueprint.sleezzi.fr/cdn/img/Logo/BP_Gold.png`); // Load the bot's profile image
             // ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2, 0, Math.PI * 2); // Draw a circle
             // ctx.clip(); // Cut the sheet so that you can only write in this circle
             // ctx.drawImage(pdpbot, properties.pdpBot.x - properties.pdpBot.size / 2, properties.pdpBot.y - properties.pdpBot.size / 2 || 0, properties.pdpBot.size || 0, properties.pdpBot.size || 0); // Draw the bot's profile picture

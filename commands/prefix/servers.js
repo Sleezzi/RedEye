@@ -8,7 +8,7 @@ module.exports = {
     async execute(message, client, Discord) {
         message.channel.sendTyping();
         if (message.member.id !== client.ownerId) {
-            message.channel.send({ content: `<a:no:1209518375169167391> - <@${message.member.id}>, you do not have the necessary permissions to use this command`, ephemeral: true });
+            message.channel.send({ content: `<a:no:1211019198881472622> - <@${message.member.id}>, you do not have the necessary permissions to use this command`, ephemeral: true });
             return;
         }
         const embed = {

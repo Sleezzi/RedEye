@@ -54,7 +54,7 @@ module.exports = {
                         color: 0xff0000,
                         title: `Error`,
                         fields: [
-                            { name: '<a:no:1209518375169167391> - The administrators of this server have disabled this command.', value: '\u200B', inline: false },
+                            { name: '<a:no:1211019198881472622> - The administrators of this server have disabled this command.', value: '\u200B', inline: false },
                             { name: `<:time:1205987554260684870> - __Date:__`, value: `> <t:${Math.floor(interaction.createdTimestamp / 1000)}:d> (<t:${Math.floor(interaction.createdTimestamp / 1000)}:R>)`, inline: true},
                         ],
                         footer: {
@@ -83,7 +83,15 @@ module.exports = {
                             icon_url: client.user.avatarURL(),
                         }
                     }], ephemeral: true });
-                    console.error(err);
+                    try {
+                        if (err) {
+                            if (typeof err === "object") {
+                                console.error("\x1b[31m", err, "\x1b[0m");
+                            } else {
+                                require("./components/log")(`%red%${err}`);
+                            }
+                        }
+                    } catch (_) {}
                 }
             } catch(err) { console.error(err); }
         } catch(err) { console.error(err); }

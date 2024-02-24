@@ -21,7 +21,7 @@ module.exports = {
             await interaction.deleteReply();
             interaction.followUp({ embeds: [
                 {
-                    title: "<a:no:1209518375169167391> - You do not have permission to delete messages",
+                    title: "<a:no:1211019198881472622> - You do not have permission to delete messages",
                     color: 0xFF0000,
                     author: {
                         name: interaction.member.tag,

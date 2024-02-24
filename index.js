@@ -14,7 +14,7 @@ const [Discord, {
     SlashCommandBuilder,
     Routes,
     REST
-}] = [require("discord.js"), require("discord.js")];
+}] = [ require("discord.js"), require("discord.js") ];
     
 
 const client = new Client({
@@ -39,7 +39,6 @@ client.ownerId = "542703093981380628";
 
 client.config = require("./config.json");
 console.clear();
-
 
 require("./components/database").initialize();
 
@@ -89,7 +88,17 @@ for (const file of readdirSync("./events").filter((file) => file.endsWith(".js")
     if (Object.hasOwnProperty.call(Events, event.event) && event.name && event.type && event.execute) {
         client[event.type](Events[`${event.event}`], (...args) => {
             try {
-                return event.execute(args, client, Discord).then((err) => { if (err) console.error(err); });
+                return event.execute(args, client, Discord).then((err) => {
+                    try {
+                        if (err) {
+                            if (typeof err === "object") {
+                                console.error("\x1b[31m", err, "\x1b[0m");
+                            } else {
+                                require("./components/log")(`%red%${err}`);
+                            }
+                        }
+                    } catch (_) {}
+                });
             } catch(err) { return; }
         });
     }

@@ -37,7 +37,7 @@ module.exports = {
                 interaction.channel.send({ content: interaction.options.getString("text") });
             } catch(err) { return err; }
         } else {
-            interaction.followUp({ content: "<a:no:1209518375169167391> - You do not have permission to do that.", ephemeral: true });
+            interaction.followUp({ content: "<a:no:1211019198881472622> - You do not have permission to do that.", ephemeral: true });
         }
     }
 }

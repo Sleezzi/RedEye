@@ -16,7 +16,7 @@ module.exports = {
             .addFields(
                 { name: "<:nametag:1200757678104915978> - __Name:__", value: `\`${channel.name}\`` },
                 { name: `:book:・__Description:__`, value: `> ${(channel.topic ? channel.topic : "This channel has no description")}`, inline: true },
-                { name: ":underage:・__NSFW:__", value: (channel.nsfw === true ? "<a:yes:1205984539852144751>" : "<a:no:1209518375169167391>") },
+                { name: ":underage:・__NSFW:__", value: (channel.nsfw === true ? "<a:yes:1205984539852144751>" : "<a:no:1211019198881472622>") },
                 { name: "<:time:1205987554260684870> - __Date:__", value: `<t:${Math.floor(channel.createdTimestamp / 1000)}:d> (<t:${Math.floor(channel.createdTimestamp / 1000)}:R>)`, inline: true },
             )
             .setFooter({ text: `Id: ${channel.id}`, iconURL: client.user.avatarURL() });

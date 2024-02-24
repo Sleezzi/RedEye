@@ -15,7 +15,7 @@ module.exports = {
                 !message.guild.channels.cache.get(serverData.channels.log.channelId) ||
                 message.channel.id === serverData.channels.log.channelId ||
                 !message.guild.channels.cache.get(serverData.channels.log.channelId).permissionsFor(message.guild.members.cache.get(client.user.id)).has("SendMessages") ||
-                message.member.id === client.user.id
+                message.author.id === client.user.id
             ) return;
             const embed = new Discord.EmbedBuilder()
             .setColor("Red")

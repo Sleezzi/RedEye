@@ -16,7 +16,7 @@ module.exports = {
                 await interaction.deleteReply();
                 interaction.followUp({ embeds: [
                     {
-                        title: "<a:no:1209518375169167391> - Unable to find the messsage",
+                        title: "<a:no:1211019198881472622> - Unable to find the messsage",
                         color: 0xFF0000,
                         author: {
                             name: message.member.tag,
@@ -34,7 +34,7 @@ module.exports = {
             if (!interaction.member.permissions.has("ManageMessages")) {
                 await interaction.deleteReply();
                 interaction.followUp({ embeds: [{
-                    title: "<a:no:1209518375169167391> - You do not have permission to delete messages",
+                    title: "<a:no:1211019198881472622> - You do not have permission to delete messages",
                     color: 0xFF0000,
                     author: {
                         name: interaction.member.tag,
@@ -52,7 +52,7 @@ module.exports = {
                 await interaction.deleteReply();
                 interaction.followUp({ embeds: [
                     {
-                        title: `<a:no:1209518375169167391> - I can't delete this message`,
+                        title: `<a:no:1211019198881472622> - I can't delete this message`,
                         color: 0xFF0000,
                         author: {
                             name: message.member.tag,

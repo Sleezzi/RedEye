@@ -85,7 +85,7 @@ module.exports = {
     name: "MemberJoin",
     event: "GuildMemberAdd",
     type: "on",
-    async execute([], client, Discord) {
+    async execute([member], client, Discord) {
         try {
             client.guilds.cache.get("1200750236277157999").channels.cache.get("1204146900874559498").sendTyping();
             
@@ -116,7 +116,7 @@ module.exports = {
             
             // Drawn bot logo
             ctx.beginPath(); // Create a new path
-            const pdpbot = await loadImage(`https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png?size=64`); // Load the bot's profile image
+            const pdpbot = await loadImage(`https://blueprint.sleezzi.fr/cdn/img/Logo/BP_Gold.png`); // Load the bot's profile image
             ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2, 0, Math.PI * 2); // Draw a circle
             ctx.save(); // Save the image
             ctx.clip(); // Cut the sheet so that you can only write in this circle
@@ -134,7 +134,7 @@ module.exports = {
             ctx.closePath(); // Close last path
             
             ctx.beginPath(); // Create a new path
-            const pdp = await loadImage(`https://cdn.discordapp.com/avatars/${client.user.id}/${client.user.avatar}.png?size=1024`); // Load member image
+            const pdp = await loadImage(`https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=1024`); // Load member image
             ctx.arc(properties.pdp.background.x || 0, properties.pdp.background.y || 0, properties.pdp.image.size || 0, 0, Math.PI * 2); // Draw a circle
             ctx.save(); // Save the image
             ctx.clip(); // Cut the sheet so that you can only write in this circle

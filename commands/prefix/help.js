@@ -32,7 +32,7 @@ module.exports = {
                     .addFields(
                         { name: "<:nametag:1200757678104915978> - __**Name:**__", value: `**\`${command.name}\`**`},
                         { name: ":book:・__**Description:**__", value: `**\`${command.description}\`**`},
-                        { name: ":unlock:・__**Can be used:**__", value: `${(command.permissions !== undefined ? (command.permissions === "Owner" && message.member.id === client.ownerId ? "<a:yes:1205984539852144751>" : (message.member.permissions.has(command.permissions) ? "<a:yes:1205984539852144751>" : "<a:no:1209518375169167391>")) : "<a:yes:1205984539852144751>")}`},
+                        { name: ":unlock:・__**Can be used:**__", value: `${(command.permissions !== undefined ? (command.permissions === "Owner" && message.member.id === client.ownerId ? "<a:yes:1205984539852144751>" : (message.member.permissions.has(command.permissions) ? "<a:yes:1205984539852144751>" : "<a:no:1211019198881472622>")) : "<a:yes:1205984539852144751>")}`},
                         { name: ":question:・__**How to use:**__", value: `${serverData.prefix ?? "!"}${command.model}`},
                         { name: "<:time:1205987554260684870> - __**Date:**__", value: `<t:${Math.floor(message.createdTimestamp / 1000)}:d> (<t:${Math.floor(message.createdTimestamp / 1000)}:R>)`},
                     )

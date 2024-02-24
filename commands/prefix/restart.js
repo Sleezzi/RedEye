@@ -14,7 +14,7 @@ module.exports = {
                     console.log(`  \x1b[32m➜ Restarted\x1b[0m\n\n`);
                 }, 490);
             } else {
-                const msg = await message.channel.send(`<a:no:1209518375169167391> - <@${message.member.id}>, you do not have the necessary permissions to use this command`);
+                const msg = await message.channel.send(`<a:no:1211019198881472622> - <@${message.member.id}>, you do not have the necessary permissions to use this command`);
                 setTimeout(() => {
                     try {
                         msg.delete();

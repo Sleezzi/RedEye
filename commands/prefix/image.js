@@ -6,7 +6,7 @@ module.exports = {
     cooldown: 15_000,
     async execute(message, client, Discord) {
         message.channel.sendTyping();
-        const theme = message.content.replace(`${client.config.prefix}image `, "");
+        const theme = message.content.split(" ").slice(0, 1).join(" ");
         try {
             const response = await fetch(`https://source.unsplash.com/1920x1080/?${theme}`);
             

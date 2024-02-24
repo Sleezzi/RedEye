@@ -26,13 +26,13 @@ module.exports = {
             
             if (oldChannel.nsfw !== channel.nsfw) {
                 embed.fields.unshift(
-                    { name: `:underage:・__NSFW before:__`, value: `> ${(oldChannel.nsfw === true ? `<a:yes:1205984539852144751>` : `<a:no:1209518375169167391>`)}`, inline: true},
-                    { name: `:underage:・__NSFW after:__`, value: `> ${(channel.nsfw === true ? `<a:yes:1205984539852144751>` : `<a:no:1209518375169167391>`)}`, inline: true },
+                    { name: `:underage:・__NSFW before:__`, value: `> ${(oldChannel.nsfw === true ? `<a:yes:1205984539852144751>` : `<a:no:1211019198881472622>`)}`, inline: true},
+                    { name: `:underage:・__NSFW after:__`, value: `> ${(channel.nsfw === true ? `<a:yes:1205984539852144751>` : `<a:no:1211019198881472622>`)}`, inline: true },
                     { name: '\u200B', value: '\u200B', inline: true },
                 );
             } else {
                 embed.fields.unshift(
-                    { name: `:underage:・__NSFW:__`, value: `> ${(channel.nsfw === true ? `<a:yes:1205984539852144751>` : `<a:no:1209518375169167391>`)}`, inline: true},
+                    { name: `:underage:・__NSFW:__`, value: `> ${(channel.nsfw === true ? `<a:yes:1205984539852144751>` : `<a:no:1211019198881472622>`)}`, inline: true},
                 );
             }
             
