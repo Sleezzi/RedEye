@@ -91,9 +91,9 @@ module.exports = {
                     },
                 };
 
-                const coreEmbed = {
+                const moderationEmbed = {
                     color: 0x0099ff,
-                    title: 'Help • Core',
+                    title: 'Help • Moderation',
                     author: {
                         name: message.member.tag,
                         icon_url: message.member.user.avatarURL(),
@@ -111,7 +111,7 @@ module.exports = {
 
                 const funEmbed = {
                     color: 0x0099ff,
-                    title: 'Help • Fun',
+                    title: 'Help • Game',
                     author: {
                         name: message.member.tag,
                         icon_url: message.member.user.avatarURL(),
@@ -144,35 +144,34 @@ module.exports = {
                         icon_url: client.user.avatarURL(),
                     },
                 };
-                if (!serverData.disabled) serverData.disabled = [];
                 
                 for (const command of client.data.commands.prefix) {
-                    if (serverData.disabled.find(cmd => cmd === command[0])) continue;
+                    if (serverData.disabled.length > 1 && serverData.disabled.find(cmd => cmd === command[0])) continue;
                     if (!command.permissions) {
-                        if (command[1].category === "Core") {
-                            coreEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
+                        if (command[1].category === "Moderation") {
+                            moderationEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         }
-                        if (command[1].category === "Fun") {
+                        if (command[1].category === "Games") {
                             funEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         }
                         if (command[1].category === "Misc") {
                             miscEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         }
                     } else if (command.permissions === "Owner" && message.member.id === client.ownerId) {
-                        if (command[1].category === "Core") {
-                            coreEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
+                        if (command[1].category === "Moderation") {
+                            moderationEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         }
-                        if (command[1].category === "Fun") {
+                        if (command[1].category === "Games") {
                             funEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         }
                         if (command[1].category === "Misc") {
                             miscEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         }
                     } else if (message.member.permissions.has(command.permissions)) {
-                        if (command[1].category === "Core") {
-                            coreEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
+                        if (command[1].category === "Moderation") {
+                            moderationEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         }
-                        if (command[1].category === "Fun") {
+                        if (command[1].category === "Games") {
                             funEmbed.fields.unshift({ name: `__**${command[0]}:**__`, value: `**\`${(command[1].description !== "" ? command[1].description : "This command doesn't have a description")}\`**`})
                         }
                         if (command[1].category === "Misc") {
@@ -190,16 +189,16 @@ module.exports = {
                         default: true
                     },
                     {
-                        label: 'Core',
-                        value: 'core',
+                        label: 'Moderation',
+                        value: 'moderation',
                     },
                     {
                         label: 'Misc',
                         value: 'misc',
                     },
                     {
-                        label: 'Fun',
-                        value: 'fun',
+                        label: 'Game',
+                        value: 'game',
                     }
                 ]);
 
@@ -215,12 +214,12 @@ module.exports = {
                             reply.edit({ embeds: [ mainEmbed ], omponents: [ row ], ephemeral: true });
                         } catch(err) { return err; }
                     }
-                    if (interaction.values[0] === "core") {
+                    if (interaction.values[0] === "moderation") {
                         try {
-                            reply.edit({ embeds: [ coreEmbed ], components: [ row ], ephemeral: true });
+                            reply.edit({ embeds: [ moderationEmbed ], components: [ row ], ephemeral: true });
                         } catch(err) { return err; }
                     }
-                    if (interaction.values[0] === "fun") {
+                    if (interaction.values[0] === "game") {
                         try {
                             reply.edit({ embeds: [ funEmbed ], components: [ row ], ephemeral: true });
                         } catch(err) { return err; }

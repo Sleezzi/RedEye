@@ -3,7 +3,7 @@ module.exports = {
     description: "Delete messages in the channel in which the command is used",
     permissions: "ManageMessages",
     model: `clear **\`Number of messages to delete\`** *\`member\`*`,
-    category: "Core",
+    category: "Moderation",
     cooldown: 30000,
     async execute(message, client, Discord) {
         if (!message.member.permissions.has("ManageMessages")) {

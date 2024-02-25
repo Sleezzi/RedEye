@@ -3,7 +3,7 @@ module.exports = {
     description: "Show you the list of guild where the bot is.",
     permissions: "Administrator",
     model: `servers`,
-    category: "Core",
+    category: "Moderation",
     cooldown: 5000,
     async execute(message, client, Discord) {
         message.channel.sendTyping();

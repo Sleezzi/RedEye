@@ -4,7 +4,7 @@ module.exports = {
     type: "on",
     async execute([oldChannel, channel], client, Discord) {
         try {
-            const id = await require("../components/database").get(`/${channel.guild.id}/channels/log/channelId`);
+            const id = await require("../components/database").get(`/${channel.guild.id}/channels/log`);
             if (
                 typeof id === "object" ||
                 !channel.guild.channels.cache.has(id) ||

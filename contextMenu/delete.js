@@ -71,7 +71,7 @@ module.exports = {
             await interaction.deleteReply();
             interaction.followUp({ embeds: [
                 {
-                    title: `<:trash:1205985915160371221> - Message deleted`,
+                    title: `:wastebasket: - Message deleted`,
                     color: 0x00FF00,
                     author: {
                         name: message.member.tag,
@@ -84,6 +84,6 @@ module.exports = {
                     },
                 }
             ], ephemeral: true });
-        } catch (err) { console.error(err); }
+        } catch (err) { return err; }
     }
 }

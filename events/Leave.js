@@ -87,7 +87,14 @@ module.exports = {
     type: "on",
     async execute([member], client, Discord) {
         try {
-            client.guilds.cache.get("1200750236277157999").channels.cache.get("1204146900874559498").sendTyping();
+            const channelId = require("../components/database").get(`/${member.guild.id}/channels/goodbye`);
+            if (
+                typeof channelId === "object" ||
+                !member.guild.channels.cache.find(c => c.id === channelId)  ||
+                !member.guild.channels.cache.find(c => c.id === channelId).permissionsFor(message.guild.members.cache.find(member => member.id === client.user.id)).has("SendMessages") ||
+                member.bot
+            ) return;
+            member.guild.channels.cache.find(c => c.id === channelId).sendTyping();
             
             const image = createCanvas(properties.image.width, properties.image.height); // Create an image
             const ctx = image.getContext("2d"); // Initialize canvas
@@ -142,7 +149,7 @@ module.exports = {
             ctx.drawImage(pdp, properties.pdp.image.x || 0, properties.pdp.image.y || 0, properties.pdp.image.size * 2 || 0, properties.pdp.image.size * 2 || 0); // Draw the member's profile picture
             
             const attachment = new Discord.AttachmentBuilder(image.toBuffer(), {name: `${member.user.tag.toLowerCase()}'s leave image.png`});
-            await client.guilds.cache.get("1200750236277157999").channels.cache.get("1204146900874559498").send({ files: [attachment] });
+            await member.guild.channels.cache.find(c => c.id === channelId).send({ files: [attachment] });
         } catch (err) { console.error(err); }
     }
 }

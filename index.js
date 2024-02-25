@@ -108,8 +108,8 @@ client.login(client.config.token).then(() => {
     require("./components/log")("\n", `%green%Logging...%reset%`);
 });
 
-// client.on(Events.MessageCreate, async (response) => {
-//     response.guild.roles.cache.find(role => role.id === "").
+// client.on(Events.GuildMemberAdd, async (member) => {
+//     member.roles.add
 // });
 
 process.stdin.setRawMode(true);

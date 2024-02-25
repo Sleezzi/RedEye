@@ -11,10 +11,9 @@ module.exports = {
                 // message.content.startsWith(serverData.prefix) ||
                 !serverData.channels ||
                 !serverData.channels.log ||
-                !serverData.channels.log.channelId ||
-                !message.guild.channels.cache.get(serverData.channels.log.channelId) ||
-                message.channel.id === serverData.channels.log.channelId ||
-                !message.guild.channels.cache.get(serverData.channels.log.channelId).permissionsFor(message.guild.members.cache.get(client.user.id)).has("SendMessages") ||
+                !message.guild.channels.cache.get(serverData.channels.log) ||
+                message.channel.id === serverData.channels.log ||
+                !message.guild.channels.cache.get(serverData.channels.log).permissionsFor(message.guild.members.cache.get(client.user.id)).has("SendMessages") ||
                 message.author.id === client.user.id
             ) return;
             const embed = new Discord.EmbedBuilder()
@@ -30,7 +29,7 @@ module.exports = {
             )
             .setURL(message.url)
             .setFooter({ text: `Id: ${message.id}`, iconURL: client.user.avatarURL() });
-            message.guild.channels.cache.get(serverData.channels.log.channelId).send({ embeds: [embed]});
+            message.guild.channels.cache.get(serverData.channels.log).send({ embeds: [embed]});
         } catch (err) { return err; }
     }
 }

@@ -7,7 +7,7 @@ const modules = {
             try {
                 const channel = response.mentions.channels.first();
                 if (!channel) { // Check if the user put a channel
-                    const id = await require("../../components/database").get(`/${response.guild.id}/channels/log/channelId`);
+                    const id = await require("../../components/database").get(`/${response.guild.id}/channels/log`);
                     if (typeof id === "object") { // Check if the db already has a channelId
                         const msg = await response.reply('You must mention the channel to which you want the bot to send log messages');
                         setTimeout(async () => {
@@ -22,7 +22,7 @@ const modules = {
                                 msg.delete();
                             } catch(err) { console.error(err); }
                         }, 5000);
-                        require("../../components/database").delete(`/${response.guild.id}/channels/log/channelId`);
+                        require("../../components/database").delete(`/${response.guild.id}/channels/log`);
                     }
                     return;
                 }
@@ -46,7 +46,7 @@ const modules = {
                 }
                 
                 try {
-                    require("../../components/database").set(`/${response.guild.id}/channels/log/channelId`, channel.id); // Register the channel id in db
+                    require("../../components/database").set(`/${response.guild.id}/channels/log`, channel.id); // Register the channel id in db
                     const msg = await response.reply('The log channel has been successfully registered');
                     setTimeout(async () => {
                         try {
@@ -65,7 +65,7 @@ const modules = {
             try {
                 const channel = response.mentions.channels.first();
                 if (!channel) { // Check if the user put a channel
-                    const id = await require("../../components/database").get(`/${response.guild.id}/channels/welcome/channelId`);
+                    const id = await require("../../components/database").get(`/${response.guild.id}/channels/welcome`);
                     if (typeof id === "object") { // Check if the db already has a channelId
                         const msg = await response.reply('You must mention the channel to which you want the bot to send welcome messages');
                         setTimeout(async () => {
@@ -80,7 +80,7 @@ const modules = {
                                 msg.delete();
                             } catch(err) { console.error(err); }
                         }, 5000);
-                        require("../../components/database").delete(`/${response.guild.id}/channels/welcome/channelId`);
+                        require("../../components/database").delete(`/${response.guild.id}/channels/welcome`);
                     }
                     return;
                 }
@@ -104,7 +104,7 @@ const modules = {
                 }
                 
                 try {
-                    require("../../components/database").set(`/${response.guild.id}/channels/welcome/channelId`, channel.id); // Register the channel id in db
+                    require("../../components/database").set(`/${response.guild.id}/channels/welcome`, channel.id); // Register the channel id in db
                     const msg = await response.reply('The welcome channel has been successfully registered');
                     setTimeout(async () => {
                         try {
@@ -123,7 +123,7 @@ const modules = {
             try {
                 const channel = response.mentions.channels.first();
                 if (!channel) { // Check if the user put a channel
-                    const id = await require("../../components/database").get(`/${response.guild.id}/channels/goodbye/channelId`);
+                    const id = await require("../../components/database").get(`/${response.guild.id}/channels/goodbye`);
                     if (typeof id === "object") { // Check if the db already has a channelId
                         const msg = await response.reply('You must mention the channel to which you want the bot to send goodbye messages');
                         setTimeout(async () => {
@@ -138,7 +138,7 @@ const modules = {
                                 msg.delete();
                             } catch(err) { console.error(err); }
                         }, 5000);
-                        require("../../components/database").delete(`/${response.guild.id}/channels/goodbye/channelId`);
+                        require("../../components/database").delete(`/${response.guild.id}/channels/goodbye`);
                     }
                     return;
                 }
@@ -162,7 +162,7 @@ const modules = {
                 }
                 
                 try {
-                    require("../../components/database").set(`/${response.guild.id}/channels/goodbye/channelId`, channel.id); // Register the channel id in db
+                    require("../../components/database").set(`/${response.guild.id}/channels/goodbye`, channel.id); // Register the channel id in db
                     const msg = await response.reply('The goodbye channel has been successfully registered');
                     setTimeout(async () => {
                         try {
@@ -240,8 +240,8 @@ module.exports = {
     description: "Enables a command on this server.",
     permissions: "Administrator",
     model: `logchannel **\`mention of channel\`**`,
-    category: "Manage",
-    cooldown: 5000,
+    category: "Moderation",
+    cooldown: 15000,
     async execute(message, client, Discord) {
         try {
             message.channel.sendTyping();

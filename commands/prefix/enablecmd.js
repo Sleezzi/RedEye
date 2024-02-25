@@ -3,7 +3,7 @@ module.exports = {
     description: "Enables a command on this server.",
     permissions: "Administrator",
     model: `enablecmd **\`Name of command to enable\`**`,
-    category: "Manage",
+    category: "Moderation",
     cooldown: 5000,
     async execute(message, client, Discord) {
         message.channel.sendTyping();

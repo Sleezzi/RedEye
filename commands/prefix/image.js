@@ -2,7 +2,7 @@ module.exports = {
     name: "image",
     description: "Send a photo on a specific theme (may not work properly)",
     model: `image **\`the theme of the image\`**`,
-    category: "Fun",
+    category: "Misc",
     cooldown: 15_000,
     async execute(message, client, Discord) {
         message.channel.sendTyping();

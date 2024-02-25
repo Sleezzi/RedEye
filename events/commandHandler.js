@@ -8,6 +8,10 @@ module.exports = {
         const serverData = await require("../components/database").get(`/${message.guild.id}`); // Get serverData from db
         if (!serverData.prefix) serverData.prefix = "!"; // Check if the server have a custom prefix, if he don't have, it's put ! by default
         if (!serverData.disabled) serverData.disabled = []; // Check if the server have a disabled command, if he don't have, it set disabled on a Array to don't make error
+        if (message.content === "!help") {
+            require("../commands/prefix/help").execute(message, client, Discord);
+            return;
+        }
         if (message.content.startsWith(serverData.prefix)) { // Check if message is a command
             const command = message.content.toLowerCase().replace(serverData.prefix, "").split(" ")[0]; // Get the command
             if (client.data.commands.prefix.has(command)) { // Check if it's a valid command

@@ -2,7 +2,7 @@ module.exports = {
     name: "headortail",
     description: "Toss head or tail",
     model: `headortail`,
-    category: "Fun",
+    category: "Games",
     cooldown: 10000,
     async execute(message, client, Discord) {
         try {

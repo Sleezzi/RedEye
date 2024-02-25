@@ -3,7 +3,7 @@ module.exports = {
     description: "Restart the bot",
     permissions: "Owner",
     model: `restart`,
-    category: "Core",
+    category: "Moderation",
     cooldown: 15000,
     async execute(message, client, Discord) {
         try {

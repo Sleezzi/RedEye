@@ -87,11 +87,16 @@ module.exports = {
     },
     async execute(interaction, client, Discord) {
         try {
-            const { v4: uuidv4 } = require("uuid");
-            const id = uuidv4();
+            const tickets = await require("../../components/database").get(`/${interaction.guild.id}/tickets/${interaction.member.id}`);
+            if (tickets.length >= 15 && interaction.member.id !== client.ownerId) {
+                interaction.followUp({ content: `<a:no:1211019198881472622> - Sorry but you have reached the maximum ticket limit`, ephemeral: true  });
+                return;
+            }
+            const { v1: uuid} = require("uuid");
+            const id = uuid();
             require("../../components/database").set(`/${interaction.guild.id}/tickets/${interaction.member.id}/${id}`, {
                 cat: interaction.options.getString("category"),
-                content: interaction.options.getString("content"),
+                content: interaction.options.getString("content").replace(/\`/g, "``"),
                 username: interaction.member.user.username,
                 status: "Not done",
                 madeAt: Math.floor(Date.now() / 1000)

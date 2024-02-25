@@ -3,7 +3,7 @@ module.exports = {
     description: "Stop the bot",
     permissions: "Owner",
     model: `stop`,
-    category: "Core",
+    category: "Moderation",
     cooldown: 15000,
     async execute(message, client, Discord) {
         try {

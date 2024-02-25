@@ -3,7 +3,7 @@ module.exports = {
     description: "Unmute a members",
     permissions: "ModerateMembers",
     model: `unmute **\`member\`**`,
-    category: "Core",
+    category: "Moderation",
     cooldown: 1000,
     async execute(message, client, Discord) {
         try {

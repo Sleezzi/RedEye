@@ -1,7 +1,7 @@
 module.exports = {
     name: "wiki",
     description: "Search Wikipedia for information",
-    model: `wiki *\`\`*`,
+    model: `wiki *\`query\`*`,
     category: "Misc",
     cooldown: 10000,
     async execute(message, client, Discord) {

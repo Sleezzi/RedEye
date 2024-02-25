@@ -3,7 +3,7 @@ module.exports = {
     description: "Change the prefix on this server.",
     permissions: "Administrator",
     model: `setprefix **\`prefix\`**`,
-    category: "Manage",
+    category: "Moderation",
     cooldown: 5000,
     async execute(message, client, Discord) {
         try {

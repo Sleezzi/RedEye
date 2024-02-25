@@ -3,7 +3,7 @@ module.exports = {
     description: "Disables a command on this server.",
     permissions: "Administrator",
     model: `disablecmd **\`Name of command to disable\`**`,
-    category: "Manage",
+    category: "Moderation",
     cooldown: 5000,
     async execute(message, client, Discord) {
         message.channel.sendTyping();

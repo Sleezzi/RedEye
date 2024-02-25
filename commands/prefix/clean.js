@@ -3,7 +3,7 @@ module.exports = {
     description: "Delete messages in the channel in which the command is used",
     permissions: "ManageMessages",
     model: `clean`,
-    category: "Core",
+    category: "Moderation",
     cooldown: 15_000,
     async execute(message, client, Discord) {
         try {

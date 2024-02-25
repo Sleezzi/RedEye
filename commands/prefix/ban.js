@@ -3,7 +3,7 @@ module.exports = {
     description: "Ban a members",
     permissions: "BanMembers",
     model: `ban **\`member\`** *\`Banishment time in seconds\`* *\`The reason for the ban\`*`,
-    category: "Core",
+    category: "Moderation",
     cooldown: 1000,
     async execute(message, client, Discord) {
         try {

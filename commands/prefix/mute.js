@@ -3,7 +3,7 @@ module.exports = {
     description: "mute a members",
     permissions: "ModerateMembers",
     model: `mute **\`member\`**`,
-    category: "Core",
+    category: "Moderation",
     cooldown: 1000,
     async execute(message, client, Discord) {
         try {
