@@ -19,7 +19,7 @@ module.exports = {
                     text: `Id: ${message.id}`,
                     icon_url: client.user.avatarURL(),
                 },
-            }]})
+            }]});
             setTimeout(async () => { try { msg.delete(); if (message) message.delete(); } catch(err) { return err; } }, 5000);
             return;
         }

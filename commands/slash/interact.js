@@ -26,9 +26,20 @@ const properties = {
             width: 1500
         },
         pdp: {
-            size: 250,
+            size: 500,
             x: 640,
             y: 500
+        }
+    },
+    stonks: {
+        image: {
+            height: 1450,
+            width: 1450
+        },
+        pdp: {
+            size: 500,
+            x: 600,
+            y: 450
         }
     }
 }
@@ -58,19 +69,19 @@ module.exports = {
                     "fr": "Quelle modification vous voulez sur l'image"
                 },
                 choices: [
-                    {
-                        name: "blur",
-                        name_localizations: {
-                            fr: "flouter",
-                            "en-US": "blur"
-                        },
-                        description: 'Blur the image',
-                        description_localizations: {
-                            fr: "Flouter l'image",
-                            "en-US": "Blur the image"
-                        },
-                        value: "blur"
-                    },
+                    // {
+                    //     name: "blur",
+                    //     name_localizations: {
+                    //         fr: "flouter",
+                    //         "en-US": "blur"
+                    //     },
+                    //     description: 'Blur the image',
+                    //     description_localizations: {
+                    //         fr: "Flouter l'image",
+                    //         "en-US": "Blur the image"
+                    //     },
+                    //     value: "blur"
+                    // },
                     {
                         name: "brazzer",
                         name_localizations: {
@@ -96,6 +107,19 @@ module.exports = {
                             "en-US": "Makes you part of the \"Shut up and take my money\" meme"
                         },
                         value: "pigeon"
+                    },
+                    {
+                        name: "stonks",
+                        name_localizations: {
+                            fr: "stonks",
+                            "en-US": "stonks"
+                        },
+                        description: 'Makes you part of the "stonks" meme',
+                        description_localizations: {
+                            fr: "Vous intègre au meme \"stonks\"",
+                            "en-US": "Makes you part of the \"stonks\" meme"
+                        },
+                        value: "stonks"
                     },
                 ],
                 required: true,
@@ -129,7 +153,6 @@ module.exports = {
                 const pdp = await loadImage(`https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=1024`);
                 ctx.drawImage(pdp, 0, 0, properties.blur.image.width, properties.blur.image.height);
                 ctx.fillStyle= "#FFFFFF50";
-                ctx.fillRect(0, 0, properties.blur.image.width, properties.blur.image.height);
             }
             if (interaction.options.getString("type") === "brazzer") {
                 const pdp = await loadImage(`https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=1024`);
@@ -138,12 +161,22 @@ module.exports = {
                 ctx.drawImage(brazzer, properties.brazzer.image.width - properties.brazzer.brazzer.width - properties.brazzer.brazzer.margin, properties.brazzer.image.height - properties.brazzer.brazzer.height - properties.brazzer.brazzer.margin, properties.brazzer.brazzer.width, properties.brazzer.brazzer.height)
             }
             if (interaction.options.getString("type") === "pigeon") {
-                const background = await loadImage(`https://blueprint.sleezzi.fr/cdn/img/meme/shut-up-and-take-my-money.png`);
+                const background = await loadImage(`https://blueprint.sleezzi.fr/cdn/img/meme/sh*t-up-and-take-my-m0ney.png`);
                 ctx.drawImage(background, 0, 0, properties.pigeon.image.width, properties.pigeon.image.height);
                 const pdp = await loadImage(`https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=1024`);
                 ctx.arc(properties.pigeon.pdp.x, properties.pigeon.pdp.y, properties.pigeon.pdp.size / 2, 0, Math.PI * 2);
                 ctx.clip();
+                ctx.fillRect(properties.pigeon.pdp.x / 2, properties.pigeon.pdp.y / 2, properties.pigeon.pdp.x, properties.pigeon.pdp.y);
                 ctx.drawImage(pdp, properties.pigeon.pdp.x - properties.pigeon.pdp.size / 2, properties.pigeon.pdp.y - properties.pigeon.pdp.size / 2, properties.pigeon.pdp.size, properties.pigeon.pdp.size);
+            }
+            if (interaction.options.getString("type") === "stonks") {
+                const background = await loadImage(`https://blueprint.sleezzi.fr/cdn/img/meme/stonks.png`);
+                ctx.drawImage(background, 0, 0, properties.stonks.image.width, properties.stonks.image.height);
+                const pdp = await loadImage(`https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=1024`);
+                ctx.arc(properties.stonks.pdp.x, properties.stonks.pdp.y, properties.stonks.pdp.size / 2, 0, Math.PI * 2);
+                ctx.clip();
+                ctx.fillRect(properties.stonks.pdp.x / 2, properties.stonks.pdp.y / 2, properties.stonks.pdp.x, properties.stonks.pdp.y);
+                ctx.drawImage(pdp, properties.stonks.pdp.x - properties.stonks.pdp.size / 2, properties.stonks.pdp.y - properties.stonks.pdp.size / 2, properties.stonks.pdp.size, properties.stonks.pdp.size);
             }
 
             // Drawn bot logo
