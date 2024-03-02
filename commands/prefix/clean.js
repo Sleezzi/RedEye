@@ -46,7 +46,7 @@ module.exports = {
             try { if (message && message.id) message.delete();} catch(err) { return err; }
             const msg = await message.channel.send({embeds: [
                 {
-                    title: `<:trash:1205985915160371221> - Channel content delete (${messagesDeleted} message${(messagesDeleted > 1 ? "s" : "")})`,
+                    title: `<a:trash:1213524421621448756> - Channel content delete (${messagesDeleted} message${(messagesDeleted > 1 ? "s" : "")})`,
                     color: 0x00FF00,
                     author: {
                         name: message.member.tag,

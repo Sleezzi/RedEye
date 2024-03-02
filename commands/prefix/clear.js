@@ -74,7 +74,7 @@ module.exports = {
             .then(messages => messages.filter((msg) => 1_209_600_000 > Date.now() - msg.createdAt && msg.bulkDeletable));
             await message.channel.bulkDelete(messages);
             const msg = await message.channel.send({ embeds: [{
-                title: `<:trash:1205985915160371221> - ${"Multiple "}Messages Deleted (${messages.size - 1} message${(messages.size - 1 > 1 ? "s" : "")})`,
+                title: `<a:trash:1213524421621448756> - ${"Multiple "}Messages Deleted (${messages.size - 1} message${(messages.size - 1 > 1 ? "s" : "")})`,
                 color: 0x00FF00,
                 author: {
                     name: message.member.tag,

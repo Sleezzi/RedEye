@@ -161,7 +161,7 @@ module.exports = {
                 ctx.drawImage(brazzer, properties.brazzer.image.width - properties.brazzer.brazzer.width - properties.brazzer.brazzer.margin, properties.brazzer.image.height - properties.brazzer.brazzer.height - properties.brazzer.brazzer.margin, properties.brazzer.brazzer.width, properties.brazzer.brazzer.height)
             }
             if (interaction.options.getString("type") === "pigeon") {
-                const background = await loadImage(`https://blueprint.sleezzi.fr/cdn/img/meme/sh*t-up-and-take-my-m0ney.png`);
+                const background = await loadImage(`https://blueprint.sleezzi.fr/cdn/img/meme/shut-up-and-take-my-money.png`);
                 ctx.drawImage(background, 0, 0, properties.pigeon.image.width, properties.pigeon.image.height);
                 const pdp = await loadImage(`https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=1024`);
                 ctx.arc(properties.pigeon.pdp.x, properties.pigeon.pdp.y, properties.pigeon.pdp.size / 2, 0, Math.PI * 2);
@@ -175,7 +175,7 @@ module.exports = {
                 const pdp = await loadImage(`https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=1024`);
                 ctx.arc(properties.stonks.pdp.x, properties.stonks.pdp.y, properties.stonks.pdp.size / 2, 0, Math.PI * 2);
                 ctx.clip();
-                ctx.fillRect(properties.stonks.pdp.x / 2, properties.stonks.pdp.y / 2, properties.stonks.pdp.x, properties.stonks.pdp.y);
+                ctx.fillRect(properties.stonks.pdp.x / 3, properties.stonks.pdp.y / 3, properties.stonks.pdp.x * 2, properties.stonks.pdp.y * 2);
                 ctx.drawImage(pdp, properties.stonks.pdp.x - properties.stonks.pdp.size / 2, properties.stonks.pdp.y - properties.stonks.pdp.size / 2, properties.stonks.pdp.size, properties.stonks.pdp.size);
             }
 

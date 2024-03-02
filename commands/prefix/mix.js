@@ -1,7 +1,6 @@
 module.exports = {
     name: "mix",
     description: "Change the prefix on this server.",
-    permissions: "Administrator",
     model: `mix **\`First word\`** **\`Seconde word\`**`,
     category: "Games",
     cooldown: 5000,

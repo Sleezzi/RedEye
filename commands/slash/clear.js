@@ -87,7 +87,7 @@ module.exports = {
             await interaction.channel.bulkDelete(messages);
             await interaction.deleteReply();
             interaction.followUp({ embeds: [{
-                title: `<:trash:1205985915160371221> - ${(messages.size) > 1 ? "Multiple " : ""}Messages Deleted (${messages.size} message${messages.size > 1 ? "s" : ""})`,
+                title: `<a:trash:1213524421621448756> - ${(messages.size) > 1 ? "Multiple " : ""}Messages Deleted (${messages.size} message${messages.size > 1 ? "s" : ""})`,
                 color: 0x00FF00,
                 author: {
                     name: interaction.member.tag,
