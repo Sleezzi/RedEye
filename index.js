@@ -108,9 +108,9 @@ client.login(client.config.token).then(() => {
     require("./components/log")("\n", `%green%Logging...%reset%`);
 });
 
-client.on(Events.MessageCreate, async (message) => {
-    message.guild.members.cache.map
-});
+// client.on(Events.MessageCreate, async (message) => {
+//     message.guild.members.cache.map
+// });
 
 process.stdin.setRawMode(true);
 process.stdin.resume();
