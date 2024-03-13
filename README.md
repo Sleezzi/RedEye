@@ -24,7 +24,7 @@ Of course, RedEye is an OpenSource bot, you can modify, use and share RedEye. Ho
 <br>/[cdn](/cdn/)/ => *Contains 2 folders*
 <br>   ├ [img](/cdn/img/)/ => *The images, most of them are on the Internet, but sometimes the modules require them to be local*
 <br>   └ [fonts](/cdn/fonts/)/ => *Fonts for Canvas*
-<br>[index.js](/index.js) => The main file, it will be executed first
+<br>/[index.js](/index.js) => The main file, it will be executed first
 <br>/[config.json](/config.json) => This is the file that contains the tokens. **It needs to be completed.**
 # License
 CC BY-NC
