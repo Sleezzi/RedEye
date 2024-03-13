@@ -27,7 +27,7 @@ module.exports = {
                     "tracks down the criminals"
                 ];
                 await interaction.reply({ embeds: [{
-                    title: `<a:loading:1204754788055646218> - Please wait while Blueprint ${replyMessage[Math.floor(Math.random() * replyMessage.length)]}`,
+                    title: `<a:loading:1204754788055646218> - Please wait while RedEye ${replyMessage[Math.floor(Math.random() * replyMessage.length)]}`,
                     color: 0xBF94FF,
                     author: {
                         name: interaction.member.tag,

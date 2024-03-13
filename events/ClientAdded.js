@@ -32,16 +32,16 @@ module.exports = {
             
                 const dmChannel = await guild.members.cache.find(u => u.id === guild.ownerId).createDm();
                 dmChannel.send({ embeds: [{
-                    title: "<a:verified:1205995010567184475> - Blueprint",
-                    description: "We thank you for the trust you have in our service.\nThis is why our staff remains at your disposal, if you have any questions you can ask them on our [Disocrd server](https://blueprint.sleezzi.fr/server).",
+                    title: "<a:verified:1205995010567184475> - RedEye",
+                    description: "We thank you for the trust you have in our service.\nThis is why our staff remains at your disposal, if you have any questions you can ask them on our [Disocrd server](https://redeye.sleezzi.fr/server).",
                     color: 0xFF0000,
                     author: {
                         name: client.users.cache.find(u => u.id === client.ownerId).username,
                         icon_url: client.users.cache.find(u => u.id === client.ownerId).avatarURL(),
-                        url: "https://blueprint.sleezzi.fr/",
+                        url: "https://redeye.sleezzi.fr/",
                     },
                     fields: [
-                        { name: `🔑- **Token:** ||${data.token}||`, value: `It will allow you to access the [Control Panel](https://blueprint.sleezzi.fr/control/guild?id=${guild.id}).\n**KEEP IT CAREFULLY, IT WILL NOT BE RETURNED TO YOU LATER, DO NOT SHARE IT**` },
+                        { name: `🔑- **Token:** ||${data.token}||`, value: `It will allow you to access the [Control Panel](https://redeye.sleezzi.fr/control/guild?id=${guild.id}).\n**KEEP IT CAREFULLY, IT WILL NOT BE RETURNED TO YOU LATER, DO NOT SHARE IT**` },
                         { name: `🏠 - **Valid only on the server:**`, value: `**${guild.name}** (*${guild.id}*)` }
                     ],
                     footer: {

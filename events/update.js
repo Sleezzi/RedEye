@@ -8,18 +8,19 @@ module.exports = {
     execute([], client, Discord) {
         client.user.setStatus(Discord.PresenceUpdateStatus.Online);
         const properties = [
-            (client, Discord) => client.user.setActivity(`!help`, { type: Discord.ActivityType.Playing, url: "https://blueprint.sleezzi.fr", state: "Bot made by Sleezzi" }),
-            (client, Discord, members) => client.user.setActivity(`${members.length} member${(members.length > 1 ? "s" : "")} • 👤`, { type: Discord.ActivityType.Watching, url: "https://blueprint.sleezzi.fr", state: "Bot made by Sleezzi" }),
-            (client, Discord, members, onlineMembers) => client.user.setActivity(`${onlineMembers.length} online member${(onlineMembers.length > 1 ? "s" : "")} • 🟢`, { type: Discord.ActivityType.Watching, url: "https://blueprint.sleezzi.fr", state: "Bot made by Sleezzi" }),
-            (client, Discord) => client.user.setActivity(`at his animated profile picture`, { type: Discord.ActivityType.Watching, url: "https://blueprint.sleezzi.fr", state: "Bot made by Sleezzi" }),
+            (client, Discord) => client.user.setActivity(`!help`, { type: Discord.ActivityType.Playing, url: "https://redeye.sleezzi.fr", state: "Bot made by Sleezzi" }),
+            (client, Discord) => client.user.setActivity(`New name!`, { type: Discord.ActivityType.Playing, url: "https://redeye.sleezzi.fr", state: "Blueprint becomes RedEye, but don't worry, its features remain the same" }),
+            (client, Discord, members) => client.user.setActivity(`${members.length} member${(members.length > 1 ? "s" : "")} • 👤`, { type: Discord.ActivityType.Watching, url: "https://redeye.sleezzi.fr", state: "Bot made by Sleezzi" }),
+            (client, Discord, members, onlineMembers) => client.user.setActivity(`${onlineMembers.length} online member${(onlineMembers.length > 1 ? "s" : "")} • 🟢`, { type: Discord.ActivityType.Watching, url: "https://redeye.sleezzi.fr", state: "Bot made by Sleezzi" }),
+            (client, Discord) => client.user.setActivity(`at his animated profile picture`, { type: Discord.ActivityType.Watching, url: "https://redeye.sleezzi.fr", state: "Bot made by Sleezzi" }),
             (client, Discord) => {
                 const date = new Date();
                 if (date.getMonth() === 1 && date.getDate() <= 13) {
                     if (!edited) {
-                        client.user.edit({ avatar: "./cdn/img/valentine_s_day.gif", username: "Blueprint [❤️]" });
+                        client.user.edit({ avatar: "./cdn/img/valentine_s_day.gif", username: "RedEye [❤️]" });
                         edited = true;
                     }
-                    client.user.setActivity(`Happy Valentine day • ❤️`, { type: Discord.ActivityType.Watching, url: "https://blueprint.sleezzi.fr", state: "Bot made by Sleezzi" });
+                    client.user.setActivity(`Happy Valentine day • ❤️`, { type: Discord.ActivityType.Watching, url: "https://redeye.sleezzi.fr", state: "Bot made by Sleezzi" });
                 } else {
                     i++;
                     fun();
@@ -29,10 +30,10 @@ module.exports = {
                 const date = new Date();
                 if (date.getMonth() === 9) {
                     if (!edited) {
-                        client.user.edit({ avatar: "./cdn/img/halloween.gif", username: "Blueprint [🎃]" });
+                        client.user.edit({ avatar: "./cdn/img/halloween.gif", username: "RedEye [🎃]" });
                         edited = true;
                     }
-                    client.user.setActivity(`Happy Halloween • 🎃`, { type: Discord.ActivityType.Watching, url: "https://blueprint.sleezzi.fr", state: "Bot made by Sleezzi" });
+                    client.user.setActivity(`Happy Halloween • 🎃`, { type: Discord.ActivityType.Watching, url: "https://redeye.sleezzi.fr", state: "Bot made by Sleezzi" });
                 } else {
                     i++;
                     fun();
@@ -42,10 +43,10 @@ module.exports = {
                 const date = new Date();
                 if (date.getMonth() === 11 && date.getDate() <= 24) {
                     if (!edited) {
-                        client.user.edit({ avatar: "./cdn/img/christmas.gif", username: "Blueprint [🎄]" });
+                        client.user.edit({ avatar: "./cdn/img/christmas.gif", username: "RedEye [🎄]" });
                         edited = true;
                     }
-                    client.user.setActivity(`Merry Christmas • 🎄`, { type: Discord.ActivityType.Watching, url: "https://blueprint.sleezzi.fr", state: "Bot made by Sleezzi" });
+                    client.user.setActivity(`Merry Christmas • 🎄`, { type: Discord.ActivityType.Watching, url: "https://redeye.sleezzi.fr", state: "Bot made by Sleezzi" });
                 } else {
                     i++;
                     fun();
@@ -68,7 +69,7 @@ module.exports = {
                 const date = new Date();
                 
                 if ((date.getMonth() !== 1 || date.getDate() > 13) && date.getMonth() !== 9 && (date.getMonth() !== 11 || date.getDate() > 24) && edited) {
-                    client.user.edit({ avatar: "./cdn/img/avatar.gif", username: "Blueprint" });
+                    client.user.edit({ avatar: "./cdn/img/avatar.gif", username: "RedEye" });
                     edited = false;
                 }
             } catch(err) { return console.error(err); }

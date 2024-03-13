@@ -1,7 +1,7 @@
 const firebase = require("firebase-admin");
 firebase.initializeApp({
     credential: firebase.credential.cert(require("../config.json").firebase),
-    databaseURL: "https://blueprint-bot-db-default-rtdb.europe-west1.firebasedatabase.app/"
+    databaseURL: "https://redeye-bot-db-default-rtdb.europe-west1.firebasedatabase.app/"
 });
 
 const db = firebase.database();

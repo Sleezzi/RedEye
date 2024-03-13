@@ -161,7 +161,7 @@ module.exports = {
                 ctx.drawImage(brazzer, properties.brazzer.image.width - properties.brazzer.brazzer.width - properties.brazzer.brazzer.margin, properties.brazzer.image.height - properties.brazzer.brazzer.height - properties.brazzer.brazzer.margin, properties.brazzer.brazzer.width, properties.brazzer.brazzer.height)
             }
             if (interaction.options.getString("type") === "pigeon") {
-                const background = await loadImage(`https://blueprint.sleezzi.fr/cdn/img/meme/shut-up-and-take-my-money.png`);
+                const background = await loadImage(`https://redeye.sleezzi.fr/cdn/img/meme/shut-up-and-take-my-money.png`);
                 ctx.drawImage(background, 0, 0, properties.pigeon.image.width, properties.pigeon.image.height);
                 const pdp = await loadImage(`https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=1024`);
                 ctx.arc(properties.pigeon.pdp.x, properties.pigeon.pdp.y, properties.pigeon.pdp.size / 2, 0, Math.PI * 2);
@@ -170,7 +170,7 @@ module.exports = {
                 ctx.drawImage(pdp, properties.pigeon.pdp.x - properties.pigeon.pdp.size / 2, properties.pigeon.pdp.y - properties.pigeon.pdp.size / 2, properties.pigeon.pdp.size, properties.pigeon.pdp.size);
             }
             if (interaction.options.getString("type") === "stonks") {
-                const background = await loadImage(`https://blueprint.sleezzi.fr/cdn/img/meme/stonks.png`);
+                const background = await loadImage(`https://redeye.sleezzi.fr/cdn/img/meme/stonks.png`);
                 ctx.drawImage(background, 0, 0, properties.stonks.image.width, properties.stonks.image.height);
                 const pdp = await loadImage(`https://cdn.discordapp.com/avatars/${member.id}/${member.user.avatar}.png?size=1024`);
                 ctx.arc(properties.stonks.pdp.x, properties.stonks.pdp.y, properties.stonks.pdp.size / 2, 0, Math.PI * 2);
@@ -181,7 +181,7 @@ module.exports = {
 
             // Drawn bot logo
             // ctx.beginPath(); // Create a new path
-            // const pdpbot = await loadImage(`https://blueprint.sleezzi.fr/cdn/img/Logo/BP_Gold.png`); // Load the bot's profile image
+            // const pdpbot = await loadImage(`https://redeye.sleezzi.fr/cdn/img/Logo/BP_Gold.png`); // Load the bot's profile image
             // ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2, 0, Math.PI * 2); // Draw a circle
             // ctx.clip(); // Cut the sheet so that you can only write in this circle
             // ctx.drawImage(pdpbot, properties.pdpBot.x - properties.pdpBot.size / 2, properties.pdpBot.y - properties.pdpBot.size / 2 || 0, properties.pdpBot.size || 0, properties.pdpBot.size || 0); // Draw the bot's profile picture

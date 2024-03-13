@@ -1,5 +1,5 @@
 {
-  "name": "blueprint-bot",
+  "name": "redeye-bot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -126,13 +126,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sleezzi/Blueprint-Bot.git"
+    "url": "git+https://github.com/Sleezzi/RedEye-Bot.git"
   },
   "keywords": [],
   "author": "Sleezzi",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Sleezzi/Blueprint-Bot/issues"
+    "url": "https://github.com/Sleezzi/RedEye-Bot/issues"
   },
-  "homepage": "https://sleezzi.github.io/Blueprint-Bot"
+  "homepage": "https://sleezzi.github.io/RedEye-Bot"
 }

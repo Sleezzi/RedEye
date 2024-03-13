@@ -7,7 +7,7 @@ module.exports = {
     async execute(message, client, Discord) {
         message.channel.sendTyping();
         try {
-            let response = await fetch(`https://api.imgflip.com/get_memes`, { method: "GET", referrer: "https://blueprint.sleezzi.fr/", });
+            let response = await fetch(`https://api.imgflip.com/get_memes`, { method: "GET", referrer: "https://redeye.sleezzi.fr/", });
             if (response.status === 200) {   
                 response = await response.json();
                 const memes = response.data.memes[Math.floor(Math.random() * response.data.memes.length)];

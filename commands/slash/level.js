@@ -5,7 +5,7 @@ const properties = {
     image: {
         width: 1024,
         height: 400,
-        background: "https://blueprint.sleezzi.fr/cdn/img/canvas-background-level.png"
+        background: "https://redeye.sleezzi.fr/cdn/img/canvas-background-level.png"
     },
     overlay: {
         get x() {
@@ -188,7 +188,7 @@ module.exports = {
             
             // Drawn bot logo
             ctx.beginPath(); // Create a new path
-            const pdpbot = await loadImage(`https://blueprint.sleezzi.fr/cdn/img/Logo/BP_Gold.png`); // Load the bot's profile image
+            const pdpbot = await loadImage(`https://redeye.sleezzi.fr/cdn/img/Logo/BP_Gold.png`); // Load the bot's profile image
             ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2, 0, Math.PI * 2); // Draw a circle
             ctx.clip(); // Cut the sheet so that you can only write in this circle
             ctx.drawImage(pdpbot, properties.pdpBot.x - properties.pdpBot.size / 2, properties.pdpBot.y - properties.pdpBot.size / 2 || 0, properties.pdpBot.size || 0, properties.pdpBot.size || 0); // Draw the bot's profile picture
