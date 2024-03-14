@@ -17,8 +17,8 @@ Of course, RedEye is an OpenSource bot, you can modify, use and share RedEye. Ho
 ## Folder/File Tree
 /[events](/events/)/ => *Contains all files for events*
 <br>/[commands](/commands/)/ => *Contains 2 folders relating to commands*
-<br>/[contextMenu](/contextMenu//)/ => *Contains 2 folders relating to orders*
-<br> ├ [prefix](/commands/prefix/)/ => *Contains all prefix type commands (by default the prefix is!)*
+<br>/[contextMenu](/contextMenu//)/ => *Contains 2 folders relating to commands*
+<br>   ├ [prefix](/commands/prefix/)/ => *Contains all prefix type commands (by default the prefix is "!")*
 <br>   └ [slash](/commands/slash/)/ => *Contains all application type commands (the one used with /)*
 <br>/[components](/components/)/ => *Contains all the "practical" files, it makes development easier*
 <br>/[cdn](/cdn/)/ => *Contains 2 folders*
@@ -26,5 +26,10 @@ Of course, RedEye is an OpenSource bot, you can modify, use and share RedEye. Ho
 <br>   └ [fonts](/cdn/fonts/)/ => *Fonts for Canvas*
 <br>/[index.js](/index.js) => The main file, it will be executed first
 <br>/[config.json](/config.json) => This is the file that contains the tokens. **It needs to be completed.**
+## Fonctionnement des fichiers
+### Ce diagram représente les appels de fonction, la plupart on une fonction par fichier, mais ce n'est pas toujours le cas et un fichier peut contenir plusieurs fonction
+
+<img src="https://redeye.sleezzi.fr/cdn/img/diagram.png">
+
 # License
 CC BY-NC
