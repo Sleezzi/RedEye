@@ -7,24 +7,23 @@
     <title>Blueprint</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&family=Protest+Guerrilla&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Revolution&display=swap" rel="stylesheet">
 </head>
-<body style="background: #333;">
+<body style="background: #999;">
     <canvas height="1024" width="1024"></canvas>
     <script>
         const canvas = document.querySelector("canvas");
         const ctx = canvas.getContext("2d");
         // ctx.arc(1024/2, 1024/2, 1024/2, 0, Math.PI *2);
         // ctx.clip();
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "#333";
         ctx.fillRect(0, 0, 1024, 1024);
-        // ctx.globalCompositeOperation = 'xor'; // Pour faire du transparent
-        const gradient = ctx.createLinearGradient(1024/2, 0, 1024/2, 1024);
-        gradient.addColorStop(0.5, "#AAAA00");
-        gradient.addColorStop(0, "#ffd700");
-        ctx.fillStyle = gradient;
-        ctx.font = "750px \"Protest Guerrilla\"";
-        ctx.fillText("BP", 1024/2-750/2-20, 1024/2+750/3, 1024);
+        ctx.globalCompositeOperation = 'xor'; // Pour faire du transparent
+        ctx.font = "750px \"Protest Revolution\"";
+        ctx.fillText("S", 1024/2-750/2+175, 1024/2+750/3, 1024);
+        ctx.lineWidth = 15;
+        ctx.fillStyle = "#FFF";
+        ctx.strokeText("S", 1024/2-750/2+175, 1024/2+750/3, 1024);
     </script>
 </body>
 </html>
