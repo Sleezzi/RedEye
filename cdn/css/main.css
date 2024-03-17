@@ -33,7 +33,7 @@ footer {
     align-items: center;
     z-index: 99;
     margin: 2% 0 0 0;
-    background: rgba(0, 0, 0, .15);
+    background: #00000026;
     position: fixed;
     bottom: 0;
     width: 100%;

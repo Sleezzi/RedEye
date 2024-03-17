@@ -33,23 +33,23 @@ a {
 a:hover {
     text-decoration: underline;
 }
-a#add, a#manage {
+a#add, a#manage, a#docs {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    border-radius: 20px;
+    border-radius: 1.5rem;
     background: #00000075;
     height: auto;
     width: auto;
-    padding: 1%;
+    padding: 1rem;
     min-width: auto;
     transition: all 0.5s ease;
 }
 a#add::before {
     content: "";
-    height: 25%;
-    width: 25%;
+    height: 1rem;
+    width: 1rem;
     min-width: 25px;
     min-height: 25px;
     background: url(/cdn/img/discord.svg) center/70% no-repeat;
@@ -63,18 +63,35 @@ a#add::after {
     min-width: 60px;
     transition: all 0.5s ease;
 }
-a#add:hover, a#manage:hover {
+a#docs::before {
+    content: "";
+    height: 25%;
+    width: 25%;
+    min-width: 25px;
+    min-height: 25px;
+    background: url(/cdn/img/icon/help.png) center/70% no-repeat;
+    transform: rotateY(0);
+    transition: all 0.5s ease;
+}
+a#docs::after {
+    content: "Docs";
+    text-align: center;
+    width: 45%;
+    min-width: 60px;
+    transition: all 0.5s ease;
+}
+a#add:hover, a#manage:hover, a#docs:hover {
     background: #000000;
-    border-radius: 10px;
+    border-radius: 1rem;
     margin: 0;
     height: calc(auto - 5px);
     width: calc(auto + 1%);
 }
-a#add:hover::before, a#manage:hover::before {
+a#add:hover::before, a#manage:hover::before, a#docs:hover::before {
     height: calc(25% + 5px);
     transform: rotateY(360deg);
 }
-a#add:hover::after, a#manage:hover::after {
+a#add:hover::after, a#manage:hover::after, a#docs:hover::after {
     height: calc(auto + 5px);
 }
 

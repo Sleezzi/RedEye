@@ -3,10 +3,10 @@ import { getDatabase, ref, get, set, remove, onValue } from "https://www.gstatic
 
 firebase.initializeApp({
     apiKey: localStorage.getItem("apiKey"),
-    authDomain: "blueprint-bot-db.firebaseapp.com",
-    databaseURL: "https://blueprint-bot-db-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "blueprint-bot-db",
-    storageBucket: "blueprint-bot-db.appspot.com",
+    authDomain: "redeye-bot-db.firebaseapp.com",
+    databaseURL: "https://redeye-bot-db-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "redeye-bot-db",
+    storageBucket: "redeye-bot-db.appspot.com",
     messagingSenderId: "857297152967",
     appId: "1:857297152967:web:e0300cf5ea5023a70d87e2",
     measurementId: "G-KLZWSZ8ZP2"

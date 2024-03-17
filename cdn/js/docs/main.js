@@ -20,7 +20,7 @@ document.querySelector(".sidenavOpener").onclick = () => {
         document.querySelector(".sidenav").classList.remove("active");
     }
 }
-fetch("/docs/sidenav.json").then((response) => response.json()).then((response) => {
+fetch("/docs/docs.json").then((response) => response.json()).then((response) => {
     for (const nav in response) {
         if (typeof response[nav] === "string") {
             const a = document.createElement("a");

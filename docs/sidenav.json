@@ -1,9 +1,0 @@
-{
-    "Gettings started": {
-        "Récuperation du code": "/docs/gettings-started/get-code",
-        "Installation des modules Node.js": "/docs/gettings-started/download-modules",
-        "config.js": "/docs/gettings-started/config.json",
-        "Launch": "/docs/gettings-started/launch"
-    },
-    "Help": "/server"
-}

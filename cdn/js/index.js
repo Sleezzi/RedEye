@@ -3,7 +3,7 @@ async function buildLevel(username, avatar, color) {
         image: {
             width: 1024,
             height: 400,
-            background: "https://blueprint.sleezzi.fr/cdn/img/canvas-background-level.png"
+            background: "https://redeye.sleezzi.fr/cdn/img/canvas-background-level.png"
         },
         overlay: {
             get x() {
@@ -117,8 +117,8 @@ async function buildLevel(username, avatar, color) {
         ctx.fillStyle = properties.username.color || "#FFF"; // Make the text white
         ctx.textAlign = properties.username.textAlign || "center"; // Position the text in the center
         ctx.lineWidth = properties.username.lineWidth || 4;  //define the width of the stroke line
-        ctx.fillText((username || "blueprint").toUpperCase(), properties.username.x || 0, properties.username.y || 0); // Write the member's name
-        ctx.strokeText((username || "blueprint").toUpperCase(), properties.username.x || 0, properties.username.y || 0); // Write the member's nam
+        ctx.fillText((username || "redeye").toUpperCase(), properties.username.x || 0, properties.username.y || 0); // Write the member's name
+        ctx.strokeText((username || "redeye").toUpperCase(), properties.username.x || 0, properties.username.y || 0); // Write the member's nam
         
         // LEVEL Text
         ctx.font = `${properties.level.size || 42}px "${properties.level.font || "Protest Strike"}"`; // Change the text font
@@ -150,7 +150,7 @@ async function buildLevel(username, avatar, color) {
         
         // Drawn bot logo
         const pdpbot = new Image();
-        pdpbot.src = "/cdn/img/Logo/BP.png";
+        pdpbot.src = "/cdn/img/Logo/RedEye.png";
         pdpbot.onload = () => {
             ctx.beginPath(); // Create a new path
             ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2, 0, Math.PI * 2); // Draw a circle
@@ -171,7 +171,7 @@ async function buildLevel(username, avatar, color) {
         ctx.closePath(); // Close last path
         
         const pdp = new Image();
-        pdp.src = avatar || "/cdn/img/Logo/BP.png";
+        pdp.src = avatar || "/cdn/img/Logo/RedEye.png";
         pdp.onload = () => {
             ctx.beginPath(); // Create a new path
             ctx.arc(properties.pdp.background.x || 0, properties.pdp.background.y || 0, properties.pdp.image.size || 0, 0, Math.PI * 2); // Draw a circle
@@ -192,7 +192,7 @@ async function buildwelcome(username, avatar) {
         image: {
             width: 712,
             height: 400,
-            background: "https://blueprint.sleezzi.fr/cdn/img/canvas-background-welcom.png"
+            background: "https://redeye.sleezzi.fr/cdn/img/canvas-background-welcom.png"
         },
         overlay: {
             get x() {
@@ -304,7 +304,7 @@ async function buildwelcome(username, avatar) {
         
         // Drawn bot logo
         const pdpbot = new Image();
-        pdpbot.src = "/cdn/img/Logo/BP.png";
+        pdpbot.src = "/cdn/img/Logo/RedEye.png";
         pdpbot.onload = () => {
             ctx.beginPath(); // Create a new path
             ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2, 0, Math.PI * 2); // Draw a circle
@@ -326,7 +326,7 @@ async function buildwelcome(username, avatar) {
         
         
         const pdp = new Image();
-        pdp.src = avatar || "/cdn/img/Logo/BP.png";
+        pdp.src = avatar || "/cdn/img/Logo/RedEye.png";
         pdp.onload = () => {
             ctx.beginPath(); // Create a new path
             ctx.arc(properties.pdp.background.x || 0, properties.pdp.background.y || 0, properties.pdp.image.size || 0, 0, Math.PI * 2); // Draw a circle

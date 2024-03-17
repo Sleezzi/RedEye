@@ -3,7 +3,7 @@
         image: {
             width: 712,
             height: 400,
-            background: "https://blueprint.sleezzi.fr/cdn/img/canvas-background-goodbye.png"
+            background: "/cdn/img/canvas-background-goodbye.png"
         },
         overlay: {
             get x() {
@@ -96,8 +96,8 @@
         ctx.fillStyle = properties.username.color || "#FFF"; // Make the text white
         ctx.textAlign = properties.username.textAlign || "center"; // Position the text in the center
         ctx.lineWidth = properties.username.lineWidth || 4;  //define the width of the stroke line
-        ctx.fillText((params.get("member") || "blueprint").toUpperCase(), properties.username.x || 0, properties.username.y || 0); // Write the member's name
-        ctx.strokeText((params.get("member") || "blueprint").toUpperCase(), properties.username.x || 0, properties.username.y || 0);
+        ctx.fillText((params.get("member") || "redeye").toUpperCase(), properties.username.x || 0, properties.username.y || 0); // Write the member's name
+        ctx.strokeText((params.get("member") || "redeye").toUpperCase(), properties.username.x || 0, properties.username.y || 0);
         
         // welcom Text
         ctx.fillStyle = properties.welcom.color || "#FFF"; // Make the text white
@@ -116,7 +116,7 @@
         
         // Drawn bot logo
         const pdpbot = new Image();
-        pdpbot.src = "/cdn/img/Logo/BP.png";
+        pdpbot.src = "/cdn/img/Logo/RedEye.png";
         pdpbot.onload = () => {
             ctx.beginPath(); // Create a new path
             ctx.arc(properties.pdpBot.x || 0, properties.pdpBot.y || 0, properties.pdpBot.size / 2, 0, Math.PI * 2); // Draw a circle
@@ -137,7 +137,7 @@
         ctx.closePath(); // Close last path
         
         const pdp = new Image();
-        pdp.src = params.get("avatar") || "/cdn/img/Logo/BP.png?size=1024";
+        pdp.src = params.get("avatar") || "/cdn/img/Logo/RedEye.png?size=1024";
         pdp.onload = () => {
             ctx.beginPath(); // Create a new path
             ctx.arc(properties.pdp.background.x || 0, properties.pdp.background.y || 0, properties.pdp.image.size || 0, 0, Math.PI * 2); // Draw a circle
