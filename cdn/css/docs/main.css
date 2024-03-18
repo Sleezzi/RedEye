@@ -143,10 +143,10 @@ body > div {
     border-radius: .5rem;
 }
 .sidenav > li > p::after {
-    content: "▶";
+    content: ">";
 }
 .sidenav > li.active > p::after {
-    content: "▼";
+    content: "⌵";
 }
 .sidenav > a {
     width: calc(90% - .5rem);
