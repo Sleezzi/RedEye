@@ -7,23 +7,173 @@
     <title>RedEye</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Protest+Revolution&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&family=Protest+Guerrilla&display=swap" rel="stylesheet">
 </head>
-<body style="background: #999;">
-    <canvas height="1024" width="1024"></canvas>
+<body style="background: #333;">
+    <canvas></canvas>
     <script>
         const canvas = document.querySelector("canvas");
         const ctx = canvas.getContext("2d");
+        const properties = {
+            image: {
+                heigth: 1024,
+                width: 1024,
+                get size() {
+                    return (properties.image.width + properties.image.heigth) / 2
+                },
+                background: "transparent"
+            },
+            eye: {
+                get color() {
+                    const gradient = ctx.createLinearGradient(0, 0, properties.image.width, 0);
+                    gradient.addColorStop(0, "black");
+                    gradient.addColorStop(0.25, "#CCC");
+                    gradient.addColorStop(0.75, "#CCC");
+                    gradient.addColorStop(1, "black");
+                    return gradient;
+                },
+                border: {
+                    size: 4,
+                    color: "#757575"
+                },
+                size: 200,
+                reflections: [
+                    {
+                        get size() {
+                            return properties.image.size / 60;
+                        },
+                        get color() {
+                            const radialGradient = ctx.createRadialGradient(properties.eye.pupil.x, properties.eye.pupil.y, 0, (properties.eye.pupil.x + properties.eye.pupil.y) / 2, (properties.eye.pupil.x + properties.eye.pupil.y) / 2, (properties.eye.pupil.x + properties.eye.pupil.y) / 4);
+                            radialGradient.addColorStop(0, "white");
+                            radialGradient.addColorStop(0.5, "white");
+                            radialGradient.addColorStop(1, "#FFFFFF00");
+                            return radialGradient;
+                        },
+                        get x() {
+                            return properties.image.size / 1.75;
+                        },
+                        get y() {
+                            return properties.image.size / 2.3;
+                        }
+                    },
+                    {
+                        get size() {
+                            return properties.image.size / 50;
+                        },
+                        get color() {
+                            const radialGradient = ctx.createRadialGradient(properties.eye.pupil.x, properties.eye.pupil.y, 0, (properties.eye.pupil.x + properties.eye.pupil.y) / 2, (properties.eye.pupil.x + properties.eye.pupil.y) / 2, (properties.eye.pupil.x + properties.eye.pupil.y) / 4);
+                            radialGradient.addColorStop(0, "white");
+                            radialGradient.addColorStop(0.5, "white");
+                            radialGradient.addColorStop(1, "#FFFFFF00");
+                            return radialGradient;
+                        },
+                        get x() {
+                            return properties.image.size / 1.65;
+                        },
+                        get y() {
+                            return properties.image.size / 2.525;
+                        }
+                    },
+                    {
+                        get size() {
+                            return properties.image.size / 40;
+                        },
+                        get color() {
+                            const radialGradient = ctx.createRadialGradient(properties.eye.pupil.x, properties.eye.pupil.y, 0, (properties.eye.pupil.x + properties.eye.pupil.y) / 2, (properties.eye.pupil.x + properties.eye.pupil.y) / 2, (properties.eye.pupil.x + properties.eye.pupil.y) / 4);
+                            radialGradient.addColorStop(0, "white");
+                            radialGradient.addColorStop(0.5, "white");
+                            radialGradient.addColorStop(1, "#FFFFFF00");
+                            return radialGradient;
+                        },
+                        get x() {
+                            return properties.image.size / 1.8;
+                        },
+                        get y() {
+                            return properties.image.size / 2.6;
+                        }
+                    }
+                ],
+                pupil: {
+                    get x() {
+                        return properties.image.width / 2
+                    },
+                    get y() {
+                        return properties.image.heigth / 2
+                    },
+                    size: 100,
+                    get color() {
+                        const radialGradient = ctx.createRadialGradient(properties.eye.pupil.x, properties.eye.pupil.y, 0, (properties.eye.pupil.x + properties.eye.pupil.y) / 2, (properties.eye.pupil.x + properties.eye.pupil.y) / 2, (properties.eye.pupil.x + properties.eye.pupil.y) / 4);
+                        radialGradient.addColorStop(0, "white");
+                        radialGradient.addColorStop(0.1, properties.eye.pupil.iris);
+                        radialGradient.addColorStop(0.2, "red");
+                        radialGradient.addColorStop(0.5, "#C00");
+                        radialGradient.addColorStop(0.8, "red");
+                        radialGradient.addColorStop(1, properties.eye.pupil.border);
+                        return radialGradient;
+                    },
+                    iris: "black",
+                    border: "#757575",
+                },
+            }
+        }
+        canvas.height = properties.image.heigth;
+        canvas.width = properties.image.width;
+
         // ctx.arc(1024/2, 1024/2, 1024/2, 0, Math.PI *2);
         // ctx.clip();
-        ctx.fillStyle = "#333";
-        ctx.fillRect(0, 0, 1024, 1024);
-        ctx.globalCompositeOperation = 'xor'; // Pour faire du transparent
-        ctx.font = "750px \"Protest Revolution\"";
-        ctx.fillText("S", 1024/2-750/2+175, 1024/2+750/3, 1024);
-        ctx.lineWidth = 15;
-        ctx.fillStyle = "#FFF";
-        ctx.strokeText("S", 1024/2-750/2+175, 1024/2+750/3, 1024);
+        ctx.fillStyle = properties.image.background;
+        ctx.fillRect(0, 0, properties.image.width, properties.image.heigth);
+        // ctx.globalCompositeOperation = 'xor'; // Pour faire du transparent
+
+        ctx.beginPath(); // Dessiner le haut du contour de l'oeil
+        ctx.fillStyle = properties.eye.border.color;
+        ctx.arc(properties.image.width / 2 - properties.eye.border.size, properties.image.heigth / 1.5 - properties.eye.border.size * 2, properties.image.size / 3, Math.PI, Math.PI * 2);
+        ctx.save();
+        ctx.clip();
+        ctx.fillRect(0, 0, properties.image.width, properties.image.heigth / 2);
+        ctx.restore();
+
+        ctx.beginPath(); // Dessiner le bas du contour de l'oeil
+        ctx.fillStyle = properties.eye.border.color;
+        ctx.arc(properties.image.width / 2 - properties.eye.border.size, properties.image.heigth / 3 + properties.eye.border.size * 2, properties.image.size / 3, Math.PI * 2, Math.PI);
+        ctx.save();
+        ctx.clip();
+        ctx.fillRect(0, properties.image.heigth / 2, properties.image.width, properties.image.heigth);
+        ctx.restore();
+
+        ctx.beginPath(); // Dessiner le haut de l'oeil
+        ctx.fillStyle = properties.eye.color;
+        ctx.arc(properties.image.width / 2 - properties.eye.border.size, properties.image.heigth / 1.5, properties.image.size / 3, Math.PI, Math.PI * 2);
+        ctx.save();
+        ctx.clip();
+        ctx.fillRect(0, 0, properties.image.width, properties.image.heigth / 2);
+        ctx.restore();
+
+        ctx.beginPath(); // Dessiner le bas de l'oeil
+        ctx.fillStyle = properties.eye.color;
+        ctx.arc(properties.image.width / 2 - properties.eye.border.size, properties.image.heigth / 3, properties.image.size / 3, Math.PI * 2, Math.PI);
+        ctx.save();
+        ctx.clip();
+        ctx.fillRect(0, properties.image.heigth / 2, properties.image.width, properties.image.heigth);
+        ctx.restore();
+
+        ctx.beginPath(); // Dessiner le contour de la pupille
+        ctx.fillStyle = properties.eye.pupil.color;
+        ctx.arc(properties.eye.pupil.x, properties.eye.pupil.y, properties.image.heigth / 7, 0, Math.PI * 2);
+        ctx.save();
+        ctx.clip();
+        ctx.fill();
+        ctx.restore();
+
+        properties.eye.reflections.forEach((reflection) => { // Dessiner les reflets
+            ctx.beginPath();
+            ctx.fillStyle = reflection.color;
+            ctx.arc(reflection.x, reflection.y, reflection.size, 0, Math.PI * 2);
+            ctx.save();
+            ctx.clip();
+            ctx.fill();
+            ctx.restore();
+        });
     </script>
 </body>
 </html>
