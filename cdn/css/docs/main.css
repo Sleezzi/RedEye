@@ -31,7 +31,6 @@ i {
 a {
     text-decoration: none;
     color: var(--a-color);
-    -webkit-text-stroke: .5px var(--stroke-a-color);
     transition: color .5s ease, text-decoration .5s ease;
 }
 a:hover {
@@ -96,7 +95,7 @@ body > div {
     width: 100%;
 }
 .sidenav {
-    height: 100%;
+    height: calc(100% - 4rem);
     width: 20rem;
     background: var(--alt-background);
     margin: 0;
@@ -105,6 +104,7 @@ body > div {
     align-items: center;
     flex-direction: column;
     border-right: 2px solid #0000000A;
+    z-index: 99;
 }
 .sidenav > li {
     width: 90%;
@@ -205,19 +205,19 @@ a.nav:hover {
     cursor: pointer;
 }
 /* Track */
-::-webkit-scrollbar-track {
-    background: #00000000;
+::-webkit-scrollbar-track { /* La scroll bar */
+    background: transparent;
 }
 /* Handle */
-::-webkit-scrollbar-thumb {
-    background: #111;
+::-webkit-scrollbar-thumb { /* La scroll bar */
+    background: var(--color);
     border-radius: 5vh;
 }
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: black;
+::-webkit-scrollbar-thumb:hover { /* La scroll bar */
+    background: var(--alt-color);
 }
-.note::before {
+.note::before { /* L'icon lampe des notes */
     content: "";
     display: inline-flex;
     height: 1rem;
@@ -229,14 +229,14 @@ a.nav:hover {
 body.light .note::before {
     filter: invert();
 }
-.note {
+.note { /* CSS Pour les notes */
     background: var(--alt-background);
     padding: 1rem;
     border-left: 0.2rem solid green;
     margin: 1rem 0;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1195px) { /* Pour les téléphones */
     .sidenav {
         position: absolute;
         left: -100%;
@@ -247,7 +247,7 @@ body.light .note::before {
         left: 0;
     }
     header.navbar {
-        justify-content: space-evenly;
+        justify-content: space-between;
     }
     header.navbar .sidenavOpener {
         display: flex;
@@ -257,6 +257,8 @@ body.light .note::before {
         height: 50%;
         border-radius: .25rem;
         overflow: hidden;
+        margin: 0 0 0 1rem;
+        cursor: pointer;
     }
     header.navbar .sidenavOpener span {
         width: 100%;
@@ -264,6 +266,6 @@ body.light .note::before {
         background: var(--color);
     }
     p {
-        width: 100%;
+        width: auto;
     }
 }
