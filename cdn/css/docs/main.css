@@ -63,6 +63,9 @@ header a {
     text-decoration: none !important;
     color: var(--color) !important;
     -webkit-text-stroke: 1px #00000075 !important;
+    padding: .5rem;
+    border-radius: 1rem;
+    transition: background .5s ease;
 }
 header > button {
     display: flex;
@@ -83,7 +86,7 @@ header > button {
     border-radius: 50%;
     overflow: hidden;
 }
-.toggleTheme:hover {
+.toggleTheme:hover, header a:hover {
     background: #0000002F;
 }
 .toggleTheme > span.material-symbols-outlined {
