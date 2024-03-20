@@ -5,10 +5,5 @@ Allow: /
 Disallow: /cdn
 Disallow: /overview
 Disallow: /logoBuilder
-Disallow: /server
 Disallow: /thanks
 Disallow: /404
-Disallow: /docs/*/*
-Disallow: /control/*/*
-Allow: /control/$
-Allow: /docs/$

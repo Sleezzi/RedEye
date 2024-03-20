@@ -123,10 +123,10 @@ section.space a > canvas {
     height: auto;
     max-height: 100%;
 }
-section.space h3 {
+section.space h1 {
     height: auto;
     width: auto;
-    max-height: 35%;
+    max-height: 35%;h1
     max-width: 45%;
     text-align: center;
 }
@@ -182,10 +182,22 @@ a#bot-hosting::before {
 a#github::before {
     background: url(https://github.githubassets.com/favicons/favicon-dark.png) center/cover no-repeat;
 }
-/* A mettre dans un truc qui ne prend en compte que les petits écran pour ne 
-pas bloquer le aria-label
-footer {
-    overflow: scroll;
+*/ footer {
+    overflow: auto hidden;
 }
-
-*/
+@media screen and (max-width: 1195px) { /* Pour les téléphones */
+    section.space {
+        flex-direction: column-reverse;
+    }
+    section.space h3 {
+        max-width: 90%;
+        max-height: 100%;
+    }
+    section.space img {
+        width: 90%;
+        border-radius: 1rem;
+    }
+    section:nth-child(even) {
+        flex-direction: column;
+    }
+}

@@ -17,6 +17,7 @@ body {
     font-optical-sizing: auto;
     font-style: normal;
     transition: background .3s ease;
+    overflow: hidden;
 }
 body.light {
     --background: white;
@@ -98,7 +99,7 @@ body > div {
     width: 100%;
 }
 .sidenav {
-    height: calc(100% - 4rem);
+    height: 100%;
     width: 20rem;
     background: var(--alt-background);
     margin: 0;
@@ -108,6 +109,7 @@ body > div {
     flex-direction: column;
     border-right: 2px solid #0000000A;
     z-index: 99;
+    overflow: hidden auto;
 }
 .sidenav > li {
     width: 90%;
@@ -170,6 +172,7 @@ main {
     flex-direction: column;
     align-items: center;
     width: 100%;
+    overflow: hidden auto;
 }
 main > div {
     height: 100%;
@@ -220,23 +223,33 @@ a.nav:hover {
 ::-webkit-scrollbar-thumb:hover { /* La scroll bar */
     background: var(--alt-color);
 }
-.note::before { /* L'icon lampe des notes */
+.note, .warning { /* CSS Pour les notes */
+    background: var(--alt-background);
+    padding: 1rem;
+    margin: 1rem 0;
+}
+.note::before, .warning::before { /* L'icon lampe des notes */
     content: "";
     display: inline-flex;
     height: 1rem;
     width: 1rem;
     position: relative;
     bottom: 50%;
-    background: url(/cdn/img/icon/light-bulb.png) no-repeat center/cover;
 }
-body.light .note::before {
+body.light .note::before, body.light .warning::before {
     filter: invert();
 }
-.note { /* CSS Pour les notes */
-    background: var(--alt-background);
-    padding: 1rem;
-    border-left: 0.2rem solid green;
-    margin: 1rem 0;
+.note::before {
+    background: url(/cdn/img/icon/light-bulb.png) no-repeat center/cover;
+}
+.note {
+    border-left: 0.3rem solid green;
+}
+.warning::before { /* L'icon des warns */
+    background: url(/cdn/img/icon/warning.png) no-repeat center/cover;
+}
+.warning { /* CSS Pour les warns */
+    border-left: 0.3rem solid red;
 }
 
 @media screen and (max-width: 1195px) { /* Pour les téléphones */

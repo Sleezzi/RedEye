@@ -24,6 +24,7 @@ fetch("/docs/docs.json").then((response) => response.json()).then((response) => 
     for (const nav in response) {
         if (typeof response[nav] === "string") {
             const a = document.createElement("a");
+            a.rel = "noopener noreferrer";
             a.innerText = nav;
             a.href = response[nav];
             document.querySelector(".sidenav").appendChild(a);
@@ -46,6 +47,7 @@ fetch("/docs/docs.json").then((response) => response.json()).then((response) => 
             for (const undernav in response[nav]) {
                 const secondeLi = document.createElement("li");
                 const a = document.createElement("a");
+                a.rel = "noopener noreferrer";
                 a.innerText = undernav;
                 a.href = response[nav][undernav];
                 if (window.location.href.replace(".html", "").endsWith(response[nav][undernav].replace(".html", ""))) {
@@ -54,6 +56,7 @@ fetch("/docs/docs.json").then((response) => response.json()).then((response) => 
 
                     if (Object.keys(response[nav])[Object.keys(response[nav]).indexOf(undernav)-1]) {
                         const previous = document.createElement("a");
+                        previous.rel = "noopener noreferrer";
                         previous.innerText = "Previous";
                         previous.classList.add("nav")
                         previous.href = response[nav][Object.keys(response[nav])[Object.keys(response[nav]).indexOf(undernav)-1]];
@@ -61,6 +64,7 @@ fetch("/docs/docs.json").then((response) => response.json()).then((response) => 
                     }
                     if (Object.keys(response[nav])[Object.keys(response[nav]).indexOf(undernav)+1]) {
                         const next = document.createElement("a");
+                        next.rel = "noopener noreferrer";
                         next.innerText = "Next";
                         next.classList.add("nav")
                         next.href = response[nav][Object.keys(response[nav])[Object.keys(response[nav]).indexOf(undernav)+1]];
