@@ -2,9 +2,9 @@
 
 User-agent: *
 Allow: /
-Disallow: /cdn
-Allow: /cdn/img/Logo/*
 Disallow: /overview
 Disallow: /logoBuilder
 Disallow: /thanks
 Disallow: /404
+
+Sitemap: https://redeye.sleezzi.fr/sidemap.xml
