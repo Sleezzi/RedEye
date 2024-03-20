@@ -3,6 +3,7 @@
 User-agent: *
 Allow: /
 Disallow: /cdn
+Allow: /cdn/img/Logo/*
 Disallow: /overview
 Disallow: /logoBuilder
 Disallow: /thanks
