@@ -8,5 +8,5 @@ Disallow: /logoBuilder
 Disallow: /server
 Disallow: /thanks
 Disallow: /404
-Disallow: /docs/*
-Disallow: /control/*
+Disallow: /docs/*/*
+Disallow: /control/*/*
