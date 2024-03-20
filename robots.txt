@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
-Allow: /control
-Allow: /docs
+Allow: /control/$
+Allow: /docs/$
 Disallow: /cdn
 Disallow: /overview
 Disallow: /logoBuilder
