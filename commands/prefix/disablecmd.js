@@ -26,7 +26,7 @@ module.exports = {
             }, 5000);
             return;
         }
-        if (!client.data.commands.prefix.has(command)) {
+        if (!client.commands.prefix.has(command)) {
             const msg = await message.reply('The specified command does not exist');
             setTimeout(async () => {
                 try {

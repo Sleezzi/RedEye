@@ -33,12 +33,12 @@ module.exports = {
         try {
             let command = message.options.getString("command");
             if (command) {
-                if (!client.data.commands.app.get(command)) {
+                if (!client.commands.app.get(command)) {
                     await message.deleteReply();
                     message.followUp({ content: `/${command} is not a command.`, ephemeral: true });
                     return;
                 }
-                command = client.data.commands.app.get(command).data;
+                command = client.commands.app.get(command).data;
                 let embed = {
                     color: 0x0099ff,
                     title: 'Help',
@@ -145,7 +145,7 @@ module.exports = {
                     },
                 };
                 
-                for (const command of client.data.commands.prefix) {
+                for (const command of client.commands.prefix) {
                     if (serverData.disabled.length > 1 && serverData.disabled.find(cmd => cmd === command[0])) continue;
                     if (!command.permissions) {
                         if (command[1].category === "Moderation") {

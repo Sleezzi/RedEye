@@ -5,7 +5,7 @@ module.exports = {
     async execute([interaction], client, Discord) {
         try {
             if (interaction.type === 3) return;
-            const command = client.data.commands.app.get(interaction.commandName);
+            const command = client.commands.app.get(interaction.commandName);
             if (!command) return interaction.reply({ embeds: [{
                 color: 0xff0000,
                 title: `Error`,
@@ -39,10 +39,10 @@ module.exports = {
                         icon_url: client.user.avatarURL(),
                     },
                 }], ephemeral: true });
-                if (client.data.cooldown.has(interaction.member.id)) { // Checks if the user is in cooldown
+                if (client.cooldown.has(interaction.member.id)) { // Checks if the user is in cooldown
                     try {
                         await interaction.deleteReply();
-                        interaction.followUp({ content: `Please wait **${client.data.cooldown.get(interaction.member.id).cooldown / 1000 - (Math.floor(Date.now() / 1000) - client.data.cooldown.get(interaction.member.id).usedAt)}s** before using command.`, ephemeral: true});
+                        interaction.followUp({ content: `Please wait **${client.cooldown.get(interaction.member.id).cooldown / 1000 - (Math.floor(Date.now() / 1000) - client.cooldown.get(interaction.member.id).usedAt)}s** before using command.`, ephemeral: true});
                         return;
                     } catch(err) {console.error(err);}
                 }

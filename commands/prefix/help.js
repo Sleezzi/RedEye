@@ -11,7 +11,7 @@ module.exports = {
 
             let command = message.content.split(' ').slice(1)[0];
             if (command && command !== "help") {
-                if (!client.data.commands.prefix.has(command)) {
+                if (!client.commands.prefix.has(command)) {
                     const msg = await message.channel.send({ content: `${command} is not a command.` });
                     if (message.deletable) message.delete();
                     setTimeout(() => {
@@ -23,7 +23,7 @@ module.exports = {
                     }, 5000);
                     return;
                 }
-                command = client.data.commands.prefix.find((n) => n.name === command);
+                command = client.commands.prefix.find((n) => n.name === command);
                 const embed = new Discord.EmbedBuilder()
                     .setColor("Aqua")
                     .setTitle("Help:")
@@ -115,7 +115,7 @@ module.exports = {
                 };
                 if (!serverData.disabled) serverData.disabled = [];
                 
-                for (const command of client.data.commands.prefix) {
+                for (const command of client.commands.prefix) {
                     if (serverData.disabled.find(cmd => cmd === command[0])) continue;
                     if (!command.permissions) {
                         if (command[1].category === "Moderation") {

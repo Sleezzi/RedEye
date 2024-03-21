@@ -25,7 +25,7 @@ module.exports = {
                 // The put method is used to fully refresh all commands in the guild with the current set
                 const data = await new Discord.REST().setToken(client.config.token).put(
                     Discord.Routes.applicationGuildCommands(client.user.id, guild.id),
-                    { body: client.data.commands.app.map(cmd => cmd.data) },
+                    { body: client.commands.app.map(cmd => cmd.data) },
                 );
                 require("../components/log")(`Successfully added ${data.length} slash command${(data.length > 1 ? "s" : "")} in ${guild.id} server.`);
             } catch(err) { console.error(err); }
