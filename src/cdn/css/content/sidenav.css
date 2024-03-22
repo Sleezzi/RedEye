@@ -1,0 +1,94 @@
+.sidenav {
+    height: 100%;
+    width: 20rem;
+    background: var(--alt-background);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-right: 2px solid #0000000A;
+    z-index: 99;
+    overflow: hidden auto;
+}
+.sidenav > li {
+    width: 90%;
+    margin: 0;
+    list-style-type: none;
+}
+.sidenav > li > p:hover, .sidenav a:hover {
+    background: #0000005F;
+    color: var(--a-color);
+    border-radius: .5rem;
+}
+.sidenav > li.active > ul > li.active a {
+    background: #00000075;
+    color: white;
+    border-radius: .5rem;
+}
+.sidenav a {
+    padding: 1rem .5rem;
+    border-radius: .5rem;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 0;
+    color: var(--color);
+    -webkit-text-stroke: 0;
+    text-decoration: none !important;
+}
+.sidenav > li > p {
+    width: calc(100% - .5rem);
+    margin: 1rem 0 0 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 1rem .5rem;
+    border-radius: .5rem;
+}
+.sidenav > li > p::after {
+    content: ">";
+}
+.sidenav > li.active > p::after {
+    content: "⌵";
+}
+.sidenav > a {
+    width: calc(90% - .5rem);
+}
+.sidenav > a::after {
+    content: "↗";
+}
+.sidenav > li > ul {
+    display: none;
+    list-style-type: none;
+    transition: opacity .5s ease;
+}
+.sidenav > li.active > ul {
+    display: block;
+}
+
+a.nav {
+    border: var(--alt-background) solid 2px;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    color: var(--color);
+    transition: border .25s ease;
+    text-decoration: none;
+    margin: 5rem .5rem;
+}
+a.nav:hover {
+    border: var(--a-color) solid 2px;
+}
+
+@media screen and (max-width: 1195px) { /* For mobiles */
+    .sidenav {
+        position: absolute;
+        left: -100%;
+        overflow-x: hidden;
+        transition: left .5s ease;
+    }
+    .sidenav.active {
+        left: 0;
+    }
+}

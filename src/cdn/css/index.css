@@ -1,0 +1,135 @@
+:root {
+    --background: #3D3951;
+    --alt-background: #4E4A6E;
+    --color: white;
+    --alt-color: #AAA;
+    --a-color: #ff0059;
+    --alt-a-color: #c80046;
+    --stroke-a-color: #c80046;
+}
+body {
+    background: var(--background);
+    color: var(--color);
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    font-family: "Kreon", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    transition: background .3s ease;
+    overflow: hidden;
+}
+body.light {
+    --background: white;
+    --alt-background: #e9e9e9;
+    --color: black;
+    --alt-color: #555;
+    background: var(--background);
+}
+#root {
+    background: transparent;
+    height: 100%;
+    width: 100%;
+}
+i {
+    color: var(--alt-color);
+}
+a {
+    text-decoration: none;
+    color: var(--a-color);
+    transition: color .5s ease, text-decoration .5s ease;
+}
+a:hover {
+    text-decoration: underline;
+    color: var(--alt-a-color);
+}
+
+.toggleTheme {
+    cursor: pointer;
+    transition: background .5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.toggleTheme:hover, header a:hover {
+    background: #0000002F;
+}
+.toggleTheme > span.material-symbols-outlined {
+    color: var(--color);
+}
+#root > div {
+    display: flex;
+    height: calc(100% - 4rem);
+    width: 100%;
+}
+
+
+pre:not(.small) {
+    background: black;
+    color: white;
+    overflow: scroll hidden;
+    width: 100%;
+    padding: .5rem;
+}
+pre.small {
+    background: black;
+    color: white;
+    overflow: scroll hidden;
+    width: fit-content;
+    padding: .5rem;
+}
+::-webkit-scrollbar {
+    width: 1vh;
+    height: 1vh;
+    background: #333;
+    cursor: pointer;
+}
+/* Track */
+::-webkit-scrollbar-track { /* La scroll bar */
+    background: transparent;
+}
+/* Handle */
+::-webkit-scrollbar-thumb { /* La scroll bar */
+    background: var(--color);
+    border-radius: 5vh;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover { /* La scroll bar */
+    background: var(--alt-color);
+}
+.note, .warning { /* CSS Pour les notes */
+    background: var(--alt-background);
+    padding: 1rem;
+    margin: 1rem 0;
+}
+.note::before, .warning::before { /* L'icon lampe des notes */
+    content: "";
+    display: inline-flex;
+    height: 1rem;
+    width: 1rem;
+    position: relative;
+    bottom: 50%;
+}
+body.light .note::before, body.light .warning::before {
+    filter: invert();
+}
+.note::before {
+    background: url(../../../public/cdn/img/icon/light-bulb.png) no-repeat center/cover;
+}
+.note {
+    border-left: 0.3rem solid green;
+}
+.warning::before { /* L'icon des warns */
+    background: url(../../../public/cdn/img/icon/warning.png) no-repeat center/cover;
+}
+.warning { /* CSS Pour les warns */
+    border-left: 0.3rem solid red;
+}
+
+@media screen and (max-width: 1195px) { /* For mobiles */
+    p {
+        width: auto;
+    }
+}
