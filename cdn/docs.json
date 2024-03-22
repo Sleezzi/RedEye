@@ -1,0 +1,12 @@
+{
+    "Gettings started": {
+        "Code recovery": "/docs/gettings-started/get-code",
+        "Installing Node.js modules": "/docs/gettings-started/download-modules",
+        "config.js": "/docs/gettings-started/config.json",
+        "Launch": "/docs/gettings-started/launch"
+    },
+    "How it's work": {
+        "Folder/File Tree": "/docs/how-it's-work/folder-file-tree"
+    },
+    "Help": "/server"
+}
