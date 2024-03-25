@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import "../../cdn/css/header.css";
+import "../../cdn/css/docs/header.css";
+
+import { Link } from "react-router-dom";
 
 export default function Header() {
     const [sidenavIsOpen, setSidenavIsOpen] = useState(false);
@@ -42,11 +44,11 @@ export default function Header() {
                 <span></span>
                 <span></span>
             </div>
-            <a href="/docs/">
+            <Link to="/docs/">
                 <img src="https://redeye.sleezzi.fr/cdn/img/Logo/RedEye_Rounded.png" alt="logo"></img>RedEye - Docs
-            </a>
-            <button onClick={toggleTheme} class="toggleTheme" title="Switch from dark mode to light mode">
-                <span class="material-symbols-outlined">dark_mode</span>
+            </Link>
+            <button onClick={toggleTheme} className="toggleTheme" title="Switch from dark mode to light mode">
+                <span className="material-symbols-outlined">dark_mode</span>
             </button>
         </header>
     );
