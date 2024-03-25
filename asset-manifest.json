@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/redeye.sleezzi.fr/static/css/main.afbb0e61.css",
-    "main.js": "/redeye.sleezzi.fr/static/js/main.26895b21.js",
+    "main.css": "/redeye.sleezzi.fr/static/css/main.0d77afdc.css",
+    "main.js": "/redeye.sleezzi.fr/static/js/main.cedd497e.js",
     "static/js/453.4b9396b9.chunk.js": "/redeye.sleezzi.fr/static/js/453.4b9396b9.chunk.js",
+    "static/media/help.png": "/redeye.sleezzi.fr/static/media/help.e95f32fcf2c4ad20d298.png",
+    "static/media/discord.svg": "/redeye.sleezzi.fr/static/media/discord.1567aecabafe26b3f248.svg",
     "index.html": "/redeye.sleezzi.fr/index.html",
-    "main.afbb0e61.css.map": "/redeye.sleezzi.fr/static/css/main.afbb0e61.css.map",
-    "main.26895b21.js.map": "/redeye.sleezzi.fr/static/js/main.26895b21.js.map",
+    "main.0d77afdc.css.map": "/redeye.sleezzi.fr/static/css/main.0d77afdc.css.map",
+    "main.cedd497e.js.map": "/redeye.sleezzi.fr/static/js/main.cedd497e.js.map",
     "453.4b9396b9.chunk.js.map": "/redeye.sleezzi.fr/static/js/453.4b9396b9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.afbb0e61.css",
-    "static/js/main.26895b21.js"
+    "static/css/main.0d77afdc.css",
+    "static/js/main.cedd497e.js"
   ]
 }

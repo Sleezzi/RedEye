@@ -1,3 +1,10 @@
-# https://www.robotstxt.org/robotstxt.html
+# Hello you. It seems that you are lost
+
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /overview
+Disallow: /logoBuilder
+Disallow: /thanks
+Disallow: /404
+
+Sitemap: https://redeye.sleezzi.fr/sidemap.xml
