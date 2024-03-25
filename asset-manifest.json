@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/redeye.sleezzi.fr/static/css/main.0d77afdc.css",
-    "main.js": "/redeye.sleezzi.fr/static/js/main.cedd497e.js",
-    "static/js/453.4b9396b9.chunk.js": "/redeye.sleezzi.fr/static/js/453.4b9396b9.chunk.js",
-    "static/media/help.png": "/redeye.sleezzi.fr/static/media/help.e95f32fcf2c4ad20d298.png",
-    "static/media/discord.svg": "/redeye.sleezzi.fr/static/media/discord.1567aecabafe26b3f248.svg",
-    "index.html": "/redeye.sleezzi.fr/index.html",
-    "main.0d77afdc.css.map": "/redeye.sleezzi.fr/static/css/main.0d77afdc.css.map",
-    "main.cedd497e.js.map": "/redeye.sleezzi.fr/static/js/main.cedd497e.js.map",
-    "453.4b9396b9.chunk.js.map": "/redeye.sleezzi.fr/static/js/453.4b9396b9.chunk.js.map"
+    "main.css": "/static/css/main.1ebae5f4.css",
+    "main.js": "/static/js/main.58024a5b.js",
+    "static/js/453.4b9396b9.chunk.js": "/static/js/453.4b9396b9.chunk.js",
+    "static/media/help.png": "/static/media/help.e95f32fcf2c4ad20d298.png",
+    "static/media/discord.svg": "/static/media/discord.1567aecabafe26b3f248.svg",
+    "index.html": "/index.html",
+    "main.1ebae5f4.css.map": "/static/css/main.1ebae5f4.css.map",
+    "main.58024a5b.js.map": "/static/js/main.58024a5b.js.map",
+    "453.4b9396b9.chunk.js.map": "/static/js/453.4b9396b9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0d77afdc.css",
-    "static/js/main.cedd497e.js"
+    "static/css/main.1ebae5f4.css",
+    "static/js/main.58024a5b.js"
   ]
 }
